@@ -23,20 +23,13 @@
 				
 				{% include form~'file.tpl' with {'label': 'Изображения и иконки', 'data': [
 					{'name': 'setting_logo', 'label': 'Логотип', 'ext': 'images|svg', 'alt': 1},
-					{'name': 'setting_logo_footer', 'label': 'Логотип в футере', 'ext': 'images|svg', 'alt': 1},
 					{'name': 'setting_favicon', 'label': 'Фавикон', 'ext': 'images'},
-					{'name': 'setting_watermark', 'label': 'Водяной знак', 'ext': 'images'},
 				]} %}
 				
 				
 				
 				{% include form~'field.tpl' with {'label': 'телефоны', 'name': 'setting_phone', 'rules': 'empty', 'data': [
-					{'name': 'mobile1', 'label': 'Мобильный телефон 1', 'phonemask': 1},
-					{'name': 'mobile12', 'label': 'Мобильный телефон 2', 'phonemask': 1},
-					{'name': 'free1', 'label': 'Бесплатный телефон 1', 'mask': '8 (800) ^^^-^^-^^'},
-					{'name': 'free2', 'label': 'Бесплатный телефон 2', 'mask': '8 (800) ^^^-^^-^^'},
-					{'name': 'city1', 'label': 'Городской телефон 1', 'mask': '8 (^^^) ^^^-^^-^^'},
-					{'name': 'city2', 'label': 'Городской телефон 2', 'mask': '8 (^^^) ^^^-^^-^^'}
+					{'name': 'mobile', 'label': 'Мобильный телефон', 'phonemask': 1, 'cls': 'w-36rem'},
 				]} %}
 				
 				
@@ -62,36 +55,13 @@
 				{% include form~'textarea.tpl' with {'label': 'Мета-теги', 'rows': 10, 'name': 'setting_metatags'} %}
 				{% include form~'textarea.tpl' with {'label': 'JS функции (работают только на хостинге)', 'rows': 20, 'name': 'setting_scripts'} %}
 				{% include form~'textarea.tpl' with {'label': 'Скрипты в <head>', 'rows': 10, 'name': 'setting_scripts_head'} %}
+				{% include form~'textarea.tpl' with {'label': 'Скрипты в низ страницы', 'rows': 10, 'name': 'setting_scripts_end'} %}
+				{% include form~'textarea.tpl' with {'label': 'Стили в <head>', 'rows': 10, 'name': 'setting_styles_head'} %}
 				
 				
-				{% include form~'field.tpl' with {'label': 'Количество товаров на странице', 'name': 'setting_count_products', 'type': 'number', 'cls': 'w-60px'} %}
-				
-				{% include form~'select.tpl' with {'label': 'Тип карточки товара', 'name': 'setting_card_variant', 'data': [
-					{'value': 'vertical', 'title': 'Вертикальные изображения'},
-					{'value': 'horizontal', 'title': 'Горионтальные изображения'}
-				], 'cls': 'w-40rem'} %}
-				
-				{% include form~'select.tpl' with {'label': 'Отображение 3D модели в вертикальном типе карточки', 'name': 'setting_show_3d_variant', 'data': [
-					{'value': 'in_main', 'title': 'Иконка в главной картинке'},
-					{'value': 'standalone', 'title': 'Отдельный элемент'}
-				], 'cls': 'w-40rem'} %}
-				
-				{% include form~'field.tpl' with {'label': 'Знак валюты', 'name': 'setting_currency', 'cls': 'w-60px'} %}
-				
-				{% include form~'file.tpl' with {'label': 'PDF каталог', 'name': 'setting_pdf_catalog', 'ext': 'docs'} %}
-				
-				
-				{% include form~'field.tpl' with {'label': 'Плавающая иконка', 'name': 'setting_stockicon', 'data': [
-					{'name': 'url', 'label': 'URL страницы', 'rules': 'string', 'placeholder': 'URL страницы', 'cls': 'w-60rem'},
-					{'name': 'link_title', 'label': 'Title ссылки', 'rules': 'string', 'placeholder': 'Title ссылки', 'cls': 'w-60rem'}
-				]} %}
 				
 				{% include form~'field.tpl' with {'label': 'ID иконки прокрутки вверх', 'name': 'setting_scrolltop', 'cls': 'w-20rem'} %}
 				
-				
-				{% include form~'textarea.tpl' with {'label': 'Надпись в шапке сайта', 'markdown': 1, 'rows': 4, 'name': 'setting_header_label'} %}
-				
-				{% include form~'textarea.tpl' with {'label': 'Описание в футере', 'rows': 2, 'name': 'setting_footer__desc'} %}
 				
 						
 				{#{% include form~'field.tpl' with {'label': 'тест', 'name': 'setting_site|foo'} %}

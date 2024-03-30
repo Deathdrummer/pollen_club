@@ -32,6 +32,7 @@
 	<link rel="stylesheet" href="{{base_url('public/css/plugins.min.css')}}">
 	<link rel="stylesheet" href="{{base_url('public/css/components.min.css')}}">
 	{% if is_file('public/css/'~controller~'.min.css') %}<link rel="stylesheet" href="{{base_url('public/css/'~controller~'.min.css')}}">{% endif %}
+	{% if styles_head %}{{styles_head|raw}}{% endif %}
 
 	<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
 	<script src="{{base_url('public/js/plugins.min.js')}}"></script>
@@ -39,6 +40,8 @@
 	<script src="{{base_url('public/js/common.js')}}"></script>
 	<script src="{{base_url('public/js/components.min.js')}}"></script>
 	<script src="{{base_url('public/js/ddrFormSubmit.js')}}"></script>
+	
+	{% if scripts_head %}{{scripts_head|raw}}{% endif %}
 
 	{% if hosting %}{% include 'views/'~controller~'/layout/hosting.tpl' %}{% endif %} <!-- Если сайт на хостинге - выполнять функции -->
 	<title itemprop="headline">{{page_title|default('Страница без заголовка')}}</title>
@@ -66,11 +69,10 @@
 
 	<script defer src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
-	<script defer src="{{base_url('public/js/aquarel/main.js')}}"></script>
 
 	{# <script type="module" src="{{base_url('public/js/modelViewer.js')}}"></script> #}
 
-	{% if scripts_head %}{{scripts_head|raw}}{% endif %}
+	{% if scripts_end %}{{scripts_end|raw}}{% endif %}
 
 	{% if is_file('public/js/'~controller~'.js') %}<script src="{{base_url('public/js/'~controller~'.js')}}"></script>{% endif %}
 </body>
