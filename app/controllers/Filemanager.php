@@ -1,5 +1,12 @@
 <? defined('BASEPATH') OR exit('Доступ к скрипту запрещен');
 
+require_once(APPPATH."libraries/Tinify/Tinify/Exception.php");
+require_once(APPPATH."libraries/Tinify/Tinify/ResultMeta.php");
+require_once(APPPATH."libraries/Tinify/Tinify/Result.php");
+require_once(APPPATH."libraries/Tinify/Tinify/Source.php");
+require_once(APPPATH."libraries/Tinify/Tinify/Client.php");
+require_once(APPPATH."libraries/Tinify/Tinify.php");
+
 class Filemanager extends MY_Controller {
 	
 	private $filesPath = './public/filemanager/';
@@ -7,11 +14,15 @@ class Filemanager extends MY_Controller {
 	private $miniDir = '__mini__'; // директория для уменьшенных изображений
 	private $thumbsWidth = 150;
 	private $thumbsHeight = 150;
+	private $tinyPngApiKey = null;
 	
 	
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper(['directory', 'string', 'text']);
+		
+		$this->tinyPngApiKey = $this->settings->getSettings('tinypng_api_key');
+		if ($this->tinyPngApiKey) \Tinify\setKey($this->tinyPngApiKey);
 	}
 	
 	
@@ -354,6 +365,15 @@ class Filemanager extends MY_Controller {
 	    		}
         		
         		if ($uploadData['is_image'] == 1) { // если загруженный файл - изображение
+					
+					# TinyPng compressing
+					if ($this->tinyPngApiKey) {
+						$uploadedFilePath = 'public/filemanager/'.$path.'/'.$uploadData['file_name'];
+						$source = \Tinify\fromFile($uploadedFilePath);
+						$source->toFile($uploadedFilePath);
+					}
+				
+				
 	        		$cfg['image_library'] = 'gd2';
 					$cfg['source_image'] = $uploadData['full_path'];
 		        	$cfg['maintain_ratio'] = true;

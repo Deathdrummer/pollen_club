@@ -271,6 +271,8 @@
 		
 		<div tabid="tabSettings">
 			<table class="fieldset">
+				{% include form~'field.tpl' with {'label': 'TinyPNG секретный ключ', 'name': 'setting_tinypng_api_key', 'cls': 'w-50rem'} %}
+				
 				{% include form~'checkbox.tpl' with {'label': 'Задавать переменные в категориях', 'v': 2, 'data': [
 					{'name': 'setting_setvarstocats', 'value': 'insta', 'inline': 0}
 				]} %}
