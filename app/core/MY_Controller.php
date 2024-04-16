@@ -41,6 +41,7 @@ class MY_Controller extends CI_Controller {
 		});
 
 		$this->twig->addFilter('reset', function($array) {
+			if (!is_array($array)) return null;
 			return reset($array);
 		});
 
@@ -98,6 +99,7 @@ class MY_Controller extends CI_Controller {
 		
 		
 		$this->twig->addFilter('arrstrtswith', function($arr, $symbal, $arrItem = false) {
+			if (!is_array($arr)) return null;
 			return array_filter($arr, function($item) use($arrItem, $symbal) {
 				if ($arrItem) return strpos($item[$arrItem], $symbal) === 0;
 				return strpos($item, $symbal) === 0;
@@ -105,6 +107,7 @@ class MY_Controller extends CI_Controller {
 		});
 		
 		$this->twig->addFilter('arrnotstrtswith', function($arr, $symbal, $arrItem = false) {
+			if (!is_array($arr)) return null;
 			return array_filter($arr, function($item) use($arrItem, $symbal) {
 				if ($arrItem) return strpos($item[$arrItem], $symbal) !== 0;
 				return strpos($item, $symbal) !== 0;

@@ -322,14 +322,14 @@ class Pages_model extends MY_Model {
 		
 		$prodData = $this->productsmodel->getItem($result['product_id']);
 		
-		$prodData['name'] = $prodData['name'] ?: $prodData['title'];
+		$prodData['name'] = ($prodData['name'] ?? $prodData['title']) ?: '-';
 		unset($prodData['id'], $prodData['title'], $prodData['seo_url'], $prodData['meta_keywords'], $prodData['meta_description'], $prodData['sort']);
 		
 		$result[$result['item_variable']] = $prodData;
 		
 		unset($result['item_variable'], $result['product_id']);
 		
-		$result['catalog_vars'] = $this->catalogs->getVars($result['product']['catalog_id']);
+		$result['catalog_vars'] = isset($result['product']['catalog_id']) ? $this->catalogs->getVars($result['product']['catalog_id']) : null;
 		
 		return $result;
 	}
