@@ -40,7 +40,7 @@
 	<script src="{{base_url('public/js/common.js')}}"></script>
 	<script src="{{base_url('public/js/components.min.js')}}"></script>
 	<script src="{{base_url('public/js/ddrFormSubmit.js')}}"></script>
-	
+
 	{% if scripts_head %}{{scripts_head|raw}}{% endif %}
 
 	{% if hosting %}{% include 'views/'~controller~'/layout/hosting.tpl' %}{% endif %} <!-- Если сайт на хостинге - выполнять функции -->
@@ -75,5 +75,11 @@
 	{% if scripts_end %}{{scripts_end|raw}}{% endif %}
 
 	{% if is_file('public/js/'~controller~'.js') %}<script src="{{base_url('public/js/'~controller~'.js')}}"></script>{% endif %}
+<div class="container">
+<div class="test1"></div>
+</div>
+
 </body>
+
+
 </html>
