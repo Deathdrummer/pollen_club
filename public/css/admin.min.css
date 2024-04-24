@@ -1889,7 +1889,7 @@ table:not(.fieldset) {
       .ddrpopup__title_1 {
         font-size: 28px;
         line-height: 30px; } }
-    @media screen and (min-width: 992px) {
+    @media screen and (min-width: 1024px) {
       .ddrpopup__title_1 {
         font-size: 34px;
         line-height: 36px; } }
@@ -1908,7 +1908,7 @@ table:not(.fieldset) {
       .ddrpopup__title_2 {
         font-size: 26px;
         line-height: 28px; } }
-    @media screen and (min-width: 992px) {
+    @media screen and (min-width: 1024px) {
       .ddrpopup__title_2 {
         font-size: 30px;
         line-height: 32px; } }
@@ -1927,7 +1927,7 @@ table:not(.fieldset) {
       .ddrpopup__title_3 {
         font-size: 22px;
         line-height: 24px; } }
-    @media screen and (min-width: 992px) {
+    @media screen and (min-width: 1024px) {
       .ddrpopup__title_3 {
         font-size: 24px;
         line-height: 26px; } }
@@ -1946,7 +1946,7 @@ table:not(.fieldset) {
       .ddrpopup__title_4 {
         font-size: 20px;
         line-height: 22px; } }
-    @media screen and (min-width: 992px) {
+    @media screen and (min-width: 1024px) {
       .ddrpopup__title_4 {
         font-size: 20px;
         line-height: 22px; } }
@@ -1965,7 +1965,7 @@ table:not(.fieldset) {
       .ddrpopup__title_5 {
         font-size: 18px;
         line-height: 20px; } }
-    @media screen and (min-width: 992px) {
+    @media screen and (min-width: 1024px) {
       .ddrpopup__title_5 {
         font-size: 20px;
         line-height: 22px; } }
@@ -2375,7 +2375,7 @@ table:not(.fieldset) {
     @media screen and (min-width: 768px) {
       .filemanager__content .filmanager__file {
         width: 20%; } }
-    @media screen and (min-width: 992px) {
+    @media screen and (min-width: 1024px) {
       .filemanager__content .filmanager__file {
         width: 16.66667%; } }
     @media screen and (min-width: 1200px) {

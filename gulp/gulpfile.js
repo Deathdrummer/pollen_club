@@ -1,4 +1,4 @@
-const domain = 'kuhni.loc', // прописать домен
+const domain = 'polen.club.loc', // прописать домен
   prodDir = '../../production/', // директория для продакшн версии
   repoDir = '../../repository/', // директория репозитория
   { src, dest, parallel, series, watch } = require('gulp'),
@@ -59,10 +59,7 @@ function startWatch() {
       var dirName = dir.name || dir;
       watch('../public/css/styles/' + dirName + '.{sass,scss}', sassToCss);
       watch('../public/js/' + dirName + '.js').on('change', browserSync.reload);
-      watch([
-        '../public/views/' + dirName + '/**/*.tpl',
-        '!../public/views/' + dirName + '/render/**/*.tpl',
-      ]).on('change', browserSync.reload);
+      watch(['../public/views/' + dirName + '/**/*.tpl', '!../public/views/' + dirName + '/render/**/*.tpl']).on('change', browserSync.reload);
     });
   } else {
     console.log('startWatch -> Нет директорий для отслеживания файлов!');
@@ -87,23 +84,17 @@ async function build() {
 
   src('../public/js/plugins.min.js').pipe(dest(prodDir + 'public/js'));
   src('../public/js/components.min.js').pipe(dest(prodDir + 'public/js'));
-  src(['../public/js/common.js', '../public/js/functions.js']).pipe(
-    dest(prodDir + 'public/js')
-  );
+  src(['../public/js/common.js', '../public/js/functions.js']).pipe(dest(prodDir + 'public/js'));
 
   src('../public/fonts/**/*').pipe(dest(prodDir + 'public/fonts'));
   src('../public/images/**/*.svg').pipe(dest(prodDir + 'public/images'));
   src('../public/svg/sprite.svg').pipe(dest(prodDir + 'public/svg'));
   src('../public/filemanager/**/*').pipe(dest(prodDir + 'public/filemanager'));
-  src(['../public/components/**/*.tpl']).pipe(
-    dest(prodDir + 'public/components')
-  );
+  src(['../public/components/**/*.tpl']).pipe(dest(prodDir + 'public/components'));
 
   publicDirs.forEach(function (dir) {
     var dirName = dir.name;
-    src(['../public/views/' + dirName + '/**/*.tpl']).pipe(
-      dest(prodDir + 'public/views/' + dirName)
-    );
+    src(['../public/views/' + dirName + '/**/*.tpl']).pipe(dest(prodDir + 'public/views/' + dirName));
     src('../public/css/' + dirName + '.min.css')
       .pipe(cleanCSS())
       .pipe(dest(prodDir + 'public/css'));
@@ -152,15 +143,7 @@ function buld_from_repository(done) {
 
   // plugins js
   src(repoDir + 'js/plugins/**/*.js')
-    .pipe(
-      order([
-        'jquery/jquery-3.2.1.min.js',
-        'jquery/jquery.migrate.js',
-        'jquery/ui/**/*.js',
-        'jquery/**/*.js',
-        '**/*.js',
-      ])
-    )
+    .pipe(order(['jquery/jquery-3.2.1.min.js', 'jquery/jquery.migrate.js', 'jquery/ui/**/*.js', 'jquery/**/*.js', '**/*.js']))
     .pipe(concat('plugins.min.js'))
     //.pipe(babel({presets: ['@babel/preset-env'], compact: false}))
     .pipe(
@@ -174,15 +157,7 @@ function buld_from_repository(done) {
   // plugins css
   src([repoDir + 'js/plugins/**/*.css'])
     .pipe(concat('plugins.min.css'))
-    .pipe(
-      autoprefixer([
-        '> 1%',
-        'last 10 versions',
-        'Firefox >= 20',
-        'iOS 7',
-        'ie 9',
-      ])
-    )
+    .pipe(autoprefixer(['> 1%', 'last 10 versions', 'Firefox >= 20', 'iOS 7', 'ie 9']))
     .pipe(cleanCSS())
     .pipe(dest('../public/css'));
 
@@ -203,15 +178,7 @@ function buld_from_repository(done) {
     .on('end', done)
     .pipe(sass({ includePaths: bourbon }).on('error', notify.onError()))
     .pipe(concat('components.min.css'))
-    .pipe(
-      autoprefixer([
-        '> 1%',
-        'last 2 versions',
-        'Firefox >= 20',
-        'iOS 7',
-        'ie 9',
-      ])
-    )
+    .pipe(autoprefixer(['> 1%', 'last 2 versions', 'Firefox >= 20', 'iOS 7', 'ie 9']))
     .pipe(cleanCSS())
     .pipe(dest('../public/css'));
 
@@ -220,15 +187,7 @@ function buld_from_repository(done) {
     .on('end', done)
     .pipe(sass({ includePaths: bourbon }).on('error', notify.onError()))
     .pipe(rename({ suffix: '.min', prefix: '' }))
-    .pipe(
-      autoprefixer([
-        '> 1%',
-        'last 2 versions',
-        'Firefox >= 20',
-        'iOS 7',
-        'ie 9',
-      ])
-    )
+    .pipe(autoprefixer(['> 1%', 'last 2 versions', 'Firefox >= 20', 'iOS 7', 'ie 9']))
     .pipe(cleanCSS())
     .pipe(dest('../public/css'));
 }
@@ -257,15 +216,7 @@ function fonts_from_repository() {
 function plugins_js_from_repository() {
   return (
     src(repoDir + 'js/plugins/**/*.js')
-      .pipe(
-        order([
-          'jquery/jquery-3.2.1.min.js',
-          'jquery/jquery.migrate.js',
-          'jquery/ui/**/*.js',
-          'jquery/**/*.js',
-          '**/*.js',
-        ])
-      )
+      .pipe(order(['jquery/jquery-3.2.1.min.js', 'jquery/jquery.migrate.js', 'jquery/ui/**/*.js', 'jquery/**/*.js', '**/*.js']))
       //.pipe(babel({presets: ['@babel/preset-env'], compact: false}))
       .pipe(concat('plugins.min.js'))
       .pipe(
@@ -282,24 +233,14 @@ function plugins_js_from_repository() {
 function plugins_css_from_repository() {
   return src([repoDir + 'js/plugins/**/*.css'])
     .pipe(concat('plugins.min.css'))
-    .pipe(
-      autoprefixer([
-        '> 1%',
-        'last 2 versions',
-        'Firefox >= 20',
-        'iOS 7',
-        'ie 9',
-      ])
-    )
+    .pipe(autoprefixer(['> 1%', 'last 2 versions', 'Firefox >= 20', 'iOS 7', 'ie 9']))
     .pipe(cleanCSS())
     .pipe(dest('../public/css'));
 }
 
 // components css js tpl
 function components_from_repository(done) {
-  return src([repoDir + 'components/**/*.tpl']).pipe(
-    dest('../public/components')
-  );
+  return src([repoDir + 'components/**/*.tpl']).pipe(dest('../public/components'));
 
   src([repoDir + 'components/**/*.js'])
     .pipe(concat('components.min.js'))
@@ -315,15 +256,7 @@ function components_from_repository(done) {
     .on('end', done)
     .pipe(sass({ includePaths: bourbon }).on('error', notify.onError()))
     .pipe(concat('components.min.css'))
-    .pipe(
-      autoprefixer([
-        '> 1%',
-        'last 2 versions',
-        'Firefox >= 20',
-        'iOS 7',
-        'ie 9',
-      ])
-    )
+    .pipe(autoprefixer(['> 1%', 'last 2 versions', 'Firefox >= 20', 'iOS 7', 'ie 9']))
     .pipe(cleanCSS())
     .pipe(dest('../public/css'));
 }
@@ -334,15 +267,7 @@ function assets_css_from_repository(done) {
     .on('end', done)
     .pipe(sass({ includePaths: bourbon }).on('error', notify.onError()))
     .pipe(rename({ suffix: '.min', prefix: '' }))
-    .pipe(
-      autoprefixer([
-        '> 1%',
-        'last 2 versions',
-        'Firefox >= 20',
-        'iOS 7',
-        'ie 9',
-      ])
-    )
+    .pipe(autoprefixer(['> 1%', 'last 2 versions', 'Firefox >= 20', 'iOS 7', 'ie 9']))
     .pipe(cleanCSS())
     .pipe(dest('../public/css'))
     .pipe(browserSync.stream());
@@ -362,15 +287,7 @@ function sassToCss(done) {
     .on('end', done)
     .pipe(sass({ includePaths: bourbon }).on('error', notify.onError()))
     .pipe(rename({ suffix: '.min', prefix: '' }))
-    .pipe(
-      autoprefixer([
-        '> 1%',
-        'last 2 versions',
-        'Firefox >= 20',
-        'iOS 7',
-        'ie 9',
-      ])
-    )
+    .pipe(autoprefixer(['> 1%', 'last 2 versions', 'Firefox >= 20', 'iOS 7', 'ie 9']))
     .pipe(dest('../public/css/'))
     .pipe(browserSync.stream());
 }

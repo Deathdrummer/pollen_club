@@ -40,34 +40,31 @@
 	<script src="{{base_url('public/js/common.js')}}"></script>
 	<script src="{{base_url('public/js/components.min.js')}}"></script>
 	<script src="{{base_url('public/js/ddrFormSubmit.js')}}"></script>
-	
+
 	{% if scripts_head %}{{scripts_head|raw}}{% endif %}
 
 	{% if hosting %}{% include 'views/'~controller~'/layout/hosting.tpl' %}{% endif %} <!-- Если сайт на хостинге - выполнять функции -->
 	<title itemprop="headline">{{page_title|default('Страница без заголовка')}}</title>
 </head>
 <body data-scroll-block="body" id="body" class="page__body" >
-	{% if svg_sprite %}{{svg_sprite|raw}}{% endif %} {# Вставляем SVG спрайт #}
-	{% if header %}{% include 'views/'~controller~'/layout/header.tpl' %}{% endif %}
-	{% if nav_mobile %}{% include 'views/'~controller~'/layout/nav_mobile.tpl' %}{% endif %}
-	<main class="main" >
-		{% if sections %}
-			{% for section in sections %}
-				{% include 'views/'~controller~'/sections/'~section.filename|ext('tpl') with section.data %}
-			{% endfor %}
-		{% endif %}
-	</main>
-	{% if footer %}{% include 'views/'~controller~'/layout/footer.tpl' %}{% endif %}
-	{% if scrolltop %}<div scrolltop class="hidden-sm-down"><svg><use xlink:href="{{scrolltop}}"></use></svg></div>{% endif %}
-	{% if stockicon.url and seo_url != stockicon.url %}<a href="{{stockicon.url}}" class="stockicon" title="{{stockicon.link_title}}"><span class="stockicon__icon">%</span></a>{% endif %}
-
+	<div class="wrapper">
+		{% if svg_sprite %}{{svg_sprite|raw}}{% endif %} {# Вставляем SVG спрайт #}
+		{% if header %}{% include 'views/'~controller~'/layout/header.tpl' %}{% endif %}
+		{% if nav_mobile %}{% include 'views/'~controller~'/layout/nav_mobile.tpl' %}{% endif %}
+		<main class="main" >
+			{% if sections %}
+				{% for section in sections %}
+					{% include 'views/'~controller~'/sections/'~section.filename|ext('tpl') with section.data %}
+				{% endfor %}
+			{% endif %}
+		</main>
+		{% if footer %}{% include 'views/'~controller~'/layout/footer.tpl' %}{% endif %}
+		{% if scrolltop %}<div scrolltop class="hidden-sm-down"><svg><use xlink:href="{{scrolltop}}"></use></svg></div>{% endif %}
+		{% if stockicon.url and seo_url != stockicon.url %}<a href="{{stockicon.url}}" class="stockicon" title="{{stockicon.link_title}}"><span class="stockicon__icon">%</span></a>{% endif %}
+	</div>
 
 	<script defer src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
-
-
-	<script defer src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 
 	{# <script type="module" src="{{base_url('public/js/modelViewer.js')}}"></script> #}
 
