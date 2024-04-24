@@ -47,7 +47,7 @@
 	<title itemprop="headline">{{page_title|default('Страница без заголовка')}}</title>
 </head>
 <body data-scroll-block="body" id="body" class="page__body" >
-
+<div class="wrapper">
 	{% if svg_sprite %}{{svg_sprite|raw}}{% endif %} {# Вставляем SVG спрайт #}
 	{% if header %}{% include 'views/'~controller~'/layout/header.tpl' %}{% endif %}
 	{% if nav_mobile %}{% include 'views/'~controller~'/layout/nav_mobile.tpl' %}{% endif %}
@@ -62,6 +62,7 @@
 	{% if scrolltop %}<div scrolltop class="hidden-sm-down"><svg><use xlink:href="{{scrolltop}}"></use></svg></div>{% endif %}
 	{% if stockicon.url and seo_url != stockicon.url %}<a href="{{stockicon.url}}" class="stockicon" title="{{stockicon.link_title}}"><span class="stockicon__icon">%</span></a>{% endif %}
 
+</div>
 
 	<script defer src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
@@ -75,9 +76,8 @@
 	{% if scripts_end %}{{scripts_end|raw}}{% endif %}
 
 	{% if is_file('public/js/'~controller~'.js') %}<script src="{{base_url('public/js/'~controller~'.js')}}"></script>{% endif %}
-<div class="container">
-<div class="test1"></div>
-</div>
+
+
 
 </body>
 
