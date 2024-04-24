@@ -29,34 +29,6 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="w-30"><div><span>Иконка</span></div></td>
-			<td>
-				<div class="file{% if not icon %} empty{% endif %}">
-					<label class="file__block" for="pageIcon" filemanager="images">
-						<div class="file__image" fileimage>
-							{% if icon %}
-								{% if icon|filename(2)|is_img_file %}
-									<img src="{{base_url('public/filemanager/__thumbs__/'~icon|freshfile)}}" alt="{{icon|filename}}">
-								{% else %}
-									<img src="{{base_url('public/images/filetypes/'~icon|filename(2))}}.png" alt="{{icon|filename}}">
-								{% endif %}
-							{% else %}
-								<img src="{{base_url('public/images/none_img.png')}}" alt="Нет картинки">
-							{% endif %}
-						</div>
-						<div class="file__name"><span filename>{% if icon %}{{icon|filename|decodedirsfiles}}{% endif %}</span></div>
-						<div class="file__remove" title="Удалить" fileremove><i class="fa fa-trash"></i></div>
-					</label>
-					<input
-					type="hidden"
-					filesrc
-					name="icon"
-					value="{{icon}}"
-					id="pageIcon" />
-				</div>
-			</td>
-		</tr>
-		<tr>
 			<td class="w-30"><div><span>Отобразить элементы</span></div></td>
 			<td>
 				<div class="checkbox__item checkbox__item_ver2 checkbox__item_small">
@@ -88,6 +60,34 @@
 				<div class="field w-13rem">
 					<small class="label">0 - не выводить</small>
 					<input type="number" min="0" showrows name="navigation" rules="num::Ошибка! Допускаются только положительные цифры!|length:1,9" value="{{navigation|default('0')}}" autocomplete="off">
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="w-30"><div><span>Иконка для пункта меню</span></div></td>
+			<td>
+				<div class="file{% if not icon %} empty{% endif %}">
+					<label class="file__block" for="pageIcon" filemanager="images">
+						<div class="file__image" fileimage>
+							{% if icon %}
+								{% if icon|filename(2)|is_img_file %}
+									<img src="{{base_url('public/filemanager/__thumbs__/'~icon|freshfile)}}" alt="{{icon|filename}}">
+								{% else %}
+									<img src="{{base_url('public/images/filetypes/'~icon|filename(2))}}.png" alt="{{icon|filename}}">
+								{% endif %}
+							{% else %}
+								<img src="{{base_url('public/images/none_img.png')}}" alt="Нет картинки">
+							{% endif %}
+						</div>
+						<div class="file__name"><span filename>{% if icon %}{{icon|filename|decodedirsfiles}}{% endif %}</span></div>
+						<div class="file__remove" title="Удалить" fileremove><i class="fa fa-trash"></i></div>
+					</label>
+					<input
+					type="hidden"
+					filesrc
+					name="icon"
+					value="{{icon}}"
+					id="pageIcon" />
 				</div>
 			</td>
 		</tr>

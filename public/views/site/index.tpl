@@ -47,7 +47,6 @@
 	<title itemprop="headline">{{page_title|default('Страница без заголовка')}}</title>
 </head>
 <body data-scroll-block="body" id="body" class="page__body" >
-
 	{% if svg_sprite %}{{svg_sprite|raw}}{% endif %} {# Вставляем SVG спрайт #}
 	{% if header %}{% include 'views/'~controller~'/layout/header.tpl' %}{% endif %}
 	{% if nav_mobile %}{% include 'views/'~controller~'/layout/nav_mobile.tpl' %}{% endif %}

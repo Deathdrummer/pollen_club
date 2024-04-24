@@ -136,7 +136,8 @@ if (!function_exists('clearDirs')) {
 	 * @param строка
 	 * @return раскодированная строка
 	*/
-    function clearDirs($dirs, $hideDirs = false) {
+    function clearDirs($dirs = null, $hideDirs = false) {
+        if (!$dirs) return null;
         $hideDirs = gettype($hideDirs) == 'string' ? explode('|', $hideDirs) : $hideDirs;
         $data = [];
         

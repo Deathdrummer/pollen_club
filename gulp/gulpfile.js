@@ -355,7 +355,7 @@ function sassToCss(done) {
 
   watchDirs.forEach(function (dir) {
     var dirName = dir.name || dir;
-    sassFiles.push('../public/css/styles/' + dirName + '.sass');
+    sassFiles.push('../public/css/styles/' + dirName + '.{sass,scss}');
   });
 
   return src(sassFiles)
