@@ -5,6 +5,27 @@
 /* ---------- Мобильное меню ---------- */
 /* ---------- Админка ---------- */
 /* ---------- Скроллбар сайта ---------- */
+
+.test {
+  height: 100px;
+  width: 100%;
+  background: black; }
+  @media screen and (min-width: 576px) {
+    .test {
+      background: black; } }
+  @media screen and (min-width: 768px) {
+    .test {
+      background: black; } }
+  @media screen and (min-width: 992px) {
+    .test {
+      background: black; } }
+  @media screen and (min-width: 1200px) {
+    .test {
+      background: black; } }
+  @media screen and (min-width: xxl) {
+    .test {
+      background: black; } }
+
 /* Шрифты */
 @font-face {
   font-family: 'Roboto';
@@ -1128,3 +1149,4 @@ img {
     gap: 10px; }
   .menu-nav .menu-link {
     padding: 0 10px; } }
+>>>>>>> 38ba4b5cc394c18d359e002e27c2209613b309c9
