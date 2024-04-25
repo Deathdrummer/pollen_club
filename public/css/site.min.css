@@ -297,8 +297,9 @@ img {
   @media screen and (min-width: 1024px) {
     .aside:hover .menu-link span {
       opacity: 1; } }
-  .aside:hover .menu-link.policy span {
-    padding-left: 0px; }
+  @media screen and (min-width: 1024px) {
+    .aside:hover .menu-link.policy span {
+      padding-left: 0px; } }
   .aside:hover .social-links {
     display: -webkit-box;
     display: -webkit-flex;
@@ -312,6 +313,30 @@ img {
        -moz-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row; }
+  @media screen and (min-width: 1024px) {
+    .aside:hover .menu-link.mail {
+      display: none; } }
+  @media screen and (min-width: 1024px) {
+    .aside:hover .menu-link.policy span {
+      width: auto; } }
+  @media screen and (min-width: 1024px) {
+    .aside:hover .menu-link span {
+      padding-left: 0px; } }
+  @media screen and (min-width: 1024px) {
+    .aside:hover .menu-link span {
+      width: 0; } }
+  @media screen and (min-width: 1024px) {
+    .aside:hover .menu-link span {
+      opacity: 0; } }
+  @media screen and (min-width: 1024px) {
+    .aside:hover .menu-link span {
+      -webkit-transition: "width 0.5s linear,\a             padding-left 0.5s linear,\a             opacity 0.5s linear";
+      transition: "width 0.5s linear,\a             padding-left 0.5s linear,\a             opacity 0.5s linear"; } }
+  .aside:hover .menu-link:hover span {
+    background: radial-gradient(317.37% 116.72% at 100% 87.5%, #70c270 0%, #269ed9 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; }
   .aside .aside-block {
     display: -webkit-box;
     display: -webkit-flex;

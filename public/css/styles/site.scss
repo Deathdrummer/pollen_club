@@ -343,12 +343,69 @@ img {
         );
       }
       &.policy span {
-        padding-left: 0px;
+        @include resp(
+          padding-left,
+          (
+            lg: 0px,
+          )
+        );
       }
     }
     .social-links {
       display: flex;
       flex-direction: row;
+    }
+    .menu-link {
+      &.mail {
+        @include resp(
+          display,
+          (
+            lg: none,
+          )
+        );
+      }
+      &.policy span {
+        @include resp(
+          width,
+          (
+            lg: auto,
+          )
+        );
+      }
+      span {
+        @include resp(
+          padding-left,
+          (
+            lg: 0px,
+          )
+        );
+        @include resp(
+          width,
+          (
+            lg: 0,
+          )
+        );
+        @include resp(
+          opacity,
+          (
+            lg: 0,
+          )
+        );
+        @include resp(
+          transition,
+          (
+            lg: 'width 0.5s linear,
+            padding-left 0.5s linear,
+            opacity 0.5s linear',
+          )
+        );
+      }
+      &:hover span {
+        background: $buttonsGradient;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
     }
   }
   .aside-block {
