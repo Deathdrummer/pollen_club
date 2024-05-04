@@ -1,4 +1,4 @@
-const domain = 'polen.club.loc', // прописать домен
+const domain = 'polen-club.loc', // прописать домен
   prodDir = '../../production/', // директория для продакшн версии
   repoDir = '../../repository/', // директория репозитория
   { src, dest, parallel, series, watch } = require('gulp'),

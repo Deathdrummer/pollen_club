@@ -2,7 +2,7 @@
 
 
 
-$config['base_url'] = 'http://polen.club.loc';
+$config['base_url'] = 'http://polen-club.loc';
 $config['settings_table'] = 'settings';
 $config['noroutes_controllers'] = ['reviews'];
 

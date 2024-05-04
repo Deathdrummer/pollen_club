@@ -1,13 +1,12 @@
 <aside class="aside" id="aside">
   <div class="aside-block">
     <div class="aside-block__top">
-      {% if logo %}
-        {% if seo_url == 'index' %}
-          <div class="logo"></div>
-        {% else %}
-          <a href="/" class="logo"></a>
-        {% endif %}
+      {% if seo_url == 'index' %}
+        <div class="logo"></div>
+      {% else %}
+        <a href="/" class="logo"></a>
       {% endif %}
+
       <div class="menu-btn">
         <i class="grad-icon" style="mask-image: url('public/images/polen/img/charm_menu-hamburger.svg');"></i>
       </div>
