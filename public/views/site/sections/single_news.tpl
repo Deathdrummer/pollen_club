@@ -41,9 +41,9 @@
       </div>
     </div>
     <div class="wrapper-single__search">
-      <div class="search">
+      <form class="search">
         <input type="text" placeholder="Поиск" />
-      </div>
+      </form>
     </div>
   </div>
 </section>

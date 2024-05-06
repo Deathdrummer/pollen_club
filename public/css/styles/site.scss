@@ -192,7 +192,7 @@ video {
 }
 .bcg-light {
   background: $light;
-  color: $dark;
+  color: $dark !important;
 }
 .story ul {
   margin: 0px;
@@ -229,8 +229,8 @@ video {
   ul {
     display: flex;
     flex-wrap: wrap;
-    column-gap: 8px;
-    row-gap: 4px;
+    gap: 8px;
+
     li,
     a {
       color: $light;
@@ -256,7 +256,15 @@ video {
     ul {
       li,
       a {
+        @include resp(
+          padding,
+          (
+            md-down: 10px,
+            lg: 8px 10px,
+          )
+        );
         color: $dark;
+        box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 5px 0 rgba(0, 0, 0, 0.05), 0 2px 9px 0 rgba(0, 0, 0, 0.06), 0 3px 16px 0 rgba(0, 0, 0, 0.07), 0 6px 30px 0 rgba(0, 0, 0, 0.09);
         &.active {
           background: $gradientText;
           background-clip: text;
@@ -402,6 +410,24 @@ video {
         xxxl: 100px,
       )
     );
+    @include resp(
+      display,
+      (
+        md-down: flex,
+      )
+    );
+    @include resp(
+      align-content,
+      (
+        md-down: center,
+      )
+    );
+    @include resp(
+      flex-direction,
+      (
+        md-down: column,
+      )
+    );
   }
   &__right {
     .appstore-utp {
@@ -465,7 +491,9 @@ video {
 
 .swiper-scrollbar {
   background: #d9d9d9 !important;
-  margin-top: 50px !important;
+  margin-top: 20px !important;
+  top: 0 !important;
+  bottom: 0 !important;
   position: relative !important;
   &.swiper-scrollbar-horizontal {
     width: 100% !important;
@@ -483,8 +511,21 @@ video {
 }
 .logo {
   background: url('/public/images/polen/img/logo.svg') top center no-repeat;
-  width: 100%;
-  height: 34px;
+
+  @include resp(
+    width,
+    (
+      md-down: 32px,
+      lg: 100%,
+    )
+  );
+  @include resp(
+    height,
+    (
+      md-down: 27px,
+      lg: 32px,
+    )
+  );
   transition: all 0.3s linear;
   display: block;
 }
@@ -588,6 +629,7 @@ video {
         );
       }
     }
+
     .menu-link {
       span {
         @include resp(
@@ -628,10 +670,20 @@ video {
         );
       }
     }
+
     .social-links {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
+      @include resp(
+        flex-direction,
+        (
+          lg: row,
+        )
+      );
+      @include resp(
+        justify-content,
+        (
+          lg: flex-start,
+        )
+      );
     }
   }
   .aside-block {
@@ -687,6 +739,92 @@ video {
     }
   }
 
+  .menu-nav {
+    @include resp(
+      width,
+      (
+        md-down: 100%,
+      )
+    );
+    @include resp(
+      padding,
+      (
+        md-down: 0 17px,
+      )
+    );
+    .menu-link {
+      @include resp(
+        display,
+        (
+          md-down: flex,
+        )
+      );
+      @include resp(
+        gap,
+        (
+          md-down: 12px,
+        )
+      );
+      @include resp(
+        width,
+        (
+          md-down: 100%,
+        )
+      );
+      @include resp(
+        height,
+        (
+          md-down: 80px,
+        )
+      );
+      @include resp(
+        background,
+        (
+          md-down: $light,
+        )
+      );
+      @include resp(
+        color,
+        (
+          md-down: $dark,
+        )
+      );
+      @include resp(
+        border-radius,
+        (
+          md-down: 5px,
+        )
+      );
+      @include resp(
+        box-shadow,
+        (
+          md-down: ' 1px 1px 6px 0px rgba(54, 77, 99, 0.5) inset,
+          1px 2px 6px 0px rgba(54, 77, 99, 0.7)',
+        )
+      );
+      @include resp(
+        align-items,
+        (
+          md-down: center,
+        )
+      );
+      @include resp(
+        transition,
+        (
+          md-down: all 0.5s linear,
+        )
+      );
+      &:hover,
+      &:active {
+        @include resp(
+          background,
+          (
+            md-down: linear-gradient(to right, #269ed9, #70c270),
+          )
+        );
+      }
+    }
+  }
   .menu-link {
     &.mail {
       @include resp(
@@ -696,10 +834,32 @@ video {
         )
       );
     }
+    &.policy span,
+    &.mail span {
+      color: $light;
+
+      @include resp(
+        font-size,
+        (
+          md-down: 12px,
+          lg: 14px,
+        )
+      );
+      @include resp(
+        display,
+        (
+          md-down: block,
+        )
+      );
+      @include resp(
+        max-width,
+        (
+          md-down: 134px,
+        )
+      );
+    }
     &.policy {
       span {
-        font-size: 14px;
-
         @include resp(
           width,
           (
@@ -756,11 +916,27 @@ video {
         )
       );
     }
+
+    &:hover span,
+    &:active span {
+      @include resp(
+        color,
+        (
+          md-down: $light,
+        )
+      );
+    }
   }
 }
 
 .menu-btn {
-  display: none;
+  @include resp(
+    display,
+    (
+      md-down: block,
+      lg: none,
+    )
+  );
   &:hover {
     .grad-icon {
       background: $buttonsGradient;
@@ -781,6 +957,9 @@ video {
 }
 .menu-aside {
   .menu-link {
+    display: flex;
+    align-items: center;
+    transition: all 2s linear;
     span {
       @include resp(
         color,
@@ -790,23 +969,13 @@ video {
         )
       );
     }
-  }
-}
-.menu-link {
-  display: flex;
-  align-items: center;
-  transition: all 2s linear;
-  @include resp(
-    padding,
-    (
-      sm-down: 0 10px,
-      md-down: 0 20px,
-    )
-  );
-  span {
-    font-size: 15px;
-    color: $light;
-    @include font('Roboto', 'regular');
+    @include resp(
+      padding,
+      (
+        sm-down: 0 10px,
+        md-down: 0 20px,
+      )
+    );
   }
 }
 
@@ -841,7 +1010,13 @@ video {
   width: 100%;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+
+  @include resp(
+    justify-content,
+    (
+      lg: center,
+    )
+  );
   .social-link {
     &:hover {
       .grad-icon {
@@ -913,6 +1088,9 @@ video {
         max-width: 600px;
       }
     }
+  }
+  .swiper-scrollbar {
+    margin-top: 50px !important ;
   }
 }
 
@@ -1635,25 +1813,28 @@ video {
     grid-template-columns,
     (
       md-down: repeat(1, 1fr),
-      lg: 1fr 390px 320px,
+      lg: 1fr 1fr,
+      xxl: 1fr 390px 320px,
     )
   );
 }
 .finance-col {
   box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 5px 0 rgba(0, 0, 0, 0.05), 0 2px 9px 0 rgba(0, 0, 0, 0.06), 0 3px 16px 0 rgba(0, 0, 0, 0.07), 0 6px 30px 0 rgba(0, 0, 0, 0.09);
-  padding: 20px;
   border-radius: 5px;
-  &:nth-child(4) {
+  .content-title {
     @include resp(
-      grid-column-start,
+      font-size,
       (
-        xl: 1,
+        md-down: 16px,
       )
     );
+  }
+  .content-title {
     @include resp(
-      grid-column-end,
+      padding,
       (
-        xl: 4,
+        md-down: 15px,
+        lg: 20px,
       )
     );
   }
@@ -1663,6 +1844,8 @@ video {
   display: flex;
   gap: 16px;
   align-items: center;
+  pointer-events: none;
+  cursor: none;
   &__wrapper {
     width: 100%;
   }
@@ -1673,6 +1856,7 @@ video {
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
+    text-wrap: nowrap;
   }
 
   &__bar {
@@ -1700,6 +1884,125 @@ video {
 
   &__max {
     text-wrap: nowrap;
+  }
+}
+.finance-first-col {
+  grid-column-start: 1;
+
+  @include resp(
+    grid-column-end,
+    (
+      lg: 3,
+      xxl: 1,
+    )
+  );
+}
+.finance-banks-col,
+.finance-last-col {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  gap: 12px;
+}
+.finance-banks {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+}
+.finance-banks-row {
+  display: flex;
+  gap: 8px;
+}
+.finance-last {
+  display: grid;
+  grid-template-columns: 1fr 80px 82px;
+  column-gap: 10px;
+  row-gap: 6px;
+  .finance-sum {
+    text-align: right;
+    @include font('Roboto', 'medium');
+    color: $green;
+  }
+}
+
+.finance-static-col {
+  display: flex;
+  justify-content: space-between;
+
+  grid-column-start: 1;
+  @include resp(
+    flex-direction,
+    (
+      md-down: column,
+    )
+  );
+  @include resp(
+    gap,
+    (
+      md-down: 30px,
+      lg: 10px,
+    )
+  );
+  @include resp(
+    grid-column-end,
+    (
+      lg: 3,
+      xxl: 4,
+    )
+  );
+  .finance-static-content {
+    display: grid;
+    column-gap: 60px;
+    row-gap: 20px;
+    @include resp(
+      grid-template-columns,
+      (
+        md-down: 1fr,
+        lg: repeat(2, minmax(auto, 530px)),
+      )
+    );
+  }
+  .finance-static-author {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    text-align: right;
+    min-width: 220px;
+    @include font('Roboto', 'bolditalic');
+  }
+}
+
+.text-copy {
+}
+.copy {
+  background-image: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 5H7C5.89543 5 5 5.89543 5 7V15C5 16.1046 5.89543 17 7 17H15C16.1046 17 17 16.1046 17 15V7C17 5.89543 16.1046 5 15 5Z' stroke='%23081530' stroke-linecap='round' stroke-linejoin='round' /%3E%3Cpath d='M13 5V3C13 2.46957 12.7893 1.96086 12.4142 1.58579C12.0391 1.21071 11.5304 1 11 1H3C2.46957 1 1.96086 1.21071 1.58579 1.58579C1.21071 1.96086 1 2.46957 1 3V11C1 11.5304 1.21071 12.0391 1.58579 12.4142C1.96086 12.7893 2.46957 13 3 13H5' stroke='%23081530' stroke-linecap='round' stroke-linejoin='round' /%3E%3C/svg%3E");
+  width: 16px;
+  height: 16px;
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.finance-link {
+  width: fit-content;
+  &::before {
+    position: absolute;
+    content: '';
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: $dark;
+    opacity: 1;
+    transition: all 0.3s linear;
+  }
+  &:hover {
+    &::before {
+      opacity: 0;
+      transition: all 0.3s linear;
+    }
   }
 }
 
@@ -1863,16 +2166,8 @@ video {
         lg: center,
       )
     );
-    // @include resp(
-    //   flex-direction,
-    //   (
-    //     md-down: column,
-    //     lg: row,
-    //   )
-    // );
-    li {
-      // display: flex;
 
+    li {
       @include resp(
         gap,
         (
@@ -1886,13 +2181,7 @@ video {
           lg: center,
         )
       );
-      // @include resp(
-      //   flex-direction,
-      //   (
-      //     md-down: column,
-      //     lg: row,
-      //   )
-      // );
+
       &:not(:first-child)::before {
         content: '';
         display: block;
@@ -1903,6 +2192,207 @@ video {
         flex-shrink: 0;
       }
     }
+  }
+}
+
+// страница Гид аллергика
+.gid_alergika {
+  .content-header {
+    .content-title {
+      @include resp(
+        margin-bottom,
+        (
+          sm-down: 35px,
+          md: 60px,
+        )
+      );
+      @include resp(
+        order,
+        (
+          sm-down: 1,
+        )
+      );
+    }
+    .search {
+      @include resp(
+        display,
+        (
+          md: none,
+        )
+      );
+    }
+  }
+  .content-news {
+    @include resp(
+      margin-bottom,
+      (
+        sm-down: 20px,
+        md: 60px,
+      )
+    );
+
+    .story {
+      max-width: 1010px;
+    }
+    .search {
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 1;
+      @include resp(
+        display,
+        (
+          sm-down: none,
+          md: block,
+        )
+      );
+    }
+  }
+  .content-alergika {
+    .story {
+      max-width: 1310px;
+      margin-bottom: 30px;
+    }
+    &__cards-allergika {
+      display: grid;
+
+      @include resp(
+        grid-template-columns,
+        (
+          sm-down: 1fr,
+          md: repeat(2, 1fr),
+          lg: repeat(3, 1fr),
+        )
+      );
+      gap: 20px;
+      max-width: 1375px;
+      @include resp(
+        margin-top,
+        (
+          sm-down: 35px,
+          md: 25px,
+        )
+      );
+    }
+  }
+}
+.news-gallery-wrapper {
+  margin-top: 24px;
+  .swiper-horizontal {
+    // overflow: visible;
+  }
+  .swiper-slide {
+    min-width: 347px;
+  }
+}
+// карточка новости
+.card-news {
+  min-width: 347px;
+
+  background: #14181f;
+  border-radius: 5px;
+  padding: 16px 36px 8px 16px;
+  display: flex;
+  overflow: hidden;
+  &__photo {
+    width: 110px;
+    height: 120px;
+    border-radius: 5px;
+    flex-shrink: 0;
+    img {
+      position: absolute;
+      inset: 0;
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-left: 12px;
+  }
+
+  &__content-title {
+    @include font('Roboto', 'bold');
+    font-size: 14px;
+    color: $green;
+  }
+
+  &__content-text {
+    color: $light;
+    @include resp(
+      font-size,
+      (
+        sm-down: 10px,
+        md: 12px,
+      )
+    );
+  }
+
+  &__link {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    top: 0;
+    width: 28px;
+    height: 100%;
+
+    background: radial-gradient(210.81% 205.04% at -105.04% 50%, rgb(54, 77, 99) 53.125%, rgb(5, 19, 46) 100%);
+  }
+  .date {
+    @include font('Roboto', 'bold');
+    font-size: 8px;
+    color: #98989870;
+    text-align: right;
+  }
+}
+// карточка Аллергика
+.card-allergika {
+  &__tags {
+    left: 8px;
+    top: 8px;
+
+    z-index: 1;
+    @include resp(
+      margin-bottom,
+      (
+        sm-down: 8px,
+      )
+    );
+    @include resp(
+      position,
+      (
+        sm-down: static,
+        md: absolute,
+      )
+    );
+  }
+  &__photo {
+    overflow: hidden;
+    width: 100%;
+    padding-bottom: 75%;
+    border-radius: 5px;
+
+    img {
+      position: absolute;
+      inset: 0;
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+    padding: 16px 8px;
+  }
+
+  &__content-title {
+    margin-bottom: 14px;
+    @include font('Roboto', 'medium');
+    font-size: 14px;
+  }
+
+  &__content-text {
+    font-size: 12px;
   }
 }
 
@@ -1997,42 +2487,6 @@ video {
     }
   }
 
-  .menu-nav {
-    width: 100%;
-    padding: 0 17px;
-
-    .menu-link {
-      display: flex;
-      gap: 12px;
-      width: 100%;
-      height: 80px;
-      background: $light;
-      color: $dark;
-      border-radius: 5px;
-      box-shadow: 1px 1px 6px 0px rgba(54, 77, 99, 0.5) inset, 1px 2px 6px 0px rgba(54, 77, 99, 0.7);
-
-      align-items: center;
-      transition: all 0.5s linear;
-      &.policy span {
-        font-size: 12px;
-        max-width: 134px;
-      }
-      &.mail span {
-        display: block;
-        max-width: 134px;
-        font-size: 12px;
-      }
-    }
-  }
-  .menu-btn {
-    display: block;
-  }
-  .logo {
-    // background: url('/public/images/polen/img/logo-mobile.svg') top center no-repeat;
-    width: 32px;
-    height: 27px;
-  }
-
   .social-links {
     align-items: flex-start;
     flex-direction: row;
@@ -2057,20 +2511,5 @@ video {
       background: linear-gradient(to right, #70c270, #269ed9) !important;
       border-radius: 3px;
     }
-  }
-
-  .menu-link:not(.policy, .mail):hover,
-  .menu-link:not(.policy, .mail):active {
-    background: linear-gradient(to right, #269ed9, #70c270);
-  }
-  .menu-link:hover span,
-  .menu-link:active span {
-    color: $light;
-  }
-
-  .content-main__left {
-    display: flex;
-    align-content: center;
-    flex-direction: column;
   }
 }

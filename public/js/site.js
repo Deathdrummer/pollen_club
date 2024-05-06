@@ -64,6 +64,29 @@ $(document).ready(function () {
       },
     },
   });
+  var swiperSliderNews = new Swiper('.news-gallery .swiper-container', {
+    slidesPerView: 1.2,
+    mousewheel: true,
+    spaceBetween: 10,
+
+    scrollbar: {
+      el: '.swiper-scrollbar',
+      draggable: true,
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+      1440: {
+        slidesPerView: 5,
+        spaceBetween: 20,
+      },
+    },
+  });
   var swiperSliderAbout = new Swiper('.about .achievements-list', {
     slidesPerView: 1.2,
     mousewheel: true,

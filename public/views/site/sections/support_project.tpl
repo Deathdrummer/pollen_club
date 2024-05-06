@@ -52,7 +52,7 @@
     </div>
   </div>
   <div class="content-support-finance">
-    <div class="finance-col">
+    <div class="finance-col finance-first-col">
       <h3 class="content-title section-title green">Наша текущая цель:</h3>
       <div class="story">
         <p>Друзья, мы развиваем проект Пыльца Club уже 8 лет. Все это время он был абсолютно бесплатным для наших подписчиков, мы финансировали его за счет своих личных средств. Со своей стороны мы уверены, что такой проект нужен. Каждый день мы продолжаем активно работать над улучшением сервиса. Но без вашего участия его развитие сильно ограничено.</p>
@@ -65,31 +65,56 @@
         </div>
       </div>
     </div>
-    <div class="finance-col">
-      <h3 class="content-title section-title orange">Оказать финансовую помощь:</h3>
-      <div class="finance-banks">
-        <div class="finance-banks-row">
-          <p>
-            Тинькофф <span class="text-copy">5536913837313705</span>
-          </p>
-          <div class="copy"></div>
+    <div class="finance-col finance-banks-col">
+      <div class="finance-col-wrapper">
+        <h3 class="content-title section-title orange">Оказать финансовую помощь:</h3>
+        <div class="finance-banks">
+          <div class="finance-banks-row">
+            <p>
+              Тинькофф <span class="text-copy">5536913837313705</span>
+            </p>
+            <div class="copy"></div>
+          </div>
+          <div class="finance-banks-row">
+            <p>
+              Сбербанк Онлайн <span class="text-copy">4276380088080143</span>
+            </p>
+            <div class="copy"></div>
+          </div>
+          <div class="finance-banks-row">
+            <a class="title-gradient" href="#">Кошелек</a>
+          </div>
         </div>
-        <div class="finance-banks-row">
-          <p>
-            Сбербанк Онлайн <span class="text-copy">4276380088080143</span>
-          </p>
-          <div class="copy"></div>
+      </div>
+      <a class="finance-link" href="#">Ознакомиться с полным текстов оферты</a>
+    </div>
+    <div class="finance-col finance-last-col">
+      <div class="finance-col-wrapper">
+        <h3 class="content-title section-title blue">Последние пожертвования:</h3>
+        <div class="finance-last">
+          <span>Маргарита</span><span class="finance-sum">100 ₽</span><span>01.01.2023</span>
+          <span>Дмитрий</span><span class="finance-sum">1000 ₽</span><span>01.01.2023</span>
+          <span>Григорий</span><span class="finance-sum">10000 ₽</span><span>01.01.2023</span>
+          <span>Ваня</span><span class="finance-sum">100 ₽</span><span>01.01.2023</span>
         </div>
-        <div class="finance-banks-row">
-          <a class="title-gradient" href="#">Кошелек</a>
-        </div>
-
-        <a class="oferta" href="#">Ознакомиться с полным текстов оферты</a>
+      </div>
+      <a class="finance-link" href="#">Полный список</a>
+    </div>
+    <div class="finance-col finance-static-col">
+      <div class="finance-static-content">
+        <p>Благодарим всех, кто в 2020 году финансово поддержал проект (78 человек, 56 413,37 рублей). Благодарим всех, кто в 2021 году финансово поддержал проект (19 человек, 11 634,60 рублей).</p>
+        <p>
+          Из полученных за 2 года средств финансовой помощи потрачено:<br />
+          — на шубохранилище: 0,00 рублей<br />
+          — на развитие сервиса: 68 047, 97 рублей
+        </p>
+      </div>
+      <div class="finance-static-author">
+        <p>Спасибо за поддержку проекта!</p>
+        <p>
+          Артем Антипов,<br /> основатель Пыльца Club
+        </p>
       </div>
     </div>
-    <div class="finance-col">
-      <h3 class="content-title section-title blue">Последние пожертвования:</h3>
-    </div>
-    <div class="finance-col"></div>
   </div>
 </section>

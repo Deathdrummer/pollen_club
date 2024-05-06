@@ -1,5 +1,5 @@
 {% if page_title %}
-	<h4 class="text-center">Страница: {{page_title}}</h4>		
+	<h4 class="text-center">Страница: {{page_title}}</h4>
 {% endif %}
 <form id="newPageForm">
 	<table class="fieldset">
