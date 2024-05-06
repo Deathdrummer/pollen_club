@@ -67,7 +67,7 @@
 			<td class="w-30"><div><span>Иконка для пункта меню</span></div></td>
 			<td>
 				<div class="file{% if not icon %} empty{% endif %}">
-					<label class="file__block" for="pageIcon" filemanager="images">
+					<label class="file__block" for="pageIcon" filemanager="images|svg">
 						<div class="file__image" fileimage>
 							{% if icon %}
 								{% if icon|filename(2)|is_img_file %}
