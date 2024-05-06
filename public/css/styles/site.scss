@@ -494,6 +494,7 @@ video {
   margin-top: 20px !important;
   top: 0 !important;
   bottom: 0 !important;
+  z-index: 1 !important;
   position: relative !important;
   &.swiper-scrollbar-horizontal {
     width: 100% !important;
@@ -510,7 +511,8 @@ video {
   overflow: hidden;
 }
 .logo {
-  background: url('/public/images/polen/img/logo.svg') top center no-repeat;
+  background-position: top center;
+  background-repeat: no-repeat;
 
   @include resp(
     width,
@@ -532,6 +534,7 @@ video {
 
 .aside {
   width: 96px;
+  z-index: 100;
   @include resp(
     height,
     (
@@ -635,7 +638,7 @@ video {
         @include resp(
           width,
           (
-            lg: 90px,
+            lg: 110px,
           )
         );
         @include resp(
@@ -815,6 +818,7 @@ video {
         )
       );
       &:hover,
+      &.active,
       &:active {
         @include resp(
           background,
@@ -890,7 +894,8 @@ video {
         )
       );
     }
-    &:hover span {
+    &:hover span,
+    &.active span {
       @include resp(
         background,
         (
@@ -918,6 +923,7 @@ video {
     }
 
     &:hover span,
+    &.active span,
     &:active span {
       @include resp(
         color,
@@ -980,7 +986,8 @@ video {
 }
 
 .menu-link-icon {
-  &:hover {
+  &:hover,
+  &.active {
     .grad-icon {
       @include resp(
         background,

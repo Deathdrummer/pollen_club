@@ -465,6 +465,7 @@ video {
   margin-top: 20px !important;
   top: 0 !important;
   bottom: 0 !important;
+  z-index: 1 !important;
   position: relative !important; }
   .swiper-scrollbar.swiper-scrollbar-horizontal {
     width: 100% !important;
@@ -481,7 +482,8 @@ video {
   overflow: hidden; }
 
 .logo {
-  background: url("/public/images/polen/img/logo.svg") top center no-repeat;
+  background-position: top center;
+  background-repeat: no-repeat;
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
   display: block; }
@@ -500,6 +502,7 @@ video {
 
 .aside {
   width: 96px;
+  z-index: 100;
   background: radial-gradient(1508.23% 99.48% at 50% 0%, #05132e 41.15%, #364d63 100%);
   position: fixed;
   top: 0;
@@ -578,7 +581,7 @@ video {
               align-items: flex-start; } }
   @media screen and (min-width: 1024px) {
     .aside:hover .menu-link span {
-      width: 90px; } }
+      width: 110px; } }
   @media screen and (min-width: 1024px) {
     .aside:hover .menu-link span {
       -webkit-transition: "width 0.3s linear 0.7s,\a             padding-left 0.7s linear 0.5s,\a             opacity 0.3s linear 0.7s";
@@ -728,7 +731,7 @@ video {
       -webkit-transition: all 0.5s linear;
       transition: all 0.5s linear; } }
   @media screen and (max-width: 1023px) {
-    .aside .menu-nav .menu-link:hover, .aside .menu-nav .menu-link:active {
+    .aside .menu-nav .menu-link:hover, .aside .menu-nav .menu-link.active, .aside .menu-nav .menu-link:active {
       background: -webkit-gradient(linear, left top, right top, from(#269ed9), to(#70c270));
       background: linear-gradient(to right, #269ed9, #70c270); } }
   @media screen and (min-width: 1024px) {
@@ -767,20 +770,25 @@ video {
       -webkit-transition: "width 0.5s linear,\a             padding-left 0.5s linear,\a             opacity 0.5s linear";
       transition: "width 0.5s linear,\a             padding-left 0.5s linear,\a             opacity 0.5s linear"; } }
   @media screen and (min-width: 1024px) {
-    .aside .menu-link:hover span {
+    .aside .menu-link:hover span,
+    .aside .menu-link.active span {
       background: radial-gradient(317.37% 116.72% at 100% 87.5%, #70c270 0%, #269ed9 100%); } }
   @media screen and (min-width: 1024px) {
-    .aside .menu-link:hover span {
+    .aside .menu-link:hover span,
+    .aside .menu-link.active span {
       -webkit-background-clip: text;
               background-clip: text; } }
   @media screen and (min-width: 1024px) {
-    .aside .menu-link:hover span {
+    .aside .menu-link:hover span,
+    .aside .menu-link.active span {
       -webkit-background-clip: text; } }
   @media screen and (min-width: 1024px) {
-    .aside .menu-link:hover span {
+    .aside .menu-link:hover span,
+    .aside .menu-link.active span {
       -webkit-text-fill-color: transparent; } }
   @media screen and (max-width: 1023px) {
     .aside .menu-link:hover span,
+    .aside .menu-link.active span,
     .aside .menu-link:active span {
       color: #f5fafe; } }
 
@@ -843,11 +851,11 @@ video {
       padding: 0 20px; } }
 
 @media screen and (max-width: 1023px) {
-  .menu-link-icon:hover .grad-icon {
+  .menu-link-icon:hover .grad-icon, .menu-link-icon.active .grad-icon {
     background: #f5fafe; } }
 
 @media screen and (min-width: 1024px) {
-  .menu-link-icon:hover .grad-icon {
+  .menu-link-icon:hover .grad-icon, .menu-link-icon.active .grad-icon {
     background: radial-gradient(317.37% 116.72% at 100% 87.5%, #70c270 0%, #269ed9 100%); } }
 
 .menu-link-icon .grad-icon {
