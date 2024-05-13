@@ -869,8 +869,8 @@ video {
     display: inline-block; }
   .aside .menu-link span {
     display: inline-block;
-    -webkit-transition: all 0.3s linear;
-    transition: all 0.3s linear; }
+    -webkit-transition: all 0.3s linear 0.1s;
+    transition: all 0.3s linear 0.1s; }
     @media screen and (min-width: 1024px) {
       .aside .menu-link span {
         background: -webkit-gradient(linear, left top, right top, color-stop(0, #f5fafe), color-stop(50%, #269ed9), to(#70c270));
@@ -896,8 +896,8 @@ video {
         -webkit-background-clip: text; } }
   .aside .menu-link:hover span,
   .aside .menu-link.active span {
-    -webkit-transition: all 0.3s linear;
-    transition: all 0.3s linear; }
+    -webkit-transition: all 0.3s linear 0.1s;
+    transition: all 0.3s linear 0.1s; }
     @media screen and (min-width: 1024px) {
       .aside .menu-link:hover span,
       .aside .menu-link.active span {
@@ -1001,8 +1001,8 @@ video {
   -webkit-flex-shrink: 0;
       -ms-flex-negative: 0;
           flex-shrink: 0;
-  -webkit-transition: all 0.3s linear;
-  transition: all 0.3s linear; }
+  -webkit-transition: all 0.3s linear 0.1s;
+  transition: all 0.3s linear 0.1s; }
   @media screen and (max-width: 1023px) {
     .menu-link-icon .grad-icon {
       background: #081530; } }
@@ -1021,8 +1021,8 @@ video {
       background-position: 0 0; } }
 
 .menu-link-icon:hover .grad-icon, .menu-link-icon.active .grad-icon {
-  -webkit-transition: all 0.3s linear;
-  transition: all 0.3s linear; }
+  -webkit-transition: all 0.3s linear 0.1s;
+  transition: all 0.3s linear 0.1s; }
   @media screen and (max-width: 1023px) {
     .menu-link-icon:hover .grad-icon, .menu-link-icon.active .grad-icon {
       background: #f5fafe; } }
@@ -1076,8 +1076,8 @@ video {
     -webkit-flex-shrink: 0;
         -ms-flex-negative: 0;
             flex-shrink: 0;
-    -webkit-transition: all 0.3s linear;
-    transition: all 0.3s linear; }
+    -webkit-transition: all 0.3s linear 0.1s;
+    transition: all 0.3s linear 0.1s; }
     @media screen and (max-width: 1023px) {
       .social-links .social-link .grad-icon {
         background: #f5fafe; } }
@@ -1095,8 +1095,8 @@ video {
       .social-links .social-link .grad-icon {
         background-position: 0 0; } }
   .social-links .social-link:hover .grad-icon {
-    -webkit-transition: all 0.3s linear;
-    transition: all 0.3s linear; }
+    -webkit-transition: all 0.3s linear 0.1s;
+    transition: all 0.3s linear 0.1s; }
     @media screen and (min-width: 1024px) {
       .social-links .social-link:hover .grad-icon {
         background-size: 200%; } }

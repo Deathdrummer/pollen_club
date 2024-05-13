@@ -1020,11 +1020,11 @@ video {
           lg: text,
         )
       );
-      transition: all 0.3s linear;
+      transition: all 0.3s linear 0.1s;
     }
     &:hover span,
     &.active span {
-      transition: all 0.3s linear;
+      transition: all 0.3s linear 0.1s;
       @include resp(
         background-position,
         (
@@ -1142,7 +1142,7 @@ video {
     height: 24px;
     display: block;
     flex-shrink: 0;
-    transition: all 0.3s linear;
+    transition: all 0.3s linear 0.1s;
 
     @include resp(
       background,
@@ -1168,7 +1168,7 @@ video {
   &:hover,
   &.active {
     .grad-icon {
-      transition: all 0.3s linear;
+      transition: all 0.3s linear 0.1s;
       @include resp(
         background,
         (
@@ -1227,7 +1227,7 @@ video {
       height: 24px;
       display: block;
       flex-shrink: 0;
-      transition: all 0.3s linear;
+      transition: all 0.3s linear 0.1s;
 
       @include resp(
         background,
@@ -1252,7 +1252,7 @@ video {
     }
     &:hover {
       .grad-icon {
-        transition: all 0.3s linear;
+        transition: all 0.3s linear 0.1s;
 
         @include resp(
           background-size,
