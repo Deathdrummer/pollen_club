@@ -10,8 +10,8 @@
       <div class="content-header__right">
         <div class="block-download">
           <div class="block-download-list">
-            <a class="appstore" href="#appstore"><img src="public/images/polen/img/appstore.svg" alt="" /></a>
-            <a class="appstore" href="#googleplay"><img src="public/images/polen/img/googleplay.svg" alt="" /></a>
+            <a class="appstore" href="#appstore"><img src="{{ base_url('public/images/pollen/icons/appstore.svg') }}" alt="" /></a>
+            <a class="appstore" href="#googleplay"><img src="{{ base_url('public/images/pollen/icons/googleplay.svg') }}" alt="" /></a>
           </div>
           <div class="advantages-application">
             <div class="advantages-circle circle-1 bcg-green-bef">
@@ -33,13 +33,13 @@
           <div class="swiper-container">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
-                <img src="/public/images/polen/img/mobile-phone 1.png" alt="" role="group" />
+                <img src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
               </div>
               <div class="swiper-slide">
-                <img src="/public/images/polen/img/mobile-phone 1.png" alt="" role="group" />
+                <img src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
               </div>
               <div class="swiper-slide">
-                <img src="/public/images/polen/img/mobile-phone 1.png" alt="" role="group" />
+                <img src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
               </div>
             </div>
           </div>

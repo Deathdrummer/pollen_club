@@ -97,8 +97,8 @@ u {
     padding,
     (
       md-down: 140px 16px 40px,
-      lg: 60px 40px 60px 120px,
-      xxl: 60px 40px 60px 140px,
+      lg: 40px 40px 60px 120px,
+      xxl: 40px 40px 60px 140px,
     )
   );
 }
@@ -263,15 +263,96 @@ video {
             lg: 8px 10px,
           )
         );
-        color: $dark;
-        box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 5px 0 rgba(0, 0, 0, 0.05), 0 2px 9px 0 rgba(0, 0, 0, 0.06), 0 3px 16px 0 rgba(0, 0, 0, 0.07), 0 6px 30px 0 rgba(0, 0, 0, 0.09);
-        &.active {
-          background: $gradientText;
-          background-clip: text;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
 
-          flex-shrink: 0;
+        box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 5px 0 rgba(0, 0, 0, 0.05), 0 2px 9px 0 rgba(0, 0, 0, 0.06), 0 3px 16px 0 rgba(0, 0, 0, 0.07), 0 6px 30px 0 rgba(0, 0, 0, 0.09);
+        transition: all 0.2s linear;
+        @include resp(
+          background,
+          (
+            md-down: $dark,
+            lg: linear-gradient(90deg, $dark 0, $blue 50%, $green 100%),
+          )
+        );
+
+        @include resp(
+          background-size,
+          (
+            md-down: 100%,
+            lg: 1000%,
+          )
+        );
+        @include resp(
+          background-position,
+          (
+            lg: 0 0,
+          )
+        );
+        @include resp(
+          color,
+          (
+            lg: transparent,
+          )
+        );
+        @include resp(
+          -webkit-text-fill-color,
+          (
+            lg: transparent,
+          )
+        );
+        @include resp(
+          background-clip,
+          (
+            lg: text,
+          )
+        );
+        @include resp(
+          -webkit-background-clip,
+          (
+            lg: text,
+          )
+        );
+        &:hover {
+          cursor: pointer;
+        }
+        &:hover,
+        &.active {
+          transition: all 0.2s linear;
+          @include resp(
+            background-size,
+            (
+              lg: 200%,
+            )
+          );
+          @include resp(
+            background-position,
+            (
+              lg: 100%,
+            )
+          );
+          @include resp(
+            color,
+            (
+              lg: transparent,
+            )
+          );
+          @include resp(
+            -webkit-text-fill-color,
+            (
+              lg: transparent,
+            )
+          );
+          @include resp(
+            background-clip,
+            (
+              lg: text,
+            )
+          );
+          @include resp(
+            -webkit-background-clip,
+            (
+              lg: text,
+            )
+          );
         }
       }
     }
@@ -313,11 +394,23 @@ video {
     )
   );
   &__left {
-    display: flex;
-
+    @include resp(
+      grid-template-columns,
+      (
+        md-down: repeat(1, 1fr),
+      )
+    );
+    @include resp(
+      display,
+      (
+        md-down: grid,
+        lg: flex,
+      )
+    );
     @include resp(
       gap,
       (
+        md-down: 20px,
         xl-down: 30px,
         xxxl: 92px,
       )
@@ -511,25 +604,56 @@ video {
   overflow: hidden;
 }
 .logo {
-  background-position: top center;
-  background-repeat: no-repeat;
-
-  @include resp(
-    width,
-    (
-      md-down: 32px,
-      lg: 100%,
-    )
-  );
-  @include resp(
-    height,
-    (
-      md-down: 27px,
-      lg: 32px,
-    )
-  );
-  transition: all 0.3s linear;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .logo-img {
+    @include resp(
+      width,
+      (
+        md-down: 32px,
+        lg: 40px,
+      )
+    );
+    @include resp(
+      height,
+      (
+        md-down: 27px,
+        lg: 34px,
+      )
+    );
+  }
+  .logo-text {
+    text-wrap: nowrap;
+    @include font('Roboto', 'bold');
+    @include resp(
+      padding-top,
+      (
+        lg: 8px,
+      )
+    );
+    @include resp(
+      font-size,
+      (
+        lg: 20px,
+      )
+    );
+    @include resp(
+      display,
+      (
+        md-down: none,
+        lg: block,
+      )
+    );
+    @include resp(
+      opacity,
+      (
+        lg: 0,
+      )
+    );
+    transition: all 0.3s ease-out 0.2s;
+  }
 }
 
 .aside {
@@ -574,7 +698,7 @@ video {
   @include resp(
     transition,
     (
-      lg: width 0.3s ease-out 0.3s,
+      lg: width 0.3s ease-out 0.2s,
     )
   );
   @include resp(
@@ -605,22 +729,17 @@ video {
     @include resp(
       transition,
       (
-        lg: all 0.3s ease-in,
+        lg: all 0.3s ease-in 0.2s,
       )
     );
-    @include resp(
-      transition,
-      (
-        lg: all 0.3s ease-in,
-      )
-    );
-    .logo {
+    .logo-text {
       @include resp(
-        height,
+        opacity,
         (
-          lg: 65px,
+          lg: 1,
         )
       );
+      transition: all 0.3s ease-in 0.2s;
     }
     .aside-block {
       &__bottom {
@@ -635,42 +754,28 @@ video {
 
     .menu-link {
       span {
-        @include resp(
-          width,
-          (
-            lg: 110px,
-          )
-        );
-        @include resp(
-          transition,
-          (
-            lg: 'width 0.3s linear 0.7s,
-            padding-left 0.7s linear 0.5s,
-            opacity 0.3s linear 0.7s',
-          )
-        );
-
-        @include resp(
-          padding-left,
-          (
-            lg: 12px,
-          )
-        );
-
-        @include resp(
-          opacity,
-          (
-            lg: 1,
-          )
-        );
+        transition: all 0.2s linear;
       }
-      &.policy span {
-        @include resp(
-          padding-left,
-          (
-            lg: 0px,
-          )
-        );
+      &.policy {
+        span {
+          @include resp(
+            padding-left,
+            (
+              lg: 0px,
+            )
+          );
+          @include resp(
+            opacity,
+            (
+              lg: 1,
+            )
+          );
+        }
+        &:hover {
+          span {
+            transition: opacity 0.3s ease-in 0.2s, background-size 0.3s linear, background-position 0.3s linear;
+          }
+        }
       }
     }
 
@@ -697,16 +802,9 @@ video {
     width: 100%;
     &__top {
       @include resp(
-        padding-top,
+        padding,
         (
-          lg: 26px,
-        )
-      );
-
-      @include resp(
-        padding-bottom,
-        (
-          lg: 100px,
+          lg: 40px 0 80px 0,
         )
       );
 
@@ -720,14 +818,15 @@ video {
     &__bottom {
       display: flex;
       flex-direction: column;
-      align-items: center;
+
+      align-items: flex-start;
       justify-content: space-between;
       height: 100%;
       width: 100%;
       @include resp(
         padding,
         (
-          lg: 0 40px,
+          lg: 0 35px,
         )
       );
     }
@@ -811,12 +910,12 @@ video {
           md-down: center,
         )
       );
-      @include resp(
-        transition,
-        (
-          md-down: all 0.5s linear,
-        )
-      );
+      // @include resp(
+      //   transition,
+      //   (
+      //     md-down: all 0.5s linear,
+      //   )
+      // );
       &:hover,
       &.active,
       &:active {
@@ -865,41 +964,48 @@ video {
     &.policy {
       span {
         @include resp(
-          width,
+          opacity,
           (
-            lg: auto,
+            lg: 0,
           )
         );
+        transition: opacity 0.3s ease-out 0.2s, background-size 0.3s linear, background-position 0.3s linear;
       }
     }
-    span {
-      @include resp(
-        width,
-        (
-          lg: 0,
-        )
-      );
-      @include resp(
-        opacity,
-        (
-          lg: 0,
-        )
-      );
-      @include resp(
-        transition,
-        (
-          lg: 'width 0.5s linear,
-            padding-left 0.5s linear,
-            opacity 0.5s linear',
-        )
-      );
+    b {
+      display: inline-block;
     }
-    &:hover span,
-    &.active span {
+    span {
+      display: inline-block;
+
       @include resp(
         background,
         (
-          lg: $buttonsGradient,
+          lg: linear-gradient(90deg, $light 0, $blue 50%, $green 100%),
+        )
+      );
+      @include resp(
+        background-size,
+        (
+          lg: 1000%,
+        )
+      );
+      @include resp(
+        background-position,
+        (
+          lg: 0 0,
+        )
+      );
+      @include resp(
+        color,
+        (
+          lg: transparent,
+        )
+      );
+      @include resp(
+        -webkit-text-fill-color,
+        (
+          lg: transparent,
         )
       );
       @include resp(
@@ -914,14 +1020,52 @@ video {
           lg: text,
         )
       );
+      transition: all 0.3s linear;
+    }
+    &:hover span,
+    &.active span {
+      transition: all 0.3s linear;
+      @include resp(
+        background-position,
+        (
+          lg: 100%,
+        )
+      );
+      @include resp(
+        background-size,
+        (
+          lg: 200%,
+        )
+      );
+
+      @include resp(
+        color,
+        (
+          lg: transparent,
+        )
+      );
       @include resp(
         -webkit-text-fill-color,
         (
           lg: transparent,
         )
       );
+      @include resp(
+        background-clip,
+        (
+          lg: text,
+        )
+      );
+      @include resp(
+        -webkit-background-clip,
+        (
+          lg: text,
+        )
+      );
     }
-
+    &.active {
+      pointer-events: none;
+    }
     &:hover span,
     &.active span,
     &:active span {
@@ -945,13 +1089,14 @@ video {
   );
   &:hover {
     .grad-icon {
-      background: $buttonsGradient;
+      background: $gradientText;
     }
   }
   .grad-icon {
     width: 40px;
     height: 40px;
     display: block;
+    flex-shrink: 0;
     background: $light;
   }
 }
@@ -965,7 +1110,13 @@ video {
   .menu-link {
     display: flex;
     align-items: center;
-    transition: all 2s linear;
+
+    @include resp(
+      gap,
+      (
+        lg: 37px,
+      )
+    );
     span {
       @include resp(
         color,
@@ -986,55 +1137,136 @@ video {
 }
 
 .menu-link-icon {
-  &:hover,
-  &.active {
-    .grad-icon {
-      @include resp(
-        background,
-        (
-          md-down: $light,
-          lg: $buttonsGradient,
-        )
-      );
-    }
-  }
   .grad-icon {
     width: 24px;
     height: 24px;
     display: block;
+    flex-shrink: 0;
+    transition: all 0.3s linear;
+
     @include resp(
       background,
       (
         md-down: $dark,
-        lg: $light,
+        lg: linear-gradient(90deg, $light 0, $blue 50%, $green 100%),
+      )
+    );
+    @include resp(
+      background-size,
+      (
+        md-down: 100%,
+        lg: 1000%,
+      )
+    );
+    @include resp(
+      background-position,
+      (
+        lg: 0 0,
       )
     );
   }
+  &:hover,
+  &.active {
+    .grad-icon {
+      transition: all 0.3s linear;
+      @include resp(
+        background,
+        (
+          md-down: $light,
+        )
+      );
+      @include resp(
+        background-size,
+        (
+          lg: 200%,
+        )
+      );
+      @include resp(
+        background-position,
+        (
+          lg: 100%,
+        )
+      );
+    }
+  }
 }
 .social-links {
-  gap: 20px;
   display: flex;
   width: 100%;
   flex-wrap: wrap;
   align-items: center;
-
   @include resp(
-    justify-content,
+    gap,
     (
-      lg: center,
+      md-down: 12px,
+      lg: 20px,
     )
   );
+  @include resp(
+    align-item,
+    (
+      md-down: flex-start,
+    )
+  );
+  @include resp(
+    flex-direction,
+    (
+      md-down: row,
+    )
+  );
+  @include resp(
+    margin,
+    (
+      md-down: 20px 0 12px,
+    )
+  );
+
   .social-link {
-    &:hover {
-      .grad-icon {
-        background: $buttonsGradient;
-      }
-    }
     .grad-icon {
       width: 24px;
       height: 24px;
       display: block;
-      background: $light;
+      flex-shrink: 0;
+      transition: all 0.3s linear;
+
+      @include resp(
+        background,
+        (
+          md-down: $light,
+          lg: linear-gradient(90deg, $light 0, $blue 50%, $green 100%),
+        )
+      );
+      @include resp(
+        background-size,
+        (
+          md-down: 100%,
+          lg: 1000%,
+        )
+      );
+      @include resp(
+        background-position,
+        (
+          lg: 0 0,
+        )
+      );
+    }
+    &:hover {
+      .grad-icon {
+        transition: all 0.3s linear;
+
+        @include resp(
+          background-size,
+          (
+            lg: 200%,
+          )
+        );
+        @include resp(
+          background-position,
+          (
+            lg: 100%,
+          )
+        );
+      }
     }
   }
 }
@@ -1054,6 +1286,14 @@ video {
         gap,
         (
           sm-down: 20px,
+        )
+      );
+    }
+    &__description {
+      @include resp(
+        max-width,
+        (
+          md-down: 100%,
         )
       );
     }
@@ -1089,10 +1329,6 @@ video {
             lg: 700px,
           )
         );
-      }
-
-      .swiper-slide {
-        max-width: 600px;
       }
     }
   }
@@ -1370,7 +1606,23 @@ video {
 }
 
 .close-button {
-  display: none;
+  @include resp(
+    display,
+    (
+      md-down: flex,
+      lg: none,
+    )
+  );
+  justify-content: center;
+  margin-top: auto;
+  padding-bottom: 16px;
+  i {
+    display: block;
+    height: 5px;
+    width: 56px;
+    background: linear-gradient(to right, #70c270, #269ed9) !important;
+    border-radius: 3px;
+  }
 }
 
 /* Видео */
@@ -1675,17 +1927,6 @@ video {
         lg: 2,
       )
     );
-    // .achievements-list {
-    //   li {
-    //     @include resp(
-    //       max-width,
-    //       (
-    //         md-down: 100%,
-    //         lg: 354px,
-    //       )
-    //     );
-    //   }
-    // }
   }
 }
 
@@ -1828,20 +2069,18 @@ video {
 .finance-col {
   box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 5px 0 rgba(0, 0, 0, 0.05), 0 2px 9px 0 rgba(0, 0, 0, 0.06), 0 3px 16px 0 rgba(0, 0, 0, 0.07), 0 6px 30px 0 rgba(0, 0, 0, 0.09);
   border-radius: 5px;
+  @include resp(
+    padding,
+    (
+      md-down: 15px,
+      lg: 20px,
+    )
+  );
   .content-title {
     @include resp(
       font-size,
       (
         md-down: 16px,
-      )
-    );
-  }
-  .content-title {
-    @include resp(
-      padding,
-      (
-        md-down: 15px,
-        lg: 20px,
       )
     );
   }
@@ -2216,15 +2455,15 @@ video {
       @include resp(
         order,
         (
-          sm-down: 1,
+          md-down: 1,
         )
       );
     }
     .search {
       @include resp(
-        display,
+        margin-left,
         (
-          md: none,
+          lg: auto,
         )
       );
     }
@@ -2240,19 +2479,6 @@ video {
 
     .story {
       max-width: 1010px;
-    }
-    .search {
-      position: absolute;
-      right: 0;
-      top: 0;
-      z-index: 1;
-      @include resp(
-        display,
-        (
-          sm-down: none,
-          md: block,
-        )
-      );
     }
   }
   .content-alergika {
@@ -2346,6 +2572,18 @@ video {
     height: 100%;
 
     background: radial-gradient(210.81% 205.04% at -105.04% 50%, rgb(54, 77, 99) 53.125%, rgb(5, 19, 46) 100%);
+    &:before {
+      content: '';
+      display: block;
+      position: relative;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px;
+      height: 12px;
+      background-size: 12px 12px;
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.61516 3.37675L6.82907 6.12283L2.61516 8.86891L3.45794 9.96734L9.35742 6.12283L3.45794 2.27832L2.61516 3.37675Z' fill='%23F7F7F7' /%3E%3C/svg%3E");
+    }
   }
   .date {
     @include font('Roboto', 'bold');
@@ -2404,14 +2642,6 @@ video {
 }
 
 @media screen and (max-width: 1024px) {
-  .content-header {
-    &__left {
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      gap: 20px;
-    }
-  }
-
   .circle-1 {
     margin-left: 40px;
     margin-top: 80px;
@@ -2432,9 +2662,6 @@ video {
       top: -39px;
       left: -50px;
     }
-  }
-  .mobile-application-header__description {
-    max-width: 100%;
   }
 
   .aside {
@@ -2491,32 +2718,6 @@ video {
         gap: 0px;
         margin-bottom: 0;
       }
-    }
-  }
-
-  .social-links {
-    align-items: flex-start;
-    flex-direction: row;
-    gap: 12px;
-    margin: 20px 0 12px;
-    &::before {
-      width: 30px;
-      height: 30px;
-      background-size: 30px 30px;
-    }
-  }
-
-  .close-button {
-    display: flex;
-    justify-content: center;
-    margin-top: auto;
-    padding-bottom: 16px;
-    i {
-      display: block;
-      height: 5px;
-      width: 56px;
-      background: linear-gradient(to right, #70c270, #269ed9) !important;
-      border-radius: 3px;
     }
   }
 }
