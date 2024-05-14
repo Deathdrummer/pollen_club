@@ -2560,26 +2560,45 @@ video {
 }
 .news-gallery-wrapper {
   margin-top: 24px;
-  .swiper-horizontal {
-    // overflow: visible;
-  }
+}
+.news-gallery {
   .swiper-slide {
-    min-width: 347px;
   }
 }
 // карточка новости
 .card-news {
-  min-width: 347px;
+  // min-width: 347px;
 
   background: #14181f;
   border-radius: 5px;
-  padding: 16px 36px 8px 16px;
+  padding: 16px 36px 18px 16px;
   display: flex;
   overflow: hidden;
+  @include resp(
+    padding,
+    (
+      md-down: 8px 30px 8px 8px,
+      lg: 16px 36px 18px 16px,
+    )
+  );
   &__photo {
-    width: 110px;
-    height: 120px;
+    @include resp(
+      min-width,
+      (
+        sm-down: 70px,
+        md: 120px,
+      )
+    );
+    @include resp(
+      width,
+      (
+        sm-down: 35%,
+        md: 25%,
+      )
+    );
+    min-height: 100%;
     border-radius: 5px;
+    overflow: hidden;
     flex-shrink: 0;
     img {
       position: absolute;
@@ -2636,9 +2655,51 @@ video {
   }
   .date {
     @include font('Roboto', 'bold');
-    font-size: 8px;
-    color: #98989870;
-    text-align: right;
+
+    @include resp(
+      font-size,
+      (
+        md-down: 10px,
+        lg: 8px,
+      )
+    );
+    @include resp(
+      color,
+      (
+        md-down: $dark,
+        lg: #98989870,
+      )
+    );
+
+    position: absolute;
+    @include resp(
+      right,
+      (
+        md-down: auto,
+        lg: 36px,
+      )
+    );
+    @include resp(
+      bottom,
+      (
+        md-down: auto,
+        lg: 8px,
+      )
+    );
+    @include resp(
+      top,
+      (
+        md-down: 12px,
+        lg: auto,
+      )
+    );
+    @include resp(
+      left,
+      (
+        md-down: 12px,
+        lg: auto,
+      )
+    );
   }
 }
 // карточка Аллергика

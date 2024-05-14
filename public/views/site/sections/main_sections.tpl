@@ -21,8 +21,7 @@
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
                       <p class="card-news__content-text">Аллергенная обстановка повсеместно нестабильная. Большинство аллергиков реагируют...</p>
-                      <span class="date">20/07/2022</span>
-                    </div>
+                    </div> <span class="date">20/07/2022</span>
                     <a href="/news/" class="card-news__link"></a>
                   </div>
                 </div>
@@ -34,8 +33,7 @@
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
                       <p class="card-news__content-text">Аллергенная обстановка повсеместно нестабильная. Большинство аллергиков реагируют...</p>
-                      <span class="date">20/07/2022</span>
-                    </div>
+                    </div> <span class="date">20/07/2022</span>
                     <a href="/news/" class="card-news__link"></a>
                   </div>
                 </div>
@@ -47,8 +45,7 @@
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
                       <p class="card-news__content-text">Аллергенная обстановка повсеместно нестабильная. Большинство аллергиков реагируют...</p>
-                      <span class="date">20/07/2022</span>
-                    </div>
+                    </div> <span class="date">20/07/2022</span>
                     <a href="/news/" class="card-news__link"></a>
                   </div>
                 </div>
@@ -60,8 +57,7 @@
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
                       <p class="card-news__content-text">Аллергенная обстановка повсеместно нестабильная. Большинство аллергиков реагируют...</p>
-                      <span class="date">20/07/2022</span>
-                    </div>
+                    </div> <span class="date">20/07/2022</span>
                     <a href="/news/" class="card-news__link"></a>
                   </div>
                 </div>
@@ -73,8 +69,7 @@
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
                       <p class="card-news__content-text">Аллергенная обстановка повсеместно нестабильная. Большинство аллергиков реагируют...</p>
-                      <span class="date">20/07/2022</span>
-                    </div>
+                    </div> <span class="date">20/07/2022</span>
                     <a href="/news/" class="card-news__link"></a>
                   </div>
                 </div>
@@ -86,8 +81,7 @@
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
                       <p class="card-news__content-text">Аллергенная обстановка повсеместно нестабильная. Большинство аллергиков реагируют...</p>
-                      <span class="date">20/07/2022</span>
-                    </div>
+                    </div> <span class="date">20/07/2022</span>
                     <a href="/news/" class="card-news__link"></a>
                   </div>
                 </div>
@@ -99,8 +93,7 @@
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
                       <p class="card-news__content-text">Аллергенная обстановка повсеместно нестабильная. Большинство аллергиков реагируют...</p>
-                      <span class="date">20/07/2022</span>
-                    </div>
+                    </div> <span class="date">20/07/2022</span>
                     <a href="/news/" class="card-news__link"></a>
                   </div>
                 </div>

@@ -82,16 +82,20 @@ $(document).ready(function () {
         spaceBetween: 20,
       },
       1440: {
+        slidesPerView: 4,
+        spaceBetween: 20,
+      },
+      1640: {
         slidesPerView: 5,
         spaceBetween: 20,
       },
     },
   });
-  var swiperSliderNewsMain = new Swiper('.main .news-gallery .swiper-container', {
+  var swiperSliderNewsMain = new Swiper('.main-sections .news-gallery .swiper-container', {
     slidesPerView: 1.2,
     mousewheel: true,
     spaceBetween: 10,
-
+    variableWidth: true,
     scrollbar: {
       el: '.swiper-scrollbar',
       draggable: true,
@@ -99,21 +103,16 @@ $(document).ready(function () {
     breakpoints: {
       640: {
         slidesPerView: 2,
-      },
-      1024: {
-        slidesPerView: 3,
         spaceBetween: 20,
       },
-      1440: {
-        slidesPerView: 2,
-        spaceBetween: 20,
-      },
+      1024: { loopedSlides: 2, slidesPerView: 2 },
     },
   });
   var swiperSliderAbout = new Swiper('.about .achievements-list', {
     slidesPerView: 1.2,
     mousewheel: true,
     spaceBetween: 18,
+
     scrollbar: {
       el: '.swiper-scrollbar',
       draggable: true,
