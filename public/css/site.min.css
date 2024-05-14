@@ -1104,6 +1104,11 @@ video {
       .social-links .social-link:hover .grad-icon {
         background-position: 100%; } }
 
+.main-sections .content-main__content-news {
+  margin: 25px 0; }
+  .main-sections .content-main__content-news .news-gallery {
+    display: grid; }
+
 @media screen and (max-width: 767px) {
   .mobile-application .content-header__left {
     grid-template-columns: repeat(1, 1fr); } }
@@ -1368,7 +1373,7 @@ video {
       .advantages-circle.circle-1::before {
         left: -74px; } }
   .advantages-circle.circle-2 {
-    max-width: 153px; }
+    max-width: 175px; }
     @media screen and (max-width: 1199px) {
       .advantages-circle.circle-2::before {
         width: 60px; } }

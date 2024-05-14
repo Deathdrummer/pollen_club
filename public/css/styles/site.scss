@@ -1271,6 +1271,30 @@ video {
   }
 }
 
+// Главная
+.main-sections {
+  .content-main {
+    &__content {
+      .main-block {
+      }
+
+      .content-title {
+      }
+
+      .content-description {
+      }
+    }
+    &__content-news {
+      margin: 25px 0;
+      .news-gallery {
+        display: grid;
+      }
+    }
+    &__map {
+    }
+  }
+}
+
 // мобильное приложение
 
 .mobile-application {
@@ -1570,7 +1594,7 @@ video {
   }
 
   &.circle-2 {
-    max-width: 153px;
+    max-width: 175px;
     &::before {
       @include resp(
         width,
