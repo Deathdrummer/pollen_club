@@ -25,7 +25,7 @@
               <li>
                 <a class="menu-link menu-link-icon{% if item.active %}{{ ' active' }}{% endif %}" href="{{ item.href }}">
                   <i class="grad-icon" style="mask-image: url('{{ base_url('public/filemanager/' ~ item.icon) }}')"></i>
-                  <b><span>{{ item.link_title }}</span></b>
+                  <span>{{ item.link_title }}</span>
                 </a>
               </li>
             {% endfor %}

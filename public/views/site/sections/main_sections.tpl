@@ -16,7 +16,7 @@
                 <div class="swiper-slide">
                   <div class="card-news">
                     <div class="card-news__photo">
-                      <img src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                      <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
                     </div>
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -29,7 +29,7 @@
                 <div class="swiper-slide">
                   <div class="card-news">
                     <div class="card-news__photo">
-                      <img src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                      <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
                     </div>
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -42,7 +42,7 @@
                 <div class="swiper-slide">
                   <div class="card-news">
                     <div class="card-news__photo">
-                      <img src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                      <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
                     </div>
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -55,7 +55,7 @@
                 <div class="swiper-slide">
                   <div class="card-news">
                     <div class="card-news__photo">
-                      <img src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                      <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
                     </div>
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -68,7 +68,7 @@
                 <div class="swiper-slide">
                   <div class="card-news">
                     <div class="card-news__photo">
-                      <img src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                      <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
                     </div>
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -81,7 +81,7 @@
                 <div class="swiper-slide">
                   <div class="card-news">
                     <div class="card-news__photo">
-                      <img src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                      <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
                     </div>
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -94,7 +94,7 @@
                 <div class="swiper-slide">
                   <div class="card-news">
                     <div class="card-news__photo">
-                      <img src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                      <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
                     </div>
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>

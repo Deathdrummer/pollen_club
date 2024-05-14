@@ -1142,8 +1142,14 @@ video {
     height: 24px;
     display: block;
     flex-shrink: 0;
-    transition: all 0.3s linear 0.1s;
 
+    @include resp(
+      transition,
+      (
+        md-down: all 0.3s linear,
+        lg: all 0.3s linear 0.1s,
+      )
+    );
     @include resp(
       background,
       (
@@ -1168,7 +1174,13 @@ video {
   &:hover,
   &.active {
     .grad-icon {
-      transition: all 0.3s linear 0.1s;
+      @include resp(
+        transition,
+        (
+          md-down: all 0.3s linear,
+          lg: all 0.3s linear 0.1s,
+        )
+      );
       @include resp(
         background,
         (
@@ -1227,7 +1239,13 @@ video {
       height: 24px;
       display: block;
       flex-shrink: 0;
-      transition: all 0.3s linear 0.1s;
+      @include resp(
+        transition,
+        (
+          md-down: all 0.3s linear,
+          lg: all 0.3s linear 0.1s,
+        )
+      );
 
       @include resp(
         background,
@@ -1252,7 +1270,13 @@ video {
     }
     &:hover {
       .grad-icon {
-        transition: all 0.3s linear 0.1s;
+        @include resp(
+          transition,
+          (
+            md-down: all 0.3s linear,
+            lg: all 0.3s linear 0.1s,
+          )
+        );
 
         @include resp(
           background-size,
@@ -1528,6 +1552,7 @@ video {
 .advantages-description {
   @include font('Roboto', 'regular');
   line-height: 1;
+  display: block;
   @include resp(
     font-size,
     (

@@ -21,22 +21,22 @@
             <div class="swiper-wrapper">
               <div class="swiper-slide">
                 <div class="photo">
-                  <img src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                  <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
                 </div>
               </div>
               <div class="swiper-slide">
                 <div class="photo">
-                  <img src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                  <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
                 </div>
               </div>
               <div class="swiper-slide">
                 <div class="photo">
-                  <img src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                  <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
                 </div>
               </div>
               <div class="swiper-slide">
                 <div class="photo">
-                  <img src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                  <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
                 </div>
               </div>
             </div>

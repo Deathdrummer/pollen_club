@@ -1000,9 +1000,15 @@ video {
   display: block;
   -webkit-flex-shrink: 0;
       -ms-flex-negative: 0;
-          flex-shrink: 0;
-  -webkit-transition: all 0.3s linear 0.1s;
-  transition: all 0.3s linear 0.1s; }
+          flex-shrink: 0; }
+  @media screen and (max-width: 1023px) {
+    .menu-link-icon .grad-icon {
+      -webkit-transition: all 0.3s linear;
+      transition: all 0.3s linear; } }
+  @media screen and (min-width: 1024px) {
+    .menu-link-icon .grad-icon {
+      -webkit-transition: all 0.3s linear 0.1s;
+      transition: all 0.3s linear 0.1s; } }
   @media screen and (max-width: 1023px) {
     .menu-link-icon .grad-icon {
       background: #081530; } }
@@ -1020,18 +1026,27 @@ video {
     .menu-link-icon .grad-icon {
       background-position: 0 0; } }
 
-.menu-link-icon:hover .grad-icon, .menu-link-icon.active .grad-icon {
-  -webkit-transition: all 0.3s linear 0.1s;
-  transition: all 0.3s linear 0.1s; }
-  @media screen and (max-width: 1023px) {
-    .menu-link-icon:hover .grad-icon, .menu-link-icon.active .grad-icon {
-      background: #f5fafe; } }
-  @media screen and (min-width: 1024px) {
-    .menu-link-icon:hover .grad-icon, .menu-link-icon.active .grad-icon {
-      background-size: 200%; } }
-  @media screen and (min-width: 1024px) {
-    .menu-link-icon:hover .grad-icon, .menu-link-icon.active .grad-icon {
-      background-position: 100%; } }
+@media screen and (max-width: 1023px) {
+  .menu-link-icon:hover .grad-icon, .menu-link-icon.active .grad-icon {
+    -webkit-transition: all 0.3s linear;
+    transition: all 0.3s linear; } }
+
+@media screen and (min-width: 1024px) {
+  .menu-link-icon:hover .grad-icon, .menu-link-icon.active .grad-icon {
+    -webkit-transition: all 0.3s linear 0.1s;
+    transition: all 0.3s linear 0.1s; } }
+
+@media screen and (max-width: 1023px) {
+  .menu-link-icon:hover .grad-icon, .menu-link-icon.active .grad-icon {
+    background: #f5fafe; } }
+
+@media screen and (min-width: 1024px) {
+  .menu-link-icon:hover .grad-icon, .menu-link-icon.active .grad-icon {
+    background-size: 200%; } }
+
+@media screen and (min-width: 1024px) {
+  .menu-link-icon:hover .grad-icon, .menu-link-icon.active .grad-icon {
+    background-position: 100%; } }
 
 .social-links {
   display: -webkit-box;
@@ -1075,9 +1090,15 @@ video {
     display: block;
     -webkit-flex-shrink: 0;
         -ms-flex-negative: 0;
-            flex-shrink: 0;
-    -webkit-transition: all 0.3s linear 0.1s;
-    transition: all 0.3s linear 0.1s; }
+            flex-shrink: 0; }
+    @media screen and (max-width: 1023px) {
+      .social-links .social-link .grad-icon {
+        -webkit-transition: all 0.3s linear;
+        transition: all 0.3s linear; } }
+    @media screen and (min-width: 1024px) {
+      .social-links .social-link .grad-icon {
+        -webkit-transition: all 0.3s linear 0.1s;
+        transition: all 0.3s linear 0.1s; } }
     @media screen and (max-width: 1023px) {
       .social-links .social-link .grad-icon {
         background: #f5fafe; } }
@@ -1094,15 +1115,20 @@ video {
     @media screen and (min-width: 1024px) {
       .social-links .social-link .grad-icon {
         background-position: 0 0; } }
-  .social-links .social-link:hover .grad-icon {
-    -webkit-transition: all 0.3s linear 0.1s;
-    transition: all 0.3s linear 0.1s; }
-    @media screen and (min-width: 1024px) {
-      .social-links .social-link:hover .grad-icon {
-        background-size: 200%; } }
-    @media screen and (min-width: 1024px) {
-      .social-links .social-link:hover .grad-icon {
-        background-position: 100%; } }
+  @media screen and (max-width: 1023px) {
+    .social-links .social-link:hover .grad-icon {
+      -webkit-transition: all 0.3s linear;
+      transition: all 0.3s linear; } }
+  @media screen and (min-width: 1024px) {
+    .social-links .social-link:hover .grad-icon {
+      -webkit-transition: all 0.3s linear 0.1s;
+      transition: all 0.3s linear 0.1s; } }
+  @media screen and (min-width: 1024px) {
+    .social-links .social-link:hover .grad-icon {
+      background-size: 200%; } }
+  @media screen and (min-width: 1024px) {
+    .social-links .social-link:hover .grad-icon {
+      background-position: 100%; } }
 
 .main-sections .content-main__content-news {
   margin: 25px 0; }
@@ -1319,7 +1345,8 @@ video {
 
 .advantages-description {
   font-family: Roboto-regular, sans-serif;
-  line-height: 1; }
+  line-height: 1;
+  display: block; }
   @media screen and (max-width: 1439px) {
     .advantages-description {
       font-size: 18px; } }

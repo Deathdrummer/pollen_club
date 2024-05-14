@@ -116,19 +116,19 @@
       <div class="experts">
         <div class="experts-item">
           <div class="experts-photo">
-            <img src="{{ base_url('public/img/experts/1.jpg') }}" alt="" />
+            <img loading="lazy" src="{{ base_url('public/img/experts/1.jpg') }}" alt="" />
           </div>
           <div class="experts-content">
-            <div class="experts-title">Федоскова Татьяна Германовна</div>
+            <p class="experts-title">Федоскова Татьяна Германовна</p>
             <p class="experts-text">Доктор медицинских наук, зав лабораторией молекулярных механизмов аллергии ФГБУ ГНЦ ИНСТИТУТ ИММУНОЛОГИИ ФМБА РОССИИ, профессор кафедры иммунологии МБФ ГБОУ ВПО РНИМУ им Н. И. Пирогова, профессор кафедры аллергологии, иммунологии и адаптологии ФГАОУ ВО РУДН</p>
           </div>
         </div>
         <div class="experts-item">
           <div class="experts-photo">
-            <img src="{{ base_url('public/img/experts/1.jpg') }}" alt="" />
+            <img loading="lazy" src="{{ base_url('public/img/experts/1.jpg') }}" alt="" />
           </div>
           <div class="experts-content">
-            <div class="experts-title">Минин Александр</div>
+            <p class="experts-title">Минин Александр</p>
             <p class="experts-text">Доктор биологических наук, академик Российской экологической академии</p>
           </div>
         </div>

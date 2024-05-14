@@ -10,17 +10,17 @@
       <div class="content-header__right">
         <div class="block-download">
           <div class="block-download-list">
-            <a class="appstore" href="#appstore"><img src="{{ base_url('public/images/pollen/icons/appstore.svg') }}" alt="" /></a>
-            <a class="appstore" href="#googleplay"><img src="{{ base_url('public/images/pollen/icons/googleplay.svg') }}" alt="" /></a>
+            <a class="appstore" href="#appstore"><img loading="lazy" src="{{ base_url('public/images/pollen/icons/appstore.svg') }}" alt="" /></a>
+            <a class="appstore" href="#googleplay"><img loading="lazy" src="{{ base_url('public/images/pollen/icons/googleplay.svg') }}" alt="" /></a>
           </div>
           <div class="advantages-application">
             <div class="advantages-circle circle-1 bcg-green-bef">
-              <div class="advantages-title">40 тыс</div>
-              <div class="advantages-description">одноклубников в&nbsp;социальных сетях</div>
+              <span class="advantages-title">40 тыс</span>
+              <span class="advantages-description">одноклубников в&nbsp;социальных сетях</span>
             </div>
             <div class="advantages-circle circle-2 bcg-orange-bef">
-              <div class="advantages-title">130 тыс</div>
-              <div class="advantages-description">установок мобильного приложения</div>
+              <span class="advantages-title">130 тыс</span>
+              <span class="advantages-description">установок мобильного приложения</span>
             </div>
           </div>
           <span class="appstore-utp blue">Скачайте приложение и получайте актуальную информацию о цветении и пылении в вашем регионе.</span>
@@ -33,13 +33,13 @@
           <div class="swiper-container">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
-                <img src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
               </div>
               <div class="swiper-slide">
-                <img src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
               </div>
               <div class="swiper-slide">
-                <img src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
               </div>
             </div>
           </div>
