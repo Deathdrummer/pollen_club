@@ -53,6 +53,7 @@ body {
       lg: 16px,
     )
   );
+
   background-color: $light;
   color: $dark;
 }
@@ -594,7 +595,25 @@ video {
     left: 0 !important;
   }
 }
-
+.swiper-pagination {
+  margin-top: 15px !important ;
+  top: 0 !important;
+  bottom: 0 !important;
+  z-index: 1 !important;
+  position: relative !important;
+  .swiper-pagination-bullet {
+    background: #dee4e9 !important;
+    width: 40px !important;
+    height: 4px !important;
+    border-radius: 65px;
+    margin: 0 4px !important;
+    opacity: 1 !important;
+  }
+  .swiper-pagination-bullet-active {
+    background: linear-gradient(to right, #269ed9, #70c270) !important;
+    pointer-events: none;
+  }
+}
 .swiper-scrollbar-drag {
   background: linear-gradient(to right, #269ed9, #70c270) !important;
   cursor: grab;
@@ -729,7 +748,7 @@ video {
     @include resp(
       transition,
       (
-        lg: all 0.3s ease-in 0.2s,
+        lg: all 0.2s ease-in 0.2s,
       )
     );
     .logo-text {
@@ -754,7 +773,13 @@ video {
 
     .menu-link {
       span {
-        transition: all 0.2s linear;
+        transition: opacity 0.2s ease-in 0.2s, background-size 0.16s linear 0.1s, background-position 0.16s linear 0.1s;
+        @include resp(
+          opacity,
+          (
+            lg: 1,
+          )
+        );
       }
       &.policy {
         span {
@@ -773,7 +798,7 @@ video {
         }
         &:hover {
           span {
-            transition: opacity 0.3s ease-in 0.2s, background-size 0.3s linear, background-position 0.3s linear;
+            transition: opacity 0.3s ease-in 0.2s, background-size 0.16s linear, background-position 0.16s linear;
           }
         }
       }
@@ -834,7 +859,7 @@ video {
     &__bottom-bottom {
       display: flex;
       flex-direction: column;
-      gap: 52px;
+      gap: 30px;
       width: 100%;
 
       margin-bottom: 32px;
@@ -936,7 +961,14 @@ video {
           lg: none,
         )
       );
+      @include resp(
+        order,
+        (
+          md-down: 2,
+        )
+      );
     }
+
     &.policy span,
     &.mail span {
       color: $light;
@@ -977,7 +1009,12 @@ video {
     }
     span {
       display: inline-block;
-
+      @include resp(
+        opacity,
+        (
+          lg: 0,
+        )
+      );
       @include resp(
         background,
         (
@@ -1020,11 +1057,11 @@ video {
           lg: text,
         )
       );
-      transition: all 0.3s linear 0.1s;
+      transition: opacity 0.2s ease-in 0.2s, background-size 0.16s linear 0.1s, background-position 0.16s linear 0.1s;
     }
     &:hover span,
     &.active span {
-      transition: all 0.3s linear 0.1s;
+      transition: all 0.16s linear 0.1s;
       @include resp(
         background-position,
         (
@@ -1146,8 +1183,8 @@ video {
     @include resp(
       transition,
       (
-        md-down: all 0.3s linear,
-        lg: all 0.3s linear 0.1s,
+        md-down: all 0.16s linear,
+        lg: all 0.16s linear 0.1s,
       )
     );
     @include resp(
@@ -1177,8 +1214,8 @@ video {
       @include resp(
         transition,
         (
-          md-down: all 0.3s linear,
-          lg: all 0.3s linear 0.1s,
+          md-down: all 0.16s linear,
+          lg: all 0.16s linear 0.1s,
         )
       );
       @include resp(
@@ -1232,6 +1269,12 @@ video {
       md-down: 20px 0 12px,
     )
   );
+  @include resp(
+    order,
+    (
+      md-down: 1,
+    )
+  );
 
   .social-link {
     .grad-icon {
@@ -1242,8 +1285,8 @@ video {
       @include resp(
         transition,
         (
-          md-down: all 0.3s linear,
-          lg: all 0.3s linear 0.1s,
+          md-down: all 0.16s linear,
+          lg: all 0.16s linear 0.1s,
         )
       );
 
@@ -1273,8 +1316,8 @@ video {
         @include resp(
           transition,
           (
-            md-down: all 0.3s linear,
-            lg: all 0.3s linear 0.1s,
+            md-down: all 0.16s linear,
+            lg: all 0.16s linear 0.1s,
           )
         );
 
@@ -1298,6 +1341,12 @@ video {
 // Главная
 .main-sections {
   .content-main {
+    @include resp(
+      grid-template-columns,
+      (
+        lg: 60% auto,
+      )
+    );
     &__content {
       .main-block {
       }
@@ -1309,16 +1358,152 @@ video {
       }
     }
     &__content-news {
-      margin: 25px 0;
+      margin: 28px 0;
       .news-gallery {
         display: grid;
+      }
+    }
+    &__mobile-app {
+      border-radius: 5px;
+
+      box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 5px 0 rgba(0, 0, 0, 0.05), 0 2px 9px 0 rgba(0, 0, 0, 0.06), 0 3px 15px 0 rgba(0, 0, 0, 0.07), 0 6px 29px 0 rgba(0, 0, 0, 0.09);
+
+      @include resp(
+        box-shadow,
+        (
+          md-down: none,
+        )
+      );
+      @include resp(
+        margin,
+        (
+          md-down: 18px 0 60px,
+        )
+      );
+      @include resp(
+        padding,
+        (
+          md-down: 0,
+          lg: 13px 26px,
+        )
+      );
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      @include resp(
+        grid-template-columns,
+        (
+          lg: 176px auto,
+          xxl: repeat(3, auto),
+        )
+      );
+      align-items: center;
+
+      @include resp(
+        gap,
+        (
+          sm-down: 20px,
+          md: 30px,
+        )
+      );
+      @include resp(
+        margin,
+        (
+          lg: 28px 0,
+        )
+      );
+
+      .block-download-list {
+        width: auto;
+      }
+      .content-title {
+        @include font('Roboto', 'bold');
+        @include resp(
+          font-size,
+          (
+            sm-down: 14px,
+          )
+        );
+      }
+      .qr-download {
+        @include resp(
+          display,
+          (
+            md-down: none,
+          )
+        );
+        @include resp(
+          grid-column-start,
+          (
+            xl-down: 1,
+          )
+        );
+        @include resp(
+          grid-column-end,
+          (
+            xl-down: 3,
+          )
+        );
+      }
+    }
+
+    .finance-progress {
+      margin-top: 28px;
+    }
+    &__support {
+      display: flex;
+      flex-wrap: wrap;
+      @include resp(
+        flex-direction,
+        (
+          sm-down: column,
+        )
+      );
+      align-items: center;
+      @include resp(
+        justify-content,
+        (
+          sm-down: center,
+        )
+      );
+      @include resp(
+        margin-top,
+        (
+          md-down: 32px,
+          lg: 10px,
+        )
+      );
+      @include resp(
+        gap,
+        (
+          md-down: 10px,
+          lg: 40px,
+        )
+      );
+      &-link {
+        padding: 9px 32px;
+        background-color: $blue;
+        color: $light;
+        border-radius: 5px;
       }
     }
     &__map {
     }
   }
 }
-
+.qr-download {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  .photo {
+    width: 100%;
+    max-width: 115px;
+    min-width: 80px;
+    height: auto;
+  }
+  &__text {
+    width: 180px;
+  }
+}
 // мобильное приложение
 
 .mobile-application {
@@ -1665,6 +1850,7 @@ video {
   justify-content: center;
   margin-top: auto;
   padding-bottom: 16px;
+  width: 100%;
   i {
     display: block;
     height: 5px;
@@ -2577,8 +2763,8 @@ video {
   @include resp(
     padding,
     (
-      md-down: 8px 30px 8px 8px,
-      lg: 16px 36px 18px 16px,
+      sm-down: 8px 30px 8px 8px,
+      md: 16px 36px 18px 16px,
     )
   );
   &__photo {
@@ -2596,7 +2782,7 @@ video {
         md: 25%,
       )
     );
-    min-height: 100%;
+    min-height: 110px;
     border-radius: 5px;
     overflow: hidden;
     flex-shrink: 0;
@@ -2654,50 +2840,50 @@ video {
     }
   }
   .date {
+    position: absolute;
     @include font('Roboto', 'bold');
 
     @include resp(
       font-size,
       (
-        md-down: 10px,
-        lg: 8px,
+        sm-down: 10px,
+        md: 8px,
       )
     );
     @include resp(
       color,
       (
-        md-down: $dark,
-        lg: #98989870,
+        sm-down: $dark,
+        md: #98989870,
       )
     );
 
-    position: absolute;
     @include resp(
       right,
       (
-        md-down: auto,
-        lg: 36px,
+        sm-down: auto,
+        md: 36px,
       )
     );
     @include resp(
       bottom,
       (
-        md-down: auto,
-        lg: 8px,
+        sm-down: auto,
+        md: 8px,
       )
     );
     @include resp(
       top,
       (
-        md-down: 12px,
-        lg: auto,
+        sm-down: 12px,
+        md: auto,
       )
     );
     @include resp(
       left,
       (
-        md-down: 12px,
-        lg: auto,
+        sm-down: 12px,
+        md: auto,
       )
     );
   }
@@ -2816,6 +3002,7 @@ video {
         &.active {
           transition: height 0.3s linear;
           height: 600px;
+          overflow-y: scroll;
         }
       }
       &__bottom-top {

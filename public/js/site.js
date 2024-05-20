@@ -36,7 +36,24 @@ $(document).ready(function () {
   });
   main.addEventListener('click', handleClickOutsideMenu);
   // header.addEventListener('click', handleClickOutsideMenu);
+  var swiperSliderNewsMain = new Swiper('.main-sections .news-gallery .swiper-container', {
+    slidesPerView: 1.2,
+    mousewheel: true,
+    spaceBetween: 10,
+    variableWidth: true,
 
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+      1024: { slidesPerView: 2 },
+    },
+  });
   var swiperSliderScreens = new Swiper('.content-main__slider .swiper-container', {
     slidesPerView: 1,
     mousewheel: true,
@@ -64,50 +81,7 @@ $(document).ready(function () {
       },
     },
   });
-  var swiperSliderNews = new Swiper('.news-gallery .swiper-container', {
-    slidesPerView: 1.2,
-    mousewheel: true,
-    spaceBetween: 10,
 
-    scrollbar: {
-      el: '.swiper-scrollbar',
-      draggable: true,
-    },
-    breakpoints: {
-      640: {
-        slidesPerView: 2,
-      },
-      1024: {
-        slidesPerView: 3,
-        spaceBetween: 20,
-      },
-      1440: {
-        slidesPerView: 4,
-        spaceBetween: 20,
-      },
-      1640: {
-        slidesPerView: 5,
-        spaceBetween: 20,
-      },
-    },
-  });
-  var swiperSliderNewsMain = new Swiper('.main-sections .news-gallery .swiper-container', {
-    slidesPerView: 1.2,
-    mousewheel: true,
-    spaceBetween: 10,
-    variableWidth: true,
-    scrollbar: {
-      el: '.swiper-scrollbar',
-      draggable: true,
-    },
-    breakpoints: {
-      640: {
-        slidesPerView: 2,
-        spaceBetween: 20,
-      },
-      1024: { loopedSlides: 2, slidesPerView: 2 },
-    },
-  });
   var swiperSliderAbout = new Swiper('.about .achievements-list', {
     slidesPerView: 1.2,
     mousewheel: true,
@@ -148,6 +122,34 @@ $(document).ready(function () {
       },
       1440: {
         slidesPerView: 5,
+      },
+    },
+  });
+
+  var swiperSliderNews = new Swiper('.news-gallery-wrapper .news-gallery .swiper-container', {
+    slidesPerView: 1.2,
+    mousewheel: true,
+    spaceBetween: 10,
+
+    scrollbar: {
+      el: '.swiper-scrollbar',
+      draggable: true,
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+      1440: {
+        slidesPerView: 4,
+        spaceBetween: 20,
+      },
+      1640: {
+        slidesPerView: 5,
+        spaceBetween: 20,
       },
     },
   });

@@ -33,11 +33,11 @@
         </nav>
       </div>
       <div class="aside-block__bottom-bottom">
-        <a class="menu-link policy" href="#"><span>Политика конфиденциальности</span></a>
         <div class="social-links">
           <a class="social-link" href="#"><i class="grad-icon" style="mask-image: url('{{ base_url('public/images/pollen/icons/youtube.svg') }}');"></i></a>
           <a class="social-link" href="#"><i class="grad-icon" style="mask-image: url('{{ base_url('public/images/pollen/icons/vk.svg') }}');"></i></a>
         </div>
+        <a class="menu-link policy" href="#"><span>Политика конфиденциальности</span></a>
         <a class="menu-link mail" href="mailto:feedback@pollen.club"><span>Связаться с нами: feedback@pollen.club</span></a>
       </div>
       <div class="close-button">
