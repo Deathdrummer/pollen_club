@@ -51,7 +51,8 @@ $(document).ready(function () {
         slidesPerView: 2,
         spaceBetween: 20,
       },
-      1024: { slidesPerView: 2 },
+      1200: { slidesPerView: 1.2 },
+      1440: { slidesPerView: 2 },
     },
   });
   var swiperSliderScreens = new Swiper('.content-main__slider .swiper-container', {
@@ -153,6 +154,29 @@ $(document).ready(function () {
       },
     },
   });
+  const ctx = document.getElementById('myChart');
+  const optLine = ctx.getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      datasets: [
+        {
+          label: '',
+          data: [
+            { x: '01.05', y: 3 },
+            { x: '01.07', y: 6 },
+            { x: '01.08', y: 6 },
+            { x: '01.09', y: 8 },
+            { x: '01.10', y: 8 },
+          ],
+
+          colors: ['', 'red', 'green', 'blue'],
+          spanGaps: true,
+        },
+      ],
+    },
+  });
+  console.log(optLine.borderColor);
   const player = document.querySelector('.video-player__video');
   if (player) {
     const btnPlayPause = document.querySelector('.controls-buttons__play');

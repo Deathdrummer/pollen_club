@@ -6,17 +6,58 @@
         <div class="content-description story">
           <p>Уровень аллергенной пыльцы и Индекс самочувствия. Расширенный обзор аллергенной обстановки и прогноз аллерго рисков доступны в мобильном приложении «Пыльца Club».</p>
         </div>
-        <div class=""></div>
+        <div class="pollen-level">
+          <div class="pollen-level__left">
+            <div class="photo">
+              <img src="{{ base_url('public/images/pollen/bereza.png') }}" loading="lazy" alt="" />
+              <span class="photo-text">Береза</span>
+            </div>
+          </div>
+          <div class="pollen-level__right">
+            <div class="pollen-level__item">
+              <span class="level-item__title">Уровень пыльцы</span>
+              <div class="level-item__content">
+                <span class="level-item__content-text orange">Высокий</span>
+                <div class="level-item__content-progress bcg-grad--orane"></div>
+              </div>
+            </div>
+            <div class="pollen-level__item">
+              <span class="level-item__title">Индекс самочувствия</span>
+              <div class="level-item__content">
+                <span class="level-item__content-text blue">6 Баллов</span>
+                <div class="level-item__content-progress bcg-grad--blue"></div>
+              </div>
+            </div>
+            <div class="pollen-level__item">
+              <span class="level-item__title">Динамика самочувствия</span>
+              <div class="level-item__content">
+                <canvas id="myChart"></canvas>
+              </div>
+            </div>
+            <div class="pollen-level__item">
+              <span class="level-item__title">Аллерго прогноз</span>
+              <div class="level-item__content">
+                <div class="level-item__prognoz">
+                  <img src="{{ base_url('public/images/pollen/prognoz.svg') }}" loading="lazy" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="content-main__content-news">
-          <h2 class="content-title"><a href="#">Последние новости</a></h2>
-
+          <h2 class="content-title">
+            <a href="#" class="content-main__news-all">
+              <span class="news-all-text">Последние новости</span>
+              <span class="news-all-icon" style=" mask-image: url({{ base_url('public/images/pollen/icons/arrow.svg') }})"></span>
+            </a>
+          </h2>
           <div class="news-gallery">
             <div class="swiper-container">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
                   <div class="card-news">
                     <div class="card-news__photo">
-                      <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                      <img loading="lazy" src="{{ base_url('public/images/pollen/img/mobile-phone 1.png') }}" alt="" role="group" />
                     </div>
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -28,7 +69,7 @@
                 <div class="swiper-slide">
                   <div class="card-news">
                     <div class="card-news__photo">
-                      <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                      <img loading="lazy" src="{{ base_url('public/images/pollen/img/mobile-phone 1.png') }}" alt="" role="group" />
                     </div>
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -40,7 +81,7 @@
                 <div class="swiper-slide">
                   <div class="card-news">
                     <div class="card-news__photo">
-                      <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                      <img loading="lazy" src="{{ base_url('public/images/pollen/img/mobile-phone 1.png') }}" alt="" role="group" />
                     </div>
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -52,7 +93,7 @@
                 <div class="swiper-slide">
                   <div class="card-news">
                     <div class="card-news__photo">
-                      <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                      <img loading="lazy" src="{{ base_url('public/images/pollen/img/mobile-phone 1.png') }}" alt="" role="group" />
                     </div>
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -64,7 +105,7 @@
                 <div class="swiper-slide">
                   <div class="card-news">
                     <div class="card-news__photo">
-                      <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                      <img loading="lazy" src="{{ base_url('public/images/pollen/img/mobile-phone 1.png') }}" alt="" role="group" />
                     </div>
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -76,7 +117,7 @@
                 <div class="swiper-slide">
                   <div class="card-news">
                     <div class="card-news__photo">
-                      <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                      <img loading="lazy" src="{{ base_url('public/images/pollen/img/mobile-phone 1.png') }}" alt="" role="group" />
                     </div>
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -88,7 +129,7 @@
                 <div class="swiper-slide">
                   <div class="card-news">
                     <div class="card-news__photo">
-                      <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                      <img loading="lazy" src="{{ base_url('public/images/pollen/img/mobile-phone 1.png') }}" alt="" role="group" />
                     </div>
                     <div class="card-news__content">
                       <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -133,12 +174,48 @@
         </div>
         <div class="content-main__support">
           <a href="#" class="content-main__support-link">Поддержать Pollen Club!</a>
-          <p class="content-main__support-text">Поддержите проект</p>
+          <a href="#" class="content-main__support-text">На что идут ваши пожертвования</a>
         </div>
       </div>
       <div class="content-main__map">
-        <img src="{{ base_url('public/images/pollen/map.png') }}" loading="lazy" alt="map" />
-        <a href="/map"></a>
+        <a href="/map" class="content-main__map-link">
+          <p class="content-main__map-text">
+            <span class="content-main__map-text__link">Открыть карту на весь экран</span>
+            <span class="content-main__map-text__icon"><img src="{{ base_url('public/images/pollen/icons/map-zoom.svg') }}" loading="lazy" alt="" /></span>
+          </p>
+          <span class="content-main__map-img"><img src="{{ base_url('public/images/pollen/map.png') }}" loading="lazy" alt="map" /></span>
+        </a>
+        <div class="content__reklama content-main__reklama">
+          <div class="reklama-item">
+            <div class="photo reklama-item__photo">
+              <img src="{{ base_url('public/images/pollen/reklama.png') }}" loading="lazy" alt="" />
+            </div>
+            <div class="reklama-item__content">
+              <h3 class="reklama-item__title">Безопасное средство от аллергии!</h3>
+              <p class="reklama-item__text">Новейшая разработка российских ученых - средство против аллергии в мягких капсулах. Средство разработано на основе натуральных компонентов по новым технологиям.</p>
+              <a href="#" class="reklama-item__link bcg-blue">Подробнее</a>
+            </div>
+          </div>
+          <div class="reklama-item">
+            <div class="photo reklama-item__photo">
+              <img src="{{ base_url('public/images/pollen/reklama.png') }}" loading="lazy" alt="" />
+            </div>
+            <div class="reklama-item__content">
+              <h3 class="reklama-item__title">Безопасное средство от аллергии!</h3>
+              <p class="reklama-item__text">Новейшая разработка российских ученых - средство против аллергии в мягких капсулах. Средство разработано на основе натуральных компонентов по новым технологиям.</p>
+              <a href="#" class="reklama-item__link bcg-blue">Подробнее</a>
+            </div>
+          </div> <div class="reklama-item">
+            <div class="photo reklama-item__photo">
+              <img src="{{ base_url('public/images/pollen/reklama.png') }}" loading="lazy" alt="" />
+            </div>
+            <div class="reklama-item__content">
+              <h3 class="reklama-item__title">Безопасное средство от аллергии!</h3>
+              <p class="reklama-item__text">Новейшая разработка российских ученых - средство против аллергии в мягких капсулах. Средство разработано на основе натуральных компонентов по новым технологиям.</p>
+              <a href="#" class="reklama-item__link bcg-blue">Подробнее</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

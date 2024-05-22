@@ -52,6 +52,9 @@
     <script src="{{ base_url('public/js/common.js') }}"></script>
     <script src="{{ base_url('public/js/components.min.js') }}"></script>
     <script src="{{ base_url('public/js/ddrFormSubmit.js') }}"></script>
+<script  src="https://yourweb.com/inc/chart.utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
     {% if scripts_head %}{{ scripts_head|raw }}{% endif %}
 
