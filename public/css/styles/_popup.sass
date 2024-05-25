@@ -1,15 +1,13 @@
-@import '../../../../repository/css/assets/mixins'
-
 //----------------------------------------------------------- ddrpopup
 @keyframes ddrPopUpIn
 	from
 		background-color: transparent
 	to
-		background-color: rgba(#13050d, 0.88)
+		background-color: rgba(#364D63, 0.3)
 
 @keyframes ddrPopUpOut
 	from
-		background-color: rgba(#13050d, 0.88)
+		background-color: rgba(#364D63, 0.3)
 	to
 		background-color: transparent
 
@@ -31,12 +29,12 @@
 		padding-bottom: 15px
 
 	&__win
-		background-color: #fff
-		box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.66)
-		border-radius: 0
+		box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 5px 0 rgba(0, 0, 0, 0.05), 0 2px 9px 0 rgba(0, 0, 0, 0.06), 0 3px 16px 0 rgba(0, 0, 0, 0.07), 0 6px 30px 0 rgba(0, 0, 0, 0.09)
+		background-color: #f5fafe
+		border-radius: 5px
 		overflow: hidden
-		+resp(padding-left, (sm: 10px, md: 20px, lg: 30px, xl: 70px), (padding-right: 0))
-		+resp(padding-top, (sm: 10px, md: 20px, lg: 24px, xl: 40px), (padding-bottom: 0))
+	  padding: 20px
+    padding-right: 70px
 		//transform: scale(5)
 		transform: scale(0.8)
 		//transform: translateY(-100vh)

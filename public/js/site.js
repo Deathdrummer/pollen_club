@@ -154,29 +154,175 @@ $(document).ready(function () {
       },
     },
   });
-  const ctx = document.getElementById('myChart');
-  const optLine = ctx.getContext('2d');
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      datasets: [
-        {
-          label: '',
-          data: [
-            { x: '01.05', y: 3 },
-            { x: '01.07', y: 6 },
-            { x: '01.08', y: 6 },
-            { x: '01.09', y: 8 },
-            { x: '01.10', y: 8 },
-          ],
+  $('.finance-link-popup').on('click', function () {
+    ddrPopUp(
+      {
+        width: 360,
+      },
+      function (getDonate) {
+        getDonate.wait();
 
-          colors: ['', 'red', 'green', 'blue'],
-          spanGaps: true,
-        },
-      ],
-    },
+        getSectionData({ section: 'support_project', template: 'render/donate.tpl', data: {} }, function (html, stat) {
+          getDonate.setData(html, false, function () {
+            getDonate.wait(false);
+          });
+        });
+      }
+    );
   });
-  console.log(optLine.borderColor);
+
+  $('.drowdown-block__active').on('click', function () {
+    $(this).toggleClass('active');
+    $('.drowdown-block__list').toggleClass('active');
+  });
+
+  $('.drowdown-block__list li').on('click', function () {
+    $('.drowdown-block__active').text($(this).text());
+    $('.drowdown-block__active').addClass('active');
+    $('.drowdown-block__list li').removeClass('active');
+    $(this).addClass('active');
+  });
+
+  $('.drowdown-block__active').on('click', function (event) {
+    event.stopPropagation();
+  });
+  const ctx = document.getElementById('myChart');
+  if (ctx) {
+    const optLine = ctx.getContext('2d');
+    const data = [
+      { x: '01/04', y: 8 },
+      { x: '01/05', y: 2 },
+      { x: '01/07', y: 5 },
+      { x: '01/08', y: 4 },
+      { x: '01/10', y: 10 },
+    ];
+
+    const annotations = [];
+
+    data.forEach((dataPoint, index) => {
+      const annotation = {
+        type: 'label',
+        color: '#ffffff',
+        content: ctx => {
+          const currentValueForPoint = currentValueForIndex(ctx, index);
+          return `${currentValueForPoint.toFixed(0)}`;
+        },
+        font: {
+          size: 14,
+          weight: 'bold',
+        },
+        padding: {},
+        position: {
+          x: 'center',
+          y: 'end',
+        },
+        xValue: ctx => maxLabelForIndex(ctx, index),
+        yAdjust: -6,
+        yValue: ctx => currentValueForIndex(ctx, index),
+      };
+      const annotation_line = {
+        type: 'line',
+        borderColor: '#ffffff',
+        borderDash: [3, 3],
+        borderWidth: 1,
+        xMax: index,
+        xMin: index,
+        xScaleID: 'x',
+        yMax: 0,
+        yMin: dataPoint.y,
+        yScaleID: 'y',
+      };
+      annotations.push(annotation);
+      annotations.push(annotation_line);
+    });
+
+    function currentValueForIndex(ctx, index) {
+      const dataset = ctx.chart.data.datasets[0];
+      const values = dataset.data.map(item => item.y);
+      return values[index];
+    }
+
+    function maxLabelForIndex(ctx, index) {
+      const dataset = ctx.chart.data.datasets[0];
+      const labels = dataset.data.map(item => item.x);
+      return labels[index];
+    }
+    let width, height, gradient;
+    function getGradient(ctx, chartArea) {
+      const chartWidth = chartArea.right - chartArea.left;
+      const chartHeight = chartArea.bottom - chartArea.top;
+      if (!gradient || width !== chartWidth || height !== chartHeight) {
+        // Create the gradient because this is either the first render
+        // or the size of the chart has changed
+        width = chartWidth;
+        height = chartHeight;
+        gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+        gradient.addColorStop(0, '#70C270');
+        gradient.addColorStop(0.1, '#269ED9');
+        gradient.addColorStop(0.25, '#F5C23D');
+        gradient.addColorStop(0.5, '#F5C23D');
+        gradient.addColorStop(0.75, '#F5693D');
+      }
+
+      return gradient;
+    }
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        datasets: [
+          {
+            data: data,
+            borderWidth: 2,
+            borderColor: function (context) {
+              const chart = context.chart;
+              const { ctx, chartArea } = chart;
+
+              if (!chartArea) {
+                // This case happens on initial chart load
+                return;
+              }
+              return getGradient(ctx, chartArea);
+            },
+          },
+        ],
+      },
+      spanGaps: true,
+      options: {
+        plugins: {
+          legend: false,
+          annotation: {
+            clip: false,
+            annotations: annotations,
+          },
+        },
+        scales: {
+          x: {
+            display: true,
+
+            ticks: {
+              color: '#ffffff',
+              font: {
+                size: 12,
+              },
+            },
+          },
+          y: {
+            display: false,
+            min: 0,
+            max: 16, // макс высота графика
+            ticks: {
+              stepSize: 1,
+            },
+          },
+        },
+        elements: {
+          point: {
+            pointStyle: false,
+          },
+        },
+      },
+    });
+  }
   const player = document.querySelector('.video-player__video');
   if (player) {
     const btnPlayPause = document.querySelector('.controls-buttons__play');

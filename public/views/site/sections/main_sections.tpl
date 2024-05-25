@@ -3,9 +3,36 @@
     <div class="content-main">
       <div class="content-main__content">
         <h1 class="content-title blue">Уровень пыльцы и самочувствия</h1>
-        <div class="content-description story">
-          <p>Уровень аллергенной пыльцы и Индекс самочувствия. Расширенный обзор аллергенной обстановки и прогноз аллерго рисков доступны в мобильном приложении «Пыльца Club».</p>
+        <div class="content-main__conten-main-section">
+          <div class="content-description story">
+            <p>Уровень аллергенной пыльцы и Индекс самочувствия. Расширенный обзор аллергенной обстановки и прогноз аллерго рисков доступны в мобильном приложении «Пыльца Club».</p>
+          </div>
+
+          <div class="drowdown-block">
+            <span class="drowdown-block__active">Береза</span>
+            <ul class="drowdown-block__list">
+              <li class="active">
+                <span>Береза</span>
+              </li>
+              <li>
+                <span>Злахи</span>
+              </li>
+              <li>
+                <span>Ясен</span>
+              </li>
+              <li>
+                <span>Ольха</span>
+              </li>
+              <li>
+                <span>Ольха</span>
+              </li>
+              <li>
+                <span>Ольха</span>
+              </li>
+            </ul>
+          </div>
         </div>
+
         <div class="pollen-level">
           <div class="pollen-level__left">
             <div class="photo">
@@ -46,7 +73,7 @@
         </div>
         <div class="content-main__content-news">
           <h2 class="content-title">
-            <a href="#" class="content-main__news-all">
+            <a href="/gid-alergika/" class="content-main__news-all">
               <span class="news-all-text">Последние новости</span>
               <span class="news-all-icon" style=" mask-image: url({{ base_url('public/images/pollen/icons/arrow.svg') }})"></span>
             </a>
@@ -193,7 +220,7 @@
             <div class="reklama-item__content">
               <h3 class="reklama-item__title">Безопасное средство от аллергии!</h3>
               <p class="reklama-item__text">Новейшая разработка российских ученых - средство против аллергии в мягких капсулах. Средство разработано на основе натуральных компонентов по новым технологиям.</p>
-              <a href="#" class="reklama-item__link bcg-blue">Подробнее</a>
+              <a href="#" class="reklama-item__link">Подробнее</a>
             </div>
           </div>
           <div class="reklama-item">
@@ -203,7 +230,7 @@
             <div class="reklama-item__content">
               <h3 class="reklama-item__title">Безопасное средство от аллергии!</h3>
               <p class="reklama-item__text">Новейшая разработка российских ученых - средство против аллергии в мягких капсулах. Средство разработано на основе натуральных компонентов по новым технологиям.</p>
-              <a href="#" class="reklama-item__link bcg-blue">Подробнее</a>
+              <a href="#" class="reklama-item__link">Подробнее</a>
             </div>
           </div> <div class="reklama-item">
             <div class="photo reklama-item__photo">
@@ -212,7 +239,7 @@
             <div class="reklama-item__content">
               <h3 class="reklama-item__title">Безопасное средство от аллергии!</h3>
               <p class="reklama-item__text">Новейшая разработка российских ученых - средство против аллергии в мягких капсулах. Средство разработано на основе натуральных компонентов по новым технологиям.</p>
-              <a href="#" class="reklama-item__link bcg-blue">Подробнее</a>
+              <a href="#" class="reklama-item__link">Подробнее</a>
             </div>
           </div>
         </div>

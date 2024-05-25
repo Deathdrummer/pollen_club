@@ -1,5 +1,5 @@
 @import '../../../../repository/css/assets/mixins';
-
+@import './_popup';
 $green: #70c270;
 $light: #f5fafe;
 $dark: #081530;
@@ -89,6 +89,9 @@ textarea,
 time,
 u {
   color: $dark;
+}
+input::-webkit-input-placeholder {
+  color: #c6c6c6;
 }
 .wrapper {
   max-width: 100%;
@@ -1375,6 +1378,30 @@ video {
       .content-description {
       }
     }
+    &__conten-main-section {
+      display: flex;
+
+      @include resp(
+        gap,
+        (
+          lg-down: 20px,
+          xl: 50px,
+        )
+      );
+      @include resp(
+        flex-direction,
+        (
+          lg-down: column,
+          xl: row,
+        )
+      );
+      .content-description {
+        max-width: 760px;
+      }
+      .drowdown-block {
+        margin-top: auto;
+      }
+    }
     &__content-news {
       margin: 28px 0;
       .news-gallery {
@@ -1500,9 +1527,22 @@ video {
     }
     &__support-link {
       padding: 9px 32px;
-      background-color: $blue;
+      background: linear-gradient(90deg, #269ed9 0%, #70c270 100%);
       color: $light;
+      background-position: 0%;
+      background-size: 600%;
+      transition: all 0.2s linear;
       border-radius: 5px;
+
+      &:hover {
+        transition: all 0.2s linear;
+        box-shadow: 3px 3px 20px 0 rgba(0, 0, 0, 0.1), 0 4px 10px 0 rgba(0, 0, 0, 0.15);
+      }
+      &:active {
+        background-size: 100%;
+        transition: all 0.2s linear;
+        box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.25), inset 2px 4px 10px 0 rgba(0, 0, 0, 0.15);
+      }
     }
     &__map {
     }
@@ -1647,6 +1687,7 @@ video {
           );
         }
         border-radius: 5px;
+
         box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 4px 0 rgba(0, 0, 0, 0.05), 0 2px 8px 0 rgba(0, 0, 0, 0.06), 0 3px 15px 0 rgba(0, 0, 0, 0.07), 0 5px 28px 0 rgba(0, 0, 0, 0.09);
         &:nth-child(3) {
           @include resp(
@@ -1814,9 +1855,9 @@ video {
     @include resp(
       grid-template-columns,
       (
-        sm-down: repeat(2, 1fr),
+        sm-down: 1fr 200px,
         md: repeat(4, 1fr),
-        lg: repeat(2, 1fr),
+        lg: 200px 200px,
         xxxl: 150px 170px 190px 146px,
       )
     );
@@ -1836,6 +1877,9 @@ video {
         color: $light;
         font-size: 14px;
         @include font('Roboto', 'medium');
+        #myChart {
+          max-width: 100%;
+        }
       }
       &__prognoz {
         width: 100%;
@@ -1860,6 +1904,219 @@ video {
     }
   }
 }
+.drowdown-block {
+  font-size: 15px;
+
+  @include resp(
+    border-radius,
+    (
+      lg-down: 0,
+      xl: 5px,
+    )
+  );
+  @include resp(
+    width,
+    (
+      lg-down: 100%,
+      xl: 90px,
+    )
+  );
+  @include resp(
+    min-width,
+    (
+      xl: 90px,
+    )
+  );
+  &__active {
+    display: block;
+    @include resp(
+      display,
+      (
+        lg-down: none,
+        xl: block,
+      )
+    );
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 3px 30px 3px 10px;
+    box-shadow: 0 0 3px 0 rgba(5, 19, 46, 0.07), 0 0 6px 0 rgba(5, 19, 46, 0.05), 0 0 12px 0 rgba(5, 19, 46, 0.04), 0 0 21px 0 rgba(5, 19, 46, 0.04), 0 0 39px 0 rgba(5, 19, 46, 0.03),
+      0 0 94px 0 rgba(5, 19, 46, 0.02);
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-style: solid;
+      border-width: 6px 5px 0;
+      border-top-color: #000000;
+      border-color: #000 transparent transparent;
+      transition: all 0.2s linear;
+    }
+    &.active {
+      border-radius: 5px 5px 0 0;
+      &:after {
+        transform: translateY(-50%) rotate(180deg);
+      }
+    }
+  }
+
+  &__list {
+    box-shadow: 0, 0 0 6px 0 rgba(5, 19, 46, 0.05), 0 0 12px 0 rgba(5, 19, 46, 0.04), 0 0 21px 0 rgba(5, 19, 46, 0.04), 0 0 39px 0 rgba(5, 19, 46, 0.03), 0 0 94px 0 rgba(5, 19, 46, 0.02);
+    @include resp(
+      box-shadow,
+      (
+        lg-down: none,
+      )
+    );
+    @include resp(
+      border-radius,
+      (
+        xl: 0 0 5px 5px,
+      )
+    );
+    @include resp(
+      display,
+      (
+        lg-down: flex,
+        xl: block,
+      )
+    );
+    @include resp(
+      flex-wrap,
+      (
+        lg-down: wrap,
+      )
+    );
+    @include resp(
+      gap,
+      (
+        lg-down: 7px,
+      )
+    );
+    @include resp(
+      position,
+      (
+        lg-down: static,
+        xl: absolute,
+      )
+    );
+    @include resp(
+      width,
+      (
+        lg-down: 100%,
+        xl: 90px,
+      )
+    );
+    @include resp(
+      max-height,
+      (
+        lg-down: fit-content,
+        xl: 100px,
+      )
+    );
+    @include resp(
+      background-color,
+      (
+        xl: $light,
+      )
+    );
+    @include resp(
+      opacity,
+      (
+        xl: 0,
+      )
+    );
+    @include resp(
+      visibility,
+      (
+        xl: hidden,
+      )
+    );
+    top: 100%;
+    left: 0;
+    overflow: hidden;
+    overflow-y: scroll;
+    z-index: 1;
+    transition: all 0.2s linear;
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-thumb {
+      width: 0;
+      height: 0;
+      background: transparent;
+    }
+
+    &.active {
+      @include resp(
+        opacity,
+        (
+          xl: 1,
+        )
+      );
+      @include resp(
+        visibility,
+        (
+          xl: visible,
+        )
+      );
+    }
+
+    li {
+      @include resp(
+        border-radius,
+        (
+          lg-down: 5px,
+        )
+      );
+      overflow: hidden;
+      span {
+        line-height: 1;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.5s linear;
+        box-shadow: 0 0 3px 0 rgba(5, 19, 46, 0.07), 0 0 6px 0 rgba(5, 19, 46, 0.05), 0 0 12px 0 rgba(5, 19, 46, 0.04), 0 0 21px 0 rgba(5, 19, 46, 0.04), 0 0 39px 0 rgba(5, 19, 46, 0.03),
+          0 0 94px 0 rgba(5, 19, 46, 0.02);
+        @include resp(
+          box-shadow,
+          (
+            xl: none,
+          )
+        );
+        @include resp(
+          padding,
+          (
+            lg-down: 11px 10px,
+            xl: 6px 20px,
+          )
+        );
+        display: block;
+        background: linear-gradient(90deg, $light 0, #269ed950 50%, #70c27050 100%);
+        background-size: 700%;
+        background-position: 0;
+        &:hover {
+          transition: all 0.5s linear;
+          background-size: 200%;
+          background-position: 100%;
+        }
+      }
+      &.active {
+        span {
+          pointer-events: none;
+          transition: all 0.5s linear;
+
+          box-shadow: 0 0 3px 0 rgba(5, 19, 46, 0.07), 0 0 6px 0 rgba(5, 19, 46, 0.05), 0 0 12px 0 rgba(5, 19, 46, 0.04), 0 0 21px 0 rgba(5, 19, 46, 0.04), 0 0 39px 0 rgba(5, 19, 46, 0.03),
+            0 0 94px 0 rgba(5, 19, 46, 0.02);
+          background: linear-gradient(90deg, $light 0, $blue 50%, $green 100%);
+          background-size: 200%;
+          background-position: 100%;
+        }
+      }
+    }
+  }
+}
+
 .content {
   &__reklama {
     display: grid;
@@ -1930,6 +2187,20 @@ video {
         color: $light;
         padding: 7px 10px;
         border-radius: 5px;
+        background: linear-gradient(90deg, #269ed9 0%, #70c270 100%);
+        color: $light;
+        background-position: 0%;
+        background-size: 600%;
+        transition: all 0.2s linear;
+        &:hover {
+          transition: all 0.2s linear;
+          box-shadow: 3px 3px 20px 0 rgba(0, 0, 0, 0.1), 0 4px 10px 0 rgba(0, 0, 0, 0.15);
+        }
+        &:active {
+          background-size: 100%;
+          transition: all 0.2s linear;
+          box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.25), inset 2px 4px 10px 0 rgba(0, 0, 0, 0.15);
+        }
       }
     }
   }
@@ -2919,6 +3190,7 @@ video {
 
 .finance-link {
   width: fit-content;
+  cursor: pointer;
   &::before {
     position: absolute;
     content: '';
@@ -2937,7 +3209,96 @@ video {
     }
   }
 }
-
+@keyframes ddrPopUpIn {
+  from {
+    background-color: transparent;
+  }
+  to {
+    background-color: rgba(#364d63, 0.3);
+  }
+}
+@keyframes ddrPopUpOut {
+  from {
+    background-color: rgba(#364d63, 0.3);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+.ddrpopup {
+  &__win {
+    padding: 0px;
+  }
+  &__header {
+    position: absolute;
+    right: 0;
+  }
+  &__content {
+    padding: 20px;
+    .content-donate {
+      .content-title {
+        padding-right: 35px;
+        @include resp(
+          font-size,
+          (
+            md-down: 16px,
+          )
+        );
+      }
+    }
+    .search {
+      padding-bottom: 15px;
+      padding-right: 55px;
+      input {
+        width: 100%;
+      }
+    }
+    .finance-last-wrapper {
+      overflow: hidden;
+      .finance-last {
+        padding-right: 35px;
+        margin-right: 5px;
+        overflow-y: scroll;
+        @include scrollbarNew(#081f2b10, linear-gradient(180deg, rgba(38, 158, 217, 1) 0%, rgba(112, 194, 112, 1) 100%), 5px, 5px, 5px);
+        overflow-x: hidden;
+        height: 100px;
+      }
+    }
+  }
+  &__footer {
+    display: none;
+  }
+  &__close {
+    background-color: #8e8e93;
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    right: 20px;
+    top: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    &::before,
+    &::after {
+      height: 2px;
+      background-color: $light;
+      border-radius: 2px;
+      width: 70%;
+    }
+    &::before {
+      top: calc(50% - 1.5px);
+    }
+    &::after {
+      top: calc(50% - 1.5px);
+    }
+    &:hover {
+      &::before,
+      &::after {
+        opacity: 0.8;
+        background-color: $light;
+      }
+    }
+  }
+}
 /* общие стили для записи */
 .wrapper-single {
   display: grid;

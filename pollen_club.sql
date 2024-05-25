@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 06 2024 г., 09:38
+-- Время создания: Май 25 2024 г., 18:28
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.4.30
 
@@ -45,7 +45,8 @@ CREATE TABLE `catalogs` (
 --
 
 INSERT INTO `catalogs` (`id`, `title`, `item_variable`, `page`, `fields`, `vars`, `simular_products_category`, `simular_products_options`, `simular_products_tags`, `sort`) VALUES
-(6, 'Новости', 'product', '40', '{\"color\": null, \"files\": null, \"icons\": null, \"label\": 1, \"model\": null, \"price\": null, \"threed\": null, \"videos\": null, \"article\": null, \"gallery\": 1, \"options\": null, \"hashtags\": 1, \"price_old\": null, \"attributes\": null, \"categories\": null, \"main_image\": 1, \"short_desc\": 1, \"description\": 1, \"price_label\": null}', NULL, 0, 0, 0, 0);
+(6, 'Новости', 'product', '40', '{\"color\": null, \"files\": null, \"icons\": null, \"label\": 1, \"model\": null, \"price\": null, \"threed\": null, \"videos\": null, \"article\": null, \"gallery\": 1, \"options\": null, \"hashtags\": 1, \"price_old\": null, \"attributes\": null, \"categories\": null, \"main_image\": 1, \"short_desc\": 1, \"description\": 1, \"price_label\": null}', NULL, 0, 0, 0, 0),
+(7, 'Гид Аллергика', 'product', '31', '{\"color\": null, \"files\": null, \"icons\": null, \"label\": 1, \"model\": null, \"price\": null, \"threed\": null, \"videos\": null, \"article\": null, \"gallery\": 1, \"options\": null, \"hashtags\": 1, \"price_old\": null, \"attributes\": null, \"categories\": null, \"main_image\": 1, \"short_desc\": 1, \"description\": 1, \"price_label\": null}', NULL, 0, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -93,7 +94,8 @@ CREATE TABLE `lists` (
 
 INSERT INTO `lists` (`id`, `title`, `fields`, `regroup`, `list_in_list`, `sort`) VALUES
 (48, 'test', 'text;text;названиеп;;;\ndate;date;Дата;;;', NULL, NULL, 0),
-(49, 'page-data', 'text;page_url;Url страницы;;;\nfile;icon;Иконка меню;;;', 'page_url', NULL, 1);
+(49, 'page-data', 'text;page_url;Url страницы;;;\nfile;icon;Иконка меню;;;', 'page_url', NULL, 1),
+(50, 'donate', 'text;name;Имя;;;\ntext;price;Сумма;;;\ntext;date;Дата;;;', NULL, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -113,7 +115,12 @@ CREATE TABLE `lists_items` (
 --
 
 INSERT INTO `lists_items` (`id`, `list_id`, `data`, `--sort`) VALUES
-(376, 49, '{\"page_url\":\"mobile_app\",\"icon\":null}', 0);
+(376, 49, '{\"page_url\":\"mobile_app\",\"icon\":null}', 0),
+(377, 50, '{\"name\":\"\\u041c\\u0430\\u0440\\u0433\\u0430\\u0440\\u0438\\u0442\\u0430\",\"price\":\"1 000\",\"date\":\"01.01.2023\"}', 0),
+(378, 50, '{\"name\":\"\\u041c\\u0430\\u0440\\u0433\\u0430\\u0440\\u0438\\u0442\\u0430\",\"price\":100,\"date\":\"01.01.2023\"}', 1),
+(379, 50, '{\"name\":\"\\u0410\\u043b\\u0435\\u043a\\u0441\\u0430\\u043d\\u0434\\u0440\",\"price\":\"10 000\",\"date\":\"12.05.2024\"}', 3),
+(380, 50, '{\"name\":\"\\u041c\\u0438\\u0445\\u0430\\u0438\\u043b\",\"price\":100,\"date\":\"01.01.2023\"}', 2),
+(381, 50, '{\"name\":\"\\u0410\\u043b\\u0435\\u043a\\u0441\\u0430\\u043d\\u0434\\u0440\",\"price\":100,\"date\":\"12.05.2024\"}', 4);
 
 -- --------------------------------------------------------
 
@@ -159,8 +166,8 @@ INSERT INTO `pages` (`id`, `page_title`, `icon`, `seo_url`, `link_title`, `heade
 (33, 'О проекте', '&I&k&o&n&k&i/About-icon.svg', 'about', 'О проекте', 1, 1, 1, 1, NULL, NULL),
 (34, 'Контакты', '&I&k&o&n&k&i/Contact-icon.svg', 'contacts', 'Контакты', 1, 1, 1, 1, NULL, NULL),
 (35, 'Поддержать проект', '&I&k&o&n&k&i/Support-icon.svg', 'support-project', 'Поддержать проект', 1, 1, 1, 1, NULL, NULL),
-(38, 'Article', NULL, 'article', NULL, 1, 1, 1, NULL, NULL, NULL),
-(40, 'News', NULL, 'news', NULL, 1, 1, 1, NULL, NULL, NULL),
+(38, 'Страница библиотеки Аллергика', NULL, NULL, NULL, 1, 1, 1, NULL, NULL, NULL),
+(40, 'Страница Новости', NULL, NULL, NULL, 1, 1, 1, NULL, NULL, NULL),
 (41, 'Гид аллергика', '&I&k&o&n&k&i/Gid-icon.svg', 'gid-alergika', 'Гид аллергика', 1, 1, 1, 1, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -243,6 +250,14 @@ CREATE TABLE `products` (
   `icons` json DEFAULT NULL,
   `sort` int DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='Товары';
+
+--
+-- Дамп данных таблицы `products`
+--
+
+INSERT INTO `products` (`id`, `catalog_id`, `title`, `seo_url`, `link_title`, `meta_keywords`, `meta_description`, `article`, `model`, `name`, `main_image`, `threed`, `gallery`, `videos`, `short_desc`, `description`, `price`, `price_old`, `price_label`, `attributes`, `label`, `option_title`, `option_color`, `option_icon`, `files`, `hashtags`, `icons`, `sort`) VALUES
+(136, 6, 'Новость 1', 'news1', 'Новость 1', NULL, NULL, NULL, NULL, 'Новость 1', NULL, NULL, NULL, NULL, 'Новость 1 краткое описание', '<p>Новость 1&nbsp; Полное описание</p>', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '[]', NULL),
+(137, 6, 'Новость 2 копия', 'news2', 'Новость 2', NULL, NULL, NULL, NULL, 'Новость 1 копия', NULL, NULL, NULL, NULL, 'Новость 2 краткое описание', '<p>Новость 2&nbsp; Полное описание</p>', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 'null', NULL, '[]', NULL);
 
 -- --------------------------------------------------------
 
@@ -349,10 +364,10 @@ INSERT INTO `sections` (`id`, `filename`, `title`, `fields`) VALUES
 (68, 'mobile_app', 'Мобильное приложение Пыльца Club', '[{\"type\":\"text\",\"variable\":\"title_page\",\"label\":\"\\u0417\\u0430\\u0433\\u043e\\u043b\\u043e\\u0432\\u043e\\u043a \\u0441\\u0442\\u0440\\u0430\\u043d\\u0438\\u0446\\u044b\",\"mask\":null,\"rules\":null},{\"type\":\"textarea\",\"variable\":\"desc_page\",\"label\":\"\\u041e\\u043f\\u0438\\u0441\\u0430\\u043d\\u0438\\u0435 \\u0441\\u0442\\u0440\\u0430\\u043d\\u0438\\u0446\\u044b\",\"editor\":1,\"meditor\":1,\"rules\":null}]'),
 (69, 'about', 'О проекте', NULL),
 (70, 'contacts', 'Контакты', NULL),
-(71, 'support_project', 'Поддержать проект', NULL),
+(71, 'support_project', 'Поддержать проект', '[{\"type\":\"list\",\"variable\":\"donate\",\"label\":\"\\u0414\\u043e\\u043d\\u0430\\u0442\\u044b\",\"listid\":952724,\"rules\":null}]'),
 (74, 'single_news', 'News', NULL),
 (75, 'single_article', 'Article', NULL),
-(76, 'gid_alergika', 'Гид аллергика', NULL);
+(76, 'gid_alergika', 'Гид аллергика', '[{\"type\":\"catalog\",\"variable\":\"news\",\"label\":\"\\u041d\\u043e\\u0432\\u043e\\u0441\\u0442\\u0438\",\"rules\":null},{\"type\":\"catalog\",\"variable\":\"gid_allergika\",\"label\":\"\\u0413\\u0438\\u0434 \\u0430\\u043b\\u043b\\u0435\\u0440\\u0433\\u0438\\u043a\\u0430\",\"rules\":null}]');
 
 -- --------------------------------------------------------
 
@@ -391,7 +406,9 @@ INSERT INTO `settings` (`id`, `param`, `value`, `json`) VALUES
 (161, 'page32_mobile_app147', '{\"title_page\":\"\\u041c\\u043e\\u0431\\u0438\\u043b\\u044c\\u043d\\u043e\\u0435 \\u043f\\u0440\\u0438\\u043b\\u043e\\u0436\\u0435\\u043d\\u0438\\u0435 \\u041f\\u044b\\u043b\\u044c\\u0446\\u0430 Club\",\"desc_page\":\"\\u042d\\u0442\\u043e \\u043d\\u0435 \\u043f\\u0440\\u043e\\u0441\\u0442\\u043e \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u043e\\u043d\\u043d\\u0430\\u044f \\u043f\\u043b\\u043e\\u0449\\u0430\\u0434\\u043a\\u0430, \\u044d\\u0442\\u043e \\u043c\\u0435\\u0445\\u0430\\u043d\\u0438\\u0437\\u043c \\u0432\\u0437\\u0430\\u0438\\u043c\\u043e\\u0434\\u0435\\u0439\\u0441\\u0442\\u0432\\u0438\\u044f \\u0432\\u043d\\u0443\\u0442\\u0440\\u0438 \\u0441\\u043e\\u043e\\u0431\\u0449\\u0435\\u0441\\u0442\\u0432\\u0430 \\u0430\\u043b\\u043b\\u0435\\u0440\\u0433\\u0438\\u043a\\u043e\\u0432, \\u0432\\u0438\\u0440\\u0442\\u0443\\u0430\\u043b\\u044c\\u043d\\u044b\\u0439 \\u043a\\u043b\\u0443\\u0431 \\u0437\\u0434\\u043e\\u0440\\u043e\\u0432\\u044c\\u044f \\u0431\\u043b\\u0438\\u0437\\u043a\\u0438\\u0445 \\u043f\\u043e \\u0434\\u0443\\u0445\\u0443 \\u043f\\u043e\\u043b\\u044c\\u0437\\u043e\\u0432\\u0430\\u0442\\u0435\\u043b\\u0435\\u0439. \\u0421\\u0435\\u0440\\u0432\\u0438\\u0441 \\u0442\\u0435\\u0441\\u043d\\u043e \\u0438\\u043d\\u0442\\u0435\\u0433\\u0440\\u0438\\u0440\\u043e\\u0432\\u0430\\u043d \\u0441 \\u0441\\u0430\\u0439\\u0442\\u043e\\u043c \\u0438 \\u0441\\u043e\\u0446\\u0438\\u0430\\u043b\\u044c\\u043d\\u044b\\u043c\\u0438 \\u0441\\u0435\\u0442\\u044f\\u043c\\u0438, \\u0433\\u0434\\u0435 \\u043a\\u0430\\u0436\\u0434\\u044b\\u0439 \\u043d\\u0430\\u0439\\u0434\\u0435\\u0442 \\u0430\\u043a\\u0442\\u0438\\u0432\\u043d\\u043e\\u0441\\u0442\\u0438 \\u043f\\u043e \\u0441\\u0432\\u043e\\u0438\\u043c \\u0438\\u043d\\u0442\\u0435\\u0440\\u0435\\u0441\\u0430\\u043c.\"}', 1),
 (162, 'setting_scripts_end', '', 0),
 (163, 'setting_styles_head', '', 0),
-(164, 'setting_tinypng_api_key', 'QWVgyy5gXWG951pDgfp4F5fQr9jWfvfc', 0);
+(164, 'setting_tinypng_api_key', 'QWVgyy5gXWG951pDgfp4F5fQr9jWfvfc', 0),
+(165, 'page41_gid_alergika156', '{\"catalog\":{\"news\":6,\"gid_allergika\":7}}', 1),
+(166, 'page35_support_project150', '{\"list\":{\"donate\":50}}', 1);
 
 --
 -- Индексы сохранённых таблиц
@@ -501,7 +518,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT для таблицы `catalogs`
 --
 ALTER TABLE `catalogs`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT для таблицы `categories`
@@ -513,13 +530,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT для таблицы `lists`
 --
 ALTER TABLE `lists`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT для таблицы `lists_items`
 --
 ALTER TABLE `lists_items`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=377;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=382;
 
 --
 -- AUTO_INCREMENT для таблицы `options`
@@ -537,7 +554,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT для таблицы `pages_sections`
 --
 ALTER TABLE `pages_sections`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
 
 --
 -- AUTO_INCREMENT для таблицы `patterns`
@@ -549,7 +566,7 @@ ALTER TABLE `patterns`
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 
 --
 -- AUTO_INCREMENT для таблицы `products_icons`
@@ -591,7 +608,7 @@ ALTER TABLE `sections`
 -- AUTO_INCREMENT для таблицы `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

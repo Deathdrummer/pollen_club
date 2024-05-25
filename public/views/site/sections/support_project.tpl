@@ -92,13 +92,15 @@
       <div class="finance-col-wrapper">
         <h3 class="content-title section-title blue">Последние пожертвования:</h3>
         <div class="finance-last">
-          <span>Маргарита</span><span class="finance-sum">100 ₽</span><span>01.01.2023</span>
-          <span>Дмитрий</span><span class="finance-sum">1000 ₽</span><span>01.01.2023</span>
-          <span>Григорий</span><span class="finance-sum">10000 ₽</span><span>01.01.2023</span>
-          <span>Ваня</span><span class="finance-sum">100 ₽</span><span>01.01.2023</span>
+          {% set reversedDonate = donate|reverse %}
+          {% for donat in reversedDonate|slice(0, 4)|reverse %}
+            <span>{{ donat.name }}</span>
+            <span class="finance-sum">{{ donat.price }} ₽</span>
+            <span>{{ donat.date }}</span>
+          {% endfor %}
         </div>
       </div>
-      <a class="finance-link" href="#">Полный список</a>
+      <span class="finance-link finance-link-popup">Полный список</span>
     </div>
     <div class="finance-col finance-static-col">
       <div class="finance-static-content">
