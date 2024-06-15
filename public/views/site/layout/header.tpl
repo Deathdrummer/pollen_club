@@ -40,7 +40,7 @@
         <a class="menu-link policy" href="#"><span>Политика конфиденциальности</span></a>
         <a class="menu-link mail" href="mailto:feedback@pollen.club"><span>Связаться с нами: feedback@pollen.club</span></a>
       </div>
-      <div class="close-button">
+      <div class="close-button menu-btn">
         <i></i>
       </div>
     </div>

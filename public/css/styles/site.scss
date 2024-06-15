@@ -246,6 +246,7 @@ video {
 
     li,
     a {
+      transition: all 0.3s linear;
       color: $light;
       @include resp(
         font-size,
@@ -263,6 +264,9 @@ video {
       );
       border-radius: 5px;
       width: fit-content;
+      &:hover {
+        transition: all 0.3s linear;
+      }
     }
   }
   &.tabs {
@@ -278,31 +282,30 @@ video {
         );
 
         box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 5px 0 rgba(0, 0, 0, 0.05), 0 2px 9px 0 rgba(0, 0, 0, 0.06), 0 3px 16px 0 rgba(0, 0, 0, 0.07), 0 6px 30px 0 rgba(0, 0, 0, 0.09);
-        transition: all 0.2s linear;
+        transition: all 0.2s linear 0.1s;
         @include resp(
           background,
           (
-            md-down: $dark,
+            md-down: linear-gradient(90deg, $light 0, $blue 50%, $green 100%),
             lg: linear-gradient(90deg, $dark 0, $blue 50%, $green 100%),
           )
         );
-
         @include resp(
           background-size,
           (
-            md-down: 100%,
-            lg: 1000%,
+            0: 5000%,
           )
         );
         @include resp(
           background-position,
           (
-            lg: 0 0,
+            0: 0%,
           )
         );
         @include resp(
           color,
           (
+            md: $dark,
             lg: transparent,
           )
         );
@@ -329,19 +332,10 @@ video {
         }
         &:hover,
         &.active {
-          transition: all 0.2s linear;
-          @include resp(
-            background-size,
-            (
-              lg: 200%,
-            )
-          );
-          @include resp(
-            background-position,
-            (
-              lg: 100%,
-            )
-          );
+          transition: all 0.2s linear 0.1s;
+          background-size: 200%;
+          background-position: 100%;
+
           @include resp(
             color,
             (
@@ -374,13 +368,72 @@ video {
 /* Стили поиска */
 
 .search {
+  width: 230px;
+  height: fit-content;
   input {
-    width: 230px;
     border-radius: 5px;
-    box-shadow: 0 0 3px 0 rgba(5, 19, 46, 0.07), 0 0 6px 0 rgba(5, 19, 46, 0.05), 0 0 12px 0 rgba(5, 19, 46, 0.04), 0 0 21px 0 rgba(5, 19, 46, 0.04), 0 0 39px 0 rgba(5, 19, 46, 0.03),
-      0 0 94px 0 rgba(5, 19, 46, 0.02);
+    box-shadow: 0 0 3px 0 rgba(5, 19, 46, 0.07), 0 0 6px 0 rgba(5, 19, 46, 0.05), 0 0 12px 0 rgba(5, 19, 46, 0.04), 0 0 21px 0 rgba(5, 19, 46, 0.04), 0 0 39px 0 rgba(5, 19, 46, 0.03), 0 0 94px 0 rgba(5, 19, 46, 0.02);
     background: #f5fafe;
     padding: 10px;
+    padding-right: 30px;
+    width: 100%;
+    border: 1px solid transparent;
+    transition: all 0.16s linear;
+    &:focus {
+      border: 1px solid $blue;
+      transition: all 0.16s linear;
+      + .search-close {
+        visibility: visible;
+        opacity: 1;
+        transition: all 0.16s linear;
+      }
+    }
+  }
+  .search-close {
+    display: block;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 17px;
+    height: 17px;
+    background-color: #8e8e93;
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    visibility: hidden;
+    opacity: 0;
+    border-radius: 50%;
+    transition: all 0.16s linear;
+    cursor: pointer;
+    &::before,
+    &::after {
+      content: '';
+      position: relative;
+      display: block;
+
+      left: 3px;
+      height: 2px;
+      background-color: $light;
+      border-radius: 2px;
+      width: 70%;
+      transition: all 0.16s linear;
+    }
+    &::before {
+      transform: rotate(45deg);
+      top: calc(50% - 1.5px);
+    }
+    &::after {
+      transform: rotate(-45deg);
+      top: calc(50% - 3.5px);
+    }
+    &:hover {
+      &::before,
+      &::after {
+        opacity: 0.8;
+        background-color: $light;
+        transition: all 0.16s linear;
+      }
+    }
   }
 }
 .content-description {
@@ -401,9 +454,9 @@ video {
   @include resp(
     gap,
     (
-      md-down: 40px,
+      xxl-down: 40px,
       sm-down: 20px,
-      lg: 92px,
+      xxxl: 92px,
     )
   );
   &__left {
@@ -418,6 +471,12 @@ video {
       (
         md-down: grid,
         lg: flex,
+      )
+    );
+    @include resp(
+      justify-content,
+      (
+        lg: space-between,
       )
     );
     @include resp(
@@ -447,6 +506,13 @@ video {
   }
   &__description {
     max-width: 364px;
+    @include resp(
+      max-width,
+      (
+        xl-down: 100%,
+        xxl: 364px,
+      )
+    );
   }
 }
 
@@ -504,8 +570,8 @@ video {
   @include resp(
     gap,
     (
-      md-down: 40px,
-      lg: 92px,
+      xxl-down: 40px,
+      xxxl: 92px,
     )
   );
   &__left {
@@ -563,13 +629,31 @@ video {
   @include resp(
     grid-template-columns,
     (
-      lg-down: repeat(1, 1fr),
+      xl-down: repeat(1, 1fr),
+      md-down: repeat(2, 1fr),
+      sm-down: repeat(1, 1fr),
       xl: repeat(2, 1fr),
     )
   );
 
-  column-gap: 52px;
   row-gap: 20px;
+  @include resp(
+    column-gap,
+    (
+      md-down: 20px,
+      xxxl: 50px,
+    )
+  );
+  .content-description {
+    &:first-child {
+      @include resp(
+        padding-right,
+        (
+          xl: 20px,
+        )
+      );
+    }
+  }
 }
 
 /* swiper */
@@ -688,23 +772,27 @@ video {
 }
 
 .aside {
-  width: 96px;
+  display: flex;
+
   z-index: 100;
+  @include resp(
+    width,
+    (
+      md-down: 100%,
+      lg: 96px,
+    )
+  );
   @include resp(
     height,
     (
       lg: 100vh,
     )
   );
-  @include resp(
-    display,
-    (
-      lg: flex,
-    )
-  );
+
   @include resp(
     justify-content,
     (
+      md-down: space-between,
       lg: center,
     )
   );
@@ -714,18 +802,7 @@ video {
       lg: center,
     )
   );
-  @include resp(
-    flex-direction,
-    (
-      lg: column,
-    )
-  );
-  @include resp(
-    justify-content,
-    (
-      lg: space-between,
-    )
-  );
+
   @include resp(
     transition,
     (
@@ -744,7 +821,14 @@ video {
       lg: 0 10px 10px 0,
     )
   );
-  background: $gradient;
+  @include resp(
+    background,
+    (
+      md-down: linear-gradient(90deg, rgba(5, 19, 46, 1) 33%, rgba(54, 77, 99, 1) 100%),
+      lg: $gradient,
+    )
+  );
+
   position: fixed;
   top: 0;
   left: 0;
@@ -837,44 +921,134 @@ video {
     flex-direction: column;
     height: 100%;
     width: 100%;
+    overflow: hidden;
     &__top {
+      width: 100%;
+      @include resp(
+        display,
+        (
+          md-down: flex,
+        )
+      );
+      @include resp(
+        justify-content,
+        (
+          md-down: space-between,
+        )
+      );
+      @include resp(
+        align-items,
+        (
+          md-down: center,
+        )
+      );
+      @include resp(
+        box-shadow,
+        (
+          md-down: 2px 2px 10px 0px rgba(245, 250, 254, 0.15),
+        )
+      );
       @include resp(
         padding,
         (
+          md-down: 33px 15px,
           lg: 40px 0 80px 0,
-        )
-      );
-
-      @include resp(
-        width,
-        (
-          lg: 100%,
         )
       );
     }
     &__bottom {
       display: flex;
       flex-direction: column;
-
       align-items: flex-start;
-      justify-content: space-between;
-      height: 100%;
+      transition: height 0.3s linear;
       width: 100%;
+      @include resp(
+        height,
+        (
+          md-down: 0,
+          lg: 100%,
+        )
+      );
+      @include resp(
+        justify-content,
+        (
+          md-down: flex-start,
+          lg: space-between,
+        )
+      );
+
+      @include resp(
+        gap,
+        (
+          lg: 50px,
+        )
+      );
       @include resp(
         padding,
         (
           lg: 0 35px,
         )
       );
+      &.active {
+        @include resp(
+          height,
+          (
+            md-down: 600px,
+          )
+        );
+        @include resp(
+          overflow-y,
+          (
+            md-down: scroll,
+          )
+        );
+        &::-webkit-scrollbar,
+        &::-webkit-scrollbar-track,
+        &::-webkit-scrollbar-thumb {
+          width: 0;
+          height: 0;
+          background: transparent;
+        }
+      }
     }
-
+    &__bottom-top {
+      @include resp(
+        width,
+        (
+          md-down: 100%,
+        )
+      );
+      @include resp(
+        padding-top,
+        (
+          md-down: 80px,
+        )
+      );
+    }
     &__bottom-bottom {
       display: flex;
       flex-direction: column;
-      gap: 30px;
       width: 100%;
-
-      margin-bottom: 32px;
+      @include resp(
+        gap,
+        (
+          md-down: 0,
+          lg: 30px,
+        )
+      );
+      @include resp(
+        padding,
+        (
+          md-down: 65px 17px 0,
+        )
+      );
+      @include resp(
+        margin-bottom,
+        (
+          md-down: 0,
+          lg: 32px,
+        )
+      );
     }
   }
 
@@ -919,9 +1093,22 @@ video {
       @include resp(
         background,
         (
-          md-down: $light,
+          md-down: linear-gradient(90deg, #f5fafe 0, #269ed9 50%, #70c270 100%),
         )
       );
+      @include resp(
+        background-size,
+        (
+          md-down: 2000%,
+        )
+      );
+      @include resp(
+        background-position,
+        (
+          md-down: 0,
+        )
+      );
+
       @include resp(
         color,
         (
@@ -947,19 +1134,32 @@ video {
           md-down: center,
         )
       );
-      // @include resp(
-      //   transition,
-      //   (
-      //     md-down: all 0.5s linear,
-      //   )
-      // );
+
+      @include resp(
+        transition,
+        (
+          md-down: all 0.16s linear,
+        )
+      );
       &:hover,
       &.active,
       &:active {
         @include resp(
-          background,
+          transition,
           (
-            md-down: linear-gradient(to right, #269ed9, #70c270),
+            md-down: all 0.16s linear,
+          )
+        );
+        @include resp(
+          background-size,
+          (
+            md-down: 200%,
+          )
+        );
+        @include resp(
+          background-position,
+          (
+            md-down: 100%,
           )
         );
       }
@@ -979,11 +1179,23 @@ video {
           md-down: 2,
         )
       );
+      @include resp(
+        width,
+        (
+          md-down: fit-content,
+        )
+      );
     }
 
     &.policy span,
     &.mail span {
-      color: $light;
+      background: linear-gradient(90deg, $light 0, $blue 50%, $green 100%);
+      background-size: 1000%;
+      background-position: 0 0;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
 
       @include resp(
         font-size,
@@ -1005,7 +1217,24 @@ video {
         )
       );
     }
+
+    &.policy:hover span,
+    &.mail:hover span {
+      background-size: 200%;
+      background-position: 100%;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
     &.policy {
+      @include resp(
+        width,
+        (
+          md-down: fit-content,
+        )
+      );
       span {
         @include resp(
           opacity,
@@ -1069,11 +1298,27 @@ video {
           lg: text,
         )
       );
-      transition: opacity 0.2s ease-in 0.2s, background-size 0.16s linear 0.1s, background-position 0.16s linear 0.1s;
+      @include resp(
+        transition,
+        (
+          md-down: all 0.16s linear,
+        )
+      );
+      @media screen and (min-width: 1024px) {
+        transition: opacity 0.3s ease-out 0.2s, background-size 0.16s linear 0.1s, background-position 0.16s linear 0.1s;
+      }
     }
     &:hover span,
     &.active span {
-      transition: all 0.16s linear 0.1s;
+      @include resp(
+        transition,
+        (
+          md-down: all 0.16s linear,
+        )
+      );
+      @media screen and (min-width: 1024px) {
+        transition: opacity 0.3s ease-out 0.2s, background-size 0.16s linear 0.1s, background-position 0.16s linear 0.1s;
+      }
       @include resp(
         background-position,
         (
@@ -1152,8 +1397,34 @@ video {
 
 .menu-list {
   gap: 32px;
-  display: flex;
-  flex-direction: column;
+
+  @include resp(
+    display,
+    (
+      md-down: grid,
+      lg: flex,
+    )
+  );
+  @include resp(
+    grid-template-columns,
+    (
+      md-down: repeat(2, 1fr),
+    )
+  );
+  @include resp(
+    flex-direction,
+    (
+      lg: column,
+    )
+  );
+  @include resp(
+    gap,
+    (
+      sm-down: 10px,
+      md: 20px,
+      lg: 32px,
+    )
+  );
 }
 .menu-aside {
   .menu-link {
@@ -1301,27 +1572,9 @@ video {
           lg: all 0.16s linear 0.1s,
         )
       );
-
-      @include resp(
-        background,
-        (
-          md-down: $light,
-          lg: linear-gradient(90deg, $light 0, $blue 50%, $green 100%),
-        )
-      );
-      @include resp(
-        background-size,
-        (
-          md-down: 100%,
-          lg: 1000%,
-        )
-      );
-      @include resp(
-        background-position,
-        (
-          lg: 0 0,
-        )
-      );
+      background: linear-gradient(90deg, $light 0, $blue 50%, $green 100%);
+      background-size: 1000%;
+      background-position: 0 0;
     }
     &:hover {
       .grad-icon {
@@ -1333,18 +1586,8 @@ video {
           )
         );
 
-        @include resp(
-          background-size,
-          (
-            lg: 200%,
-          )
-        );
-        @include resp(
-          background-position,
-          (
-            lg: 100%,
-          )
-        );
+        background-size: 200%;
+        background-position: 100%;
       }
     }
   }
@@ -1380,6 +1623,7 @@ video {
     }
     &__conten-main-section {
       display: flex;
+      justify-content: space-between;
 
       @include resp(
         gap,
@@ -1527,10 +1771,9 @@ video {
     }
     &__support-link {
       padding: 9px 32px;
-      background: linear-gradient(90deg, #269ed9 0%, #70c270 100%);
+      background: #269ed9;
       color: $light;
-      background-position: 0%;
-      background-size: 600%;
+
       transition: all 0.2s linear;
       border-radius: 5px;
 
@@ -1540,6 +1783,8 @@ video {
       }
       &:active {
         background-size: 100%;
+        background-position: 0%;
+        background: linear-gradient(90deg, #269ed9 0%, #70c270 100%);
         transition: all 0.2s linear;
         box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.25), inset 2px 4px 10px 0 rgba(0, 0, 0, 0.15);
       }
@@ -1589,7 +1834,14 @@ video {
       display: block;
       border-radius: 5px;
       overflow: hidden;
-
+      @include resp(
+        height,
+        (
+          lg-dowm: 270px,
+          xl: 500px,
+          xxxl: 350px,
+        )
+      );
       img {
         object-fit: cover;
         offset-position: center center;
@@ -1768,17 +2020,29 @@ video {
 
       .news-all-text {
         color: #081530;
-        transition: all 0.2s linear 0.1s;
+        transition: all 0.2s linear;
       }
       &:hover {
         .news-all-text {
           color: #08153060;
-          transition: all 0.2s linear 0.1s;
+          transition: all 0.2s linear;
         }
         .news-all-icon {
-          transition: all 0.3s linear 0.1s;
+          transition: all 0.3s linear;
           background-size: 100%;
           background-position: 100%;
+        }
+      }
+      &:active {
+        .news-all-text {
+          background: linear-gradient(90deg, $blue 0%, $green 100%);
+          transition: all 0.2s linear;
+          background-size: 100%;
+          background-position: 0 0;
+          color: #081530;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          -webkit-background-clip: text;
         }
       }
       .news-all-icon {
@@ -1786,7 +2050,7 @@ video {
         height: 14px;
         display: block;
         flex-shrink: 0;
-        transition: all 0.3s linear 0.1s;
+        transition: all 0.3s linear;
         background: linear-gradient(90deg, $dark 0, $blue 50%, $green 100%);
         background-size: 500%;
         background-position: 0 0;
@@ -1813,7 +2077,14 @@ video {
     @include resp(
       display,
       (
-        lg-down: none,
+        md-down: none,
+      )
+    );
+    @include resp(
+      width,
+      (
+        md: auto,
+        xxl-down: 100%,
       )
     );
     .photo {
@@ -1850,12 +2121,18 @@ video {
     width: 100%;
     justify-content: space-between;
     row-gap: 32px;
-    column-gap: 20px;
-
+    @include resp(
+      column-gap,
+      (
+        sm-down: 10px,
+        md: 20px,
+      )
+    );
     @include resp(
       grid-template-columns,
       (
-        sm-down: 1fr 200px,
+        sm-down: repeat(3, 1fr),
+        xs-down: repeat(2, 1fr),
         md: repeat(4, 1fr),
         lg: 200px 200px,
         xxxl: 150px 170px 190px 146px,
@@ -1867,10 +2144,37 @@ video {
     flex-direction: column;
     justify-content: space-between;
     gap: 20px;
+    &:nth-child(3n) {
+      @include resp(
+        order,
+        (
+          sm-down: 4,
+        )
+      );
+      @include resp(
+        grid-column-start,
+        (
+          sm-down: 1,
+        )
+      );
+      @include resp(
+        grid-column-end,
+        (
+          sm-down: 4,
+          xs-down: 3,
+        )
+      );
+    }
     .level-item {
       &__title {
         color: $light;
-        font-size: 16px;
+        @include resp(
+          font-size,
+          (
+            sm-down: 14px,
+            md: 16px,
+          )
+        );
         @include font('Roboto', 'bold');
       }
       &__content {
@@ -1883,13 +2187,21 @@ video {
       }
       &__prognoz {
         width: 100%;
-        max-width: 150px;
+
+        @include resp(
+          max-width,
+          (
+            sm-down: 110px,
+            md: 150px,
+          )
+        );
       }
       &__content-text {
         @include resp(
           font-size,
           (
             sm-down: 20px,
+            xs-down: 18px,
             md: 24px,
           )
         );
@@ -1939,8 +2251,7 @@ video {
     cursor: pointer;
     border-radius: 5px;
     padding: 3px 30px 3px 10px;
-    box-shadow: 0 0 3px 0 rgba(5, 19, 46, 0.07), 0 0 6px 0 rgba(5, 19, 46, 0.05), 0 0 12px 0 rgba(5, 19, 46, 0.04), 0 0 21px 0 rgba(5, 19, 46, 0.04), 0 0 39px 0 rgba(5, 19, 46, 0.03),
-      0 0 94px 0 rgba(5, 19, 46, 0.02);
+    box-shadow: 0 0 3px 0 rgba(5, 19, 46, 0.07), 0 0 6px 0 rgba(5, 19, 46, 0.05), 0 0 12px 0 rgba(5, 19, 46, 0.04), 0 0 21px 0 rgba(5, 19, 46, 0.04), 0 0 39px 0 rgba(5, 19, 46, 0.03), 0 0 94px 0 rgba(5, 19, 46, 0.02);
     &:after {
       content: '';
       display: block;
@@ -2009,13 +2320,7 @@ video {
         xl: 90px,
       )
     );
-    @include resp(
-      max-height,
-      (
-        lg-down: fit-content,
-        xl: 100px,
-      )
-    );
+
     @include resp(
       background-color,
       (
@@ -2036,8 +2341,20 @@ video {
     );
     top: 100%;
     left: 0;
-    overflow: hidden;
-    overflow-y: scroll;
+
+    @include resp(
+      overflow,
+      (
+        xl: hidden,
+      )
+    );
+    @include resp(
+      overflow-y,
+      (
+        xl: scroll,
+      )
+    );
+
     z-index: 1;
     transition: all 0.2s linear;
     &::-webkit-scrollbar,
@@ -2070,14 +2387,14 @@ video {
           lg-down: 5px,
         )
       );
-      overflow: hidden;
+
+      @include resp(
+        overflow,
+        (
+          xl: hidden,
+        )
+      );
       span {
-        line-height: 1;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.5s linear;
-        box-shadow: 0 0 3px 0 rgba(5, 19, 46, 0.07), 0 0 6px 0 rgba(5, 19, 46, 0.05), 0 0 12px 0 rgba(5, 19, 46, 0.04), 0 0 21px 0 rgba(5, 19, 46, 0.04), 0 0 39px 0 rgba(5, 19, 46, 0.03),
-          0 0 94px 0 rgba(5, 19, 46, 0.02);
         @include resp(
           box-shadow,
           (
@@ -2091,10 +2408,21 @@ video {
             xl: 6px 20px,
           )
         );
+        @include resp(
+          border-radius,
+          (
+            lg-down: 5px,
+          )
+        );
         display: block;
+        line-height: 1;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: 0 0 3px 0 rgba(5, 19, 46, 0.07), 0 0 6px 0 rgba(5, 19, 46, 0.05), 0 0 12px 0 rgba(5, 19, 46, 0.04), 0 0 21px 0 rgba(5, 19, 46, 0.04), 0 0 39px 0 rgba(5, 19, 46, 0.03), 0 0 94px 0 rgba(5, 19, 46, 0.02);
         background: linear-gradient(90deg, $light 0, #269ed950 50%, #70c27050 100%);
-        background-size: 700%;
+        background-size: 1500%;
         background-position: 0;
+        transition: all 0.5s linear;
         &:hover {
           transition: all 0.5s linear;
           background-size: 200%;
@@ -2105,9 +2433,7 @@ video {
         span {
           pointer-events: none;
           transition: all 0.5s linear;
-
-          box-shadow: 0 0 3px 0 rgba(5, 19, 46, 0.07), 0 0 6px 0 rgba(5, 19, 46, 0.05), 0 0 12px 0 rgba(5, 19, 46, 0.04), 0 0 21px 0 rgba(5, 19, 46, 0.04), 0 0 39px 0 rgba(5, 19, 46, 0.03),
-            0 0 94px 0 rgba(5, 19, 46, 0.02);
+          box-shadow: 0 0 3px 0 rgba(5, 19, 46, 0.07), 0 0 6px 0 rgba(5, 19, 46, 0.05), 0 0 12px 0 rgba(5, 19, 46, 0.04), 0 0 21px 0 rgba(5, 19, 46, 0.04), 0 0 39px 0 rgba(5, 19, 46, 0.03), 0 0 94px 0 rgba(5, 19, 46, 0.02);
           background: linear-gradient(90deg, $light 0, $blue 50%, $green 100%);
           background-size: 200%;
           background-position: 100%;
@@ -2187,16 +2513,16 @@ video {
         color: $light;
         padding: 7px 10px;
         border-radius: 5px;
-        background: linear-gradient(90deg, #269ed9 0%, #70c270 100%);
-        color: $light;
-        background-position: 0%;
-        background-size: 600%;
+        background: $blue;
+
         transition: all 0.2s linear;
         &:hover {
           transition: all 0.2s linear;
           box-shadow: 3px 3px 20px 0 rgba(0, 0, 0, 0.1), 0 4px 10px 0 rgba(0, 0, 0, 0.15);
         }
         &:active {
+          background-position: 0%;
+          background: linear-gradient(90deg, #269ed9 0%, #70c270 100%);
           background-size: 100%;
           transition: all 0.2s linear;
           box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.25), inset 2px 4px 10px 0 rgba(0, 0, 0, 0.15);
@@ -2227,6 +2553,7 @@ video {
       @include resp(
         grid-template-columns,
         (
+          lg-down: repeat(2, 1fr),
           sm-down: repeat(1, 1fr),
         )
       );
@@ -2246,6 +2573,32 @@ video {
       );
     }
   }
+  .advantages-application {
+    @include resp(
+      margin-left,
+      (
+        xxl-down: 75px,
+        lg-down: 30px,
+        md-down: 0,
+      )
+    );
+    @include resp(
+      margin-top,
+      (
+        lg-down: 45px,
+        md-down: 0,
+      )
+    );
+    .circle-2 {
+      @include resp(
+        top,
+        (
+          md-down: 20px,
+        )
+      );
+    }
+  }
+
   .content-main {
     @include resp(
       margin-top,
@@ -2315,6 +2668,7 @@ video {
     width,
     (
       md-down: 176px,
+      sm-down: 130px,
       lg: 100%,
     )
   );
@@ -2335,6 +2689,7 @@ video {
     (
       xxl-down: repeat(1, 1fr),
       md-down: 176px 1fr,
+      sm-down: 130px 1fr,
       xxxl: repeat(2, 1fr),
     )
   );
@@ -2343,6 +2698,7 @@ video {
     (
       lg-down: 16px,
       xl: 20px,
+      xxxl: 30px,
     )
   );
 }
@@ -2396,8 +2752,8 @@ video {
   @include resp(
     margin-left,
     (
-      xxl-down: 65px,
-      lg-down: 30px,
+      xxxl-down: 65px,
+      xxl-down: 50px,
       md-down: 0,
     )
   );
@@ -2708,6 +3064,12 @@ video {
 
 .about {
   .content-header {
+    @include resp(
+      grid-template-columns,
+      (
+        md: repeat(2, 1fr),
+      )
+    );
     &__left {
       @include resp(
         gap,
@@ -2728,6 +3090,9 @@ video {
   }
 
   .content-main {
+    &__left {
+      margin-top: 0;
+    }
     &__right {
       .advantages-about {
         display: flex;
@@ -2747,8 +3112,8 @@ video {
         @include resp(
           gap,
           (
-            xl-down: 20px,
-            xxl: 92px,
+            xxl-down: 20px,
+            xxxl: 92px,
           )
         );
         @include resp(
@@ -2768,14 +3133,25 @@ video {
           );
         }
         .content-description {
-          max-width: 350px;
+          @include resp(
+            max-width,
+            (
+              lg: 350px,
+            )
+          );
         }
       }
     }
   }
 
   .circle-2 {
-    top: -25px;
+    @include resp(
+      top,
+      (
+        md-down: 0,
+        lg: -25px,
+      )
+    );
   }
   .circle-1::before {
     width: 80px;
@@ -2798,10 +3174,16 @@ video {
     (
       xxl: repeat(4, 1fr),
       xl-down: repeat(2, 1fr),
-      md-down: repeat(1, 1fr),
+      sm-down: repeat(1, 1fr),
     )
   );
-  column-gap: 95px;
+  @include resp(
+    column-gap,
+    (
+      xxl-down: 40px,
+      xxxl: 90px,
+    )
+  );
   @include resp(
     row-gap,
     (
@@ -2834,15 +3216,15 @@ video {
   @include resp(
     gap,
     (
-      md-down: 60px,
-      lg: 120px,
+      xxl-down: 60px,
+      xxxl: 120px,
     )
   );
   @include resp(
     margin-top,
     (
-      md-down: 60px,
-      lg: 120px,
+      xxl-down: 60px,
+      xxxl: 120px,
     )
   );
   &__comands {
@@ -2902,7 +3284,13 @@ video {
       max-width: 100%;
     }
     .content-col-2 {
-      column-gap: 130px;
+      @include resp(
+        column-gap,
+        (
+          lg: 40px,
+          xxxl: 130px,
+        )
+      );
     }
   }
   .achievements-list-wrapper {
@@ -2946,17 +3334,25 @@ video {
       @include resp(
         grid-template-columns,
         (
-          xl-down: 1fr,
-          xxl: auto 280px,
+          xxl-down: 1fr 160px,
+          lg-down: 1fr,
+          xxxl: auto 280px,
         )
       );
-      column-gap: 60px;
+
       row-gap: 30px;
+      @include resp(
+        column-gap,
+        (
+          xxl-down: 30px,
+          xxxl: 60px,
+        )
+      );
       .advantages-application {
         @include resp(
           display,
           (
-            md-down: none,
+            lg-down: none,
           )
         );
         @include resp(
@@ -2973,7 +3369,13 @@ video {
             xl: 2,
           )
         );
-        width: 280px;
+        @include resp(
+          max-width,
+          (
+            xxl: 160px,
+            xxxl: 280px,
+          )
+        );
         margin: 0;
         .advantages-circle {
           @include resp(
@@ -2989,22 +3391,44 @@ video {
             height: 100%;
           }
           &.circle-1 {
-            width: 120px;
-            height: 120px;
-            top: 120px;
+            @include resp(
+              top,
+              (
+                xxl-down: 80px,
+                xxxl: 120px,
+              )
+            );
+            @include resp(
+              width,
+              (
+                xxl-down: 80px,
+                xxxl: 120px,
+              )
+            );
+            @include resp(
+              height,
+              (
+                xxl-down: 80px,
+                xxxl: 120px,
+              )
+            );
           }
           &.circle-2 {
             width: 80px;
             height: 80px;
-            right: 20px;
+            right: 0px;
             left: auto;
-            top: 12px;
+            top: 0;
           }
         }
       }
     }
   }
-
+  .content-support {
+    .content-title {
+      max-width: 550px;
+    }
+  }
   .achievements-list-wrapper {
     display: grid;
     grid-template-columns: minmax(auto, 1fr);
@@ -3247,10 +3671,11 @@ video {
       }
     }
     .search {
-      padding-bottom: 15px;
-      padding-right: 55px;
-      input {
+      margin-bottom: 15px;
+      margin-right: 55px;
+      .search {
         width: 100%;
+        height: fit-content;
       }
     }
     .finance-last-wrapper {
@@ -3301,24 +3726,27 @@ video {
 }
 /* общие стили для записи */
 .wrapper-single {
-  display: grid;
-  @include resp(
-    grid-template-columns,
-    (
-      md-down: 1fr,
-      lg: auto 230px,
-    )
-  );
-  @include resp(
-    gap,
-    (
-      md-down: 0,
-      lg: 80px,
-    )
-  );
   &__content {
+    @include resp(
+      max-width,
+      (
+        xxl-down: 100%,
+        xxxl: calc(100% - 300px),
+      )
+    );
+  }
+  .tags {
+    @include resp(
+      max-width,
+      (
+        lg: calc(100% - 250px),
+      )
+    );
   }
   .search {
+    position: absolute;
+    right: 0;
+    top: 0;
     @include resp(
       display,
       (
@@ -3545,7 +3973,14 @@ video {
         )
       );
       gap: 20px;
-      max-width: 1375px;
+
+      @include resp(
+        max-width,
+        (
+          xxxl: calc(100% - 230px),
+          xxl-down: 100%,
+        )
+      );
       @include resp(
         margin-top,
         (
@@ -3724,9 +4159,15 @@ video {
   &__photo {
     overflow: hidden;
     width: 100%;
-    padding-bottom: 75%;
-    border-radius: 5px;
 
+    border-radius: 5px;
+    @include resp(
+      padding-bottom,
+      (
+        md-down: 55%,
+        lg: 45%,
+      )
+    );
     img {
       position: absolute;
       inset: 0;
@@ -3748,7 +4189,6 @@ video {
     font-size: 12px;
   }
 }
-
 @media screen and (max-width: 1024px) {
   .circle-1 {
     margin-left: 40px;
@@ -3769,64 +4209,6 @@ video {
       position: absolute;
       top: -39px;
       left: -50px;
-    }
-  }
-
-  .aside {
-    width: 100%;
-    background: linear-gradient(90deg, rgba(5, 19, 46, 1) 33%, rgba(54, 77, 99, 1) 100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    &.active {
-      max-height: 702px;
-      height: 100%;
-    }
-    .menu-list {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      @include resp(
-        gap,
-        (
-          sm-down: 10px,
-          md: 20px,
-        )
-      );
-    }
-
-    .aside-block {
-      &__top {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        padding: 33px 15px;
-        align-items: center;
-
-        -webkit-box-shadow: 2px 2px 10px 0px rgba(245, 250, 254, 0.15);
-        -moz-box-shadow: 2px 2px 10px 0px rgba(245, 250, 254, 0.15);
-        box-shadow: 2px 2px 10px 0px rgba(245, 250, 254, 0.15);
-      }
-      &__bottom {
-        height: 0;
-        overflow: hidden;
-        justify-content: flex-start;
-        transition: height 0.3s linear;
-        &.active {
-          transition: height 0.3s linear;
-          height: 600px;
-          overflow-y: scroll;
-        }
-      }
-      &__bottom-top {
-        width: 100%;
-        padding-top: 80px;
-      }
-      &__bottom-bottom {
-        width: 100%;
-        padding: 65px 17px 0;
-        gap: 0px;
-        margin-bottom: 0;
-      }
     }
   }
 }

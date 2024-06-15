@@ -4,6 +4,7 @@
     <h1 class="content-title blue">Гид аллергика</h1>
     <form class="search">
       <input type="text" placeholder="Поиск" />
+      <span class="search-close"></span>
     </form>
   </div>
   <div class="content-news">
@@ -19,7 +20,7 @@
             <div class="swiper-slide">
               <div class="card-news">
                 <div class="card-news__photo">
-                  <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                  <img loading="lazy" src="/public/images/pollen/img/news.png" alt="" role="group" />
                 </div>
                 <div class="card-news__content">
                   <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -31,7 +32,7 @@
             <div class="swiper-slide">
               <div class="card-news">
                 <div class="card-news__photo">
-                  <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                  <img loading="lazy" src="/public/images/pollen/img/news.png" alt="" role="group" />
                 </div>
                 <div class="card-news__content">
                   <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -43,7 +44,7 @@
             <div class="swiper-slide">
               <div class="card-news">
                 <div class="card-news__photo">
-                  <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                  <img loading="lazy" src="/public/images/pollen/img/news.png" alt="" role="group" />
                 </div>
                 <div class="card-news__content">
                   <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -55,7 +56,7 @@
             <div class="swiper-slide">
               <div class="card-news">
                 <div class="card-news__photo">
-                  <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                  <img loading="lazy" src="/public/images/pollen/img/news.png" alt="" role="group" />
                 </div>
                 <div class="card-news__content">
                   <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -67,7 +68,7 @@
             <div class="swiper-slide">
               <div class="card-news">
                 <div class="card-news__photo">
-                  <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                  <img loading="lazy" src="/public/images/pollen/img/news.png" alt="" role="group" />
                 </div>
                 <div class="card-news__content">
                   <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -79,7 +80,7 @@
             <div class="swiper-slide">
               <div class="card-news">
                 <div class="card-news__photo">
-                  <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                  <img loading="lazy" src="/public/images/pollen/img/news.png" alt="" role="group" />
                 </div>
                 <div class="card-news__content">
                   <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -91,7 +92,7 @@
             <div class="swiper-slide">
               <div class="card-news">
                 <div class="card-news__photo">
-                  <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                  <img loading="lazy" src="/public/images/pollen/img/news.png" alt="" role="group" />
                 </div>
                 <div class="card-news__content">
                   <h3 class="card-news__content-title">Злаки продолжают, полынь готовится</h3>
@@ -132,7 +133,7 @@
           </ul>
         </div>
         <div class="card-allergika__photo">
-          <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+          <img loading="lazy" src="/public/images/pollen/img/news.png" alt="" role="group" />
         </div>
         <div class="card-allergika__content">
           <div class="card-allergika__content-title">Как правильно использовать адреналиновый автоинжектор при анафилактическом шоке</div>
@@ -147,7 +148,7 @@
           </ul>
         </div>
         <div class="card-allergika__photo">
-          <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+          <img loading="lazy" src="/public/images/pollen/img/news.png" alt="" role="group" />
         </div>
         <div class="card-allergika__content">
           <div class="card-allergika__content-title">Как правильно использовать адреналиновый автоинжектор при анафилактическом шоке</div>
@@ -162,7 +163,7 @@
           </ul>
         </div>
         <div class="card-allergika__photo">
-          <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+          <img loading="lazy" src="/public/images/pollen/img/news.png" alt="" role="group" />
         </div>
         <div class="card-allergika__content">
           <div class="card-allergika__content-title">Как правильно использовать адреналиновый автоинжектор при анафилактическом шоке</div>
@@ -177,7 +178,7 @@
           </ul>
         </div>
         <div class="card-allergika__photo">
-          <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+          <img loading="lazy" src="/public/images/pollen/img/news.png" alt="" role="group" />
         </div>
         <div class="card-allergika__content">
           <div class="card-allergika__content-title">Как правильно использовать адреналиновый автоинжектор при анафилактическом шоке</div>
@@ -191,7 +192,7 @@
           </ul>
         </div>
         <div class="card-allergika__photo">
-          <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+          <img loading="lazy" src="/public/images/pollen/img/news-1.png" alt="" role="group" />
         </div>
         <div class="card-allergika__content">
           <div class="card-allergika__content-title">Как правильно использовать адреналиновый автоинжектор при анафилактическом шоке</div>
@@ -206,7 +207,7 @@
           </ul>
         </div>
         <div class="card-allergika__photo">
-          <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+          <img loading="lazy" src="/public/images/pollen/img/news.png" alt="" role="group" />
         </div>
         <div class="card-allergika__content">
           <div class="card-allergika__content-title">Как правильно использовать адреналиновый автоинжектор при анафилактическом шоке</div>

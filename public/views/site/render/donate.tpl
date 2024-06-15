@@ -1,6 +1,7 @@
 <div class="content-donate">
   <form class="search">
     <input type="text" placeholder="Найти своё пожертвование" />
+    <span class="search-close"></span>
   </form>
   <h3 class="content-title section-title blue">Последние пожертвования:</h3>
   <div class="finance-last-wrapper">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 25 2024 г., 18:28
+-- Время создания: Июн 05 2024 г., 16:11
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.4.30
 
@@ -46,7 +46,7 @@ CREATE TABLE `catalogs` (
 
 INSERT INTO `catalogs` (`id`, `title`, `item_variable`, `page`, `fields`, `vars`, `simular_products_category`, `simular_products_options`, `simular_products_tags`, `sort`) VALUES
 (6, 'Новости', 'product', '40', '{\"color\": null, \"files\": null, \"icons\": null, \"label\": 1, \"model\": null, \"price\": null, \"threed\": null, \"videos\": null, \"article\": null, \"gallery\": 1, \"options\": null, \"hashtags\": 1, \"price_old\": null, \"attributes\": null, \"categories\": null, \"main_image\": 1, \"short_desc\": 1, \"description\": 1, \"price_label\": null}', NULL, 0, 0, 0, 0),
-(7, 'Гид Аллергика', 'product', '31', '{\"color\": null, \"files\": null, \"icons\": null, \"label\": 1, \"model\": null, \"price\": null, \"threed\": null, \"videos\": null, \"article\": null, \"gallery\": 1, \"options\": null, \"hashtags\": 1, \"price_old\": null, \"attributes\": null, \"categories\": null, \"main_image\": 1, \"short_desc\": 1, \"description\": 1, \"price_label\": null}', NULL, 0, 0, 0, 1);
+(7, 'Гид Аллергика', 'product', '38', '{\"color\": null, \"files\": null, \"icons\": null, \"label\": 1, \"model\": null, \"price\": null, \"threed\": null, \"videos\": null, \"article\": null, \"gallery\": 1, \"options\": null, \"hashtags\": 1, \"price_old\": null, \"attributes\": null, \"categories\": null, \"main_image\": 1, \"short_desc\": 1, \"description\": 1, \"price_label\": null}', NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -257,7 +257,8 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `catalog_id`, `title`, `seo_url`, `link_title`, `meta_keywords`, `meta_description`, `article`, `model`, `name`, `main_image`, `threed`, `gallery`, `videos`, `short_desc`, `description`, `price`, `price_old`, `price_label`, `attributes`, `label`, `option_title`, `option_color`, `option_icon`, `files`, `hashtags`, `icons`, `sort`) VALUES
 (136, 6, 'Новость 1', 'news1', 'Новость 1', NULL, NULL, NULL, NULL, 'Новость 1', NULL, NULL, NULL, NULL, 'Новость 1 краткое описание', '<p>Новость 1&nbsp; Полное описание</p>', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '[]', NULL),
-(137, 6, 'Новость 2 копия', 'news2', 'Новость 2', NULL, NULL, NULL, NULL, 'Новость 1 копия', NULL, NULL, NULL, NULL, 'Новость 2 краткое описание', '<p>Новость 2&nbsp; Полное описание</p>', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 'null', NULL, '[]', NULL);
+(137, 6, 'Новость 2 копия', 'news2', 'Новость 2', NULL, NULL, NULL, NULL, 'Новость 1 копия', NULL, NULL, NULL, NULL, 'Новость 2 краткое описание', '<p>Новость 2&nbsp; Полное описание</p>', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 'null', NULL, '[]', NULL),
+(138, 7, 'Гид аллергика запись', 'alergika1', 'Гид аллергика запись', NULL, NULL, NULL, NULL, 'Гид аллергика запись', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '[]', NULL);
 
 -- --------------------------------------------------------
 
@@ -566,7 +567,7 @@ ALTER TABLE `patterns`
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
 
 --
 -- AUTO_INCREMENT для таблицы `products_icons`

@@ -53,6 +53,7 @@ $(document).ready(function () {
       },
       1200: { slidesPerView: 1.2 },
       1440: { slidesPerView: 2 },
+      1920: { slidesPerView: 3 },
     },
   });
   var swiperSliderScreens = new Swiper('.content-main__slider .swiper-container', {
@@ -140,17 +141,15 @@ $(document).ready(function () {
       640: {
         slidesPerView: 2,
       },
-      1024: {
+      1200: {
         slidesPerView: 3,
         spaceBetween: 20,
       },
-      1440: {
+      1540: {
         slidesPerView: 4,
-        spaceBetween: 20,
       },
-      1640: {
+      1920: {
         slidesPerView: 5,
-        spaceBetween: 20,
       },
     },
   });
@@ -181,147 +180,162 @@ $(document).ready(function () {
     $('.drowdown-block__active').addClass('active');
     $('.drowdown-block__list li').removeClass('active');
     $(this).addClass('active');
+    $('.drowdown-block__list').removeClass('active');
+    $('.drowdown-block__active').removeClass('active');
   });
 
+  $(document).on('click', function (event) {
+    var $clickedElement = $(event.target);
+
+    var $dropdownList = $('.drowdown-block__list');
+    var $dropdownActive = $('.drowdown-block__active');
+
+    if (!$clickedElement.closest('.drowdown-block').length) {
+      $dropdownList.removeClass('active');
+      $dropdownActive.removeClass('active');
+    }
+  });
   $('.drowdown-block__active').on('click', function (event) {
     event.stopPropagation();
   });
   const ctx = document.getElementById('myChart');
   if (ctx) {
-    const optLine = ctx.getContext('2d');
-    const data = [
-      { x: '01/04', y: 8 },
-      { x: '01/05', y: 2 },
-      { x: '01/07', y: 5 },
-      { x: '01/08', y: 4 },
-      { x: '01/10', y: 10 },
-    ];
+    function ChartJS() {
+      const data = [
+        { x: '01/04', y: 8 },
+        { x: '01/05', y: 2 },
+        { x: '01/07', y: 5 },
+        { x: '01/08', y: 4 },
+        { x: '01/10', y: 10 },
+      ];
 
-    const annotations = [];
+      const annotations = [];
 
-    data.forEach((dataPoint, index) => {
-      const annotation = {
-        type: 'label',
-        color: '#ffffff',
-        content: ctx => {
-          const currentValueForPoint = currentValueForIndex(ctx, index);
-          return `${currentValueForPoint.toFixed(0)}`;
-        },
-        font: {
-          size: 14,
-          weight: 'bold',
-        },
-        padding: {},
-        position: {
-          x: 'center',
-          y: 'end',
-        },
-        xValue: ctx => maxLabelForIndex(ctx, index),
-        yAdjust: -6,
-        yValue: ctx => currentValueForIndex(ctx, index),
-      };
-      const annotation_line = {
-        type: 'line',
-        borderColor: '#ffffff',
-        borderDash: [3, 3],
-        borderWidth: 1,
-        xMax: index,
-        xMin: index,
-        xScaleID: 'x',
-        yMax: 0,
-        yMin: dataPoint.y,
-        yScaleID: 'y',
-      };
-      annotations.push(annotation);
-      annotations.push(annotation_line);
-    });
+      data.forEach((dataPoint, index) => {
+        const annotation = {
+          type: 'label',
+          color: '#ffffff',
+          content: ctx => {
+            const currentValueForPoint = currentValueForIndex(ctx, index);
+            return `${currentValueForPoint.toFixed(0)}`;
+          },
+          font: {
+            size: 14,
+            weight: 'bold',
+          },
+          padding: {},
+          position: {
+            x: 'center',
+            y: 'end',
+          },
+          xValue: ctx => maxLabelForIndex(ctx, index),
+          yAdjust: -6,
+          yValue: ctx => currentValueForIndex(ctx, index),
+        };
+        const annotation_line = {
+          type: 'line',
+          borderColor: '#ffffff',
+          borderDash: [3, 3],
+          borderWidth: 1,
+          xMax: index,
+          xMin: index,
+          xScaleID: 'x',
+          yMax: 0,
+          yMin: dataPoint.y,
+          yScaleID: 'y',
+        };
+        annotations.push(annotation);
+        annotations.push(annotation_line);
+      });
 
-    function currentValueForIndex(ctx, index) {
-      const dataset = ctx.chart.data.datasets[0];
-      const values = dataset.data.map(item => item.y);
-      return values[index];
-    }
-
-    function maxLabelForIndex(ctx, index) {
-      const dataset = ctx.chart.data.datasets[0];
-      const labels = dataset.data.map(item => item.x);
-      return labels[index];
-    }
-    let width, height, gradient;
-    function getGradient(ctx, chartArea) {
-      const chartWidth = chartArea.right - chartArea.left;
-      const chartHeight = chartArea.bottom - chartArea.top;
-      if (!gradient || width !== chartWidth || height !== chartHeight) {
-        // Create the gradient because this is either the first render
-        // or the size of the chart has changed
-        width = chartWidth;
-        height = chartHeight;
-        gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
-        gradient.addColorStop(0, '#70C270');
-        gradient.addColorStop(0.1, '#269ED9');
-        gradient.addColorStop(0.25, '#F5C23D');
-        gradient.addColorStop(0.5, '#F5C23D');
-        gradient.addColorStop(0.75, '#F5693D');
+      function currentValueForIndex(ctx, index) {
+        const dataset = ctx.chart.data.datasets[0];
+        const values = dataset.data.map(item => item.y);
+        return values[index];
       }
 
-      return gradient;
-    }
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        datasets: [
-          {
-            data: data,
-            borderWidth: 2,
-            borderColor: function (context) {
-              const chart = context.chart;
-              const { ctx, chartArea } = chart;
+      function maxLabelForIndex(ctx, index) {
+        const dataset = ctx.chart.data.datasets[0];
+        const labels = dataset.data.map(item => item.x);
+        return labels[index];
+      }
+      let width, height, gradient;
+      function getGradient(ctx, chartArea) {
+        const chartWidth = chartArea.right - chartArea.left;
+        const chartHeight = chartArea.bottom - chartArea.top;
+        if (!gradient || width !== chartWidth || height !== chartHeight) {
+          // Create the gradient because this is either the first render
+          // or the size of the chart has changed
+          width = chartWidth;
+          height = chartHeight;
+          gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+          gradient.addColorStop(0, '#70C270');
+          gradient.addColorStop(0.1, '#269ED9');
+          gradient.addColorStop(0.25, '#F5C23D');
+          gradient.addColorStop(0.5, '#F5C23D');
+          gradient.addColorStop(0.75, '#F5693D');
+        }
 
-              if (!chartArea) {
-                // This case happens on initial chart load
-                return;
-              }
-              return getGradient(ctx, chartArea);
+        return gradient;
+      }
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          datasets: [
+            {
+              data: data,
+              borderWidth: 2,
+              borderColor: function (context) {
+                const chart = context.chart;
+                const { ctx, chartArea } = chart;
+
+                if (!chartArea) {
+                  // This case happens on initial chart load
+                  return;
+                }
+                return getGradient(ctx, chartArea);
+              },
+            },
+          ],
+        },
+        spanGaps: true,
+        options: {
+          plugins: {
+            legend: false,
+            annotation: {
+              clip: false,
+              annotations: annotations,
             },
           },
-        ],
-      },
-      spanGaps: true,
-      options: {
-        plugins: {
-          legend: false,
-          annotation: {
-            clip: false,
-            annotations: annotations,
-          },
-        },
-        scales: {
-          x: {
-            display: true,
+          scales: {
+            x: {
+              display: true,
 
-            ticks: {
-              color: '#ffffff',
-              font: {
-                size: 12,
+              ticks: {
+                color: '#ffffff',
+                font: {
+                  size: 12,
+                },
+              },
+            },
+            y: {
+              display: false,
+              min: 0,
+              max: 16, // макс высота графика
+              ticks: {
+                stepSize: 1,
               },
             },
           },
-          y: {
-            display: false,
-            min: 0,
-            max: 16, // макс высота графика
-            ticks: {
-              stepSize: 1,
+          elements: {
+            point: {
+              pointStyle: false,
             },
           },
         },
-        elements: {
-          point: {
-            pointStyle: false,
-          },
-        },
-      },
-    });
+      });
+    }
+    ChartJS();
   }
   const player = document.querySelector('.video-player__video');
   if (player) {

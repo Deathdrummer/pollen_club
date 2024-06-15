@@ -16,22 +16,22 @@
             <div class="swiper-wrapper">
               <div class="swiper-slide">
                 <div class="photo">
-                  <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                  <img loading="lazy" src="/public/images/pollen/img/news-1.png" alt="" role="group" />
                 </div>
               </div>
               <div class="swiper-slide">
                 <div class="photo">
-                  <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                  <img loading="lazy" src="/public/images/pollen/img/news-1.png" alt="" role="group" />
                 </div>
               </div>
               <div class="swiper-slide">
                 <div class="photo">
-                  <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                  <img loading="lazy" src="/public/images/pollen/img/news-1.png" alt="" role="group" />
                 </div>
               </div>
               <div class="swiper-slide">
                 <div class="photo">
-                  <img loading="lazy" src="/public/images/pollen/img/mobile-phone 1.png" alt="" role="group" />
+                  <img loading="lazy" src="/public/images/pollen/img/news-1.png" alt="" role="group" />
                 </div>
               </div>
             </div>
@@ -40,10 +40,8 @@
         </div>
       </div>
     </div>
-    <div class="wrapper-single__search">
-      <form class="search">
-        <input type="text" placeholder="Поиск" />
-      </form>
-    </div>
+    <form class="search">
+      <input type="text" placeholder="Поиск" /><span class="search-close"></span>
+    </form>
   </div>
 </section>
