@@ -5,6 +5,7 @@
     <form class="search">
       <input type="text" placeholder="Поиск" />
       <span class="search-close"></span>
+      <div class="search-result"></div>
     </form>
   </div>
   <div class="content-news">

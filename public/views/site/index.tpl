@@ -87,7 +87,24 @@
 
     <script defer src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
-
+    {# скрипты из хостинга https://test.pollen.club/maps/map.html #}
+      {# <script src="{{ base_url('public/js/pollen/highcharts.js') }}"></script>
+      <script src="{{ base_url('public/js/pollen/exporting.js') }}"></script>
+      <script src="{{ base_url('public/js/pollen/modernizr.custom.js') }}"></script>
+      <script src="{{ base_url('public/js/pollen/jquery.cbpQTRotator.js') }}"></script> #}
+        <script>
+            function closeGoogleDialog() {
+                if ($(".dismissButton").length > 0) $(".dismissButton").click();
+                else
+                    setTimeout(closeGoogleDialog, 500);
+            }
+            closeGoogleDialog();
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@3.5.2/dist/maplibre-gl.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@3.5.2/dist/maplibre-gl.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+        <script src="{{ base_url('public/js/pollen/main.js') }}"></script>
+    {# скрипты из хостинга https://test.pollen.club/maps/map.html #}
     {# <script type="module" src="{{base_url('public/js/modelViewer.js')}}"></script> #}
     <script src="{{ base_url('public/js/swiper-bundle.min.js') }}"></script>
     {% if scripts_end %}{{ scripts_end|raw }}{% endif %}

@@ -1,5 +1,10 @@
 <section class="section single single_news">
   <div class="wrapper-single">
+    <form class="search">
+      <input type="text" placeholder="Поиск" />
+      <span class="search-close"></span>
+      <div class="search-result"></div>
+    </form>
     <div class="wrapper-single__content">
       <div class="date single_date">20/07/2022</div>
       <h1 class="content-title green">Злаки продолжают, полынь готовится</h1>
@@ -40,8 +45,5 @@
         </div>
       </div>
     </div>
-    <form class="search">
-      <input type="text" placeholder="Поиск" /><span class="search-close"></span>
-    </form>
   </div>
 </section>

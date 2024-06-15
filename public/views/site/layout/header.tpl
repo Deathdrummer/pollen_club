@@ -18,30 +18,32 @@
       </div>
     </div>
     <div class="aside-block__bottom">
-      <div class="aside-block__bottom-top">
-        <nav class="menu-nav">
-          <ul class="menu-list menu-aside">
-            {% for item in navigation.pages %}
-              <li>
-                <a class="menu-link menu-link-icon{% if item.active %}{{ ' active' }}{% endif %}" href="{{ item.href }}">
-                  <i class="grad-icon" style="mask-image: url('{{ base_url('public/filemanager/' ~ item.icon) }}')"></i>
-                  <span>{{ item.link_title }}</span>
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        </nav>
-      </div>
-      <div class="aside-block__bottom-bottom">
-        <div class="social-links">
-          <a class="social-link" href="#"><i class="grad-icon" style="mask-image: url('{{ base_url('public/images/pollen/icons/youtube.svg') }}');"></i></a>
-          <a class="social-link" href="#"><i class="grad-icon" style="mask-image: url('{{ base_url('public/images/pollen/icons/vk.svg') }}');"></i></a>
+      <div class="aside-block__bottom-wrapper">
+        <div class="aside-block__bottom-top">
+          <nav class="menu-nav">
+            <ul class="menu-list menu-aside">
+              {% for item in navigation.pages %}
+                <li>
+                  <a class="menu-link menu-link-icon{% if item.active %}{{ ' active' }}{% endif %}" href="{{ item.href }}">
+                    <i class="grad-icon" style="mask-image: url('{{ base_url('public/filemanager/' ~ item.icon) }}')"></i>
+                    <span>{{ item.link_title }}</span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </nav>
         </div>
-        <a class="menu-link policy" href="#"><span>Политика конфиденциальности</span></a>
-        <a class="menu-link mail" href="mailto:feedback@pollen.club"><span>Связаться с нами: feedback@pollen.club</span></a>
-      </div>
-      <div class="close-button menu-btn">
-        <i></i>
+        <div class="aside-block__bottom-bottom">
+          <div class="social-links">
+            <a class="social-link" href="#"><i class="grad-icon" style="mask-image: url('{{ base_url('public/images/pollen/icons/youtube.svg') }}');"></i></a>
+            <a class="social-link" href="#"><i class="grad-icon" style="mask-image: url('{{ base_url('public/images/pollen/icons/vk.svg') }}');"></i></a>
+          </div>
+          <a class="menu-link policy" href="#"><span>Политика конфиденциальности</span></a>
+          <a class="menu-link mail" href="mailto:feedback@pollen.club"><span>Связаться с нами: feedback@pollen.club</span></a>
+        </div>
+        <div class="close-button menu-btn">
+          <i></i>
+        </div>
       </div>
     </div>
   </div>

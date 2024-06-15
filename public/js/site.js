@@ -195,12 +195,59 @@ $(document).ready(function () {
       $dropdownActive.removeClass('active');
     }
   });
+
   $('.drowdown-block__active').on('click', function (event) {
     event.stopPropagation();
   });
+  // поиск
+  const search = $('.search');
+  const searchClose = $('.search-close');
+  const searchInput = $('.search input');
+
+  if (search) {
+    searchInput.on('input', function () {
+      var value = $(this).val();
+      const searchResult = $('.search-result');
+      searchClose.toggleClass('val', value.length > 0);
+      if (value.length > 0 && value.toLowerCase() === 'invalid') {
+        search.addClass('invalid');
+        searchResult.html(`
+        <ul>
+          <li>Все новости и статьи</li>
+          <li>Все новости1 и статьи</li>
+          <li>Все новости2 и статьи</li>
+        </ul>
+        `);
+      } else {
+        search.removeClass('invalid');
+      }
+      if (value.length > 0 && value.toLowerCase() === 'noinvalid') {
+        search.addClass('noinvalid');
+        searchResult.html(`
+        <ul>
+          <li>Ничего не найдено</li>
+        </ul>
+        `);
+      } else {
+        search.removeClass('noinvalid');
+      }
+      if (value.toLowerCase() !== 'noinvalid' && value.toLowerCase() !== 'invalid') {
+        searchResult.html('');
+      }
+    });
+    searchClose.on('click', function () {
+      searchInput.val('');
+      searchClose.removeClass('val');
+    });
+  }
+
   const ctx = document.getElementById('myChart');
   if (ctx) {
     function ChartJS() {
+      // макс высота графика
+      let maxLabel = 12;
+      if (window.matchMedia('(min-width: 768px)').matches) maxLabel = 16;
+
       const data = [
         { x: '01/04', y: 8 },
         { x: '01/05', y: 2 },
@@ -321,7 +368,7 @@ $(document).ready(function () {
             y: {
               display: false,
               min: 0,
-              max: 16, // макс высота графика
+              max: maxLabel, // макс высота графика
               ticks: {
                 stepSize: 1,
               },

@@ -66,6 +66,7 @@
               <div class="level-item__content">
                 <div class="level-item__prognoz">
                   <img src="{{ base_url('public/images/pollen/prognoz.svg') }}" loading="lazy" alt="" />
+                  <p class="level-item__prognoz-text green">Доступен в&nbsp;приложении</p>
                 </div>
               </div>
             </div>
@@ -205,7 +206,7 @@
         </div>
       </div>
       <div class="content-main__map">
-        <a href="/map" class="content-main__map-link">
+        <a href="/maps" class="content-main__map-link">
           <p class="content-main__map-text">
             <span class="content-main__map-text__link">Открыть карту на весь экран</span>
             <span class="content-main__map-text__icon"><img src="{{ base_url('public/images/pollen/icons/map-zoom.svg') }}" loading="lazy" alt="" /></span>
@@ -232,7 +233,8 @@
               <p class="reklama-item__text">Новейшая разработка российских ученых - средство против аллергии в мягких капсулах. Средство разработано на основе натуральных компонентов по новым технологиям.</p>
               <a href="#" class="reklama-item__link">Подробнее</a>
             </div>
-          </div> <div class="reklama-item">
+          </div>
+          <div class="reklama-item">
             <div class="photo reklama-item__photo">
               <img src="{{ base_url('public/images/pollen/reklama.png') }}" loading="lazy" alt="" />
             </div>

@@ -1,5 +1,10 @@
 <section class="section single single_article">
   <div class="wrapper-single">
+    <form class="search">
+      <input type="text" placeholder="Поиск" />
+      <span class="search-close"></span>
+      <div class="search-result"></div>
+    </form>
     <div class="wrapper-single__content">
       <div class="tags">
         <ul>
@@ -46,8 +51,5 @@
         </div>
       </div>
     </div>
-    <form class="search">
-      <input type="text" placeholder="Поиск" /><span class="search-close"></span>
-    </form>
   </div>
 </section>
