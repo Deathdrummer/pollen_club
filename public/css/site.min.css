@@ -5,27 +5,6 @@
 /* ---------- Мобильное меню ---------- */
 /* ---------- Админка ---------- */
 /* ---------- Скроллбар сайта ---------- */
-
-.test {
-  height: 100px;
-  width: 100%;
-  background: black; }
-  @media screen and (min-width: 576px) {
-    .test {
-      background: black; } }
-  @media screen and (min-width: 768px) {
-    .test {
-      background: black; } }
-  @media screen and (min-width: 992px) {
-    .test {
-      background: black; } }
-  @media screen and (min-width: 1200px) {
-    .test {
-      background: black; } }
-  @media screen and (min-width: xxl) {
-    .test {
-      background: black; } }
-
 /* Шрифты */
 @font-face {
   font-family: 'Roboto';
@@ -95,7 +74,7 @@ body {
   @media screen and (min-width: 1200px) {
     .wrapper {
       padding: 40px 40px 40px 120px; } }
-  @media screen and (min-width: 1440px) {
+  @media screen and (min-width: xxl) {
     .wrapper {
       padding: 40px 40px 40px 140px; } }
 
@@ -166,16 +145,16 @@ img {
 
 .content-main {
   display: grid; }
-  @media screen and (max-width: 1023px) {
+  @media screen and (max-width: 991px) {
     .content-main {
       grid-template-columns: 1fr; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .content-main {
       grid-template-columns: repeat(2, 1fr); } }
-  @media screen and (max-width: 1023px) {
+  @media screen and (max-width: 991px) {
     .content-main {
       gap: 40px; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .content-main {
       gap: 92px; } }
 
@@ -237,31 +216,31 @@ img {
   top: 0;
   left: 0;
   z-index: 10; }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .aside {
       height: 100vh; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .aside {
       display: -webkit-box;
       display: -webkit-flex;
       display: -moz-box;
       display: -ms-flexbox;
       display: flex; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .aside {
       -webkit-box-pack: center;
       -webkit-justify-content: center;
          -moz-box-pack: center;
           -ms-flex-pack: center;
               justify-content: center; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .aside {
       -webkit-box-align: center;
       -webkit-align-items: center;
          -moz-box-align: center;
           -ms-flex-align: center;
               align-items: center; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .aside {
       -webkit-box-orient: vertical;
       -webkit-box-direction: normal;
@@ -270,52 +249,52 @@ img {
          -moz-box-direction: normal;
           -ms-flex-direction: column;
               flex-direction: column; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .aside {
       -webkit-box-pack: justify;
       -webkit-justify-content: space-between;
          -moz-box-pack: justify;
           -ms-flex-pack: justify;
               justify-content: space-between; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .aside {
       -webkit-transition: width 0.3s ease-out 0.3s;
       transition: width 0.3s ease-out 0.3s; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .aside {
       overflow: hidden; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .aside:hover {
       width: 182px; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .aside:hover {
       -webkit-transition: all 0.3s ease-in;
       transition: all 0.3s ease-in; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .aside:hover {
       -webkit-transition: all 0.3s ease-in;
       transition: all 0.3s ease-in; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .aside:hover .logo {
       height: 65px; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .aside:hover .aside-block__bottom {
       -webkit-box-align: start;
       -webkit-align-items: flex-start;
          -moz-box-align: start;
           -ms-flex-align: start;
               align-items: flex-start; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .aside:hover .menu-link span {
       width: 90px; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .aside:hover .menu-link span {
       -webkit-transition: "width 0.3s linear 0.7s,\a             padding-left 0.7s linear 0.5s,\a             opacity 0.3s linear 0.7s";
       transition: "width 0.3s linear 0.7s,\a             padding-left 0.7s linear 0.5s,\a             opacity 0.3s linear 0.7s"; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .aside:hover .menu-link span {
       padding-left: 12px; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .aside:hover .menu-link span {
       opacity: 1; } }
   .aside:hover .menu-link.policy span {
@@ -424,11 +403,11 @@ img {
       -ms-flex-direction: column;
           flex-direction: column; }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 991px) {
   .menu-aside .menu-link span {
     color: #081530; } }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 992px) {
   .menu-aside .menu-link span {
     color: #f5fafe; } }
 
@@ -450,11 +429,11 @@ img {
     color: #f5fafe;
     font-weight: 400; }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 991px) {
   .menu-link-icon:hover .grad-icon {
     background: #f5fafe; } }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 992px) {
   .menu-link-icon:hover .grad-icon {
     background: radial-gradient(317.37% 116.72% at 100% 87.5%, #70c270 0%, #269ed9 100%); } }
 
@@ -462,10 +441,10 @@ img {
   width: 24px;
   height: 24px;
   display: block; }
-  @media screen and (max-width: 1023px) {
+  @media screen and (max-width: 991px) {
     .menu-link-icon .grad-icon {
       background: #081530; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 992px) {
     .menu-link-icon .grad-icon {
       background: #f5fafe; } }
 
@@ -1124,4 +1103,3 @@ img {
     gap: 10px; }
   .menu-nav .menu-link {
     padding: 0 10px; } }
->>>>>>> 38ba4b5cc394c18d359e002e27c2209613b309c9

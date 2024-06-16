@@ -279,7 +279,7 @@ class Site extends MY_Controller {
 				'footer' 			=> $pageData['footer'],
 				'nav_mobile'		=> $pageData['nav_mobile'],
 				'scrolltop'			=> '#arrow',
-				'count_per_page'	=> $settings['count_products'],
+				'count_per_page'	=> $settings['count_products'] ?? 0,
 				'hosting'			=> isHosting()
 			];
 			
@@ -334,12 +334,12 @@ class Site extends MY_Controller {
 	 * @param 
 	 * @return 
 	*/
-	/*public function get_product() {
-		if ($this->input->is_ajax_request()) return false;
-		$post = $this->input->post();
+	public function get_product() {
+		//if ($this->input->is_ajax_request()) return false;
+		//$post = $this->input->post();
 		toLog('views/'.$this->controllerName.'/render/product.tpl');
 		//echo $this->twig->render('views/'.$this->controllerName.'/render/product.tpl', $post);
-	}*/
+	}
 	
 	
 	
