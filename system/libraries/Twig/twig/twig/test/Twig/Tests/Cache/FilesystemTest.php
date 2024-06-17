@@ -160,7 +160,7 @@ class Twig_Tests_Cache_FilesystemTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Test file cache is tolerant towards trailing (back)slashes on the configured cache directory.
+     * Ajax file cache is tolerant towards trailing (back)slashes on the configured cache directory.
      *
      * @dataProvider provideDirectories
      */

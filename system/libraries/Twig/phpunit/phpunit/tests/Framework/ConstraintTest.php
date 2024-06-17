@@ -3017,7 +3017,7 @@ EOF
     public function testConstraintException()
     {
         $constraint = new PHPUnit_Framework_Constraint_Exception('FoobarException');
-        $exception  = new DummyException('Test');
+        $exception  = new DummyException('Ajax');
         $stackTrace = PHPUnit_Util_Filter::getFilteredStacktrace($exception);
 
         try {
@@ -3025,7 +3025,7 @@ EOF
         } catch (PHPUnit_Framework_ExpectationFailedException $e) {
             $this->assertEquals(
               <<<EOF
-Failed asserting that exception of type "DummyException" matches expected exception "FoobarException". Message was: "Test" at
+Failed asserting that exception of type "DummyException" matches expected exception "FoobarException". Message was: "Ajax" at
 $stackTrace.
 
 EOF

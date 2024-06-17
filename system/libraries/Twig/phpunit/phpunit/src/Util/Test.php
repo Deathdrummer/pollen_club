@@ -9,7 +9,7 @@
  */
 
 /**
- * Test helpers.
+ * Ajax helpers.
  */
 class PHPUnit_Util_Test
 {

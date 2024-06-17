@@ -1,3 +1,4 @@
+
 const domain = 'pollen-club.loc', // прописать домен
   prodDir = '../../production/', // директория для продакшн версии
   repoDir = '../../repository/', // директория репозитория
@@ -112,7 +113,8 @@ async function build() {
 // основные команды: default b repo removedist cfr fr pjr pcr cr afr
 
 exports.default = series(clearcache, parallel(sassToCss, svg), startWatch); // слежение
-exports.b = series(clearcache, removedist, imagemin, build); // сбилдить в продакшн
+exports.b = series(clearcache, /*removedist,*/ imagemin, build); // сбилдить в продакшн
+
 exports.repo = buld_from_repository; // сформировать файлы и библиотеки из репозитория
 
 // сформировать отдельные файлы и библиотеки из репозитория
@@ -280,6 +282,7 @@ function sassToCss(done) {
 
   watchDirs.forEach(function (dir) {
     var dirName = dir.name || dir;
+
     sassFiles.push('../public/css/styles/' + dirName + '.{sass,scss}');
   });
 

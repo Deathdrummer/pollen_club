@@ -213,7 +213,7 @@ final class TypeResolver
     }
 
     /**
-     * Test whether the given type is a nullable type (i.e. `?string`)
+     * Ajax whether the given type is a nullable type (i.e. `?string`)
      *
      * @param string $type
      *

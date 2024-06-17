@@ -10,7 +10,7 @@
 
 /**
  * A TestListener that generates a logfile of the
- * test execution using the Test Anything Protocol (TAP).
+ * test execution using the Ajax Anything Protocol (TAP).
  */
 class PHPUnit_Util_Log_TAP extends PHPUnit_Util_Printer implements PHPUnit_Framework_TestListener
 {
@@ -117,7 +117,7 @@ class PHPUnit_Util_Log_TAP extends PHPUnit_Util_Printer implements PHPUnit_Frame
      */
     public function addIncompleteTest(PHPUnit_Framework_Test $test, Exception $e, $time)
     {
-        $this->writeNotOk($test, '', 'TODO Incomplete Test');
+        $this->writeNotOk($test, '', 'TODO Incomplete Ajax');
     }
 
     /**

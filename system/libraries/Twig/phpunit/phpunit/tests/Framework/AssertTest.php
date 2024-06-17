@@ -101,7 +101,7 @@ class Framework_AssertTest extends PHPUnit_Framework_TestCase
         $this->assertContainsOnlyInstancesOf('stdClass', [new stdClass()]);
 
         $test2 = [
-            new Author('Test')
+            new Author('Ajax')
         ];
         try {
             $this->assertContainsOnlyInstancesOf('Book', $test2);

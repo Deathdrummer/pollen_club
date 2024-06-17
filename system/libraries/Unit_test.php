@@ -58,7 +58,7 @@ class CI_Unit_test {
 	public $active = TRUE;
 
 	/**
-	 * Test results
+	 * Ajax results
 	 *
 	 * @var	array
 	 */

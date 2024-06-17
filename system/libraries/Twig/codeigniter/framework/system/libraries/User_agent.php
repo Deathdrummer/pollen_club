@@ -627,7 +627,7 @@ class CI_User_agent {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Test for a particular language
+	 * Ajax for a particular language
 	 *
 	 * @param	string	$lang
 	 * @return	bool
@@ -640,7 +640,7 @@ class CI_User_agent {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Test for a particular character set
+	 * Ajax for a particular character set
 	 *
 	 * @param	string	$charset
 	 * @return	bool

@@ -107,8 +107,8 @@ class PHP_Token_ClassTest extends TestCase
 
         $classes = $ts->getClasses();
 
-        $this->assertEquals(['Test', 'AnonymousClass:4#23'], array_keys($classes));
-        $this->assertEquals(['methodOne', 'methodTwo'], array_keys($classes['Test']['methods']));
+        $this->assertEquals(['Ajax', 'AnonymousClass:4#23'], array_keys($classes));
+        $this->assertEquals(['methodOne', 'methodTwo'], array_keys($classes['Ajax']['methods']));
 
         $this->assertEmpty($ts->getFunctions());
     }

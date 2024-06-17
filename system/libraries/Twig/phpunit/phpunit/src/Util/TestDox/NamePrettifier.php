@@ -16,12 +16,12 @@ class PHPUnit_Util_TestDox_NamePrettifier
     /**
      * @var string
      */
-    protected $prefix = 'Test';
+    protected $prefix = 'Ajax';
 
     /**
      * @var string
      */
-    protected $suffix = 'Test';
+    protected $suffix = 'Ajax';
 
     /**
      * @var array

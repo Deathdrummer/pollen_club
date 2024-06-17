@@ -1,10 +1,9 @@
 <? defined('BASEPATH') OR exit('Доступ к скрипту запрещен');
 
-
-
 $config['base_url'] = 'http://pollen-club.loc';
+
 $config['settings_table'] = 'settings';
-$config['noroutes_controllers'] = ['test'];
+$config['noroutes_controllers'] = ['ajax'];
 
 $config['db_name'] = 'pollen_club';
 $config['db_user'] = 'root';

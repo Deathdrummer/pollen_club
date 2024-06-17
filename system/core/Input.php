@@ -885,7 +885,7 @@ class CI_Input {
 	/**
 	 * Is AJAX request?
 	 *
-	 * Test to see if a request contains the HTTP_X_REQUESTED_WITH header.
+	 * Ajax to see if a request contains the HTTP_X_REQUESTED_WITH header.
 	 *
 	 * @return 	bool
 	 */
@@ -899,7 +899,7 @@ class CI_Input {
 	/**
 	 * Is CLI request?
 	 *
-	 * Test to see if a request was made from the command line.
+	 * Ajax to see if a request was made from the command line.
 	 *
 	 * @deprecated	3.0.0	Use is_cli() instead
 	 * @return	bool

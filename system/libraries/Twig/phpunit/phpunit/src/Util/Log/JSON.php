@@ -101,7 +101,7 @@ class PHPUnit_Util_Log_JSON extends PHPUnit_Util_Printer implements PHPUnit_Fram
             'error',
             $time,
             PHPUnit_Util_Filter::getFilteredStacktrace($e, false),
-            'Incomplete Test: ' . $e->getMessage(),
+            'Incomplete Ajax: ' . $e->getMessage(),
             $test
         );
 
@@ -121,7 +121,7 @@ class PHPUnit_Util_Log_JSON extends PHPUnit_Util_Printer implements PHPUnit_Fram
             'error',
             $time,
             PHPUnit_Util_Filter::getFilteredStacktrace($e, false),
-            'Risky Test: ' . $e->getMessage(),
+            'Risky Ajax: ' . $e->getMessage(),
             $test
         );
 
@@ -141,7 +141,7 @@ class PHPUnit_Util_Log_JSON extends PHPUnit_Util_Printer implements PHPUnit_Fram
             'error',
             $time,
             PHPUnit_Util_Filter::getFilteredStacktrace($e, false),
-            'Skipped Test: ' . $e->getMessage(),
+            'Skipped Ajax: ' . $e->getMessage(),
             $test
         );
 

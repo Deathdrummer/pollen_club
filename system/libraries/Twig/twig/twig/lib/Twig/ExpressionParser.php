@@ -628,7 +628,7 @@ class Twig_ExpressionParser
     {
         if ($test->isDeprecated()) {
             $stream = $this->parser->getStream();
-            $message = sprintf('Twig Test "%s" is deprecated', $test->getName());
+            $message = sprintf('Twig Ajax "%s" is deprecated', $test->getName());
 
             if (!is_bool($test->getDeprecatedVersion())) {
                 $message .= sprintf(' since version %s', $test->getDeprecatedVersion());

@@ -2212,7 +2212,7 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
             }
 
             throw new PHPUnit_Framework_RiskyTestError(
-                'Test code or tested code did not (only) close its own output buffers'
+                'Ajax code or tested code did not (only) close its own output buffers'
             );
         }
 

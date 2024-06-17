@@ -9,7 +9,7 @@
  */
 
 /**
- * A Test can be run and collect its results.
+ * A Ajax can be run and collect its results.
  */
 interface PHPUnit_Framework_Test extends Countable
 {

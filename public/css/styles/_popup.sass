@@ -1,0 +1,342 @@
+//----------------------------------------------------------- ddrpopup
+@keyframes ddrPopUpIn
+	from
+		background-color: transparent
+	to
+		background-color: rgba(#364D63, 0.3)
+
+@keyframes ddrPopUpOut
+	from
+		background-color: rgba(#364D63, 0.3)
+	to
+		background-color: transparent
+
+
+
+.ddrpopup
+	+scrollbar(#283442, #cad6e4, 8px)
+
+	&_opening
+		animation: ddrPopUpIn 0.2s
+		animation-fill-mode: forwards
+
+	&_closing
+		animation: ddrPopUpOut 0.2s
+		animation-fill-mode: forwards
+
+	&__container
+		padding-top: 15px
+		padding-bottom: 15px
+
+	&__win
+		box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 5px 0 rgba(0, 0, 0, 0.05), 0 2px 9px 0 rgba(0, 0, 0, 0.06), 0 3px 16px 0 rgba(0, 0, 0, 0.07), 0 6px 30px 0 rgba(0, 0, 0, 0.09)
+		background-color: #f5fafe
+		border-radius: 5px
+		overflow: hidden
+	  padding: 20px
+    padding-right: 70px
+		//transform: scale(5)
+		transform: scale(0.8)
+		//transform: translateY(-100vh)
+
+		&_modelview
+			padding: 0px
+
+		&_cardimage
+			padding: 0px
+			//background: transparent
+
+			.ddrpopup__header
+				position: absolute
+				top: 0
+				left: 0
+				width: 100%
+
+			.ddrpopup__content
+				padding: 0
+				display: flex
+
+				img
+					object-fit: cover!important
+
+
+
+			.ddrpopup__close
+				&::before, &::after
+					background-color: #ddd!important
+				&:hover
+					&::before, &::after
+						background-color: #fff!important
+
+			.ddrpopup__footer
+				display: none
+
+
+		&_modelview
+			.ddrpopup__footer
+				display: none
+
+
+
+		&_callback
+			+resp(padding-left, (sm: 10px, md: 15px, lg: 20px), (padding-right: 0))
+			+resp(padding-top, (sm: 10px, md: 15px, lg: 20px), (padding-bottom: 0))
+
+		&_opening
+			transform: scale(1)
+			//transform: translateY(0)
+
+		&_closing
+			transform: scale(1.2)
+			//transform: scale(0)
+			//opacity: 0
+			//transform: translateY(-100vh)
+
+
+	&__header
+		background-color: transparent
+		position: relative
+		padding-left: 10px
+		padding-right: 40px
+		padding-top: 5px
+		padding-bottom: 5px
+		min-height: 40px
+		justify-content: flex-start
+
+	&__title
+		color: #444
+		+font($fontFamily, bold)
+
+		&_1
+			+resp(font-size, (xs: 28px, sm: 34px, md: 38px, lg: 40px, xl: 42px), (line-height: 2))
+		&_2
+			+resp(font-size, (xs: 24px, sm: 26px, md: 28px, lg: 34px, xl: 38px), (line-height: 2))
+		&_3
+			+resp(font-size, (xs: 20px, sm: 24px, md: 28px, lg: 30px, xl: 32px), (line-height: 2))
+		&_4
+			+resp(font-size, (xs: 18px, sm: 20px, md: 22px, lg: 24px, xl: 28px), (line-height: 2))
+		&_5
+			+resp(font-size, (xs: 16px, sm: 18px, md: 20px, lg: 22px, xl: 24px), (line-height: 2))
+
+	&__close
+		//background-color: #dc5656
+		top: calc(50% - 13px)
+
+		&::before, &::after
+			height: 3px
+			background-color: #ddd
+			border-radius: 2px
+
+		&::before
+			top: calc(50% - 1.5px)
+
+		&::after
+			top: calc(50% - 1.5px)
+
+		&:hover
+			&::before, &::after
+				background-color: $fontColor
+
+
+	&__content
+		padding: 10px
+
+		p.dialog
+			+font($fontFamily, bold)
+			text-align: center
+
+			&_remove
+				color: #e05353
+
+
+	&__footer
+		padding: 10px
+
+	&__buttons
+		display: flex
+
+		&_left
+			justify-content: flex-start
+
+			button
+				margin-right: 20px !important
+
+		&_right
+			justify-content: flex-end
+
+			button
+				margin-left: 20px !important
+
+		&_center
+			justify-content: center
+
+			button
+				margin-left: 5px
+				margin-right: 5px
+
+		&_between
+			justify-content: space-between
+
+			button
+				margin-left: 0px !important
+				margin-right: 0px !important
+
+
+
+		&_main, &_close
+			width: calc(50% - 15px)
+			height: 50px
+			border-radius: 1px
+			padding-left: 15px
+			padding-right: 15px
+			font-size: 16px
+			+font($fontFamily, regular)
+			transition: background-color 0.16s
+
+		&_main
+			background-color: #ab2d77
+			box-shadow: 0px 20px 25px rgba(0, 0, 0, 0.25)
+			color: #fff
+
+			&:hover
+				background-color: darken(#ab2d77, 10%)
+
+			&:active
+				background-color: darken(#ab2d77, 20%)
+				box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.25)
+				transition: background-color 0s
+
+			&[disabled]
+				cursor: default
+				pointer-events: none
+				background-color: #b3b3b3
+
+		&_close
+			border: 1px solid #444
+			background-color: #fff
+			transition: border-color 0.16s
+
+			&:hover
+				//border-color: #ab2d77
+
+			&:active
+				border-color: #000
+				transition: color 0s
+
+			&:hover
+				span
+					color: #ab2d77
+
+
+			&:hover
+				//background-color: darken(#e05252, 10%)
+
+			&:active
+				//background-color: darken(#e05252, 30%)
+				transition: background-color 0s
+
+
+	&__wait
+		background-color: rgba(255, 255, 255, 0.74)
+
+		.ddrpopupwait
+			i
+				color: #335c8c
+				font-size: 50px
+
+			p
+				color: #335c8c
+				font-size: 14px
+
+
+	&__dialog
+		background-color: rgba(48, 62, 74, 0.45)
+
+		.popupdialog
+			background-color: #fff
+			padding: 10px
+			box-shadow: 0 8px 30px -12px rgba(0, 0, 0, 0.66)
+
+			&__message
+				+font($fontFamily, bold)
+
+				.remove
+					color: #e05353
+
+			&__buttons
+				margin-top: 15px
+				text-align: right
+
+				button
+					margin: 0
+					height: 24px
+					border-radius: 3px
+					padding-left: 10px
+					padding-right: 10px
+					font-size: 13px
+					transition: background-color 0.16s
+
+					+ button
+						margin-left: 8px
+
+
+					&:not(.cancel)
+						background-color: #e05353
+						color: #fff
+
+						&:hover
+							background-color: darken(#e05353, 10%)
+
+						&:active
+							background-color: darken(#e05353, 30%)
+							transition: background-color 0s
+
+					&.cancel
+						background-color: #658ea2
+						color: #fff
+
+						&:hover
+							background-color: darken(#658ea2, 10%)
+
+						&:active
+							background-color: darken(#658ea2, 30%)
+							transition: background-color 0s
+
+
+
+	//------------------------------------- форма обратной связи
+	&__form
+		margin-bottom: 30px
+
+	&__formitem
+		position: relative
+
+		+ .ddrpopup__formitem
+			margin-top: 30px
+
+		p
+			font-size: 16px
+			+font($fontFamily, regular)
+			margin-bottom: 3px
+
+		input
+			height: 40px
+			border: none
+			border-bottom: 2px solid #333
+			width: 100%
+			touch-callout: none
+
+			&:focus
+
+			&.error
+				background: none !important
+
+				~ .animinpit__placeholder
+					color: #f00 !important
+
+		span.error
+			font-size: 12px
+			position: absolute
+			bottom: -14px
+			left: 0
+			width: 100%

@@ -879,7 +879,7 @@ class PHPUnit_Framework_TestResult implements Countable
                 $this->addFailure(
                     $test,
                     new PHPUnit_Framework_RiskyTestError(
-                        'Test method is annotated with @todo'
+                        'Ajax method is annotated with @todo'
                     ),
                     $time
                 );

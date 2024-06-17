@@ -313,6 +313,48 @@ class MY_Controller extends CI_Controller {
 
 
 
+
+        $this->twig->addFilter('randomaddinarray', function($arr = false, $item = false) {
+            if (!$arr || !$item) return false;
+            $randomPosition = rand(0, count($arr));
+            array_splice($arr, $randomPosition, 0, $item);
+        });
+
+
+        $this->twig->addFilter('arrgetbyfield', function($arr = false, $field = false, $value = false) {
+            if (!$arr || !$field || !$value) return false;
+            $index = arrGetIndexFromField($arr, $field, $value);
+
+            return $arr[$index];
+        });
+
+
+        $this->twig->addFilter('arrcombine', function($array1 = null, $array2 = null, $count = null) {
+            $result = [];
+            $array1Count = count($array1);
+
+            // Add elements from the first array
+            for ($i = 0; $i < min($count, $array1Count); $i++) {
+                $result[] = $array1[$i];
+            }
+
+            // If not enough elements in the first array, add from the second array
+            for ($i = 0; $i < $count - $array1Count; $i++) {
+                if (isset($array2[$i])) {
+                    $result[] = $array2[$i];
+                } else {
+                    break; // Exit loop if second array has fewer elements than needed
+                }
+            }
+
+            return $result;
+        });
+
+
+
+
+
+
 		//------------------------------------------------ к фильтру recursive
 		function _recur($iter, $i, $chFd, $wtgs, $lim) {
 			static $level = 0;

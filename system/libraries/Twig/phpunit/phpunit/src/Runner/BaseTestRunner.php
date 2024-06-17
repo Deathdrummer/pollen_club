@@ -33,7 +33,7 @@ abstract class PHPUnit_Runner_BaseTestRunner
     }
 
     /**
-     * Returns the Test corresponding to the given suite.
+     * Returns the Ajax corresponding to the given suite.
      * This is a template method, subclasses override
      * the runFailed() and clearStatus() methods.
      *

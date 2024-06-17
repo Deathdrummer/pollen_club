@@ -675,7 +675,7 @@ class PHPUnit_TextUI_Command
         }
 
         if (!isset($this->arguments['testSuffixes'])) {
-            $this->arguments['testSuffixes'] = ['Test.php', '.phpt'];
+            $this->arguments['testSuffixes'] = ['Ajax.php', '.phpt'];
         }
 
         if (isset($includePath)) {
@@ -1054,7 +1054,7 @@ Logging Options:
   --testdox-xml <file>      Write agile documentation in XML format to file.
   --reverse-list            Print defects in reverse order
 
-Test Selection Options:
+Ajax Selection Options:
 
   --filter <pattern>        Filter which tests to run.
   --testsuite <name>        Filter which testsuite to run.
@@ -1063,9 +1063,9 @@ Test Selection Options:
   --list-groups             List available test groups.
   --list-suites             List available test suites.
   --test-suffix ...         Only search for test in files with specified
-                            suffix(es). Default: Test.php,.phpt
+                            suffix(es). Default: Ajax.php,.phpt
 
-Test Execution Options:
+Ajax Execution Options:
 
   --report-useless-tests    Be strict about tests that do not test anything.
   --strict-coverage         Be strict about @covers annotation usage.

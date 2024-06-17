@@ -21,7 +21,7 @@ class PHPUnit_Util_TestDox_ResultPrinter_HTML extends PHPUnit_Util_TestDox_Resul
 <html lang="en">
     <head>
         <meta charset="utf-8"/>
-        <title>Test Documentation</title>
+        <title>Ajax Documentation</title>
         <style>
             body {
                 text-rendering: optimizeLegibility;

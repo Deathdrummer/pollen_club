@@ -468,7 +468,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
                     );
                 } catch (PHPUnit_Framework_IncompleteTestError $e) {
                     $message = sprintf(
-                        'Test for %s::%s marked incomplete by data provider',
+                        'Ajax for %s::%s marked incomplete by data provider',
                         $className,
                         $name
                     );
@@ -482,7 +482,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
                     $data = self::incompleteTest($className, $name, $message);
                 } catch (PHPUnit_Framework_SkippedTestError $e) {
                     $message = sprintf(
-                        'Test for %s::%s skipped by data provider',
+                        'Ajax for %s::%s skipped by data provider',
                         $className,
                         $name
                     );
@@ -516,7 +516,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
                     $data = self::warning($message);
                 }
 
-                // Test method with @dataProvider.
+                // Ajax method with @dataProvider.
                 if (isset($data)) {
                     $test = new PHPUnit_Framework_TestSuite_DataProvider(
                         $className . '::' . $name
@@ -847,7 +847,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
             $this->addTest(
                 self::warning(
                     sprintf(
-                        'Test method "%s" in test class "%s" is not public.',
+                        'Ajax method "%s" in test class "%s" is not public.',
                         $name,
                         $class->getName()
                     )

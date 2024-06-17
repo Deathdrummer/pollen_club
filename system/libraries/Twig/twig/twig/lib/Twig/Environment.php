@@ -789,7 +789,7 @@ class Twig_Environment
     }
 
     /**
-     * Registers a Test.
+     * Registers a Ajax.
      *
      * @param Twig_Test $test A Twig_Test instance
      */

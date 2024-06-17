@@ -102,7 +102,7 @@ class CodeCoverage
     private $disableIgnoredLines = false;
 
     /**
-     * Test data.
+     * Ajax data.
      *
      * @var array
      */

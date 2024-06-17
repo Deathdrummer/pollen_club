@@ -79,7 +79,7 @@ final class Twig_Extension_Staging extends Twig_Extension
     public function addTest(Twig_Test $test)
     {
         if (isset($this->tests[$test->getName()])) {
-            throw new LogicException(sprintf('Test "%s" is already registered.', $test->getTag()));
+            throw new LogicException(sprintf('Ajax "%s" is already registered.', $test->getTag()));
         }
 
         $this->tests[$test->getName()] = $test;

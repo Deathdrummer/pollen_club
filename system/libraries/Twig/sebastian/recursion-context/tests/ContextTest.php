@@ -45,7 +45,7 @@ class ContextTest extends PHPUnit_Framework_TestCase
         $obj2      = new \stdClass();
         $obj2->foo = 'bar';
 
-        $obj3 = (object) array(1,2,"Test\r\n",4,5,6,7,8);
+        $obj3 = (object) array(1,2,"Ajax\r\n",4,5,6,7,8);
 
         $obj = new \stdClass();
         //@codingStandardsIgnoreStart
@@ -114,7 +114,7 @@ class ContextTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals($key, $this->context->add($value));
 
-        // Test we get the same key on subsequent adds
+        // Ajax we get the same key on subsequent adds
         $this->assertEquals($key, $this->context->add($value));
     }
 
@@ -129,7 +129,7 @@ class ContextTest extends PHPUnit_Framework_TestCase
         $this->context->add($value);
         $this->assertEquals($key, $this->context->contains($value));
 
-        // Test we get the same key on subsequent calls
+        // Ajax we get the same key on subsequent calls
         $this->assertEquals($key, $this->context->contains($value));
     }
 

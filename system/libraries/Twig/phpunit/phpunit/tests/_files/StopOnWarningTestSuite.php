@@ -3,7 +3,7 @@ class StopOnWarningTestSuite
 {
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Test Warnings');
+        $suite = new PHPUnit_Framework_TestSuite('Ajax Warnings');
 
         $suite->addTestSuite('NoTestCases');
         $suite->addTestSuite('CoverageClassTest');

@@ -167,7 +167,7 @@ class PHPUnit_Util_Log_JUnit extends PHPUnit_Util_Printer implements PHPUnit_Fra
             $error = $this->document->createElement(
                 'error',
                 PHPUnit_Util_XML::prepareString(
-                    "Incomplete Test\n" .
+                    "Incomplete Ajax\n" .
                     PHPUnit_Util_Filter::getFilteredStacktrace($e)
                 )
             );
@@ -195,7 +195,7 @@ class PHPUnit_Util_Log_JUnit extends PHPUnit_Util_Printer implements PHPUnit_Fra
             $error = $this->document->createElement(
                 'error',
                 PHPUnit_Util_XML::prepareString(
-                    "Risky Test\n" .
+                    "Risky Ajax\n" .
                     PHPUnit_Util_Filter::getFilteredStacktrace($e)
                 )
             );
@@ -223,7 +223,7 @@ class PHPUnit_Util_Log_JUnit extends PHPUnit_Util_Printer implements PHPUnit_Fra
             $error = $this->document->createElement(
                 'error',
                 PHPUnit_Util_XML::prepareString(
-                    "Skipped Test\n" .
+                    "Skipped Ajax\n" .
                     PHPUnit_Util_Filter::getFilteredStacktrace($e)
                 )
             );

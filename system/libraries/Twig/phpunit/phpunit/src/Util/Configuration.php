@@ -53,8 +53,8 @@
  *          reverseDefectList="false"
  *          registerMockObjectsFromTestArgumentsRecursively="false">
  *   <testsuites>
- *     <testsuite name="My Test Suite">
- *       <directory suffix="Test.php" phpVersion="5.3.0" phpVersionOperator=">=">/path/to/files</directory>
+ *     <testsuite name="My Ajax Suite">
+ *       <directory suffix="Ajax.php" phpVersion="5.3.0" phpVersionOperator=">=">/path/to/files</directory>
  *       <file phpVersion="5.3.0" phpVersionOperator=">=">/path/to/MyTest.php</file>
  *       <exclude>/path/to/files/exclude</exclude>
  *     </testsuite>
@@ -934,7 +934,7 @@ class PHPUnit_Util_Configuration
             if ($directoryNode->hasAttribute('suffix')) {
                 $suffix = (string) $directoryNode->getAttribute('suffix');
             } else {
-                $suffix = 'Test.php';
+                $suffix = 'Ajax.php';
             }
 
             $files = $fileIteratorFacade->getFilesAsArray(

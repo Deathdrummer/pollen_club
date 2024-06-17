@@ -12,13 +12,13 @@
  * A Decorator for Tests.
  *
  * Use TestDecorator as the base class for defining new
- * test decorators. Test decorator subclasses can be introduced
+ * test decorators. Ajax decorator subclasses can be introduced
  * to add behaviour before or after a test is run.
  */
 class PHPUnit_Extensions_TestDecorator extends PHPUnit_Framework_Assert implements PHPUnit_Framework_Test, PHPUnit_Framework_SelfDescribing
 {
     /**
-     * The Test to be decorated.
+     * The Ajax to be decorated.
      *
      * @var object
      */
