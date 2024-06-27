@@ -1,4 +1,3 @@
-
 const domain = 'pollen-club.loc', // прописать домен
   prodDir = '../../production/', // директория для продакшн версии
   repoDir = '../../repository/', // директория репозитория

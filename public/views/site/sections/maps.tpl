@@ -70,36 +70,20 @@
   </div>
   <div class="content__map">
     <div class="content__reklama content-main__reklama">
-      <div class="reklama-item">
-        <div class="photo reklama-item__photo">
-          <img src="{{ base_url('public/images/pollen/reklama.png') }}" loading="lazy" alt="" />
-        </div>
-        <div class="reklama-item__content">
-          <h3 class="reklama-item__title">Безопасное средство от аллергии!</h3>
-          <p class="reklama-item__text">Новейшая разработка российских ученых - средство против аллергии в мягких капсулах. Средство разработано на основе натуральных компонентов по новым технологиям.</p>
-          <a href="#" class="reklama-item__link">Подробнее</a>
-        </div>
-      </div>
-      <div class="reklama-item">
-        <div class="photo reklama-item__photo">
-          <img src="{{ base_url('public/images/pollen/reklama.png') }}" loading="lazy" alt="" />
-        </div>
-        <div class="reklama-item__content">
-          <h3 class="reklama-item__title">Безопасное средство от аллергии!</h3>
-          <p class="reklama-item__text">Новейшая разработка российских ученых - средство против аллергии в мягких капсулах. Средство разработано на основе натуральных компонентов по новым технологиям.</p>
-          <a href="#" class="reklama-item__link">Подробнее</a>
-        </div>
-      </div>
-      <div class="reklama-item">
-        <div class="photo reklama-item__photo">
-          <img src="{{ base_url('public/images/pollen/reklama.png') }}" loading="lazy" alt="" />
-        </div>
-        <div class="reklama-item__content">
-          <h3 class="reklama-item__title">Безопасное средство от аллергии!</h3>
-          <p class="reklama-item__text">Новейшая разработка российских ученых - средство против аллергии в мягких капсулах. Средство разработано на основе натуральных компонентов по новым технологиям.</p>
-          <a href="#" class="reklama-item__link">Подробнее</a>
-        </div>
-      </div>
+      {% if reklama_map %}
+        {% for item in reklama_map %}
+          <div class="reklama-item">
+            <div class="photo reklama-item__photo">
+              <img src="{{ base_url('public/filemanager/' ~ item.img) }}" loading="lazy" alt="" />
+            </div>
+            <div class="reklama-item__content">
+              <h3 class="reklama-item__title">{{ item.title }}</h3>
+              <p class="reklama-item__text">{{ item.text }}</p>
+              <a href="{{ item.link }}" class="reklama-item__link">{{ item.text_link }}</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
     </div>
   </div>
 </section>
