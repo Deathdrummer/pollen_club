@@ -436,15 +436,24 @@ class Products_model extends MY_Model {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	/**
+
+
+
+
+    public function search($field = null, $value = null, $returnFields = null) {
+        if (!$field || !$value) return false;
+        if ($returnFields) $this->db->select($returnFields);
+        $this->db->like($field, $value, 'both');
+        return $this->_result('products') ?: [];
+    }
+
+
+
+
+
+
+
+    /**
 	 * Сохранить товар
 	 * @param 
 	 * @return 

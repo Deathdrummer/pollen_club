@@ -866,10 +866,7 @@ class Admin extends MY_Controller {
 				$itemData['access'] = $this->catalogsmodel->getFields($post['catalog_id']);
 				$itemData['currency'] = $this->settings->getSettings('currency');
 				$itemData['icons_list'] = $this->productsmodel->iconsGet();
-				
-				
-				
-				
+
 				$this->load->model('categories_model', 'categoriesmodel');
 				if (isset($itemData['prod_categories']) && $itemData['prod_categories']) {
 					

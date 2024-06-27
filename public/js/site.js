@@ -199,6 +199,41 @@ $(document).ready(function () {
   $('.drowdown-block__active').on('click', function (event) {
     event.stopPropagation();
   });
+
+
+
+
+  $.ajax({
+    type: 'GET',
+    url: '/ajax/get_all_hashtags',
+    dataType: 'json',
+    data: {
+      /*url: 'https://test.pollen.club/maps/pollen_type.php',
+      params: {
+        type: 1
+      }*/
+      //field: 'title',
+      //value: 'За 2 дня до начала',
+      //returnFields: ['title', 'seo_url']
+    },
+    beforeSend: function() {
+
+    },
+    success: function(r) {
+      console.log(r)
+    },
+    error: function(e, status) {
+      console.log(e, status)
+    },
+    complete: function() {
+      console.log('complete')
+    }
+  });
+
+
+
+
+
   // поиск
   const search = $('.search');
   const searchClose = $('.search-close');
