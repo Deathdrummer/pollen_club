@@ -40,7 +40,7 @@
     <div class="story">{{ text_allergika|raw }}</div>
     <div class="tags tabs">
       <ul>
-        <li class="active">Статьи</li>
+        <li class="active">Все статьи</li>
       </ul>
     </div>
     <div class="content-alergika__cards-allergika">
@@ -50,7 +50,7 @@
             <div class="card-allergika__tags tags">
               <ul>
                 {% for tag in item.hashtags %}
-                  <li class="{{ tag.name }}">{{ tag }}</li>
+                  <li style="color: {{ hashtags_list[tag][0]['color_text'] }}; background-color: {{ hashtags_list[tag][0]['color_bcg'] }}">{{ tag }}</li>
                 {% endfor %}
               </ul>
             </div>

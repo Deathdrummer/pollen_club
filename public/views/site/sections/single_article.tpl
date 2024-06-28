@@ -10,7 +10,7 @@
         {% if product.hashtags %}
           <ul>
             {% for tag in product.hashtags %}
-              <li class="{{ tag.name }}">{{ tag }}</li>
+              <li style="color: {{ hashtags_list[tag][0]['color_text'] }}; background-color: {{ hashtags_list[tag][0]['color_bcg'] }}">{{ tag }}</li>
             {% endfor %}
           </ul>
         {% endif %}
