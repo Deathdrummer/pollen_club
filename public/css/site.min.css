@@ -837,8 +837,16 @@ video {
     background: #f5fafe;
     z-index: 1;
     border-radius: 0 0 5px 5px; }
-    .search .search-result ul li {
-      padding: 12px 10px; }
+    .search .search-result ul {
+      max-height: 372px;
+      overflow-y: scroll;
+      z-index: 1; }
+      .search .search-result ul li a,
+      .search .search-result ul li span {
+        padding: 12px 10px;
+        display: block; }
+      .search .search-result ul li a {
+        cursor: pointer; }
   .search.invalid input, .search.noinvalid input {
     border-radius: 5px 5px 0 0; }
   .search.invalid input {
@@ -1102,6 +1110,9 @@ video {
 .swiper-container {
   width: 100%;
   height: 100%; }
+
+.swiper-wrapper {
+  z-index: 0; }
 
 .swiper-slide {
   /* Center slide text vertically */

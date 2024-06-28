@@ -409,8 +409,18 @@ video {
     z-index: 1;
     border-radius: 0 0 5px 5px;
     ul {
+      max-height: 372px;
+      overflow-y: scroll;
+      z-index: 1;
       li {
-        padding: 12px 10px;
+        a,
+        span {
+          padding: 12px 10px;
+          display: block;
+        }
+        a {
+          cursor: pointer;
+        }
       }
     }
   }
@@ -729,7 +739,9 @@ video {
   width: 100%;
   height: 100%;
 }
-
+.swiper-wrapper {
+  z-index: 0;
+}
 .swiper-slide {
   /* Center slide text vertically */
   display: -webkit-box;

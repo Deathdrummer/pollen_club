@@ -200,9 +200,6 @@ $(document).ready(function () {
     event.stopPropagation();
   });
 
-
-
-
   $.ajax({
     type: 'GET',
     url: '/ajax/get_all_hashtags',
@@ -216,23 +213,17 @@ $(document).ready(function () {
       //value: 'За 2 дня до начала',
       //returnFields: ['title', 'seo_url']
     },
-    beforeSend: function() {
-
+    beforeSend: function () {},
+    success: function (r) {
+      console.log(r);
     },
-    success: function(r) {
-      console.log(r)
+    error: function (e, status) {
+      console.log(e, status);
     },
-    error: function(e, status) {
-      console.log(e, status)
+    complete: function () {
+      console.log('complete');
     },
-    complete: function() {
-      console.log('complete')
-    }
   });
-
-
-
-
 
   // поиск
   const search = $('.search');
@@ -244,38 +235,89 @@ $(document).ready(function () {
       var value = $(this).val();
       const searchResult = $('.search-result');
       searchClose.toggleClass('val', value.length > 0);
-      if (value.length > 0 && value.toLowerCase() === 'invalid') {
-        search.addClass('invalid');
-        searchResult.html(`
+
+      $.ajax({
+        type: 'GET',
+        url: '/ajax/search_products',
+        dataType: 'json',
+        data: {
+          field: 'title',
+          value: value,
+          returnFields: ['title', 'seo_url'],
+        },
+        beforeSend: function () {},
+        success: function (r) {
+          if (value.length > 0 && r.data.length > 0) {
+            search.addClass('invalid');
+
+            searchResult.html(`
+                <ul>
+                    ${r.data
+                      .map(
+                        item => `
+                        <li><a href="/${item.seo_url}">${item.title}</a></li>
+                    `
+                      )
+                      .join('')}
+                </ul>
+            `);
+          } else {
+            search.removeClass('invalid');
+          }
+          if (r.data.length === 0) {
+            search.addClass('noinvalid');
+            searchResult.html(`
         <ul>
-          <li>Все новости и статьи</li>
-          <li>Все новости1 и статьи</li>
-          <li>Все новости2 и статьи</li>
+          <li><span>Ничего не найдено</span></li>
         </ul>
         `);
-      } else {
-        search.removeClass('invalid');
-      }
-      if (value.length > 0 && value.toLowerCase() === 'noinvalid') {
-        search.addClass('noinvalid');
-        searchResult.html(`
-        <ul>
-          <li>Ничего не найдено</li>
-        </ul>
-        `);
-      } else {
-        search.removeClass('noinvalid');
-      }
-      if (value.toLowerCase() !== 'noinvalid' && value.toLowerCase() !== 'invalid') {
-        searchResult.html('');
-      }
+          } else {
+            search.removeClass('noinvalid');
+          }
+          if (value.length === 0) {
+            searchResult.html('');
+          }
+        },
+        error: function (e, status) {
+          console.log(e, status);
+        },
+        complete: function () {
+          console.log('complete');
+        },
+      });
     });
     searchClose.on('click', function () {
       searchInput.val('');
+      searchResult.html('');
       searchClose.removeClass('val');
     });
   }
-
+  if ($('.gid_alergika')) {
+    $.ajax({
+      type: 'GET',
+      url: '/ajax/get_all_hashtags',
+      dataType: 'json',
+      data: {},
+      beforeSend: function () {},
+      success: function (r) {
+        $('.tags.tabs ul').append(`
+            ${Object.keys(r.data)
+              .map(
+                key => `
+                    <li>${key}</li>
+                `
+              )
+              .join('')}
+        `);
+      },
+      error: function (e, status) {
+        console.log(e, status);
+      },
+      complete: function () {
+        console.log('complete');
+      },
+    });
+  }
   const ctx = document.getElementById('myChart');
   if (ctx) {
     function ChartJS() {

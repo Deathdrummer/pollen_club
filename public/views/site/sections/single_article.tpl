@@ -7,12 +7,14 @@
     </form>
     <div class="wrapper-single__content">
       <div class="tags">
-        <ul>
-          <li class="bcg-blue">Лечение аллергии</li>
-          <li class="bcg-green">Практические рекоммендации</li>
-        </ul>
+        {% if product.hashtags %}
+          <ul>
+            {% for tag in product.hashtags %}
+              <li class="{{ tag.name }}">{{ tag }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
       </div>
-
       <h1 class="content-title title-medium">{{ product.title }}</h1>
       <div class="story">{{ product.description|raw }}</div>
       <div class="single-gallery-wrapper">

@@ -40,23 +40,17 @@
     <div class="story">{{ text_allergika|raw }}</div>
     <div class="tags tabs">
       <ul>
-        <li class="active">Все новости и статьи</li>
-        <li>Практические рекоммендации</li>
-        <li>Рекоммендации</li>
-        <li>Практические рекоммендации</li>
-        <li>Практические рекоммендации</li>
-        <li>Практические рекоммендации</li>
-        <li>Аллергенные растения</li>
+        <li class="active">Статьи</li>
       </ul>
     </div>
     <div class="content-alergika__cards-allergika">
       {% for item in gid_allergika.items %}
         <a href="{{ item.href }}" class="card-allergika">
-          {% if item.attributes %}
+          {% if item.hashtags %}
             <div class="card-allergika__tags tags">
               <ul>
-                {% for tag in item.attributes %}
-                  <li class="{{ tag.name }}">{{ tag.value }}</li>
+                {% for tag in item.hashtags %}
+                  <li class="{{ tag.name }}">{{ tag }}</li>
                 {% endfor %}
               </ul>
             </div>
