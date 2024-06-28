@@ -22,6 +22,15 @@
 							autocomplete="off"
 							value="{{item['fields'][field.name]}}">
 						</div>
+					{% elseif field.type == 'date' %}
+						<div class="field">
+							<input
+							type="date"
+							name="{{field.name}}"
+							{% if field.rules %}rules="{{field.rules}}"{% endif %}
+							autocomplete="off"
+							value="{{item['fields'][field.name]}}">
+						</div>
 					{% elseif field.type == 'select' %}
 						<div class="select">
 							<select name="{{field.name}}"{% if field.rules %} rules="{{field.rules}}"{% endif %}>
