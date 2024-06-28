@@ -309,6 +309,24 @@ $(document).ready(function () {
               )
               .join('')}
         `);
+        $('.tags.tabs ul li').on('click', function () {
+          var selectedTag = $(this).text().trim();
+          $(this).addClass('active').siblings().removeClass('active');
+          $('.card-allergika').each(function () {
+            var postTags = $(this)
+              .find('.card-allergika__tags li')
+              .map(function () {
+                return $(this).text().trim();
+              })
+              .get();
+
+            if (postTags.includes(selectedTag) || selectedTag === 'Все статьи') {
+              $(this).show();
+            } else {
+              $(this).hide();
+            }
+          });
+        });
       },
       error: function (e, status) {
         console.log(e, status);
@@ -317,25 +335,8 @@ $(document).ready(function () {
         console.log('complete');
       },
     });
-    $('.tags.tabs ul li').on('click', function () {
-      var selectedTag = $(this).text().trim();
-
-      $('.card-allergika').each(function () {
-        var postTags = $(this)
-          .find('.card-allergika__tags li')
-          .map(function () {
-            return $(this).text().trim();
-          })
-          .get();
-
-        if (postTags.includes(selectedTag) || selectedTag === 'Все статьи') {
-          $(this).show();
-        } else {
-          $(this).hide();
-        }
-      });
-    });
   }
+
   const ctx = document.getElementById('myChart');
   if (ctx) {
     function ChartJS() {
