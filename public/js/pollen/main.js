@@ -171,7 +171,7 @@ $(document).ready(function () {
   ).then(values => {
     console.log('Map marker images loaded (all)');
 
-    $.ajax({ url: '/pollen/risk.php' }).done(function (risk) {
+    $.ajax({ url: 'https://test.pollen.club/maps/risk.php' }).done(function (risk) {
       var riskmap = [];
       for (var j = 0; j < risk.length; j++) {
         if (!riskmap[risk[j].pollen_type]) riskmap[risk[j].pollen_type] = riskLevel[risk[j].level];
@@ -179,7 +179,7 @@ $(document).ready(function () {
 
       $.ajax({ url: 'https://pollen.club/new_test_sql/?request=pollen_types' }).done(function (_types) {
         types = _types.result;
-
+        console.log(types);
         $.ajax({ url: 'https://pollen.club/new_test_sql/?request=pins&time=' + time_current }).done(function (pollens) {
           var stat = calculateIndex(pollens.result);
           for (var i = 0; i < types.length; i++) {
@@ -208,14 +208,14 @@ $(document).ready(function () {
           loadPoints(pollens.result);
           $('#preloader').css('display', 'none');
         });
-        $.ajax({ url: '/pollen/radius.php' }).done(function (data) {
+        $.ajax({ url: 'https://test.pollen.club/maps/radius.php' }).done(function (data) {
           radiusData = data;
         });
-        $.ajax({ url: '/pollen/doctor.php' }).done(function (data) {
+        $.ajax({ url: 'https://test.pollen.club/maps/doctor.php' }).done(function (data) {
           OtzyvData = data;
         });
 
-        $.ajax({ url: '/pollen/fenology.php' }).done(function (data) {
+        $.ajax({ url: 'https://test.pollen.club/maps/fenology.php' }).done(function (data) {
           FenologData = data;
         });
       });
@@ -251,7 +251,7 @@ function initArchive() {
     return row;
   }
 
-  $.ajax({ url: '/pollen/pollen_type.php' }).done(function (pollen_types) {
+  $.ajax({ url: 'https://test.pollen.club/maps/pollen_type.php' }).done(function (pollen_types) {
     var submenu = '';
     var mainmenu = '';
     for (var i = 0; i < pollen_types.length; i++) {
@@ -335,7 +335,7 @@ function showArchive(id, week) {
   // }
   // showingRadiuses = [];
 
-  $.ajax({ url: '/pollen/archive.php?type=' + id + '&week=' + week }).done(function (data) {
+  $.ajax({ url: 'https://test.pollen.club/maps/archive.php?type=' + id + '&week=' + week }).done(function (data) {
     const circlesData = {
       type: 'FeatureCollection',
       features: data.map(item => {
@@ -1230,7 +1230,7 @@ function pollenForType(id, text, hasData) {
   var fromtime = parseInt(d.getHours() * 60 * 60 + d.getMinutes() * 60);
   var fromdate = '' + d.getFullYear() + '-' + (d.getMonth() > 8 ? '' : '0') + (d.getMonth() + 1) + '-' + (d.getDate() > 9 ? '' : '0') + d.getDate();
   if (hasData)
-    $.ajax({ url: '/pollen/index.php?type=' + id + '&fromd=' + fromdate + '&fromt=' + fromtime }).done(function (data) {
+    $.ajax({ url: 'https://test.pollen.club/maps/index.php?type=' + id + '&fromd=' + fromdate + '&fromt=' + fromtime }).done(function (data) {
       $('#graph').show();
       showGraph(data, id);
     });
@@ -1240,7 +1240,7 @@ function pollenForType(id, text, hasData) {
 
   $('#graph2').hide();
   if (id > -1)
-    $.ajax({ url: '/pollen/forecast.php?type=' + id }).done(function (data) {
+    $.ajax({ url: 'https://test.pollen.club/maps/forecast.php?type=' + id }).done(function (data) {
       if (data.length > 0) {
         $('#graph2').show();
         showGraph2(data, id);
@@ -1896,7 +1896,7 @@ function calculateIndex(data) {
 }
 
 function initQuoras() {
-  $.ajax({ url: '/pollen/banner.php' }).done(function (data) {
+  $.ajax({ url: 'https://test.pollen.club/maps/banner.php' }).done(function (data) {
     var content = '';
     for (var i = 0; i < data.length; i++) {
       content += '<div class="cbp-qtcontent"><p><img height="70" width="70" src="' + 'icon/' + data[i].experts_site + '.png' + '"  />' + data[i].comment + '<b>' + data[i].expert_name + '</b></p></div><div class="cbp-qtprogress"></div>';

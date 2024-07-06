@@ -153,6 +153,120 @@ $(document).ready(function () {
       },
     },
   });
+
+  // рекламный баннер
+
+  const currentDate = new Date().toDateString();
+  const savedDate = localStorage.getItem('bannerDate');
+
+  /* Function for working with the modal */
+  function bannerModal() {
+    const m = document.getElementById('bannerModal');
+    const image = document.getElementById('bannerModalImage');
+    const linkDecktop = document.getElementById('bannerModalDesktop')?.value;
+    const linkMobile = document.getElementById('bannerModalMobile')?.value;
+    const winW = window.outerWidth;
+
+    return {
+      show() {
+        image.setAttribute('src', winW < 768 ? linkMobile : linkDecktop);
+
+        const i = new Image();
+        const imageSrc = image.getAttribute('src');
+        i.onload = () => m.classList.add('modal_visible');
+        i.src = imageSrc;
+      },
+      hide() {
+        m.classList.remove('modal_visible');
+      },
+    };
+  }
+
+  // Show banner after time if the banner has not been clicked
+  let hideTimeout;
+  const modal = bannerModal();
+  if (currentDate !== savedDate) {
+    setTimeout(() => {
+      modal.show();
+      setTimeout(() => {
+        modal.hide();
+        localStorage.setItem('bannerDate', currentDate);
+      }, 12000);
+    }, 2);
+  }
+
+  document.querySelectorAll('.banner-link').forEach(function (link) {
+    link.addEventListener('click', function () {
+      clearTimeout(hideTimeout);
+      localStorage.setItem('bannerDate', currentDate);
+      modal.hide();
+    });
+  });
+
+  // поиск
+  let search = $('.search');
+  let searchClose = $('.search-close');
+  let searchInput = $('.search input');
+
+  searchInput.on('input', function () {
+    var value = $(this).val();
+    const searchResult = $('.search-result');
+    searchClose.toggleClass('val', value.length > 0);
+
+    $.ajax({
+      type: 'GET',
+      url: '/ajax/search_products',
+      dataType: 'json',
+      data: {
+        field: 'title',
+        value: value,
+        returnFields: ['title', 'seo_url'],
+      },
+      beforeSend: function () {},
+      success: function (r) {
+        if (value.length > 0 && r.data.length > 0) {
+          search.addClass('invalid');
+          searchResult.html(`
+                <ul>
+                    ${r.data
+                      .map(
+                        item => `
+                        <li><a href="/${item.seo_url}">${item.title}</a></li>
+                    `
+                      )
+                      .join('')}
+                </ul>
+            `);
+        } else {
+          search.removeClass('invalid');
+        }
+        if (r.data.length === 0) {
+          search.addClass('noinvalid');
+          searchResult.html(`
+                <ul>
+                  <li><span>Ничего не найдено</span></li>
+                </ul>
+                `);
+        } else {
+          search.removeClass('noinvalid');
+        }
+        if (value.length === 0) {
+          searchResult.html('');
+        }
+      },
+      error: function (e, status) {
+        console.log(e, status);
+      },
+      complete: function () {
+        console.log('complete');
+      },
+    });
+  });
+  searchClose.on('click', function () {
+    searchInput.val('');
+    searchResult.html('');
+    searchClose.removeClass('val');
+  });
   $('.finance-link-popup').on('click', function () {
     ddrPopUp(
       {
@@ -164,6 +278,34 @@ $(document).ready(function () {
         getSectionData({ section: 'support_project', template: 'render/donate.tpl', data: {} }, function (html, stat) {
           getDonate.setData(html, false, function () {
             getDonate.wait(false);
+            let search = $('.search');
+            let searchClose = $('.search-close');
+            let searchInput = $('.search input');
+
+            searchInput.on('input', function () {
+              var value = $(this).val();
+              const searchResult = $('.search-result');
+              searchClose.toggleClass('val', value.length > 0);
+
+              // if (value.length > 0 && r.data.length > 0) {
+              //   search.addClass('invalid');
+              // } else {
+              //   search.removeClass('invalid');
+              // }
+              // if (r.data.length === 0) {
+              //   search.addClass('noinvalid');
+              // } else {
+              //   search.removeClass('noinvalid');
+              // }
+              // if (value.length === 0) {
+              //   searchResult.html('');
+              // }
+            });
+            searchClose.on('click', function () {
+              searchInput.val('');
+              searchResult.html('');
+              searchClose.removeClass('val');
+            });
           });
         });
       }
@@ -173,15 +315,6 @@ $(document).ready(function () {
   $('.drowdown-block__active').on('click', function () {
     $(this).toggleClass('active');
     $('.drowdown-block__list').toggleClass('active');
-  });
-
-  $('.drowdown-block__list li').on('click', function () {
-    $('.drowdown-block__active').text($(this).text());
-    $('.drowdown-block__active').addClass('active');
-    $('.drowdown-block__list li').removeClass('active');
-    $(this).addClass('active');
-    $('.drowdown-block__list').removeClass('active');
-    $('.drowdown-block__active').removeClass('active');
   });
 
   $(document).on('click', function (event) {
@@ -200,96 +333,110 @@ $(document).ready(function () {
     event.stopPropagation();
   });
 
-  $.ajax({
-    type: 'GET',
-    url: '/ajax/get_all_hashtags',
-    dataType: 'json',
-    data: {
-      /*url: 'https://test.pollen.club/maps/pollen_type.php',
-      params: {
-        type: 1
-      }*/
-      //field: 'title',
-      //value: 'За 2 дня до начала',
-      //returnFields: ['title', 'seo_url']
-    },
-    beforeSend: function () {},
-    success: function (r) {
-      console.log(r);
-    },
-    error: function (e, status) {
-      console.log(e, status);
-    },
-    complete: function () {
-      console.log('complete');
-    },
-  });
-
-  // поиск
-  const search = $('.search');
-  const searchClose = $('.search-close');
-  const searchInput = $('.search input');
-
-  if (search) {
-    searchInput.on('input', function () {
-      var value = $(this).val();
-      const searchResult = $('.search-result');
-      searchClose.toggleClass('val', value.length > 0);
-
-      $.ajax({
-        type: 'GET',
-        url: '/ajax/search_products',
-        dataType: 'json',
-        data: {
-          field: 'title',
-          value: value,
-          returnFields: ['title', 'seo_url'],
+  // получение аллергенов
+  if (document.querySelector('.drowdown-block--pollens')) {
+    $.ajax({
+      type: 'GET',
+      url: '/ajax/get_pollen_data',
+      dataType: 'json',
+      data: {
+        url: 'https://test.pollen.club/maps/pollen_type.php',
+        params: {
+          type: 1,
         },
-        beforeSend: function () {},
-        success: function (r) {
-          if (value.length > 0 && r.data.length > 0) {
-            search.addClass('invalid');
-
-            searchResult.html(`
-                <ul>
-                    ${r.data
-                      .map(
-                        item => `
-                        <li><a href="/${item.seo_url}">${item.title}</a></li>
-                    `
-                      )
-                      .join('')}
-                </ul>
-            `);
-          } else {
-            search.removeClass('invalid');
+      },
+      beforeSend: function () {},
+      success: function (r) {
+        var data = JSON.parse(r.data);
+        var firstItemDesc = '';
+        var firstItemId = '';
+        data.forEach(function (item, index) {
+          var id = item.id;
+          var desc = item.desc;
+          var isActive = index === 0 ? 'active' : ''; // Check if it's the first item
+          if (index === 0) {
+            firstItemDesc = desc;
+            firstItemId = id;
           }
-          if (r.data.length === 0) {
-            search.addClass('noinvalid');
-            searchResult.html(`
-        <ul>
-          <li><span>Ничего не найдено</span></li>
-        </ul>
-        `);
-          } else {
-            search.removeClass('noinvalid');
-          }
-          if (value.length === 0) {
-            searchResult.html('');
-          }
-        },
-        error: function (e, status) {
-          console.log(e, status);
-        },
-        complete: function () {
-          console.log('complete');
-        },
-      });
+          $('.drowdown-block--pollens .drowdown-block__active').attr('data-id', firstItemId).html(`${firstItemDesc}`);
+          $('.drowdown-block--pollens .drowdown-block__list').append(`<li data-id="${id}" class="${isActive}"><span>${desc}</span></li>`);
+          getSectionData({ section: 'allergen', data: {} }, function (html, stat) {
+            var matchedData = Object.values(html.allergen).find(function (item) {
+              return item.title === firstItemDesc;
+            });
+            if (matchedData) {
+              $('.pollen-level__left .photo img').attr('src', `/public/filemanager/${matchedData.img}`);
+              $('.pollen-level__left .photo .photo-text').text(matchedData.title);
+            }
+          });
+        });
+        $('.drowdown-block__list li').on('click', function () {
+          var clickedTitle = $(this).text();
+          $('.drowdown-block__active').text(clickedTitle);
+          $('.drowdown-block__active').addClass('active');
+          $('.drowdown-block__list li').removeClass('active');
+          $(this).addClass('active');
+          $('.drowdown-block__list').removeClass('active');
+          $('.drowdown-block__active').removeClass('active');
+          // Загрузка фото аллергена после ajax и нажатия на пункт списка
+          getSectionData({ section: 'allergen', data: {} }, function (html, stat) {
+            var matchedData = Object.values(html.allergen).find(function (item) {
+              return item.title === clickedTitle;
+            });
+            if (matchedData) {
+              $('.pollen-level__left .photo img').attr('src', `public/filemanager/${matchedData.img}`);
+              $('.pollen-level__left .photo .photo-text').text(matchedData.title);
+            }
+          });
+        });
+      },
+      error: function (e, status) {
+        console.log(e, status);
+      },
+      complete: function () {
+        console.log('complete');
+      },
     });
-    searchClose.on('click', function () {
-      searchInput.val('');
-      searchResult.html('');
-      searchClose.removeClass('val');
+  }
+
+  // Карта
+
+  if ($('#silambtn').length) {
+    $('#silam').css({
+      opacity: '0',
+      zIndex: '0',
+    });
+
+    $('#silambtn').on('click', function () {
+      $('#map').css({
+        opacity: '0',
+        zIndex: '0',
+      });
+      $('#silam').css({
+        opacity: '1',
+        zIndex: '1',
+      });
+      $('.header__map').css('visibility', 'hidden');
+      $('.content-main__map-text__link').text('Закрыть SILAM');
+      $('.content-main__map-link').attr('href', '#');
+    });
+
+    $('.content-main__map-link').on('click', function (event) {
+      if ($(this).attr('href') === '#') {
+        event.preventDefault();
+      }
+
+      $('#map').css({
+        opacity: '1',
+        zIndex: '1',
+      });
+      $('#silam').css({
+        opacity: '0',
+        zIndex: '0',
+      });
+      $('.header__map').css('visibility', 'visible');
+      $('.content-main__map-text__link').text('Закрыть Карту');
+      $('.content-main__map-link').attr('href', '/');
     });
   }
   if ($('.gid_alergika')) {
@@ -319,8 +466,7 @@ $(document).ready(function () {
                 return $(this).text().trim();
               })
               .get();
-
-            if (postTags.includes(selectedTag) || selectedTag === 'Все статьи') {
+            if (postTags.includes(selectedTag) || postTags.includes('Реклама') || selectedTag === 'Все статьи') {
               $(this).show();
             } else {
               $(this).hide();

@@ -6,7 +6,7 @@
       <div class="search-result"></div>
     </form>
     <div class="wrapper-single__content">
-      <div class="date single_date">20/07/2022</div>
+      <div class="date single_date">{{ product.article }}</div>
       <h1 class="content-title green">{{ product.title }}</h1>
       <div class="story">{{ product.description|raw }}</div>
       <div class="single-gallery-wrapper">
