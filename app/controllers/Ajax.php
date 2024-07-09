@@ -46,14 +46,13 @@ class Ajax extends MY_Controller
      */
     public function get_pollen_data()
     {
+
         $url = $this->input->get('url');
         $method = $this->input->get('method');
         $params = $this->input->get('params');
 
 // Формируем URL с GET параметрами
         $queryString = $params ? http_build_query(array_merge(['method' => $method], $params)) : '';
-        $urlWithParams = $url . '?' . $queryString;
-
         $urlWithParams = $url . '?' . $queryString;
 
         // Инициализация сессии CURL

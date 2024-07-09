@@ -378,7 +378,7 @@ $(document).ready(function () {
       }
       return stat;
     }
-    function pollenForType(id, hasData) {
+    const pollenForType = function (id, hasData) {
       // if (id == -1) {
       //   $('#cbp-qtrotator').show();
       // } else {
@@ -390,14 +390,14 @@ $(document).ready(function () {
         d.setTime(d.getTime() - 1000 * 60 * 60 * 6 * 16);
         let fromtime = parseInt(d.getHours() * 60 * 60 + d.getMinutes() * 60);
         let fromdate = '' + d.getFullYear() + '-' + (d.getMonth() > 8 ? '' : '0') + (d.getMonth() + 1) + '-' + (d.getDate() > 9 ? '' : '0') + d.getDate();
-        console.log(id, fromtime, fromdate);
+        console.log(1, fromtime, fromdate);
         $.ajax({
           type: 'GET',
           url: '/ajax/get_pollen_data',
           dataType: 'json',
           data: {
             url: 'https://test.pollen.club/maps/ddr_query.php',
-            method: 'index1',
+            method: 'indexStat',
             params: {
               type: id,
               fromd: fromdate,
@@ -405,9 +405,8 @@ $(document).ready(function () {
             },
           },
           beforeSend: function () {},
-          success: function (data) {
-            // var export_pins = JSON.parse(r.data);
-            console.log(data.data);
+          success: function (indexState) {
+            console.log(JSON.parse(indexState.data));
             // showGraph(data, id);
           },
           error: function (e, status) {
@@ -422,7 +421,9 @@ $(document).ready(function () {
       }
 
       // $('#graph2').hide();
-    }
+    };
+    pollenForType(1, true);
+    console.log(1111);
     let riskLevelNone = '<span style="color:#8b8b8b">Нет пыльцы</span>';
     let pinsNone = '<span style="color:#8b8b8b">Нет отметок</span>';
     let level_item__level = document.querySelector('.level-item__level');
@@ -436,192 +437,190 @@ $(document).ready(function () {
     let statExport_pins;
     let ballov;
     let hasData;
-    $.ajax({
-      type: 'GET',
-      url: '/ajax/get_pollen_data',
-      dataType: 'json',
-      data: {
-        url: 'https://test.pollen.club/maps/ddr_query.php',
-        method: 'export_pins',
-        params: {
-          time: time_current,
-        },
-      },
-      beforeSend: function () {},
-      success: function (r) {
-        var export_pins = JSON.parse(r.data);
-        statExport_pins = calculateIndex(export_pins);
-      },
-      error: function (e, status) {
-        console.log(e, status);
-      },
-      complete: function () {
-        console.log('complete');
-      },
-    });
-    $.ajax({
-      type: 'GET',
-      url: '/ajax/get_pollen_data',
-      dataType: 'json',
-      data: {
-        url: 'https://test.pollen.club/maps/ddr_query.php',
-        method: 'risk',
-        params: {
-          type: 1,
-        },
-      },
-      beforeSend: function () {},
-      success: function (risk) {
-        var riskData = JSON.parse(risk.data);
-        var riskmap = [];
-        var riskLevelArr = [];
-        for (var j = 0; j < riskData.length; j++) {
-          if (!riskmap[riskData[j].pollen_type]) riskmap[riskData[j].pollen_type] = riskLevel[riskData[j].level];
-        }
+    // $.ajax({
+    //   type: 'GET',
+    //   url: '/ajax/get_pollen_data',
+    //   dataType: 'json',
+    //   data: {
+    //     url: 'https://test.pollen.club/maps/ddr_query.php',
+    //     method: 'export_pins',
+    //     params: {
+    //       time: time_current,
+    //     },
+    //   },
+    //   beforeSend: function () {},
+    //   success: function (r) {
+    //     var export_pins = JSON.parse(r.data);
+    //     statExport_pins = calculateIndex(export_pins);
+    //   },
+    //   error: function (e, status) {
+    //     console.log(e, status);
+    //   },
+    //   complete: function () {
+    //     console.log('complete');
+    //   },
+    // });
+    // $.ajax({
+    //   type: 'GET',
+    //   url: '/ajax/get_pollen_data',
+    //   dataType: 'json',
+    //   data: {
+    //     url: 'https://test.pollen.club/maps/ddr_query.php',
+    //     method: 'risk',
+    //     params: {
+    //       type: 1,
+    //     },
+    //   },
+    //   beforeSend: function () {},
+    //   success: function (risk) {
+    //     var riskData = JSON.parse(risk.data);
+    //     var riskmap = [];
+    //     var riskLevelArr = [];
+    //     for (var j = 0; j < riskData.length; j++) {
+    //       if (!riskmap[riskData[j].pollen_type]) riskmap[riskData[j].pollen_type] = riskLevel[riskData[j].level];
+    //     }
 
-        for (var j = 0; j < riskData.length; j++) {
-          if (!riskLevelArr[riskData[j].pollen_type]) riskLevelArr[riskData[j].pollen_type] = riskBcg[riskData[j].level];
-        }
+    //     for (var j = 0; j < riskData.length; j++) {
+    //       if (!riskLevelArr[riskData[j].pollen_type]) riskLevelArr[riskData[j].pollen_type] = riskBcg[riskData[j].level];
+    //     }
 
-        $.ajax({
-          type: 'GET',
-          url: '/ajax/get_pollen_data',
-          dataType: 'json',
-          data: {
-            url: 'https://test.pollen.club/maps/ddr_query.php',
-            method: 'pollen_type',
-            params: {
-              type: 1,
-            },
-          },
-          beforeSend: function () {},
-          success: function (r) {
-            var dataPollens = JSON.parse(r.data);
-            var firstItemDesc = '';
-            var firstItemId = '';
+    //     $.ajax({
+    //       type: 'GET',
+    //       url: '/ajax/get_pollen_data',
+    //       dataType: 'json',
+    //       data: {
+    //         url: 'https://test.pollen.club/maps/ddr_query.php',
+    //         method: 'pollen_type',
+    //         params: {
+    //           type: 1,
+    //         },
+    //       },
+    //       beforeSend: function () {},
+    //       success: function (r) {
+    //         var dataPollens = JSON.parse(r.data);
+    //         var firstItemDesc = '';
+    //         var firstItemId = '';
+    //         console.log(dataPollens);
+    //         dataPollens.forEach(function (item, index) {
+    //           var id = item.id;
+    //           var desc = item.desc;
+    //           var isActive = index === 0 ? 'active' : ''; // Check if it's the first item
 
-            dataPollens.forEach(function (item, index) {
-              var id = item.id;
-              var desc = item.desc;
-              var isActive = index === 0 ? 'active' : ''; // Check if it's the first item
+    //           if (index === 0) {
+    //             firstItemDesc = desc;
+    //             firstItemId = id;
+    //             // Уровень пыльцы
+    //             if (riskmap[id]) {
+    //               level_item__level_text.innerHTML = riskmap[id];
+    //               level_item__level_progress.style.background = riskLevelArr[id];
+    //             } else {
+    //               level_item__level_text.innerHTML = riskLevelNone;
+    //               level_item__level_progress.style.background = riskBcg[0];
+    //             }
 
-              if (index === 0) {
-                firstItemDesc = desc;
-                firstItemId = id;
-                // Уровень пыльцы
-                if (riskmap[id]) {
-                  level_item__level_text.innerHTML = riskmap[id];
-                  level_item__level_progress.style.background = riskLevelArr[id];
-                } else {
-                  level_item__level_text.innerHTML = riskLevelNone;
-                  level_item__level_progress.style.background = riskBcg[0];
-                }
+    //             //индекс самочуствия
 
-                //индекс самочуствия
+    //             hasData = statExport_pins[item.id] && statExport_pins[item.id].bad + statExport_pins[item.id].good + statExport_pins[item.id].middle >= 20;
+    //             ballov = statExport_pins[item.id] ? statExport_pins[item.id].ball : 0;
 
-                hasData = statExport_pins[item.id] && statExport_pins[item.id].bad + statExport_pins[item.id].good + statExport_pins[item.id].middle >= 20;
-                ballov = statExport_pins[item.id] ? statExport_pins[item.id].ball : 0;
+    //             if (hasData) {
+    //               if (ballov <= 1) {
+    //                 level_item__index_text.innerHTML = pinsNone;
+    //                 level_item__index_progress.style.background = '#8b8b8b';
+    //               } else if (ballov <= 4) {
+    //                 level_item__index_text.innerHTML = `<span style="color:#00b147">${ballov} Балла</span>`;
+    //                 level_item__index_progress.style.background = '#00b147';
+    //               } else if (ballov <= 7) {
+    //                 level_item__index_text.innerHTML = `<span style="color:#F19F33">${ballov} Баллов</span>`;
+    //                 level_item__index_progress.style.background = '#F19F33';
+    //               } else {
+    //                 level_item__index_text.innerHTML = `<span style="color:#E9403F">${ballov} Баллов</span>`;
+    //                 level_item__index_progress.style.background = '#E9403F';
+    //               }
+    //             } else {
+    //               level_item__index_text.innerHTML = pinsNone;
+    //               level_item__index_progress.style.background = '#8b8b8b';
+    //             }
+    //           }
+    //           $('.drowdown-block--pollens .drowdown-block__active').attr('data-id', firstItemId).html(`${firstItemDesc}`);
+    //           $('.drowdown-block--pollens .drowdown-block__list').append(`<li data-id="${id}" class="${isActive}"><span>${desc}</span></li>`);
+    //           getSectionData({ section: 'allergen', data: {} }, function (html, stat) {
+    //             var matchedData = Object.values(html.allergen).find(function (item) {
+    //               return item.title === firstItemDesc;
+    //             });
+    //             if (matchedData) {
+    //               $('.pollen-level__left .photo img').attr('src', `/public/filemanager/${matchedData.img}`);
+    //               $('.pollen-level__left .photo .photo-text').text(matchedData.title);
+    //             }
+    //           });
+    //         });
+    //         $('.drowdown-block__list li').on('click', function () {
+    //           var clickedTitle = $(this).text();
+    //           var clickedId = $(this).attr('data-id');
+    //           $('.drowdown-block__active').text(clickedTitle);
+    //           $('.drowdown-block__active').addClass('active');
+    //           $('.drowdown-block__list li').removeClass('active');
+    //           $(this).addClass('active');
+    //           $('.drowdown-block__list').removeClass('active');
+    //           $('.drowdown-block__active').removeClass('active');
+    //           // Загрузка фото аллергена после ajax и нажатия на пункт списка
+    //           getSectionData({ section: 'allergen', data: {} }, function (html, stat) {
+    //             var matchedData = Object.values(html.allergen).find(function (item) {
+    //               return item.title === clickedTitle;
+    //             });
+    //             if (matchedData) {
+    //               $('.pollen-level__left .photo img').attr('src', `public/filemanager/${matchedData.img}`);
+    //               $('.pollen-level__left .photo .photo-text').text(matchedData.title);
+    //             }
+    //           });
+    //           // Уровень пыльцы
 
-                pollenForType(item.id, hasData);
-                console.log(1111);
-                if (hasData) {
-                  if (ballov <= 1) {
-                    level_item__index_text.innerHTML = pinsNone;
-                    level_item__index_progress.style.background = '#8b8b8b';
-                  } else if (ballov <= 4) {
-                    level_item__index_text.innerHTML = `<span style="color:#00b147">${ballov} Балла</span>`;
-                    level_item__index_progress.style.background = '#00b147';
-                  } else if (ballov <= 7) {
-                    level_item__index_text.innerHTML = `<span style="color:#F19F33">${ballov} Баллов</span>`;
-                    level_item__index_progress.style.background = '#F19F33';
-                  } else {
-                    level_item__index_text.innerHTML = `<span style="color:#E9403F">${ballov} Баллов</span>`;
-                    level_item__index_progress.style.background = '#E9403F';
-                  }
-                } else {
-                  level_item__index_text.innerHTML = pinsNone;
-                  level_item__index_progress.style.background = '#8b8b8b';
-                }
-              }
-              $('.drowdown-block--pollens .drowdown-block__active').attr('data-id', firstItemId).html(`${firstItemDesc}`);
-              $('.drowdown-block--pollens .drowdown-block__list').append(`<li data-id="${id}" class="${isActive}"><span>${desc}</span></li>`);
-              getSectionData({ section: 'allergen', data: {} }, function (html, stat) {
-                var matchedData = Object.values(html.allergen).find(function (item) {
-                  return item.title === firstItemDesc;
-                });
-                if (matchedData) {
-                  $('.pollen-level__left .photo img').attr('src', `/public/filemanager/${matchedData.img}`);
-                  $('.pollen-level__left .photo .photo-text').text(matchedData.title);
-                }
-              });
-            });
-            $('.drowdown-block__list li').on('click', function () {
-              var clickedTitle = $(this).text();
-              var clickedId = $(this).attr('data-id');
-              $('.drowdown-block__active').text(clickedTitle);
-              $('.drowdown-block__active').addClass('active');
-              $('.drowdown-block__list li').removeClass('active');
-              $(this).addClass('active');
-              $('.drowdown-block__list').removeClass('active');
-              $('.drowdown-block__active').removeClass('active');
-              // Загрузка фото аллергена после ajax и нажатия на пункт списка
-              getSectionData({ section: 'allergen', data: {} }, function (html, stat) {
-                var matchedData = Object.values(html.allergen).find(function (item) {
-                  return item.title === clickedTitle;
-                });
-                if (matchedData) {
-                  $('.pollen-level__left .photo img').attr('src', `public/filemanager/${matchedData.img}`);
-                  $('.pollen-level__left .photo .photo-text').text(matchedData.title);
-                }
-              });
-              // Уровень пыльцы
+    //           if (riskmap[clickedId]) {
+    //             level_item__level_text.innerHTML = riskmap[clickedId];
+    //             level_item__level_progress.style.background = riskLevelArr[clickedId];
+    //           } else {
+    //             level_item__level_text.innerHTML = riskLevelNone;
+    //             level_item__level_progress.style.background = riskBcg[0];
+    //           }
 
-              if (riskmap[clickedId]) {
-                level_item__level_text.innerHTML = riskmap[clickedId];
-                level_item__level_progress.style.background = riskLevelArr[clickedId];
-              } else {
-                level_item__level_text.innerHTML = riskLevelNone;
-                level_item__level_progress.style.background = riskBcg[0];
-              }
-
-              // индекс самочувствия
-              hasData = statExport_pins[clickedId] && statExport_pins[clickedId].bad + statExport_pins[clickedId].good + statExport_pins[clickedId].middle >= 20;
-              ballov = statExport_pins[clickedId] ? statExport_pins[clickedId].ball : 0;
-              if (hasData) {
-                if (ballov <= 1) {
-                  level_item__index_text.innerHTML = pinsNone;
-                  level_item__index_progress.style.background = '#8b8b8b';
-                } else if (ballov <= 4) {
-                  level_item__index_text.innerHTML = `<span style="color:#00b147">${ballov} Балла</span>`;
-                  level_item__index_progress.style.background = '#00b147';
-                } else if (ballov <= 7) {
-                  level_item__index_text.innerHTML = `<span style="color:#F19F33">${ballov} Баллов</span>`;
-                  level_item__index_progress.style.background = '#F19F33';
-                } else {
-                  level_item__index_text.innerHTML = `<span style="color:#E9403F">${ballov} Баллов</span>`;
-                  level_item__index_progress.style.background = '#E9403F';
-                }
-              } else {
-                level_item__index_text.innerHTML = pinsNone;
-                level_item__index_progress.style.background = '#8b8b8b';
-              }
-            });
-          },
-          error: function (e, status) {
-            console.log(e, status);
-          },
-          complete: function () {
-            console.log('complete');
-          },
-        });
-      },
-      error: function (e, status) {
-        console.log(e, status);
-      },
-      complete: function () {
-        console.log('complete');
-      },
-    });
+    //           // индекс самочувствия
+    //           hasData = statExport_pins[clickedId] && statExport_pins[clickedId].bad + statExport_pins[clickedId].good + statExport_pins[clickedId].middle >= 20;
+    //           ballov = statExport_pins[clickedId] ? statExport_pins[clickedId].ball : 0;
+    //           if (hasData) {
+    //             if (ballov <= 1) {
+    //               level_item__index_text.innerHTML = pinsNone;
+    //               level_item__index_progress.style.background = '#8b8b8b';
+    //             } else if (ballov <= 4) {
+    //               level_item__index_text.innerHTML = `<span style="color:#00b147">${ballov} Балла</span>`;
+    //               level_item__index_progress.style.background = '#00b147';
+    //             } else if (ballov <= 7) {
+    //               level_item__index_text.innerHTML = `<span style="color:#F19F33">${ballov} Баллов</span>`;
+    //               level_item__index_progress.style.background = '#F19F33';
+    //             } else {
+    //               level_item__index_text.innerHTML = `<span style="color:#E9403F">${ballov} Баллов</span>`;
+    //               level_item__index_progress.style.background = '#E9403F';
+    //             }
+    //           } else {
+    //             level_item__index_text.innerHTML = pinsNone;
+    //             level_item__index_progress.style.background = '#8b8b8b';
+    //           }
+    //         });
+    //       },
+    //       error: function (e, status) {
+    //         console.log(e, status);
+    //       },
+    //       complete: function () {
+    //         console.log('complete');
+    //       },
+    //     });
+    //   },
+    //   error: function (e, status) {
+    //     console.log(e, status);
+    //   },
+    //   complete: function () {
+    //     console.log('complete');
+    //   },
+    // });
   }
 
   // Карта

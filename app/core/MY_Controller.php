@@ -413,7 +413,7 @@ class MY_Controller extends CI_Controller
                     break; // Exit loop if second array has fewer elements than needed
                 }
             }
-            toLog($array2);
+
             return $result;
         });
 
