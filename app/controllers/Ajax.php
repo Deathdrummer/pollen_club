@@ -1,22 +1,22 @@
-<? defined('BASEPATH') OR exit('Доступ к скрипту запрещен');
+<?defined('BASEPATH') or exit('Доступ к скрипту запрещен');
 
-class Ajax extends MY_Controller {
-	
-	
-	//private $viewsPath = 'views/site/render/reviews/';
-	
-	public function __construct() {
-		parent::__construct();
-		//$this->load->model('reviews_model', 'reviews');
-	}
-	
-	
-	
-	/**
-	 * @param 
-	 * @return 
-	 */
-	public function search_products() {
+class Ajax extends MY_Controller
+{
+
+    //private $viewsPath = 'views/site/render/reviews/';
+
+    public function __construct()
+    {
+        parent::__construct();
+        //$this->load->model('reviews_model', 'reviews');
+    }
+
+    /**
+     * @param
+     * @return
+     */
+    public function search_products()
+    {
         $field = $this->input->get('field');
         $value = $this->input->get('value');
         $returnFields = $this->input->get('returnFields');
@@ -26,16 +26,14 @@ class Ajax extends MY_Controller {
         $response = $this->products->search($field, $value, $returnFields);
 
         echo json_encode(['success' => true, 'data' => $response], JSON_UNESCAPED_UNICODE);
-	}
-
-
-
+    }
 
     /**
      * @param
      * @return
      */
-    public function get_all_hashtags() {
+    public function get_all_hashtags()
+    {
         $this->load->model('products_model', 'products');
 
         $response = $this->products->getAllHashtags();
@@ -43,17 +41,19 @@ class Ajax extends MY_Controller {
         echo json_encode(['success' => true, 'data' => $response], JSON_UNESCAPED_UNICODE);
     }
 
-
-
     /**
      * @return string[]
      */
-    public function get_pollen_data() {
+    public function get_pollen_data()
+    {
         $url = $this->input->get('url');
+        $method = $this->input->get('method');
         $params = $this->input->get('params');
 
-        // Формируем URL с GET параметрами
-        $queryString = $params ? http_build_query($params) : '';
+// Формируем URL с GET параметрами
+        $queryString = $params ? http_build_query(array_merge(['method' => $method], $params)) : '';
+        $urlWithParams = $url . '?' . $queryString;
+
         $urlWithParams = $url . '?' . $queryString;
 
         // Инициализация сессии CURL
@@ -81,6 +81,5 @@ class Ajax extends MY_Controller {
         // Возвращаем ответ
         echo json_encode(['success' => true, 'data' => $response], JSON_UNESCAPED_UNICODE);
     }
-
 
 }

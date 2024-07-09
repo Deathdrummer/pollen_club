@@ -171,7 +171,7 @@ $(document).ready(function () {
   ).then(values => {
     console.log('Map marker images loaded (all)');
 
-    $.ajax({ url: 'https://test.pollen.club/maps/risk.php' }).done(function (risk) {
+    $.ajax({ url: 'https://test.pollen.club/maps/ddr_query.php?method=risk' }).done(function (risk) {
       var riskmap = [];
       for (var j = 0; j < risk.length; j++) {
         if (!riskmap[risk[j].pollen_type]) riskmap[risk[j].pollen_type] = riskLevel[risk[j].level];
@@ -179,8 +179,8 @@ $(document).ready(function () {
 
       $.ajax({ url: 'https://pollen.club/new_test_sql/?request=pollen_types' }).done(function (_types) {
         types = _types.result;
-        console.log(types);
-        $.ajax({ url: 'https://pollen.club/new_test_sql/?request=pins&time=' + time_current }).done(function (pollens) {
+
+        $.ajax({ url: 'https://pollen.club/new_test_sql/?request=pins&time&time=' + time_current }).done(function (pollens) {
           var stat = calculateIndex(pollens.result);
           for (var i = 0; i < types.length; i++) {
             var style = '';
@@ -203,19 +203,20 @@ $(document).ready(function () {
 
             var text = types[i].desc + ' ' + (hasData ? 'ltsup class=kvupsmallkvrtltspan style=kvcolor:' + color + 'kvrt' + stat[types[i].id].ball + ' баллов(а)lt/spanrt,' : 'ltsup class=kvupsmallkvrt мало отметок,') + 'lt/suprt';
             var risk = riskmap[types[i].id] ? 'ltsup class=kvbuttomsmollkvrt' + riskmap[types[i].id] + 'lt/suprt' : '';
+            console.log(risk);
             $('#select').append('<li><a ' + style + "onclick='pollenForType(" + types[i].id + ',"' + text + risk + '",' + hasData + ")'>" + (text + risk + '').replace(/lt/g, '<').replace(/rt/g, '>').replace(/kv/g, '"') + '</a></li>');
           }
           loadPoints(pollens.result);
           $('#preloader').css('display', 'none');
         });
-        $.ajax({ url: 'https://test.pollen.club/maps/radius.php' }).done(function (data) {
+        $.ajax({ url: 'https://test.pollen.club/maps/ddr_query.php?method=radius' }).done(function (data) {
           radiusData = data;
         });
-        $.ajax({ url: 'https://test.pollen.club/maps/doctor.php' }).done(function (data) {
-          OtzyvData = data;
-        });
+        // $.ajax({ url: 'https://test.pollen.club/maps/doctor.php' }).done(function (data) {
+        //   OtzyvData = data;
+        // });
 
-        $.ajax({ url: 'https://test.pollen.club/maps/fenology.php' }).done(function (data) {
+        $.ajax({ url: 'https://test.pollen.club/maps/ddr_query.php?method=fenology' }).done(function (data) {
           FenologData = data;
         });
       });

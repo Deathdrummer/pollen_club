@@ -5,18 +5,18 @@
     var script = document.createElement('script')
     script.type = 'text/javascript'
     script.src = url
-
+  
     // then bind the event to the callback function
     // there are several events for cross browser compatibility
     script.onreadystatechange = callback
     script.onload = callback
-
+  
     // fire the loading
     head.appendChild(script)
   }
-
+  loadScript('public/js/pollen/map.js')
   loadScript('public/js/pollen/highcharts.js')
-  {# loadScript('public/js/pollen/exporting.js') #}
+  loadScript('public/js/pollen/exporting.js')
   loadScript('public/js/pollen/modernizr.custom.js')
   loadScript('public/js/pollen/jquery.cbpQTRotator.js')
 </script>
@@ -73,25 +73,29 @@
   <div class="content__map">
     <div class="content__reklama content-main__reklama">
       {% set current_date = date('Y-m-d') %}
-      {% for item in reklama[3]|arrcombine(news_last.items|reverse, 3) %}
+      {% set bannerArr = [] %}
+      {% for item in reklama[3] %}
         {% set date_min = item.date_min|date('Y-m-d') %}
         {% set date_max = item.date_max|date('Y-m-d') %}
         {% if current_date >= date_min and current_date <= date_max %}
-          <div class="reklama-item">
-            <div class="photo reklama-item__photo">
-              {% if item.img %}
-                <img src="{{ base_url('public/filemanager/' ~ item.img) }}" loading="lazy" alt="{{ item.title }}" />
-              {% else %}
-                <img src="{{ base_url('public/filemanager/' ~ item.main_image.file) }}" loading="lazy" alt="{{ item.main_image.alt }}" />
-              {% endif %}
-            </div>
-            <div class="reklama-item__content">
-              <h3 class="reklama-item__title">{{ item.title }}</h3>
-              <p class="reklama-item__text">{{ item.text ? : item.short_desc }}</p>
-              <a href="{{ item.href }}" class="reklama-item__link">{{ item.text_link ? : 'Подробнее' }}</a>
-            </div>
-          </div>
+          {% set bannerArr = bannerArr|merge([item]) %}
         {% endif %}
+      {% endfor %}
+      {% for item in bannerArr|arrcombine(news_last.items|reverse, 3) %}
+        <div class="reklama-item">
+          <div class="photo reklama-item__photo">
+            {% if item.img %}
+              <img src="{{ base_url('public/filemanager/' ~ item.img) }}" loading="lazy" alt="{{ item.title }}" />
+            {% else %}
+              <img src="{{ base_url('public/filemanager/' ~ item.main_image.file) }}" loading="lazy" alt="{{ item.main_image.alt }}" />
+            {% endif %}
+          </div>
+          <div class="reklama-item__content">
+            <h3 class="reklama-item__title">{{ item.title }}</h3>
+            <p class="reklama-item__text">{{ item.text ? : item.short_desc }}</p>
+            <a href="{{ item.href }}" class="reklama-item__link">{{ item.text_link ? : 'Подробнее' }}</a>
+          </div>
+        </div>
       {% endfor %}
     </div>
   </div>

@@ -568,6 +568,9 @@ video {
   .content-header__title a {
     font-family: Roboto-regular, sans-serif; }
 
+.grey {
+  color: #8b8b8b; }
+
 .blue {
   color: #269ed9; }
 
@@ -576,6 +579,12 @@ video {
 
 .orange {
   color: #f5b83d; }
+
+.red {
+  background: #f5693d; }
+
+.blueExtra {
+  background: #7733ff; }
 
 .gradient-text,
 .gradient-text > * {
@@ -611,17 +620,33 @@ video {
   background: -webkit-gradient(linear, right top, left top, from(#70c270), to(#269ed9));
   background: linear-gradient(-90deg, #70c270 0%, #269ed9 100%); }
 
-.bcg-grad--orane {
-  background: -webkit-gradient(linear, left top, right top, from(#f5c23d), to(#f5693d));
-  background: linear-gradient(90deg, #f5c23d 0%, #f5693d 100%); }
+.bcg-grad--grey {
+  background: #8b8b8b; }
+
+.bcg-grad--green {
+  background: -webkit-gradient(linear, left top, right top, from(#bdcb8e), to(#70c270));
+  background: linear-gradient(90deg, #bdcb8e 0%, #70c270 100%); }
+
+.bcg-grad--green {
+  background: -webkit-gradient(linear, left top, right top, from(#bdcb8e), to(#70c270));
+  background: linear-gradient(90deg, #bdcb8e 0%, #70c270 100%); }
 
 .bcg-grad--blue {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(24%, #269ed9), to(#7733ff));
   background: linear-gradient(180deg, #269ed9 24%, #7733ff 100%); }
 
-.bcg-grad--green {
-  background: -webkit-gradient(linear, left top, right top, from(#bdcb8e), to(#70c270));
-  background: linear-gradient(90deg, #bdcb8e 0%, #70c270 100%); }
+.bcg-grad--yellow {
+  background: #f5c23d; }
+
+.bcg-grad--orange {
+  background: -webkit-gradient(linear, left top, right top, from(#f5c23d), to(#f5693d));
+  background: linear-gradient(90deg, #f5c23d 0%, #f5693d 100%); }
+
+.bcg-grad--red {
+  background: #f5693d; }
+
+.bcg-grad--blueExtra {
+  background: #7733ff; }
 
 .bcg-light {
   background: #f5fafe;
@@ -2686,10 +2711,10 @@ video {
       width: 100%; } }
   @media screen and (min-width: 1200px) {
     .drowdown-block {
-      width: 90px; } }
+      width: 120px; } }
   @media screen and (min-width: 1200px) {
     .drowdown-block {
-      min-width: 90px; } }
+      min-width: 120px; } }
   .drowdown-block__active {
     display: block;
     cursor: pointer;
@@ -2768,7 +2793,7 @@ video {
         width: 100%; } }
     @media screen and (min-width: 1200px) {
       .drowdown-block__list {
-        width: 90px; } }
+        width: 120px; } }
     @media screen and (min-width: 1200px) {
       .drowdown-block__list {
         background-color: #f5fafe; } }
@@ -2900,6 +2925,7 @@ video {
            object-position: center; }
     .content__reklama .reklama-item__content {
       height: 100%;
+      width: 100%;
       display: -webkit-box;
       display: -webkit-flex;
       display: -moz-box;

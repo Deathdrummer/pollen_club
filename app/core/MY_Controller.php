@@ -68,7 +68,11 @@ class MY_Controller extends CI_Controller
         return isset($postfix) ? ($postfix == 0 ? '' : $postfix) : $default;
         });*/
 
-        $this->twig->addFilter('merge', function ($arr, $key, $value) {
+        $this->twig->addFilter('merge', function ($arr, $key, $value = null) {
+            if (is_null($value)) {
+                return array_merge($arr, $key);
+            }
+
             return array_merge($arr, [$key => $value]);
         });
 

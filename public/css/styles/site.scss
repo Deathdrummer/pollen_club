@@ -5,6 +5,7 @@ $light: #f5fafe;
 $dark: #081530;
 $blue: #269ed9;
 $orange: #f5b83d;
+$grey: #8b8b8b;
 $gradient: radial-gradient(1508.23% 99.48% at 50% 0%, #05132e 41.15%, #364d63 100%);
 $buttonsGradient: radial-gradient(317.37% 116.72% at 100% 87.5%, #70c270 0%, #269ed9 100%);
 $gradientText: linear-gradient(-90deg, #70c270 0%, #269ed9 100%);
@@ -148,6 +149,9 @@ video {
     @include font('Roboto', 'regular');
   }
 }
+.grey {
+  color: $grey;
+}
 .blue {
   color: $blue;
 }
@@ -157,6 +161,12 @@ video {
 
 .orange {
   color: $orange;
+}
+.red {
+  background: #f5693d;
+}
+.blueExtra {
+  background: #7733ff;
 }
 .gradient-text,
 .gradient-text > * {
@@ -197,14 +207,30 @@ video {
 .bcg-grad {
   background: $gradientText;
 }
-.bcg-grad--orane {
-  background: linear-gradient(90deg, #f5c23d 0%, #f5693d 100%);
+.bcg-grad--grey {
+  background: $grey;
+}
+.bcg-grad--green {
+  background: linear-gradient(90deg, #bdcb8e 0%, #70c270 100%);
+}
+.bcg-grad--green {
+  background: linear-gradient(90deg, #bdcb8e 0%, #70c270 100%);
 }
 .bcg-grad--blue {
   background: linear-gradient(180deg, #269ed9 24%, #7733ff 100%);
 }
-.bcg-grad--green {
-  background: linear-gradient(90deg, #bdcb8e 0%, #70c270 100%);
+.bcg-grad--yellow {
+  background: #f5c23d;
+}
+.bcg-grad--orange {
+  background: linear-gradient(90deg, #f5c23d 0%, #f5693d 100%);
+}
+
+.bcg-grad--red {
+  background: #f5693d;
+}
+.bcg-grad--blueExtra {
+  background: #7733ff;
 }
 .bcg-light {
   background: $light;
@@ -2372,13 +2398,13 @@ video {
     width,
     (
       lg-down: 100%,
-      xl: 90px,
+      xl: 120px,
     )
   );
   @include resp(
     min-width,
     (
-      xl: 90px,
+      xl: 120px,
     )
   );
   &__active {
@@ -2459,7 +2485,7 @@ video {
       width,
       (
         lg-down: 100%,
-        xl: 90px,
+        xl: 120px,
       )
     );
 
@@ -2639,6 +2665,7 @@ video {
 
       &__content {
         height: 100%;
+        width: 100%;
         display: flex;
         flex-direction: column;
       }
