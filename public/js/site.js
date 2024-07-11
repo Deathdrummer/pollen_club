@@ -207,6 +207,7 @@ $(document).ready(function () {
 
   // поиск
   let search = $('.search');
+
   let searchClose = $('.search-close');
   let searchInput = $('.search input');
 
@@ -269,6 +270,7 @@ $(document).ready(function () {
     searchResult.html('');
     searchClose.removeClass('val');
   });
+
   $('.finance-link-popup').on('click', function () {
     ddrPopUp(
       {
@@ -280,31 +282,29 @@ $(document).ready(function () {
         getSectionData({ section: 'support_project', template: 'render/donate.tpl', data: {} }, function (html, stat) {
           getDonate.setData(html, false, function () {
             getDonate.wait(false);
-            let search = $('.search');
+            let search = $('.content-donate  .search');
             let searchClose = $('.search-close');
-            let searchInput = $('.search input');
+            let searchDonateInput = $('.content-donate  .search input');
+            let financeItems = $('.finance-last .finance-item');
 
-            searchInput.on('input', function () {
+            searchDonateInput.on('input', function () {
               var value = $(this).val();
-              const searchResult = $('.search-result');
-              searchClose.toggleClass('val', value.length > 0);
 
-              // if (value.length > 0 && r.data.length > 0) {
-              //   search.addClass('invalid');
-              // } else {
-              //   search.removeClass('invalid');
-              // }
-              // if (r.data.length === 0) {
-              //   search.addClass('noinvalid');
-              // } else {
-              //   search.removeClass('noinvalid');
-              // }
-              // if (value.length === 0) {
-              //   searchResult.html('');
-              // }
+              searchClose.toggleClass('val', value.length > 0);
+              financeItems.each(function () {
+                var financeName = $(this).find('.finance-name').text();
+                if (financeName.toLowerCase().includes(value.toLowerCase())) {
+                  $(this).show();
+                } else {
+                  $(this).hide();
+                }
+              });
             });
             searchClose.on('click', function () {
-              searchInput.val('');
+              financeItems.each(function () {
+                $(this).show();
+              });
+              searchDonateInput.val('');
               searchResult.html('');
               searchClose.removeClass('val');
             });
