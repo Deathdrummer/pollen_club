@@ -47,7 +47,7 @@
 									{% endif %}
 								{% else %}
 									<option disabled value="">Нет данных</option>
-								{% endif %}	
+								{% endif %}
 							</select>
 						</div>
 					{% elseif field.type == 'checkbox' %}
@@ -122,7 +122,7 @@
 							{% if field.rules %}rules="{{field.rules}}"{% endif %}
 							id="{{field.name}}{{fieldId}}{{lk}}" />
 						</div>
-					
+
 					{% elseif field.type == 'category' %}
 						<div class="select">
 							<select name="{{field.name}}--category">
@@ -168,4 +168,4 @@
 			</td>
 		</tr>
 	{% endfor %}
-{% endif %}	
+{% endif %}

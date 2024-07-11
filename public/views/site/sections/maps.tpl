@@ -14,6 +14,7 @@
     // fire the loading
     head.appendChild(script)
   }
+  loadScript('public/js/pollen/map.js')
   loadScript('public/js/pollen/highcharts.js')
   loadScript('public/js/pollen/exporting.js')
   loadScript('public/js/pollen/modernizr.custom.js')
@@ -34,6 +35,7 @@
   </div>
   <div class="map-wrapper">
     {# <div id="preloader" style="background-color:#fff;border-radius:15px;position:absolute;bottom:20px;left:50%;padding: 6px 12px;z-index:2;translate(-50%, 0);display:none;">загрузка...</div> #}
+    <iframe width="100%" height="100%" id="silam" src="https://api.pollen.club/static/map.html" frameborder="0"></iframe>
     <div id="map"></div>
     <div class="content-main__map">
       <a href="/" class="content-main__map-link">
@@ -45,8 +47,8 @@
     </div>
     <div id="header" class="header__map">
       <ul class="header__map-menu">
-        <li class="dropdown">
-          <a href="https://api.pollen.club/static/map.html" target="_blank" class="dropbtn">Прогноз SILAM</a>
+        <li id="silambtn" class="dropdown">
+          <span class="dropbtn">Прогноз SILAM</span>
         </li>
         <li class="dropdown">
           <a class="dropbtn" id="pollenbtn">Прогноз +5 дней</a>
@@ -70,20 +72,31 @@
   </div>
   <div class="content__map">
     <div class="content__reklama content-main__reklama">
-      {% if reklama_map %}
-        {% for item in reklama_map %}
-          <div class="reklama-item">
-            <div class="photo reklama-item__photo">
-              <img src="{{ base_url('public/filemanager/' ~ item.img) }}" loading="lazy" alt="" />
-            </div>
-            <div class="reklama-item__content">
-              <h3 class="reklama-item__title">{{ item.title }}</h3>
-              <p class="reklama-item__text">{{ item.text }}</p>
-              <a href="{{ item.link }}" class="reklama-item__link">{{ item.text_link }}</a>
-            </div>
+      {% set current_date = date('Y-m-d') %}
+      {% set bannerArr = [] %}
+      {% for item in reklama[3] %}
+        {% set date_min = item.date_min|date('Y-m-d') %}
+        {% set date_max = item.date_max|date('Y-m-d') %}
+        {% if current_date >= date_min and current_date <= date_max %}
+          {% set bannerArr = bannerArr|merge([item]) %}
+        {% endif %}
+      {% endfor %}
+      {% for item in bannerArr|arrcombine(news_last.items|reverse, 3) %}
+        <div class="reklama-item">
+          <div class="photo reklama-item__photo">
+            {% if item.img %}
+              <img src="{{ base_url('public/filemanager/' ~ item.img) }}" loading="lazy" alt="{{ item.title }}" />
+            {% else %}
+              <img src="{{ base_url('public/filemanager/' ~ item.main_image.file) }}" loading="lazy" alt="{{ item.main_image.alt }}" />
+            {% endif %}
           </div>
-        {% endfor %}
-      {% endif %}
+          <div class="reklama-item__content">
+            <h3 class="reklama-item__title">{{ item.title }}</h3>
+            <p class="reklama-item__text">{{ item.text ? : item.short_desc }}</p>
+            <a href="{{ item.href }}" class="reklama-item__link">{{ item.text_link ? : 'Подробнее' }}</a>
+          </div>
+        </div>
+      {% endfor %}
     </div>
   </div>
 </section>

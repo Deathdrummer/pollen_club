@@ -41,10 +41,10 @@
         {% for item in progress %}
           <div class="finance-progress">
             <div class="finance-progress__wrapper">
-              <span class="finance-progress__sum">{{ item.value }} ({{ item.value * 100 / item.max }}%)</span>
+              <span class="finance-progress__sum">{{ item.value|number_format(0, ',', ' ') }} ({{ item.value * 100 / item.max }}%)</span>
               <progress class="finance-progress__bar" value="{{ item.value * 100 / item.max }}" max="100"></progress>
             </div>
-            <span class="finance-progress__max">{{ item.max }}</span>
+            <span class="finance-progress__max">{{ item.max|number_format(0, ',', ' ') }}</span>
           </div>
         {% endfor %}
       </div>
@@ -76,7 +76,7 @@
         <h3 class="content-title section-title blue">{{ title_finance_last }}</h3>
         <div class="finance-last">
           {% set reversedDonate = donate|reverse %}
-          {% for donat in reversedDonate|slice(0, 4)|reverse %}
+          {% for donat in reversedDonate|slice(0, 4) %}
             <span>{{ donat.name }}</span>
             <span class="finance-sum">{{ donat.price }} ₽</span>
             <span>{{ donat.date }}</span>

@@ -5,6 +5,7 @@ $light: #f5fafe;
 $dark: #081530;
 $blue: #269ed9;
 $orange: #f5b83d;
+$grey: #8b8b8b;
 $gradient: radial-gradient(1508.23% 99.48% at 50% 0%, #05132e 41.15%, #364d63 100%);
 $buttonsGradient: radial-gradient(317.37% 116.72% at 100% 87.5%, #70c270 0%, #269ed9 100%);
 $gradientText: linear-gradient(-90deg, #70c270 0%, #269ed9 100%);
@@ -148,6 +149,9 @@ video {
     @include font('Roboto', 'regular');
   }
 }
+.grey {
+  color: $grey;
+}
 .blue {
   color: $blue;
 }
@@ -157,6 +161,12 @@ video {
 
 .orange {
   color: $orange;
+}
+.red {
+  background: #f5693d;
+}
+.blueExtra {
+  background: #7733ff;
 }
 .gradient-text,
 .gradient-text > * {
@@ -197,14 +207,30 @@ video {
 .bcg-grad {
   background: $gradientText;
 }
-.bcg-grad--orane {
-  background: linear-gradient(90deg, #f5c23d 0%, #f5693d 100%);
+.bcg-grad--grey {
+  background: $grey;
+}
+.bcg-grad--green {
+  background: linear-gradient(90deg, #bdcb8e 0%, #70c270 100%);
+}
+.bcg-grad--green {
+  background: linear-gradient(90deg, #bdcb8e 0%, #70c270 100%);
 }
 .bcg-grad--blue {
   background: linear-gradient(180deg, #269ed9 24%, #7733ff 100%);
 }
-.bcg-grad--green {
-  background: linear-gradient(90deg, #bdcb8e 0%, #70c270 100%);
+.bcg-grad--yellow {
+  background: #f5c23d;
+}
+.bcg-grad--orange {
+  background: linear-gradient(90deg, #f5c23d 0%, #f5693d 100%);
+}
+
+.bcg-grad--red {
+  background: #f5693d;
+}
+.bcg-grad--blueExtra {
+  background: #7733ff;
 }
 .bcg-light {
   background: $light;
@@ -1944,6 +1970,14 @@ video {
             xxxl: 34px 20px,
           )
         );
+        &__content {
+          @include resp(
+            height,
+            (
+              xs-down: auto,
+            )
+          );
+        }
         &__photo {
           @include resp(
             padding-bottom,
@@ -1976,9 +2010,9 @@ video {
           @include resp(
             margin,
             (
-              sm-down: 0 auto 0 0,
-              md: 0 0 0 auto,
-              xxxl: 0 auto 0 0,
+              sm-down: auto auto 0 0,
+              md: auto 0 0 auto,
+              xxxl: auto auto 0 0,
             )
           );
         }
@@ -2048,8 +2082,8 @@ video {
             @include resp(
               margin,
               (
-                sm-down: 0 auto 0 0,
-                md: 0 0 0 auto,
+                sm-down: auto auto 0 0,
+                md: auto 0 0 auto,
               )
             );
           }
@@ -2364,13 +2398,13 @@ video {
     width,
     (
       lg-down: 100%,
-      xl: 90px,
+      xl: 120px,
     )
   );
   @include resp(
     min-width,
     (
-      xl: 90px,
+      xl: 120px,
     )
   );
   &__active {
@@ -2451,7 +2485,7 @@ video {
       width,
       (
         lg-down: 100%,
-        xl: 90px,
+        xl: 120px,
       )
     );
 
@@ -2596,6 +2630,7 @@ video {
       height: max-content;
       border-radius: 5px;
       background-color: $light;
+      height: 100%;
       box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 4px 0 rgba(0, 0, 0, 0.05), 0 2px 8px 0 rgba(0, 0, 0, 0.06), 0 3px 15px 0 rgba(0, 0, 0, 0.07), 0 5px 28px 0 rgba(0, 0, 0, 0.09);
       @include resp(
         box-shadow,
@@ -2629,6 +2664,10 @@ video {
       }
 
       &__content {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
       }
 
       &__title {
@@ -2693,10 +2732,17 @@ video {
       );
     }
   }
+  #silam,
   #map {
     border-radius: 5px;
     width: 100%;
     height: 100%;
+  }
+  #silam {
+    position: absolute;
+  }
+  #silambtn {
+    cursor: pointer;
   }
   .map-wrapper {
     @include resp(
@@ -4002,8 +4048,7 @@ video {
     .search {
       margin-bottom: 15px;
       margin-right: 55px;
-
-      width: 100%;
+      width: calc(100% - 55px);
       height: fit-content;
     }
     .finance-last-wrapper {
@@ -4050,6 +4095,37 @@ video {
         background-color: $light;
       }
     }
+  }
+}
+
+/* рекламный баннер */
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 11;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* фон */
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &_visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &__win {
+    max-width: calc(100vw - 30px);
+    /* вертикальный отступ */
+    max-height: calc(100vh - 30px);
+    /* вертикальный отступ */
+    border-radius: 3px;
+    object-fit: contain;
   }
 }
 /* общие стили для записи */
@@ -4346,7 +4422,7 @@ video {
 // карточка новости
 .card-news {
   // min-width: 347px;
-
+  width: 100%;
   background: #14181f;
   border-radius: 5px;
   padding: 16px 36px 18px 16px;

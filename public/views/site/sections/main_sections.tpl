@@ -8,28 +8,9 @@
             <p>{{ desc_page }}</p>
           </div>
 
-          <div class="drowdown-block">
-            <span class="drowdown-block__active">Береза</span>
-            <ul class="drowdown-block__list">
-              <li class="active">
-                <span>Береза</span>
-              </li>
-              <li>
-                <span>Злахи</span>
-              </li>
-              <li>
-                <span>Ясен</span>
-              </li>
-              <li>
-                <span>Ольха</span>
-              </li>
-              <li>
-                <span>Ольха</span>
-              </li>
-              <li>
-                <span>Ольха</span>
-              </li>
-            </ul>
+          <div class="drowdown-block drowdown-block--pollens">
+            <span class="drowdown-block__active">Берёза</span>
+            <ul class="drowdown-block__list"></ul>
           </div>
         </div>
 
@@ -43,21 +24,25 @@
           <div class="pollen-level__right">
             <div class="pollen-level__item">
               <span class="level-item__title">Уровень пыльцы</span>
-              <div class="level-item__content">
-                <span class="level-item__content-text orange">Высокий</span>
-                <div class="level-item__content-progress bcg-grad--orane"></div>
+              <div class="level-item__content level-item__level">
+                <div class="level-item__content-text">
+                  <span>Высокий</span>
+                </div>
+                <div class="level-item__content-progress bcg-grad--grey"></div>
               </div>
             </div>
             <div class="pollen-level__item">
               <span class="level-item__title">Индекс самочувствия</span>
-              <div class="level-item__content">
-                <span class="level-item__content-text blue">6 Баллов</span>
-                <div class="level-item__content-progress bcg-grad--blue"></div>
+              <div class="level-item__content level-item__index">
+                <div class="level-item__content-text">
+                  <span>6 баллов</span>
+                </div>
+                <div class="level-item__content-progress bcg-grad--grey"></div>
               </div>
             </div>
             <div class="pollen-level__item">
               <span class="level-item__title">Динамика самочувствия</span>
-              <div class="level-item__content">
+              <div class="level-item__content level-item__chart">
                 <canvas id="myChart"></canvas>
               </div>
             </div>
@@ -91,7 +76,7 @@
                       <div class="card-news__content">
                         <h3 class="card-news__content-title">{{ item.title }}</h3>
                         <p class="card-news__content-text">{{ item.short_desc }}</p>
-                      </div> <span class="date">20/07/2022</span>
+                      </div> <span class="date">{{ item.article }}</span>
                       <a href="{{ item.href }}" class="card-news__link"></a>
                     </div>
                   </div>
@@ -101,7 +86,6 @@
             <div class="swiper-pagination"></div>
           </div>
         </div>
-
         <h2 class="content-title">{{ title_otmetki }}</h2>
         <div class="content-description story">
           <p>{{ text_otmetki }}</p>
@@ -123,19 +107,127 @@
         <h2 class="content-title">{{ title_finance }}</h2>
         <div class="content-description story">
           <p>{{ text_finance }}</p>
+          <div style="font-weight: 700">
+            <div>Уровень пыльцы</div>
+
+            <div style="display: flex; gap: 20px;">
+              <div class="pollen-level__item">
+                <div class="level-item__content level-item__index">
+                  <div class="level-item__content-text">
+                    <span style="color:#8b8b8b">нет пыльцы</span>
+                  </div>
+                  <div class="level-item__content-progress bcg-grad--grey"></div>
+                </div>
+              </div>
+              <div class="pollen-level__item">
+                <div class="level-item__content level-item__index">
+                  <div class="level-item__content-text">
+                    <span style="color:#00b147">мало пыльцы</span>
+                  </div>
+                  <div class="level-item__content-progress bcg-grad--green"></div>
+                </div>
+              </div>
+
+              <div class="pollen-level__item">
+                <div class="level-item__content level-item__index">
+                  <div class="level-item__content-text">
+                    <span style="color:#F5D033">средне пыльцы</span>
+                  </div>
+                  <div class="level-item__content-progress bcg-grad--yellow"></div>
+                </div>
+              </div>
+              <div class="pollen-level__item">
+                <div class="level-item__content level-item__index">
+                  <div class="level-item__content-text">
+                    <span style="color:#F19F33">много пыльцы</span>
+                  </div>
+                  <div class="level-item__content-progress bcg-grad--orange"></div>
+                </div>
+              </div>
+              <div class="pollen-level__item">
+                <div class="level-item__content level-item__index">
+                  <div class="level-item__content-text">
+                    <span style="color:#FF4500">оч. много пыльцы</span>
+                  </div>
+                  <div class="level-item__content-progress bcg-grad--red"></div>
+                </div>
+              </div>
+              <div class="pollen-level__item">
+                <div class="level-item__content level-item__index">
+                  <div class="level-item__content-text">
+                    <span style="color:#8E43C7">экстра много пыльцы</span>
+                  </div>
+                  <div class="level-item__content-progress bcg-grad--blueExtra"></div>
+                </div>
+              </div>
+            </div>
+            <div>Индекс самочувствия</div>
+
+            <div style="display: flex; gap: 20px;">
+              <div class="pollen-level__item">
+                <div class="level-item__content level-item__index">
+                  <div class="level-item__content-text">
+                    <span style="color:#8b8b8b">мало баллов</span>
+                  </div>
+                  <div class="level-item__content-progress bcg-grad--grey"></div>
+                </div>
+              </div>
+              <div class="pollen-level__item">
+                <div class="level-item__content level-item__index">
+                  <div class="level-item__content-text">
+                    <span style="color:#00b147">2-4 балла</span>
+                  </div>
+                  <div class="level-item__content-progress bcg-grad--green"></div>
+                </div>
+              </div>
+
+              <div class="pollen-level__item">
+                <div class="level-item__content level-item__index">
+                  <div class="level-item__content-text">
+                    <span style="color:#f5c23d  ">пропусить?</span>
+                  </div>
+                  <div class="level-item__content-progress bcg-grad--yellow"></div>
+                </div>
+              </div>
+              <div class="pollen-level__item">
+                <div class="level-item__content level-item__index">
+                  <div class="level-item__content-text">
+                    <span style="color:#F19F33">5-7 баллов</span>
+                  </div>
+                  <div class="level-item__content-progress bcg-grad--orange"></div>
+                </div>
+              </div>
+              <div class="pollen-level__item">
+                <div class="level-item__content level-item__index">
+                  <div class="level-item__content-text">
+                    <span style="color:#E9403F">больше 8 баллов</span>
+                  </div>
+                  <div class="level-item__content-progress bcg-grad--red"></div>
+                </div>
+              </div>
+              <div class="pollen-level__item">
+                <div class="level-item__content level-item__index">
+                  <div class="level-item__content-text">
+                    <span style="color:#8E43C7">пропусить?</span>
+                  </div>
+                  <div class="level-item__content-progress bcg-grad--blueExtra"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         {% for item in progress %}
           <div class="finance-progress">
             <div class="finance-progress__wrapper">
-              <span class="finance-progress__sum">{{ item.value }} ({{ item.value * 100 / item.max }}%)</span>
+              <span class="finance-progress__sum">{{ item.value|number_format(0, ',', ' ') }} ({{ item.value * 100 / item.max }}%)</span>
               <progress class="finance-progress__bar" value="{{ item.value * 100 / item.max }}" max="100"></progress>
             </div>
-            <span class="finance-progress__max">{{ item.max }}</span>
+            <span class="finance-progress__max">{{ item.max|number_format(0, ',', ' ') }}</span>
           </div>
         {% endfor %}
         <div class="content-main__support">
-          <a href="#" class="content-main__support-link">Поддержать Pollen Club!</a>
-          <a href="#" class="content-main__support-text">На что идут ваши пожертвования</a>
+          <a href="{{ content_main__support_link_1 }}" class="content-main__support-link">{{ content_main__support_title_1 }}</a>
+          <a href="{{ content_main__support_link_2 }}" class="content-main__support-text">{{ content_main__support_title_2 }}</a>
         </div>
       </div>
       <div class="content-main__map">
@@ -146,22 +238,32 @@
           </p>
           <span class="content-main__map-img"><img src="{{ base_url('public/filemanager/' ~ map_img) }}" loading="lazy" alt="map" /></span>
         </a>
-
         <div class="content__reklama content-main__reklama">
-          {% if reklama_main %}
-            {% for item in reklama_main %}
-              <div class="reklama-item">
-                <div class="photo reklama-item__photo">
-                  <img src="{{ base_url('public/filemanager/' ~ item.img) }}" loading="lazy" alt="" />
-                </div>
-                <div class="reklama-item__content">
-                  <h3 class="reklama-item__title">{{ item.title }}</h3>
-                  <p class="reklama-item__text">{{ item.text }}</p>
-                  <a href="{{ item.link }}" class="reklama-item__link">{{ item.text_link }}</a>
-                </div>
+          {% set current_date = date('Y-m-d') %}
+          {% set bannerArr = [] %}
+          {% for item in reklama[1] %}
+            {% set date_min = item.date_min|date('Y-m-d') %}
+            {% set date_max = item.date_max|date('Y-m-d') %}
+            {% if current_date >= date_min and current_date <= date_max %}
+              {% set bannerArr = bannerArr|merge([item]) %}
+            {% endif %}
+          {% endfor %}
+          {% for item in bannerArr|arrcombine(news_last.items|reverse, 3) %}
+            <div class="reklama-item">
+              <div class="photo reklama-item__photo">
+                {% if item.img %}
+                  <img src="{{ base_url('public/filemanager/' ~ item.img) }}" loading="lazy" alt="{{ item.title }}" />
+                {% else %}
+                  <img src="{{ base_url('public/filemanager/' ~ item.main_image.file) }}" loading="lazy" alt="{{ item.main_image.alt }}" />
+                {% endif %}
               </div>
-            {% endfor %}
-          {% endif %}
+              <div class="reklama-item__content">
+                <h3 class="reklama-item__title">{{ item.title }}</h3>
+                <p class="reklama-item__text">{{ item.text ? : item.short_desc }}</p>
+                <a href="{{ item.href }}" class="reklama-item__link">{{ item.text_link ? : 'Подробнее' }}</a>
+              </div>
+            </div>
+          {% endfor %}
         </div>
       </div>
     </div>

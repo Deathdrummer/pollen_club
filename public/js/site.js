@@ -337,7 +337,6 @@ $(document).ready(function () {
 
   // получение аллергенов
   if (document.querySelector('.drowdown-block--pollens')) {
-    console.log('tool')
     var riskLevel = {
       0: '<span  style="color:#8b8b8b">Нет пыльцы</span>',
       1: '<span style="color:#00b147">Мало пыльцы</span>',
@@ -398,7 +397,7 @@ $(document).ready(function () {
           dataType: 'json',
           data: {
             url: 'https://test.pollen.club/maps/ddr_query.php',
-            method: 'index1',
+            method: 'index',
             params: {
               type: id,
               fromd: fromdate,
@@ -522,9 +521,8 @@ $(document).ready(function () {
 
                 hasData = statExport_pins[item.id] && statExport_pins[item.id].bad + statExport_pins[item.id].good + statExport_pins[item.id].middle >= 20;
                 ballov = statExport_pins[item.id] ? statExport_pins[item.id].ball : 0;
-                pollenForType(item.id, hasData);
 
-                console.log(123123123)
+                pollenForType(item.id, hasData);
 
                 if (hasData) {
                   if (ballov <= 1) {

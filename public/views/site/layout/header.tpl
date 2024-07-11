@@ -36,11 +36,16 @@
         <div class="aside-block__bottom-bottom">
           <div class="social-links">
             {% for item in soc %}
-              <a class="social-link" href="{{ item.link }}"><i class="grad-icon" style="mask-image:  url('{{ base_url('public/filemanager/' ~ item.icon) }}');"></i></a>
+              {% if item.icon %}
+                <a class="social-link" href="{{ item.link }}"><i class="grad-icon" style="mask-image:  url('{{ base_url('public/filemanager/' ~ item.icon) }}');"></i></a>
+              {% endif %}
             {% endfor %}
           </div>
-          <a class="menu-link policy" href="#"><span>Политика конфиденциальности</span></a>
-          <a class="menu-link mail" href="mailto:feedback@pollen.club"><span>Связаться с нами: feedback@pollen.club</span></a>
+          {% for item in soc %}
+            {% if not item.icon %}
+              <a class="menu-link {{ item.sprite }}" href="{{ item.link }}"><span>{{ item.title }}</span></a>
+            {% endif %}
+          {% endfor %}
         </div>
         <div class="close-button menu-btn">
           <i></i>

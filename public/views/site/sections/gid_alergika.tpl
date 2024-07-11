@@ -24,7 +24,7 @@
                   <div class="card-news__content">
                     <h3 class="card-news__content-title">{{ item.title }}</h3>
                     <p class="card-news__content-text">{{ item.short_desc }}</p>
-                  </div> <span class="date">20/07/2022</span>
+                  </div> <span class="date">{{ item.article }}</span>
                   <a href="{{ item.href }}" class="card-news__link"></a>
                 </div>
               </div>
@@ -44,25 +44,37 @@
       </ul>
     </div>
     <div class="content-alergika__cards-allergika">
-      {% for item in gid_allergika.items %}
-        <a href="{{ item.href }}" class="card-allergika">
-          {% if item.hashtags %}
+      {% set current_date = date('Y-m-d') %}
+      {% for item in gid_allergika.items|reverse|randomaddinarray(reklama[3]) %}
+        {% set date_min = item.date_min|date('Y-m-d') %}
+        {% set date_max = item.date_max|date('Y-m-d') %}
+        {% if current_date >= date_min and current_date <= date_max %}
+          <a href="{{ item.href }}" class="card-allergika">
             <div class="card-allergika__tags tags">
               <ul>
-                {% for tag in item.hashtags %}
-                  <li style="color: {{ hashtags_list[tag][0]['color_text'] }}; background-color: {{ hashtags_list[tag][0]['color_bcg'] }}">{{ tag }}</li>
-                {% endfor %}
+                {% if item.hashtags %}
+                  {% for tag in item.hashtags %}
+                    <li style="color: {{ hashtags_list[tag][0]['color_text'] }}; background-color: {{ hashtags_list[tag][0]['color_bcg'] }}">{{ tag }}</li>
+                  {% endfor %}
+                {% elseif not item.main_image.file %}
+                  <li class="bcg-light">Реклама</li>
+                {% endif %}
               </ul>
             </div>
-          {% endif %}
-          <div class="card-allergika__photo">
-            <img loading="lazy" src="{{ base_url('public/filemanager/' ~ item.main_image.file) }}" alt="{{ item.main_image.alt }}" role="group" />
-          </div>
-          <div class="card-allergika__content">
-            <div class="card-allergika__content-title">{{ item.title }}</div>
-            <div class="card-allergika__content-text">{{ item.short_desc }}</div>
-          </div>
-        </a>
+
+            <div class="card-allergika__photo">
+              {% if item.img %}
+                <img src="{{ base_url('public/filemanager/' ~ item.img) }}" loading="lazy" alt="{{ item.title }}" />
+              {% else %}
+                <img src="{{ base_url('public/filemanager/' ~ item.main_image.file) }}" loading="lazy" alt="{{ item.main_image.alt }}" />
+              {% endif %}
+            </div>
+            <div class="card-allergika__content">
+              <div class="card-allergika__content-title">{{ item.title }}</div>
+              <div class="card-allergika__content-text">{{ item.short_desc ? : item.text }}</div>
+            </div>
+          </a>
+        {% endif %}
       {% endfor %}
     </div>
   </div>
