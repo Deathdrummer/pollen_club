@@ -36,7 +36,7 @@ $(document).ready(function () {
   });
   main.addEventListener('click', handleClickOutsideMenu);
   // header.addEventListener('click', handleClickOutsideMenu);
-  var swiperSliderNewsMain = new Swiper('.main-sections .news-gallery .swiper-container', {
+  let swiperSliderNewsMain = new Swiper('.main-sections .news-gallery .swiper-container', {
     slidesPerView: 1.2,
     mousewheel: true,
     spaceBetween: 10,
@@ -56,7 +56,7 @@ $(document).ready(function () {
       1920: { slidesPerView: 3 },
     },
   });
-  var swiperSliderScreens = new Swiper('.content-main__slider .swiper-container', {
+  let swiperSliderScreens = new Swiper('.content-main__slider .swiper-container', {
     slidesPerView: 1,
     mousewheel: true,
 
@@ -65,7 +65,7 @@ $(document).ready(function () {
       draggable: true,
     },
   });
-  var swiperSliderSingle = new Swiper('.single-gallery .swiper-container', {
+  let swiperSliderSingle = new Swiper('.single-gallery .swiper-container', {
     slidesPerView: 1.2,
     mousewheel: true,
     spaceBetween: 10,
@@ -84,7 +84,7 @@ $(document).ready(function () {
     },
   });
 
-  var swiperSliderAbout = new Swiper('.about .achievements-list', {
+  let swiperSliderAbout = new Swiper('.about .achievements-list', {
     slidesPerView: 1.2,
     mousewheel: true,
     spaceBetween: 18,
@@ -103,7 +103,7 @@ $(document).ready(function () {
       },
     },
   });
-  var swiperSliderAchievements = new Swiper('.achievements-list.achievements-slider', {
+  let swiperSliderAchievements = new Swiper('.achievements-list.achievements-slider', {
     slidesPerView: 1.2,
     mousewheel: true,
     spaceBetween: 18,
@@ -128,7 +128,7 @@ $(document).ready(function () {
     },
   });
 
-  var swiperSliderNews = new Swiper('.news-gallery-wrapper .news-gallery .swiper-container', {
+  let swiperSliderNews = new Swiper('.news-gallery-wrapper .news-gallery .swiper-container', {
     slidesPerView: 1.2,
     mousewheel: true,
     spaceBetween: 10,
@@ -212,8 +212,8 @@ $(document).ready(function () {
   let searchInput = $('.search input');
 
   searchInput.on('input', function () {
-    var value = $(this).val();
-    const searchResult = $('.search-result');
+    let value = $(this).val();
+
     searchClose.toggleClass('val', value.length > 0);
 
     $.ajax({
@@ -227,6 +227,7 @@ $(document).ready(function () {
       },
       beforeSend: function () {},
       success: function (r) {
+        let searchResult = $('.search-result');
         if (value.length > 0 && r.data.length > 0) {
           search.addClass('invalid');
           searchResult.html(`
@@ -256,6 +257,13 @@ $(document).ready(function () {
         if (value.length === 0) {
           searchResult.html('');
         }
+        searchClose.on('click', function () {
+          searchInput.val('');
+          searchResult.html('');
+          searchClose.removeClass('val');
+          search.removeClass('invalid');
+          search.removeClass('noinvalid');
+        });
       },
       error: function (e, status) {
         console.log(e, status);
@@ -264,11 +272,6 @@ $(document).ready(function () {
         console.log('complete');
       },
     });
-  });
-  searchClose.on('click', function () {
-    searchInput.val('');
-    searchResult.html('');
-    searchClose.removeClass('val');
   });
 
   $('.finance-link-popup').on('click', function () {
@@ -285,14 +288,14 @@ $(document).ready(function () {
             let search = $('.content-donate  .search');
             let searchClose = $('.search-close');
             let searchDonateInput = $('.content-donate  .search input');
-            let financeItems = $('.finance-last .finance-item');
+            let financeItems = $('.content-donate .finance-last .finance-item');
 
             searchDonateInput.on('input', function () {
-              var value = $(this).val();
+              let value = $(this).val();
 
               searchClose.toggleClass('val', value.length > 0);
               financeItems.each(function () {
-                var financeName = $(this).find('.finance-name').text();
+                let financeName = $(this).find('.finance-name').text();
                 if (financeName.toLowerCase().includes(value.toLowerCase())) {
                   $(this).show();
                 } else {
@@ -305,7 +308,7 @@ $(document).ready(function () {
                 $(this).show();
               });
               searchDonateInput.val('');
-              searchResult.html('');
+
               searchClose.removeClass('val');
             });
           });
@@ -320,10 +323,10 @@ $(document).ready(function () {
   });
 
   $(document).on('click', function (event) {
-    var $clickedElement = $(event.target);
+    let $clickedElement = $(event.target);
 
-    var $dropdownList = $('.drowdown-block__list');
-    var $dropdownActive = $('.drowdown-block__active');
+    let $dropdownList = $('.drowdown-block__list');
+    let $dropdownActive = $('.drowdown-block__active');
 
     if (!$clickedElement.closest('.drowdown-block').length) {
       $dropdownList.removeClass('active');
@@ -337,7 +340,7 @@ $(document).ready(function () {
 
   // получение аллергенов
   if (document.querySelector('.drowdown-block--pollens')) {
-    var riskLevel = {
+    let riskLevel = {
       0: '<span  style="color:#8b8b8b">Нет пыльцы</span>',
       1: '<span style="color:#00b147">Мало пыльцы</span>',
       2: '<span style="color:#F5D033">Средне пыльцы</span>',
@@ -345,7 +348,7 @@ $(document).ready(function () {
       4: '<span style="color:#FF4500">Оч. много пыльцы</span>',
       5: '<span style="color:#8E43C7">Экстра много пыльцы</span>',
     };
-    var riskBcg = {
+    let riskBcg = {
       0: '#8b8b8b',
       1: 'linear-gradient(90deg, #bdcb8e 0%, #70c270 100%)',
       2: '#f5c23d',
@@ -355,17 +358,17 @@ $(document).ready(function () {
     };
 
     function ChartJS(data, typeId) {
-      var xAxis = [],
+      let xAxis = [],
         yAxis = [];
-      for (var i = 0; i < 4; i++) {
-        var d = new Date();
+      for (let i = 0; i < 4; i++) {
+        let d = new Date();
         d.setTime(d.getTime() - 1000 * 60 * 60 * 12 * (3 - i));
         xAxis.push('' + d.getDate() + '/' + (d.getMonth() + 1) + ' ' + d.getHours() + ':00');
       }
       yAxis = getIndexValuesForIntervals(data, typeId);
 
-      // for (var i = 3; i >= 0; i--) {
-      //   var d = new Date();
+      // for (let  i = 3; i >= 0; i--) {
+      //   let  d = new Date();
       //   d.setDate(d.getDate() - i);
       //   xAxis.push('' + d.getDate() + '/' + (d.getMonth() + 1));
       // }
@@ -454,8 +457,8 @@ $(document).ready(function () {
       $('#myChart').remove();
       $('.level-item__chart').append('<canvas id="myChart"></canvas>');
 
-      var ctx = document.getElementById('myChart');
-      var chart = new Chart(ctx, {
+      let ctx = document.getElementById('myChart');
+      let chart = new Chart(ctx, {
         type: 'line',
         data: {
           datasets: [
@@ -514,15 +517,15 @@ $(document).ready(function () {
     }
 
     function calculateIndex(data) {
-      var stat = {};
-      for (var i = 0; i < data.length; i++) {
+      let stat = {};
+      for (let i = 0; i < data.length; i++) {
         if (!stat[data[i].pollen_type]) stat[data[i].pollen_type] = { bad: 0, middle: 0, good: 0, ball: 0 };
         if (data[i].value == 1) stat[data[i].pollen_type].good++;
         if (data[i].value == 2) stat[data[i].pollen_type].middle++;
         if (data[i].value == 3) stat[data[i].pollen_type].bad++;
       }
-      for (var i in stat) {
-        var percents = ((stat[i].bad + stat[i].middle) / (stat[i].bad + stat[i].middle + stat[i].good)) * 100;
+      for (let i in stat) {
+        let percents = ((stat[i].bad + stat[i].middle) / (stat[i].bad + stat[i].middle + stat[i].good)) * 100;
         if (percents <= 15) stat[i].ball = 0;
         else if (percents <= 30) stat[i].ball = 1;
         else if (percents <= 35) stat[i].ball = 2;
@@ -539,24 +542,24 @@ $(document).ready(function () {
     }
     function getIndexValuesForIntervals(data, typeId) {
       intervals = [];
-      for (var i = 0; i < 4; i++) {
-        var d = new Date();
-        var from = new Date(d.getTime() - 1000 * 60 * 60 * 6 * (4 - i));
-        var to = new Date(from.getTime() + 1000 * 60 * 60 * 6);
-        var fromtime = parseInt(from.getHours() * 60 * 60 + from.getMinutes() * 60);
-        var totime = parseInt(to.getHours() * 60 * 60 + to.getMinutes() * 60);
-        var fromdate = '' + from.getFullYear() + '-' + (from.getMonth() > 8 ? '' : '0') + (from.getMonth() + 1) + '-' + (from.getDate() > 9 ? '' : '0') + from.getDate() + ' 00:00:00';
-        var todate = '' + to.getFullYear() + '-' + (to.getMonth() > 8 ? '' : '0') + (to.getMonth() + 1) + '-' + (to.getDate() > 9 ? '' : '0') + to.getDate() + ' 00:00:00';
+      for (let i = 0; i < 4; i++) {
+        let d = new Date();
+        let from = new Date(d.getTime() - 1000 * 60 * 60 * 6 * (4 - i));
+        let to = new Date(from.getTime() + 1000 * 60 * 60 * 6);
+        let fromtime = parseInt(from.getHours() * 60 * 60 + from.getMinutes() * 60);
+        let totime = parseInt(to.getHours() * 60 * 60 + to.getMinutes() * 60);
+        let fromdate = '' + from.getFullYear() + '-' + (from.getMonth() > 8 ? '' : '0') + (from.getMonth() + 1) + '-' + (from.getDate() > 9 ? '' : '0') + from.getDate() + ' 00:00:00';
+        let todate = '' + to.getFullYear() + '-' + (to.getMonth() > 8 ? '' : '0') + (to.getMonth() + 1) + '-' + (to.getDate() > 9 ? '' : '0') + to.getDate() + ' 00:00:00';
 
         intervals.push({ fromdate: fromdate, fromtime: fromtime, todate: todate, totime: totime, rows: [] });
       }
-      l: for (var i = 0; i < data.length; i++) {
-        for (var j = 0; j < intervals.length; j++) {
+      l: for (let i = 0; i < data.length; i++) {
+        for (let j = 0; j < intervals.length; j++) {
           if (checkInterval(intervals[j], data[i])) continue l;
         }
       }
-      var indexVales = [];
-      for (var i = 0; i < intervals.length; i++) {
+      let indexVales = [];
+      for (let i = 0; i < intervals.length; i++) {
         try {
           indexVales.push(calculateIndex(intervals[i].rows)[typeId].ball);
         } catch (ex) {
@@ -651,7 +654,7 @@ $(document).ready(function () {
       },
       beforeSend: function () {},
       success: function (r) {
-        var export_pins = JSON.parse(r.data);
+        let export_pins = JSON.parse(r.data);
         statExport_pins = calculateIndex(export_pins);
       },
       error: function (e, status) {
@@ -674,14 +677,14 @@ $(document).ready(function () {
       },
       beforeSend: function () {},
       success: function (risk) {
-        var riskData = JSON.parse(risk.data);
-        var riskmap = [];
-        var riskLevelArr = [];
-        for (var j = 0; j < riskData.length; j++) {
+        let riskData = JSON.parse(risk.data);
+        let riskmap = [];
+        let riskLevelArr = [];
+        for (let j = 0; j < riskData.length; j++) {
           if (!riskmap[riskData[j].pollen_type]) riskmap[riskData[j].pollen_type] = riskLevel[riskData[j].level];
         }
 
-        for (var j = 0; j < riskData.length; j++) {
+        for (let j = 0; j < riskData.length; j++) {
           if (!riskLevelArr[riskData[j].pollen_type]) riskLevelArr[riskData[j].pollen_type] = riskBcg[riskData[j].level];
         }
 
@@ -698,14 +701,14 @@ $(document).ready(function () {
           },
           beforeSend: function () {},
           success: function (r) {
-            var dataPollens = JSON.parse(r.data);
-            var firstItemDesc = '';
-            var firstItemId = '';
+            let dataPollens = JSON.parse(r.data);
+            let firstItemDesc = '';
+            let firstItemId = '';
 
             dataPollens.forEach(function (item, index) {
-              var id = item.id;
-              var desc = item.desc;
-              var isActive = index === 0 ? 'active' : ''; // Check if it's the first item
+              let id = item.id;
+              let desc = item.desc;
+              let isActive = index === 0 ? 'active' : ''; // Check if it's the first item
 
               if (index === 0) {
                 firstItemDesc = desc;
@@ -747,7 +750,7 @@ $(document).ready(function () {
               $('.drowdown-block--pollens .drowdown-block__active').attr('data-id', firstItemId).html(`${firstItemDesc}`);
               $('.drowdown-block--pollens .drowdown-block__list').append(`<li data-id="${id}" class="${isActive}"><span>${desc}</span></li>`);
               getSectionData({ section: 'allergen', data: {} }, function (html, stat) {
-                var matchedData = Object.values(html.allergen).find(function (item) {
+                let matchedData = Object.values(html.allergen).find(function (item) {
                   return item.title === firstItemDesc;
                 });
                 if (matchedData) {
@@ -757,8 +760,8 @@ $(document).ready(function () {
               });
             });
             $('.drowdown-block__list li').on('click', function () {
-              var clickedTitle = $(this).text();
-              var clickedId = $(this).attr('data-id');
+              let clickedTitle = $(this).text();
+              let clickedId = $(this).attr('data-id');
               $('.drowdown-block__active').text(clickedTitle);
               $('.drowdown-block__active').addClass('active');
               $('.drowdown-block__list li').removeClass('active');
@@ -767,7 +770,7 @@ $(document).ready(function () {
               $('.drowdown-block__active').removeClass('active');
               // Загрузка фото аллергена после ajax и нажатия на пункт списка
               getSectionData({ section: 'allergen', data: {} }, function (html, stat) {
-                var matchedData = Object.values(html.allergen).find(function (item) {
+                let matchedData = Object.values(html.allergen).find(function (item) {
                   return item.title === clickedTitle;
                 });
                 if (matchedData) {
@@ -884,10 +887,10 @@ $(document).ready(function () {
               .join('')}
         `);
         $('.tags.tabs ul li').on('click', function () {
-          var selectedTag = $(this).text().trim();
+          let selectedTag = $(this).text().trim();
           $(this).addClass('active').siblings().removeClass('active');
           $('.card-allergika').each(function () {
-            var postTags = $(this)
+            let postTags = $(this)
               .find('.card-allergika__tags li')
               .map(function () {
                 return $(this).text().trim();
@@ -969,7 +972,7 @@ $(document).ready(function () {
     progressBar.addEventListener('click', seek);
 
     function seek(e) {
-      var percent = e.offsetX / this.offsetWidth;
+      let percent = e.offsetX / this.offsetWidth;
       player.currentTime = percent * player.duration;
       e.target.value = Math.floor(percent / 100);
       e.target.innerHTML = progressBar.value + '% played';
@@ -1011,7 +1014,7 @@ $(document).ready(function () {
     // Update the progress bar
     function updateProgressBar() {
       // Work out how much of the media has played via the duration and currentTime parameters
-      var percentage = Math.floor((100 / player.duration) * player.currentTime);
+      let percentage = Math.floor((100 / player.duration) * player.currentTime);
       // Update the progress bar's value
       progressBar.value = percentage;
       // Update the progress bar's text (for browsers that don't support the progress element)
