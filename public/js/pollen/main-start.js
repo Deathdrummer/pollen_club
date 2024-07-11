@@ -59,23 +59,23 @@ var week = [
   { id: 39, label: '24.09 - 30.09' },
 ];
 var icons = [
-  { url: 'public/images/pollen/maps/m1.png', name: 'm1' },
-  { url: 'public/images/pollen/maps/m2.png', name: 'm2' },
-  { url: 'public/images/pollen/maps/m3.png', name: 'm3' },
-  { url: 'public/images/pollen/maps/m4.png', name: 'm4' },
-  { url: 'public/images/pollen/maps/m5.png', name: 'm5' },
-  { url: 'public/images/pollen/maps/m6.png', name: 'm6' },
-  { url: 'public/images/pollen/maps/m7.png', name: 'm7' },
-  { url: 'public/images/pollen/maps/m8.png', name: 'm8' },
-  { url: 'public/images/pollen/maps/m9.png', name: 'm9' },
-  { url: 'public/images/pollen/maps/m10.png', name: 'm10' },
-  { url: 'public/images/pollen/maps/stage-icon2x.png', name: 'icon/stage-icon2x.png' },
-  { url: 'public/images/pollen/maps/stage1-icon2x.png', name: 'icon/stage1-icon2x.png' },
-  { url: 'public/images/pollen/maps/stage2-icon2x.png', name: 'icon/stage2-icon2x.png' },
-  { url: 'public/images/pollen/maps/stage3-icon2x.png', name: 'icon/stage3-icon2x.png' },
-  { url: 'public/images/pollen/maps/stage4-icon2x.png', name: 'icon/stage4-icon2x.png' },
-  { url: 'public/images/pollen/maps/stage5-icon2x.png', name: 'icon/stage5-icon2x.png' },
-  { url: 'public/images/pollen/maps/stage6-icon2x.png', name: 'icon/stage6-icon2x.png' },
+  { url: 'icon/m1.png', name: 'm1' },
+  { url: 'icon/m2.png', name: 'm2' },
+  { url: 'icon/m3.png', name: 'm3' },
+  { url: 'icon/m4.png', name: 'm4' },
+  { url: 'icon/m5.png', name: 'm5' },
+  { url: 'icon/m6.png', name: 'm6' },
+  { url: 'icon/m7.png', name: 'm7' },
+  { url: 'icon/m8.png', name: 'm8' },
+  { url: 'icon/m9.png', name: 'm9' },
+  { url: 'icon/m10.png', name: 'm10' },
+  { url: 'icon/stage-icon2x.png', name: 'icon/stage-icon2x.png' },
+  { url: 'icon/stage1-icon2x.png', name: 'icon/stage1-icon2x.png' },
+  { url: 'icon/stage2-icon2x.png', name: 'icon/stage2-icon2x.png' },
+  { url: 'icon/stage3-icon2x.png', name: 'icon/stage3-icon2x.png' },
+  { url: 'icon/stage4-icon2x.png', name: 'icon/stage4-icon2x.png' },
+  { url: 'icon/stage5-icon2x.png', name: 'icon/stage5-icon2x.png' },
+  { url: 'icon/stage6-icon2x.png', name: 'icon/stage6-icon2x.png' },
 ];
 var map;
 var popup;
@@ -94,7 +94,7 @@ var time_current = new Date().getHours() * 60 * 60 + new Date().getMinutes() * 6
 
 $(document).ready(function () {
   $('.menum').click(function () {
-    $('#bannerBlock').toggle();
+    $('#left').toggle();
     $a = 'Архивы';
     document.getElementById('archive_btn').innerHTML = $a;
     $('.store').toggle();
@@ -109,30 +109,43 @@ $(document).ready(function () {
   });
   initArchive();
   $('#archive_btn').click(function () {
+    $('.news').click(function () {
+      $('.archive_dropdown').css('background-color', '#fff');
+      $('.otzyv').css('background-color', '#ffa161');
+      $('.fenolog').css('background-color', '#fff');
+    });
     $('#select').hide();
     $('#archive_select').toggle();
     $('#archive_select').html($('#mainarchivemenu').html());
-
+    var left = $('#archive_btn').position().left - $('#archive_btn').parent().parent().position().left;
+    $('#archive_select').css('margin-left', Math.ceil(left));
+    var top = $('#archive_btn').position().top + 64;
+    $('#archive_select').css('top', Math.ceil(top));
     $('.cbp-qtrotator').hide();
-    $('#bannerBlock').hide();
+    $('#left').hide();
     $('.store').hide();
   });
-  $('.support').on('click', function () {
+  $('.otzyv').on('click', function () {
     //		$a = 'Архивы';
     //			document.getElementById('archive_btn').innerHTML = $a;
-    window.open('/support-project/', '_blank', false);
+    window.open('https://pollen.club/offer/', '_blank', false);
 
     //            showOtzyv();
-    $('#bannerBlock').hide();
+    $('#left').hide();
     $('.store').hide();
   });
   $('.fenolog').on('click', function () {
     showFenolog();
-    $('#bannerBlock').hide();
+    $('#left').hide();
     $('.store').hide();
     $('.arh_block').hide();
   });
-
+  $('.news').click(function () {
+    $('.news').css('background-color', '#f0f0f0');
+    $('#left').show();
+    $('.store').show();
+    $('.arh_block').hide();
+  });
   $('.butref').on('click', function () {
     showRef();
   });
@@ -158,51 +171,17 @@ $(document).ready(function () {
   ).then(values => {
     console.log('Map marker images loaded (all)');
 
-    $.ajax({
-      type: 'GET',
-      url: '/ajax/get_pollen_data',
-      dataType: 'json',
-      data: {
-        url: 'https://test.pollen.club/maps/ddr_query.php',
-        method: 'risk',
-        params: {
-          type: 1,
-        },
-      },
-    }).done(function (risk) {
-      var riskData = JSON.parse(risk.data);
+    $.ajax({ url: 'risk.php' }).done(function (risk) {
       var riskmap = [];
-      for (var j = 0; j < riskData.length; j++) {
-        if (!riskmap[riskData[j].pollen_type]) riskmap[riskData[j].pollen_type] = riskLevel[riskData[j].level];
+      for (var j = 0; j < risk.length; j++) {
+        if (!riskmap[risk[j].pollen_type]) riskmap[risk[j].pollen_type] = riskLevel[risk[j].level];
       }
 
-      $.ajax({
-        type: 'GET',
-        url: '/ajax/get_pollen_data',
-        dataType: 'json',
-        data: {
-          url: 'https://test.pollen.club/maps/ddr_query.php',
-          method: 'pollen_type',
-          params: {
-            type: 1,
-          },
-        },
-      }).done(function (_types) {
-        types = JSON.parse(_types.data);
+      $.ajax({ url: 'https://pollen.club/new_test_sql/?request=pollen_types' }).done(function (_types) {
+        types = _types.result;
 
-        $.ajax({
-          type: 'GET',
-          url: '/ajax/get_pollen_data',
-          dataType: 'json',
-          data: {
-            url: 'https://test.pollen.club/maps/ddr_query.php',
-            method: 'export_pins',
-            params: {
-              time: time_current,
-            },
-          },
-        }).done(function (pollens) {
-          var stat = calculateIndex(JSON.parse(pollens.data));
+        $.ajax({ url: 'https://pollen.club/new_test_sql/?request=pins&time=' + time_current }).done(function (pollens) {
+          var stat = calculateIndex(pollens.result);
           for (var i = 0; i < types.length; i++) {
             var style = '';
             var color = '#000000';
@@ -222,45 +201,22 @@ $(document).ready(function () {
 
             var hasData = stat[types[i].id] && stat[types[i].id].bad + stat[types[i].id].good + stat[types[i].id].middle >= 20;
 
-            var text = types[i].desc + ' ' + (hasData ? 'ltp class=kvupsmallkvrtltspan style=kvcolor:' + color + 'kvrt' + stat[types[i].id].ball + ' баллов(а)lt/spanrt' : 'ltp class=kvupsmallkvrt мало отметок') + 'lt/prt';
-            var risk = riskmap[types[i].id] ? 'ltp class=kvbuttomsmollkvrt,' + riskmap[types[i].id] + 'lt/prt' : '';
-
+            var text = types[i].desc + ' ' + (hasData ? 'ltsup class=kvupsmallkvrtltspan style=kvcolor:' + color + 'kvrt' + stat[types[i].id].ball + ' баллов(а)lt/spanrt,' : 'ltsup class=kvupsmallkvrt мало отметок,') + 'lt/suprt';
+            var risk = riskmap[types[i].id] ? 'ltsup class=kvbuttomsmollkvrt' + riskmap[types[i].id] + 'lt/suprt' : '';
             $('#select').append('<li><a ' + style + "onclick='pollenForType(" + types[i].id + ',"' + text + risk + '",' + hasData + ")'>" + (text + risk + '').replace(/lt/g, '<').replace(/rt/g, '>').replace(/kv/g, '"') + '</a></li>');
           }
-          loadPoints(JSON.parse(pollens.data));
+          loadPoints(pollens.result);
           $('#preloader').css('display', 'none');
         });
-        $.ajax({
-          type: 'GET',
-          url: '/ajax/get_pollen_data',
-          dataType: 'json',
-          data: {
-            url: 'https://test.pollen.club/maps/ddr_query.php',
-            method: 'radius',
-            params: {
-              type: 1,
-            },
-          },
-        }).done(function (data) {
-          radiusData = JSON.parse(data.data);
+        $.ajax({ url: 'radius.php' }).done(function (data) {
+          radiusData = data;
         });
-        // $.ajax({ url: 'https://test.pollen.club/maps/doctor.php' }).done(function (data) {
-        //   OtzyvData = data;
-        // });
+        $.ajax({ url: 'doctor.php' }).done(function (data) {
+          OtzyvData = data;
+        });
 
-        $.ajax({
-          type: 'GET',
-          url: '/ajax/get_pollen_data',
-          dataType: 'json',
-          data: {
-            url: 'https://test.pollen.club/maps/ddr_query.php',
-            method: 'fenology',
-            params: {
-              type: 1,
-            },
-          },
-        }).done(function (data) {
-          FenologData = JSON.parse(data.data);
+        $.ajax({ url: 'fenology.php' }).done(function (data) {
+          FenologData = data;
         });
       });
     });
@@ -268,7 +224,7 @@ $(document).ready(function () {
     initQuoras();
 
     $('.dell a').click(function () {
-      $('#bannerBlock').hide();
+      $('#left').hide();
       $('.store').hide();
     });
   });
@@ -279,7 +235,7 @@ function initArchive() {
     $('.archive_dropdown').css('background-color', '#f0f0f0');
     $('.otzyv').css('background-color', '#ffa161');
     $('.fenolog').css('background-color', '#fff');
-
+    $('.news').css('background-color', '#fff');
     $('#pollenbtn').css('background-color', '#fff');
     $('.arh_block').show();
     $('#graph').hide();
@@ -295,19 +251,7 @@ function initArchive() {
     return row;
   }
 
-  $.ajax({
-    type: 'GET',
-    url: '/ajax/get_pollen_data',
-    dataType: 'json',
-    data: {
-      url: 'https://test.pollen.club/maps/ddr_query.php',
-      method: 'pollen_type',
-      params: {
-        type: 1,
-      },
-    },
-  }).done(function (pollen_types) {
-    pollen_types = JSON.parse(pollen_types.data);
+  $.ajax({ url: 'pollen_type.php' }).done(function (pollen_types) {
     var submenu = '';
     var mainmenu = '';
     for (var i = 0; i < pollen_types.length; i++) {
@@ -368,7 +312,7 @@ function showArchiveSubmenu(id) {
     $a = 'Архивы';
   }
   $('.dropdown-content li').click(function () {
-    $('#bannerBlock').show();
+    $('#left').show();
     $('.store').show();
   });
   document.getElementById('archive_btn').innerHTML = $a;
@@ -391,24 +335,10 @@ function showArchive(id, week) {
   // }
   // showingRadiuses = [];
 
-  $.ajax({
-    type: 'GET',
-    url: '/ajax/get_pollen_data',
-    dataType: 'json',
-    data: {
-      url: 'https://test.pollen.club/maps/ddr_query.php',
-      method: 'archive',
-      params: {
-        type: id,
-        week: week,
-      },
-    },
-  }).done(function (data) {
-    archiveData = JSON.parse(data.data);
-
+  $.ajax({ url: 'archive.php?type=' + id + '&week=' + week }).done(function (data) {
     const circlesData = {
       type: 'FeatureCollection',
-      features: archiveData.map(item => {
+      features: data.map(item => {
         const circle = turf.circle([item.longitude, item.latitude], item.radius, { units: 'kilometers' });
 
         circle.properties.color = `#${item.color}`;
@@ -1134,9 +1064,13 @@ function showArchive(id, week) {
 function showOtzyv() {
   $a = 'Архивы';
   document.getElementById('archive_btn').innerHTML = $a;
-
+  $('.news').click(function () {
+    $('.archive_dropdown').css('background-color', '#fff');
+    $('.otzyv').css('background-color', '#fff');
+    $('.fenolog').css('background-color', '#fff');
+  });
   $('.archive_dropdown').css('background-color', '#fff');
-
+  $('.news').css('background-color', '#fff');
   $('#graph').hide();
   $('#graph2').hide();
   $('#cbp-qtrotator').show();
@@ -1144,26 +1078,31 @@ function showOtzyv() {
   for (var i = 0; i < markers.length; i++) markers[i].setMap(null);
   markerCluster.clearMarkers();
   markerCluster.redraw();
-  //   $('.otzyv').css('background-color', '#f0f0f0');
-  //   $('.fenolog').css('background-color', '#f0f0f0');
-  //   $('#pollenbtn').css('background-color', '#fff');
+  $('.otzyv').css('background-color', '#f0f0f0');
+  $('.fenolog').css('background-color', '#f0f0f0');
+  $('#pollenbtn').css('background-color', '#fff');
   for (var i = 0; i < showingRadiuses.length; i++) {
     showingRadiuses[i].setMap(null);
   }
   showingRadiuses = [];
-  //   showOtzyvMarkers();
+  showOtzyvMarkers();
 }
 
 function showFenolog() {
+  $('.news').click(function () {
+    $('.archive_dropdown').css('background-color', '#fff');
+    $('.otzyv').css('background-color', '#ffa161');
+    $('.fenolog').css('background-color', '#fff');
+  });
   $('.archive_dropdown').css('background-color', '#fff');
-
+  $('.news').css('background-color', '#fff');
   $('#graph').hide();
   $('#graph2').hide();
   $('#cbp-qtrotator').show();
   $('.dropdown-content').hide();
-  //   $('.otzyv').css('background-color', '#ffa161');
-  //   $('.fenolog').css('background-color', '#f0f0f0');
-  //   $('#pollenbtn').css('background-color', '#fff');
+  $('.otzyv').css('background-color', '#ffa161');
+  $('.fenolog').css('background-color', '#f0f0f0');
+  $('#pollenbtn').css('background-color', '#fff');
   showFenologMarkers();
 }
 
@@ -1171,16 +1110,16 @@ function showIndex() {
   $a = 'Архивы';
   document.getElementById('archive_btn').innerHTML = $a;
   $('.archive_dropdown').css('background-color', '#fff');
-
-  //   $('#pollenbtn').css('background-color', '#f0f0f0');
-  //   $('.otzyv').css('background-color', '#ffa161');
-  //   $('.fenolog').css('background-color', '#fff');
-
-  //   if (jQuery('.dropdown-content').css('display') == 'block') {
-  //     $('#pollenbtn').html('Выберите аллерген</sup><span class="uparrow"></span>');
-  //   } else {
-  //     $('#pollenbtn').html('Выберите аллерген</sup><span class="downarrow">');
-  //   }
+  $('.news').css('background-color', '#f0f0f0');
+  $('#pollenbtn').css('background-color', '#f0f0f0');
+  $('.otzyv').css('background-color', '#ffa161');
+  $('.fenolog').css('background-color', '#fff');
+  $('.news').css('background-color', '#fff');
+  if (jQuery('.dropdown-content').css('display') == 'block') {
+    $('#pollenbtn').html('Выберите аллерген</sup><span class="uparrow"></span>');
+  } else {
+    $('#pollenbtn').html('Выберите аллерген</sup><span class="downarrow">');
+  }
 }
 
 function initMap() {
@@ -1250,7 +1189,7 @@ function pollenForType(id, text, hasData) {
     $('#cbp-qtrotator').hide();
   }
 
-  //   $('#pollenbtn').html(text.replace(/lt/g, '<span class="downarrow"></span><').replace(/rt/g, '>').replace(/kv/g, '"'));
+  $('#pollenbtn').html(text.replace(/lt/g, '<span class="downarrow"></span><').replace(/rt/g, '>').replace(/kv/g, '"'));
 
   var time = new Date().getHours() * 60 * 60 + new Date().getMinutes() * 60;
   var theUrl = id && id > -1 ? 'https://pollen.club/test_sql/?request=typed_pins&type=' + id + '&time=' + time : 'https://pollen.club/new_test_sql/?         request=pins&time=' + time;
@@ -1260,20 +1199,8 @@ function pollenForType(id, text, hasData) {
   removeClusterData();
   removeFenologyLayer();
 
-  $.ajax({
-    type: 'GET',
-    url: '/ajax/get_pollen_data',
-    dataType: 'json',
-    data: {
-      url: 'https://test.pollen.club/maps/ddr_query.php',
-      method: 'export_pins',
-      params: {
-        type: id,
-        time: time,
-      },
-    },
-  }).done(function (data) {
-    loadPoints(JSON.parse(data.data));
+  $.ajax({ url: theUrl }).done(function (data) {
+    loadPoints(data.result);
   });
   $('.dropdown-content').hide();
 
@@ -1303,23 +1230,9 @@ function pollenForType(id, text, hasData) {
   var fromtime = parseInt(d.getHours() * 60 * 60 + d.getMinutes() * 60);
   var fromdate = '' + d.getFullYear() + '-' + (d.getMonth() > 8 ? '' : '0') + (d.getMonth() + 1) + '-' + (d.getDate() > 9 ? '' : '0') + d.getDate();
   if (hasData)
-    $.ajax({
-      type: 'GET',
-      url: '/ajax/get_pollen_data',
-      dataType: 'json',
-      data: {
-        url: 'https://test.pollen.club/maps/ddr_query.php',
-        method: 'indexStat',
-        params: {
-          type: id,
-          fromd: fromdate,
-          fromt: fromtime,
-        },
-      },
-    }).done(function (data) {
-      var indexStat = JSON.parse(data.data);
+    $.ajax({ url: 'index.php?type=' + id + '&fromd=' + fromdate + '&fromt=' + fromtime }).done(function (data) {
       $('#graph').show();
-      showGraph(indexStat, id);
+      // showGraph(data, id);
     });
   else {
     $('#graph').hide();
@@ -1327,22 +1240,10 @@ function pollenForType(id, text, hasData) {
 
   $('#graph2').hide();
   if (id > -1)
-    $.ajax({
-      type: 'GET',
-      url: '/ajax/get_pollen_data',
-      dataType: 'json',
-      data: {
-        url: 'https://test.pollen.club/maps/ddr_query.php',
-        method: 'forecast',
-        params: {
-          type: id,
-        },
-      },
-    }).done(function (data) {
-      var forecast = JSON.parse(data.data);
-      if (forecast.length > 0) {
+    $.ajax({ url: 'forecast.php?type=' + id }).done(function (data) {
+      if (data.length > 0) {
         $('#graph2').show();
-        showGraph2(forecast, id);
+        // showGraph2(data, id);
       }
     });
 }
@@ -1416,7 +1317,7 @@ function createDonutChart(props) {
   //             </div>`;
 
   let html = `<div>
-<img src="/public/images/pollen/maps/m${totalVal}.png" alt="" />
+<img src="https://pollen.club/maps/icon/m${totalVal}.png" alt="" />
 <div style="background-color:#fff;border-radius:100%;color:#000;font-size:12px;transform:translate(8px, -54px);text-align:center;width:27px;height:25px;display:flex;align-items:center;justify-content:center">${props.point_count}</div>
             </div>`;
 
@@ -1457,7 +1358,7 @@ function loadPoints(data) {
     return {
       type: 'Feature',
       properties: {
-        icon2: '/public/images/pollen/maps/m' + index_marker + '.png',
+        icon2: 'https://pollen.club/maps/icon/m' + index_marker + '.png',
         icon: 'm' + index_marker,
         count: 1,
         index: index_marker,
@@ -1555,49 +1456,49 @@ function removeClusterData() {
   markersOnScreen = {};
 }
 
-// function showOtzyvMarkers() {
-//   var locations = [];
-//   var values = [];
-//   markers = [];
+function showOtzyvMarkers() {
+  var locations = [];
+  var values = [];
+  markers = [];
 
-//   for (var i = 0; i < OtzyvData.length; i++) {
-//     var item = OtzyvData[i];
+  for (var i = 0; i < OtzyvData.length; i++) {
+    var item = OtzyvData[i];
 
-//     markers.push(
-//       new google.maps.Marker({
-//         map: map,
-//         icon: {
-//           url: 'icon/doctor_' + item.state + '.png',
+    markers.push(
+      new google.maps.Marker({
+        map: map,
+        icon: {
+          url: 'icon/doctor_' + item.state + '.png',
 
-//           //  scaledSize: new google.maps.Size(45, 56),
-//           origin: new google.maps.Point(0, 0),
-//           anchor: new google.maps.Point(0, 20),
-//           labelOrigin: new google.maps.Point(21, 22),
-//         },
+          //  scaledSize: new google.maps.Size(45, 56),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(0, 20),
+          labelOrigin: new google.maps.Point(21, 22),
+        },
 
-//         title: item.header, // item.comment,
-//         position: {
-//           lat: parseFloat(item['latitude']),
-//           lng: parseFloat(item['longitude']),
-//         },
-//       })
-//     );
+        title: item.header, // item.comment,
+        position: {
+          lat: parseFloat(item['latitude']),
+          lng: parseFloat(item['longitude']),
+        },
+      })
+    );
 
-//     markers[i].info = new google.maps.InfoWindow({
-//       content: '<p><strong>' + item.header + '</strong></p>' + '<p><strong>Описание:</strong> ' + item.comment + '</p>' + '<p><strong>Отзыв:</strong> ' + item.clients + '</p>' + '<p><a href="' + item.ref + '">' + 'сайт</a> ' + '(обновлено ' + item.date + ').</p>',
+    markers[i].info = new google.maps.InfoWindow({
+      content: '<p><strong>' + item.header + '</strong></p>' + '<p><strong>Описание:</strong> ' + item.comment + '</p>' + '<p><strong>Отзыв:</strong> ' + item.clients + '</p>' + '<p><a href="' + item.ref + '">' + 'сайт</a> ' + '(обновлено ' + item.date + ').</p>',
 
-//       maxWidth: 300,
-//     });
+      maxWidth: 300,
+    });
 
-//     google.maps.event.addListener(markers[i], 'click', function () {
-//       // this = marker
-//       var marker_map = this.getMap();
-//       this.info.open(marker_map, this);
-//     });
+    google.maps.event.addListener(markers[i], 'click', function () {
+      // this = marker
+      var marker_map = this.getMap();
+      this.info.open(marker_map, this);
+    });
 
-//     //   markers.push();
-//   }
-// }
+    //   markers.push();
+  }
+}
 
 function addFenologyLayer() {
   map.addLayer({
@@ -1995,22 +1896,10 @@ function calculateIndex(data) {
 }
 
 function initQuoras() {
-  $.ajax({
-    type: 'GET',
-    url: '/ajax/get_pollen_data',
-    dataType: 'json',
-    data: {
-      url: 'https://test.pollen.club/maps/ddr_query.php',
-      method: 'banner',
-      params: {
-        type: 1,
-      },
-    },
-  }).done(function (data) {
-    bannerData = JSON.parse(data.data);
+  $.ajax({ url: 'banner.php' }).done(function (data) {
     var content = '';
-    for (var i = 0; i < bannerData.length; i++) {
-      content += '<div class="cbp-qtcontent"><p><img height="70" width="70" src="' + 'public/images/pollen/maps/' + bannerData[i].experts_site + '.png' + '"  />' + bannerData[i].comment + '<b>' + bannerData[i].expert_name + '</b></p></div><div class="cbp-qtprogress"></div>';
+    for (var i = 0; i < data.length; i++) {
+      content += '<div class="cbp-qtcontent"><p><img height="70" width="70" src="' + 'icon/' + data[i].experts_site + '.png' + '"  />' + data[i].comment + '<b>' + data[i].expert_name + '</b></p></div><div class="cbp-qtprogress"></div>';
     }
     $('#cbp-qtrotator').html(content);
     $('#cbp-qtrotator').cbpQTRotator({

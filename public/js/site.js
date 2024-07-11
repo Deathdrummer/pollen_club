@@ -354,6 +354,165 @@ $(document).ready(function () {
       5: '#7733ff',
     };
 
+    function ChartJS(data, typeId) {
+      var xAxis = [],
+        yAxis = [];
+      for (var i = 0; i < 4; i++) {
+        var d = new Date();
+        d.setTime(d.getTime() - 1000 * 60 * 60 * 12 * (3 - i));
+        xAxis.push('' + d.getDate() + '/' + (d.getMonth() + 1) + ' ' + d.getHours() + ':00');
+      }
+      yAxis = getIndexValuesForIntervals(data, typeId);
+
+      // for (var i = 3; i >= 0; i--) {
+      //   var d = new Date();
+      //   d.setDate(d.getDate() - i);
+      //   xAxis.push('' + d.getDate() + '/' + (d.getMonth() + 1));
+      // }
+
+      const dataChart = [];
+      xAxis.forEach((x, i) => {
+        const newData = {
+          x: x,
+          y: yAxis[i],
+        };
+        dataChart.push(newData);
+      });
+
+      let maxLabel = 12;
+      if (window.matchMedia('(min-width: 768px)').matches) maxLabel = 16;
+
+      const annotations = [];
+
+      dataChart.forEach((dataPoint, index) => {
+        const annotation = {
+          type: 'label',
+          color: '#ffffff',
+          content: ctx => {
+            const currentValueForPoint = currentValueForIndex(ctx, index);
+            return `${currentValueForPoint.toFixed(0)}`;
+          },
+          font: {
+            size: 14,
+            weight: 'bold',
+          },
+          padding: {},
+          position: {
+            x: 'center',
+            y: 'end',
+          },
+          xValue: ctx => maxLabelForIndex(ctx, index),
+          yAdjust: -6,
+          yValue: ctx => currentValueForIndex(ctx, index),
+        };
+        const annotation_line = {
+          type: 'line',
+          borderColor: '#ffffff',
+          borderDash: [3, 3],
+          borderWidth: 1,
+          xMax: index,
+          xMin: index,
+          xScaleID: 'x',
+          yMax: 0,
+          yMin: dataPoint.y,
+          yScaleID: 'y',
+        };
+        annotations.push(annotation);
+        annotations.push(annotation_line);
+      });
+
+      function currentValueForIndex(ctx, index) {
+        const dataset = ctx.chart.data.datasets[0];
+        const values = dataset.data.map(item => item.y);
+        return values[index];
+      }
+
+      function maxLabelForIndex(ctx, index) {
+        const dataset = ctx.chart.data.datasets[0];
+        const labels = dataset.data.map(item => item.x);
+        return labels[index];
+      }
+      let width, height, gradient;
+      function getGradient(ctx, chartArea) {
+        const chartWidth = chartArea.right - chartArea.left;
+        const chartHeight = chartArea.bottom - chartArea.top;
+        if (!gradient || width !== chartWidth || height !== chartHeight) {
+          // Create the gradient because this is either the first render
+          // or the size of the chart has changed
+          width = chartWidth;
+          height = chartHeight;
+          gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+          gradient.addColorStop(0, '#70C270');
+          gradient.addColorStop(0.1, '#269ED9');
+          gradient.addColorStop(0.25, '#F5C23D');
+          gradient.addColorStop(0.5, '#F5C23D');
+          gradient.addColorStop(0.75, '#F5693D');
+        }
+
+        return gradient;
+      }
+      $('#myChart').remove();
+      $('.level-item__chart').append('<canvas id="myChart"></canvas>');
+
+      var ctx = document.getElementById('myChart');
+      var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          datasets: [
+            {
+              data: dataChart,
+              borderWidth: 2,
+              borderColor: function (context) {
+                const chart = context.chart;
+                const { ctx, chartArea } = chart;
+
+                if (!chartArea) {
+                  // This case happens on initial chart load
+                  return;
+                }
+                return getGradient(ctx, chartArea);
+              },
+            },
+          ],
+        },
+        spanGaps: true,
+        options: {
+          plugins: {
+            legend: false,
+            annotation: {
+              clip: false,
+              annotations: annotations,
+            },
+          },
+          scales: {
+            x: {
+              display: true,
+
+              ticks: {
+                color: '#ffffff',
+                font: {
+                  size: 12,
+                },
+              },
+            },
+            y: {
+              display: false,
+              min: 0,
+              max: maxLabel, // макс высота графика
+              ticks: {
+                stepSize: 1,
+              },
+            },
+          },
+          elements: {
+            point: {
+              pointStyle: false,
+            },
+          },
+        },
+      });
+    }
+
     function calculateIndex(data) {
       var stat = {};
       for (var i = 0; i < data.length; i++) {
@@ -378,6 +537,49 @@ $(document).ready(function () {
       }
       return stat;
     }
+    function getIndexValuesForIntervals(data, typeId) {
+      intervals = [];
+      for (var i = 0; i < 4; i++) {
+        var d = new Date();
+        var from = new Date(d.getTime() - 1000 * 60 * 60 * 6 * (4 - i));
+        var to = new Date(from.getTime() + 1000 * 60 * 60 * 6);
+        var fromtime = parseInt(from.getHours() * 60 * 60 + from.getMinutes() * 60);
+        var totime = parseInt(to.getHours() * 60 * 60 + to.getMinutes() * 60);
+        var fromdate = '' + from.getFullYear() + '-' + (from.getMonth() > 8 ? '' : '0') + (from.getMonth() + 1) + '-' + (from.getDate() > 9 ? '' : '0') + from.getDate() + ' 00:00:00';
+        var todate = '' + to.getFullYear() + '-' + (to.getMonth() > 8 ? '' : '0') + (to.getMonth() + 1) + '-' + (to.getDate() > 9 ? '' : '0') + to.getDate() + ' 00:00:00';
+
+        intervals.push({ fromdate: fromdate, fromtime: fromtime, todate: todate, totime: totime, rows: [] });
+      }
+      l: for (var i = 0; i < data.length; i++) {
+        for (var j = 0; j < intervals.length; j++) {
+          if (checkInterval(intervals[j], data[i])) continue l;
+        }
+      }
+      var indexVales = [];
+      for (var i = 0; i < intervals.length; i++) {
+        try {
+          indexVales.push(calculateIndex(intervals[i].rows)[typeId].ball);
+        } catch (ex) {
+          indexVales.push(0);
+        }
+      }
+      return indexVales;
+    }
+    function checkInterval(interval, row) {
+      if (interval.fromdate == interval.todate) {
+        if (row.date == interval.fromdate && parseInt(row.time) > interval.fromtime && parseInt(row.time) <= interval.totime) {
+          interval.rows.push(row);
+          return true;
+        }
+      } else {
+        if ((row.date == interval.fromdate && parseInt(row.time) > interval.fromtime) || (row.date == interval.todate && parseInt(row.time) <= interval.totime)) {
+          interval.rows.push(row);
+          return true;
+        }
+      }
+      return false;
+    }
+
     const pollenForType = function (id, hasData) {
       // if (id == -1) {
       //   $('#cbp-qtrotator').show();
@@ -390,7 +592,7 @@ $(document).ready(function () {
         d.setTime(d.getTime() - 1000 * 60 * 60 * 6 * 16);
         let fromtime = parseInt(d.getHours() * 60 * 60 + d.getMinutes() * 60);
         let fromdate = '' + d.getFullYear() + '-' + (d.getMonth() > 8 ? '' : '0') + (d.getMonth() + 1) + '-' + (d.getDate() > 9 ? '' : '0') + d.getDate();
-        console.log(1, fromtime, fromdate);
+
         $.ajax({
           type: 'GET',
           url: '/ajax/get_pollen_data',
@@ -405,9 +607,10 @@ $(document).ready(function () {
             },
           },
           beforeSend: function () {},
-          success: function (indexState) {
-            console.log(JSON.parse(indexState.data));
-            // showGraph(data, id);
+          success: function (state) {
+            let data = JSON.parse(state.data);
+            $('.myChartText').hide();
+            ChartJS(data, id);
           },
           error: function (e, status) {
             console.log(e, status);
@@ -417,13 +620,11 @@ $(document).ready(function () {
           },
         });
       } else {
-        // $('#graph').hide();
+        $('#myChart').hide();
+        $('.myChartText').show();
       }
-
-      // $('#graph2').hide();
     };
-    pollenForType(1, true);
-    console.log(1111);
+
     let riskLevelNone = '<span style="color:#8b8b8b">Нет пыльцы</span>';
     let pinsNone = '<span style="color:#8b8b8b">Нет отметок</span>';
     let level_item__level = document.querySelector('.level-item__level');
@@ -437,190 +638,192 @@ $(document).ready(function () {
     let statExport_pins;
     let ballov;
     let hasData;
-    // $.ajax({
-    //   type: 'GET',
-    //   url: '/ajax/get_pollen_data',
-    //   dataType: 'json',
-    //   data: {
-    //     url: 'https://test.pollen.club/maps/ddr_query.php',
-    //     method: 'export_pins',
-    //     params: {
-    //       time: time_current,
-    //     },
-    //   },
-    //   beforeSend: function () {},
-    //   success: function (r) {
-    //     var export_pins = JSON.parse(r.data);
-    //     statExport_pins = calculateIndex(export_pins);
-    //   },
-    //   error: function (e, status) {
-    //     console.log(e, status);
-    //   },
-    //   complete: function () {
-    //     console.log('complete');
-    //   },
-    // });
-    // $.ajax({
-    //   type: 'GET',
-    //   url: '/ajax/get_pollen_data',
-    //   dataType: 'json',
-    //   data: {
-    //     url: 'https://test.pollen.club/maps/ddr_query.php',
-    //     method: 'risk',
-    //     params: {
-    //       type: 1,
-    //     },
-    //   },
-    //   beforeSend: function () {},
-    //   success: function (risk) {
-    //     var riskData = JSON.parse(risk.data);
-    //     var riskmap = [];
-    //     var riskLevelArr = [];
-    //     for (var j = 0; j < riskData.length; j++) {
-    //       if (!riskmap[riskData[j].pollen_type]) riskmap[riskData[j].pollen_type] = riskLevel[riskData[j].level];
-    //     }
+    $.ajax({
+      type: 'GET',
+      url: '/ajax/get_pollen_data',
+      dataType: 'json',
+      data: {
+        url: 'https://test.pollen.club/maps/ddr_query.php',
+        method: 'export_pins',
+        params: {
+          time: time_current,
+        },
+      },
+      beforeSend: function () {},
+      success: function (r) {
+        var export_pins = JSON.parse(r.data);
+        statExport_pins = calculateIndex(export_pins);
+      },
+      error: function (e, status) {
+        console.log(e, status);
+      },
+      complete: function () {
+        console.log('complete');
+      },
+    });
+    $.ajax({
+      type: 'GET',
+      url: '/ajax/get_pollen_data',
+      dataType: 'json',
+      data: {
+        url: 'https://test.pollen.club/maps/ddr_query.php',
+        method: 'risk',
+        params: {
+          type: 1,
+        },
+      },
+      beforeSend: function () {},
+      success: function (risk) {
+        var riskData = JSON.parse(risk.data);
+        var riskmap = [];
+        var riskLevelArr = [];
+        for (var j = 0; j < riskData.length; j++) {
+          if (!riskmap[riskData[j].pollen_type]) riskmap[riskData[j].pollen_type] = riskLevel[riskData[j].level];
+        }
 
-    //     for (var j = 0; j < riskData.length; j++) {
-    //       if (!riskLevelArr[riskData[j].pollen_type]) riskLevelArr[riskData[j].pollen_type] = riskBcg[riskData[j].level];
-    //     }
+        for (var j = 0; j < riskData.length; j++) {
+          if (!riskLevelArr[riskData[j].pollen_type]) riskLevelArr[riskData[j].pollen_type] = riskBcg[riskData[j].level];
+        }
 
-    //     $.ajax({
-    //       type: 'GET',
-    //       url: '/ajax/get_pollen_data',
-    //       dataType: 'json',
-    //       data: {
-    //         url: 'https://test.pollen.club/maps/ddr_query.php',
-    //         method: 'pollen_type',
-    //         params: {
-    //           type: 1,
-    //         },
-    //       },
-    //       beforeSend: function () {},
-    //       success: function (r) {
-    //         var dataPollens = JSON.parse(r.data);
-    //         var firstItemDesc = '';
-    //         var firstItemId = '';
-    //         console.log(dataPollens);
-    //         dataPollens.forEach(function (item, index) {
-    //           var id = item.id;
-    //           var desc = item.desc;
-    //           var isActive = index === 0 ? 'active' : ''; // Check if it's the first item
+        $.ajax({
+          type: 'GET',
+          url: '/ajax/get_pollen_data',
+          dataType: 'json',
+          data: {
+            url: 'https://test.pollen.club/maps/ddr_query.php',
+            method: 'pollen_type',
+            params: {
+              type: 1,
+            },
+          },
+          beforeSend: function () {},
+          success: function (r) {
+            var dataPollens = JSON.parse(r.data);
+            var firstItemDesc = '';
+            var firstItemId = '';
 
-    //           if (index === 0) {
-    //             firstItemDesc = desc;
-    //             firstItemId = id;
-    //             // Уровень пыльцы
-    //             if (riskmap[id]) {
-    //               level_item__level_text.innerHTML = riskmap[id];
-    //               level_item__level_progress.style.background = riskLevelArr[id];
-    //             } else {
-    //               level_item__level_text.innerHTML = riskLevelNone;
-    //               level_item__level_progress.style.background = riskBcg[0];
-    //             }
+            dataPollens.forEach(function (item, index) {
+              var id = item.id;
+              var desc = item.desc;
+              var isActive = index === 0 ? 'active' : ''; // Check if it's the first item
 
-    //             //индекс самочуствия
+              if (index === 0) {
+                firstItemDesc = desc;
+                firstItemId = id;
+                // Уровень пыльцы
+                if (riskmap[id]) {
+                  level_item__level_text.innerHTML = riskmap[id];
+                  level_item__level_progress.style.background = riskLevelArr[id];
+                } else {
+                  level_item__level_text.innerHTML = riskLevelNone;
+                  level_item__level_progress.style.background = riskBcg[0];
+                }
 
-    //             hasData = statExport_pins[item.id] && statExport_pins[item.id].bad + statExport_pins[item.id].good + statExport_pins[item.id].middle >= 20;
-    //             ballov = statExport_pins[item.id] ? statExport_pins[item.id].ball : 0;
+                //индекс самочуствия
 
-    //             if (hasData) {
-    //               if (ballov <= 1) {
-    //                 level_item__index_text.innerHTML = pinsNone;
-    //                 level_item__index_progress.style.background = '#8b8b8b';
-    //               } else if (ballov <= 4) {
-    //                 level_item__index_text.innerHTML = `<span style="color:#00b147">${ballov} Балла</span>`;
-    //                 level_item__index_progress.style.background = '#00b147';
-    //               } else if (ballov <= 7) {
-    //                 level_item__index_text.innerHTML = `<span style="color:#F19F33">${ballov} Баллов</span>`;
-    //                 level_item__index_progress.style.background = '#F19F33';
-    //               } else {
-    //                 level_item__index_text.innerHTML = `<span style="color:#E9403F">${ballov} Баллов</span>`;
-    //                 level_item__index_progress.style.background = '#E9403F';
-    //               }
-    //             } else {
-    //               level_item__index_text.innerHTML = pinsNone;
-    //               level_item__index_progress.style.background = '#8b8b8b';
-    //             }
-    //           }
-    //           $('.drowdown-block--pollens .drowdown-block__active').attr('data-id', firstItemId).html(`${firstItemDesc}`);
-    //           $('.drowdown-block--pollens .drowdown-block__list').append(`<li data-id="${id}" class="${isActive}"><span>${desc}</span></li>`);
-    //           getSectionData({ section: 'allergen', data: {} }, function (html, stat) {
-    //             var matchedData = Object.values(html.allergen).find(function (item) {
-    //               return item.title === firstItemDesc;
-    //             });
-    //             if (matchedData) {
-    //               $('.pollen-level__left .photo img').attr('src', `/public/filemanager/${matchedData.img}`);
-    //               $('.pollen-level__left .photo .photo-text').text(matchedData.title);
-    //             }
-    //           });
-    //         });
-    //         $('.drowdown-block__list li').on('click', function () {
-    //           var clickedTitle = $(this).text();
-    //           var clickedId = $(this).attr('data-id');
-    //           $('.drowdown-block__active').text(clickedTitle);
-    //           $('.drowdown-block__active').addClass('active');
-    //           $('.drowdown-block__list li').removeClass('active');
-    //           $(this).addClass('active');
-    //           $('.drowdown-block__list').removeClass('active');
-    //           $('.drowdown-block__active').removeClass('active');
-    //           // Загрузка фото аллергена после ajax и нажатия на пункт списка
-    //           getSectionData({ section: 'allergen', data: {} }, function (html, stat) {
-    //             var matchedData = Object.values(html.allergen).find(function (item) {
-    //               return item.title === clickedTitle;
-    //             });
-    //             if (matchedData) {
-    //               $('.pollen-level__left .photo img').attr('src', `public/filemanager/${matchedData.img}`);
-    //               $('.pollen-level__left .photo .photo-text').text(matchedData.title);
-    //             }
-    //           });
-    //           // Уровень пыльцы
+                hasData = statExport_pins[item.id] && statExport_pins[item.id].bad + statExport_pins[item.id].good + statExport_pins[item.id].middle >= 20;
+                ballov = statExport_pins[item.id] ? statExport_pins[item.id].ball : 0;
 
-    //           if (riskmap[clickedId]) {
-    //             level_item__level_text.innerHTML = riskmap[clickedId];
-    //             level_item__level_progress.style.background = riskLevelArr[clickedId];
-    //           } else {
-    //             level_item__level_text.innerHTML = riskLevelNone;
-    //             level_item__level_progress.style.background = riskBcg[0];
-    //           }
+                if (hasData) {
+                  if (ballov <= 1) {
+                    level_item__index_text.innerHTML = pinsNone;
+                    level_item__index_progress.style.background = '#8b8b8b';
+                  } else if (ballov <= 4) {
+                    level_item__index_text.innerHTML = `<span style="color:#00b147">${ballov} Балла</span>`;
+                    level_item__index_progress.style.background = '#00b147';
+                  } else if (ballov <= 7) {
+                    level_item__index_text.innerHTML = `<span style="color:#F19F33">${ballov} Баллов</span>`;
+                    level_item__index_progress.style.background = '#F19F33';
+                  } else {
+                    level_item__index_text.innerHTML = `<span style="color:#E9403F">${ballov} Баллов</span>`;
+                    level_item__index_progress.style.background = '#E9403F';
+                  }
+                } else {
+                  level_item__index_text.innerHTML = pinsNone;
+                  level_item__index_progress.style.background = '#8b8b8b';
+                }
+                pollenForType(item.id, hasData);
+              }
+              $('.drowdown-block--pollens .drowdown-block__active').attr('data-id', firstItemId).html(`${firstItemDesc}`);
+              $('.drowdown-block--pollens .drowdown-block__list').append(`<li data-id="${id}" class="${isActive}"><span>${desc}</span></li>`);
+              getSectionData({ section: 'allergen', data: {} }, function (html, stat) {
+                var matchedData = Object.values(html.allergen).find(function (item) {
+                  return item.title === firstItemDesc;
+                });
+                if (matchedData) {
+                  $('.pollen-level__left .photo img').attr('src', `/public/filemanager/${matchedData.img}`);
+                  $('.pollen-level__left .photo .photo-text').text(matchedData.title);
+                }
+              });
+            });
+            $('.drowdown-block__list li').on('click', function () {
+              var clickedTitle = $(this).text();
+              var clickedId = $(this).attr('data-id');
+              $('.drowdown-block__active').text(clickedTitle);
+              $('.drowdown-block__active').addClass('active');
+              $('.drowdown-block__list li').removeClass('active');
+              $(this).addClass('active');
+              $('.drowdown-block__list').removeClass('active');
+              $('.drowdown-block__active').removeClass('active');
+              // Загрузка фото аллергена после ajax и нажатия на пункт списка
+              getSectionData({ section: 'allergen', data: {} }, function (html, stat) {
+                var matchedData = Object.values(html.allergen).find(function (item) {
+                  return item.title === clickedTitle;
+                });
+                if (matchedData) {
+                  $('.pollen-level__left .photo img').attr('src', `public/filemanager/${matchedData.img}`);
+                  $('.pollen-level__left .photo .photo-text').text(matchedData.title);
+                }
+              });
+              // Уровень пыльцы
 
-    //           // индекс самочувствия
-    //           hasData = statExport_pins[clickedId] && statExport_pins[clickedId].bad + statExport_pins[clickedId].good + statExport_pins[clickedId].middle >= 20;
-    //           ballov = statExport_pins[clickedId] ? statExport_pins[clickedId].ball : 0;
-    //           if (hasData) {
-    //             if (ballov <= 1) {
-    //               level_item__index_text.innerHTML = pinsNone;
-    //               level_item__index_progress.style.background = '#8b8b8b';
-    //             } else if (ballov <= 4) {
-    //               level_item__index_text.innerHTML = `<span style="color:#00b147">${ballov} Балла</span>`;
-    //               level_item__index_progress.style.background = '#00b147';
-    //             } else if (ballov <= 7) {
-    //               level_item__index_text.innerHTML = `<span style="color:#F19F33">${ballov} Баллов</span>`;
-    //               level_item__index_progress.style.background = '#F19F33';
-    //             } else {
-    //               level_item__index_text.innerHTML = `<span style="color:#E9403F">${ballov} Баллов</span>`;
-    //               level_item__index_progress.style.background = '#E9403F';
-    //             }
-    //           } else {
-    //             level_item__index_text.innerHTML = pinsNone;
-    //             level_item__index_progress.style.background = '#8b8b8b';
-    //           }
-    //         });
-    //       },
-    //       error: function (e, status) {
-    //         console.log(e, status);
-    //       },
-    //       complete: function () {
-    //         console.log('complete');
-    //       },
-    //     });
-    //   },
-    //   error: function (e, status) {
-    //     console.log(e, status);
-    //   },
-    //   complete: function () {
-    //     console.log('complete');
-    //   },
-    // });
+              if (riskmap[clickedId]) {
+                level_item__level_text.innerHTML = riskmap[clickedId];
+                level_item__level_progress.style.background = riskLevelArr[clickedId];
+              } else {
+                level_item__level_text.innerHTML = riskLevelNone;
+                level_item__level_progress.style.background = riskBcg[0];
+              }
+
+              // индекс самочувствия
+              hasData = statExport_pins[clickedId] && statExport_pins[clickedId].bad + statExport_pins[clickedId].good + statExport_pins[clickedId].middle >= 20;
+              ballov = statExport_pins[clickedId] ? statExport_pins[clickedId].ball : 0;
+              if (hasData) {
+                if (ballov <= 1) {
+                  level_item__index_text.innerHTML = pinsNone;
+                  level_item__index_progress.style.background = '#8b8b8b';
+                } else if (ballov <= 4) {
+                  level_item__index_text.innerHTML = `<span style="color:#00b147">${ballov} Балла</span>`;
+                  level_item__index_progress.style.background = '#00b147';
+                } else if (ballov <= 7) {
+                  level_item__index_text.innerHTML = `<span style="color:#F19F33">${ballov} Баллов</span>`;
+                  level_item__index_progress.style.background = '#F19F33';
+                } else {
+                  level_item__index_text.innerHTML = `<span style="color:#E9403F">${ballov} Баллов</span>`;
+                  level_item__index_progress.style.background = '#E9403F';
+                }
+              } else {
+                level_item__index_text.innerHTML = pinsNone;
+                level_item__index_progress.style.background = '#8b8b8b';
+              }
+              pollenForType(clickedId, hasData);
+            });
+          },
+          error: function (e, status) {
+            console.log(e, status);
+          },
+          complete: function () {
+            console.log('complete');
+          },
+        });
+      },
+      error: function (e, status) {
+        console.log(e, status);
+      },
+      complete: function () {
+        console.log('complete');
+      },
+    });
   }
 
   // Карта
@@ -707,149 +910,6 @@ $(document).ready(function () {
     });
   }
 
-  const ctx = document.getElementById('myChart');
-  if (ctx) {
-    function ChartJS() {
-      // макс высота графика
-      let maxLabel = 12;
-      if (window.matchMedia('(min-width: 768px)').matches) maxLabel = 16;
-
-      const data = [
-        { x: '01/04', y: 8 },
-        { x: '01/05', y: 2 },
-        { x: '01/07', y: 5 },
-        { x: '01/08', y: 4 },
-        { x: '01/10', y: 10 },
-      ];
-
-      const annotations = [];
-
-      data.forEach((dataPoint, index) => {
-        const annotation = {
-          type: 'label',
-          color: '#ffffff',
-          content: ctx => {
-            const currentValueForPoint = currentValueForIndex(ctx, index);
-            return `${currentValueForPoint.toFixed(0)}`;
-          },
-          font: {
-            size: 14,
-            weight: 'bold',
-          },
-          padding: {},
-          position: {
-            x: 'center',
-            y: 'end',
-          },
-          xValue: ctx => maxLabelForIndex(ctx, index),
-          yAdjust: -6,
-          yValue: ctx => currentValueForIndex(ctx, index),
-        };
-        const annotation_line = {
-          type: 'line',
-          borderColor: '#ffffff',
-          borderDash: [3, 3],
-          borderWidth: 1,
-          xMax: index,
-          xMin: index,
-          xScaleID: 'x',
-          yMax: 0,
-          yMin: dataPoint.y,
-          yScaleID: 'y',
-        };
-        annotations.push(annotation);
-        annotations.push(annotation_line);
-      });
-
-      function currentValueForIndex(ctx, index) {
-        const dataset = ctx.chart.data.datasets[0];
-        const values = dataset.data.map(item => item.y);
-        return values[index];
-      }
-
-      function maxLabelForIndex(ctx, index) {
-        const dataset = ctx.chart.data.datasets[0];
-        const labels = dataset.data.map(item => item.x);
-        return labels[index];
-      }
-      let width, height, gradient;
-      function getGradient(ctx, chartArea) {
-        const chartWidth = chartArea.right - chartArea.left;
-        const chartHeight = chartArea.bottom - chartArea.top;
-        if (!gradient || width !== chartWidth || height !== chartHeight) {
-          // Create the gradient because this is either the first render
-          // or the size of the chart has changed
-          width = chartWidth;
-          height = chartHeight;
-          gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
-          gradient.addColorStop(0, '#70C270');
-          gradient.addColorStop(0.1, '#269ED9');
-          gradient.addColorStop(0.25, '#F5C23D');
-          gradient.addColorStop(0.5, '#F5C23D');
-          gradient.addColorStop(0.75, '#F5693D');
-        }
-
-        return gradient;
-      }
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          datasets: [
-            {
-              data: data,
-              borderWidth: 2,
-              borderColor: function (context) {
-                const chart = context.chart;
-                const { ctx, chartArea } = chart;
-
-                if (!chartArea) {
-                  // This case happens on initial chart load
-                  return;
-                }
-                return getGradient(ctx, chartArea);
-              },
-            },
-          ],
-        },
-        spanGaps: true,
-        options: {
-          plugins: {
-            legend: false,
-            annotation: {
-              clip: false,
-              annotations: annotations,
-            },
-          },
-          scales: {
-            x: {
-              display: true,
-
-              ticks: {
-                color: '#ffffff',
-                font: {
-                  size: 12,
-                },
-              },
-            },
-            y: {
-              display: false,
-              min: 0,
-              max: maxLabel, // макс высота графика
-              ticks: {
-                stepSize: 1,
-              },
-            },
-          },
-          elements: {
-            point: {
-              pointStyle: false,
-            },
-          },
-        },
-      });
-    }
-    ChartJS();
-  }
   const player = document.querySelector('.video-player__video');
   if (player) {
     const btnPlayPause = document.querySelector('.controls-buttons__play');
@@ -858,10 +918,10 @@ $(document).ready(function () {
     const volumeBar = document.querySelector('.controls-volume__range');
 
     // Update the video volume
-    volumeBar.addEventListener('change', function (evt) {
-      const { value, min, max } = evt.target;
-      const percentage = ((value - min) * 100) / (max - min);
-      volumeBar.style.setProperty('--percentage', `${100 - percentage}%`);
+    volumeBar.addEventListener('input', function (e) {
+      playerVolume = (e.target.value - e.target.min) / (e.target.max - e.target.min);
+      e.target.style.setProperty('--percentage', playerVolume);
+      player.volume = playerVolume;
     });
 
     // Add a listener for the timeupdate event so we can update the progress bar

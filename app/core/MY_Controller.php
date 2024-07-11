@@ -375,7 +375,7 @@ class MY_Controller extends CI_Controller
         });
 
         $this->twig->addFilter('randomaddinarray', function ($arr = false, $item = false) {
-            if (!$arr || !$item) {
+            if (!$arr) {
                 return false;
             }
 

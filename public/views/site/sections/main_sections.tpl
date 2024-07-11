@@ -25,25 +25,23 @@
             <div class="pollen-level__item">
               <span class="level-item__title">Уровень пыльцы</span>
               <div class="level-item__content level-item__level">
-                <div class="level-item__content-text">
-                  <span>Высокий</span>
-                </div>
+                <div class="level-item__content-text"></div>
                 <div class="level-item__content-progress bcg-grad--grey"></div>
               </div>
             </div>
             <div class="pollen-level__item">
               <span class="level-item__title">Индекс самочувствия</span>
               <div class="level-item__content level-item__index">
-                <div class="level-item__content-text">
-                  <span>6 баллов</span>
-                </div>
+                <div class="level-item__content-text"></div>
                 <div class="level-item__content-progress bcg-grad--grey"></div>
               </div>
             </div>
             <div class="pollen-level__item">
               <span class="level-item__title">Динамика самочувствия</span>
               <div class="level-item__content level-item__chart">
-                <canvas id="myChart"></canvas>
+                <div class="level-item__content-text myChartText">
+                  <span style="color:#8b8b8b">Нет данных</span>
+                </div>
               </div>
             </div>
             <div class="pollen-level__item">

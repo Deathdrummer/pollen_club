@@ -1,25 +1,40 @@
-<script type="module">
-  function loadScript(url, callback) {
-    // adding the script element to the head as suggested before
-    var head = document.getElementsByTagName('head')[0]
-    var script = document.createElement('script')
-    script.type = 'text/javascript'
-    script.src = url
-  
-    // then bind the event to the callback function
-    // there are several events for cross browser compatibility
-    script.onreadystatechange = callback
-    script.onload = callback
-  
-    // fire the loading
-    head.appendChild(script)
-  }
-  loadScript('public/js/pollen/map.js')
-  loadScript('public/js/pollen/highcharts.js')
-  loadScript('public/js/pollen/exporting.js')
-  loadScript('public/js/pollen/modernizr.custom.js')
-  loadScript('public/js/pollen/jquery.cbpQTRotator.js')
-</script>
+{# <script type="module">
+     function loadScript(url, callback) {
+       // adding the script element to the head as suggested before
+       var head = document.getElementsByTagName('head')[0]
+       var script = document.createElement('script')
+     
+       script.src = url
+     
+       // then bind the event to the callback function
+       // there are several events for cross browser compatibility
+       script.onreadystatechange = callback
+       script.onload = callback
+     
+       // fire the loading
+       head.appendChild(script)
+     }
+     loadScript('https://code.jquery.com/jquery-2.2.4.min.js')
+     loadScript('public/js/pollen/highcharts.js')
+     loadScript('public/js/pollen/exporting.js')
+     loadScript('public/js/pollen/modernizr.custom.js')
+     loadScript('public/js/pollen/jquery.cbpQTRotator.js')
+     loadScript('https://cdn.jsdelivr.net/npm/maplibre-gl@3.5.2/dist/maplibre-gl.min.js')
+     loadScript('https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js')
+     
+     loadScript('public/js/pollen/main.js')
+   </script> #}
+
+<script src="{{ base_url('public/js/pollen/highcharts.js') }}"></script>
+<script src="{{ base_url('public/js/pollen/exporting.js') }}"></script>
+<script src="{{ base_url('public/js/pollen/modernizr.custom.js') }}"></script>
+<script src="{{ base_url('public/js/pollen/jquery.cbpQTRotator.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@3.5.2/dist/maplibre-gl.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+
+<script src="{{ base_url('public/js/pollen/main.js') }}"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@3.5.2/dist/maplibre-gl.min.css" />
 
 <section class="section section_map">
   <div class="content-header">
@@ -51,15 +66,15 @@
           <span class="dropbtn">Прогноз SILAM</span>
         </li>
         <li class="dropdown">
-          <a class="dropbtn" id="pollenbtn">Прогноз +5 дней</a>
+          <div class="dropbtn" id="pollenbtn">Прогноз +5 дней</div>
+          <ul class="dropdown-content main_select" id="select" style="display:none"></ul>
         </li>
-        <ul class="dropdown-content main_select" id="select" style="display:none"></ul>
         <li class="archive_dropdown dropdown">
-          <a class="dropbtn" id="archive_btn">Архивы</a>
+          <div class="dropbtn" id="archive_btn">Архивы</div>
+          <ul class="dropdown-content archive_select" id="archive_select" style="display:none"></ul>
         </li>
-        <ul class="dropdown-content archive_select" id="archive_select" style="display:none"></ul>
         <li class="fenolog">
-          <a>Фенология</a>
+          <div class="dropbtn">Фенология</div>
         </li>
         <li class="support">
           <a href="/support-project/" target="_blank" class="dropbtn">Поддержи проект</a>
@@ -69,7 +84,106 @@
         </li>
       </ul>
     </div>
+    <div class="banner-wrapper">
+      <div id="bannerBlock">
+        <div class="dell">
+          <a>&#10006;</a>
+        </div>
+        <div class="arh_block">
+          <a class="close_a"></a>
+          <p>
+            <b><span style="text-align: left;font-size: 14px;font-family:HelveticaNeueCyr">Описание цветовой шкалы карты&nbsp;</span></b>
+          </p>
+          <p>
+            <span style="font-family: HelveticaNeueCyr; font-size: 14px;">Цвет круга показывает степень возможного воздействия пыльцы на аллергика.</span>
+          </p>
+          <p>
+            <span style="font-family: HelveticaNeueCyr; font-size: 14px;">Ключ: уровень влияния (процент пользователей, с отметками о проблемах с самочувствием; уровень пыльцы):</span>
+          </p>
+          <p>&nbsp;</p>
+          <ul>
+            <li>
+              <p>
+                <font color="#000000">
+                  <span style="font-family: HelveticaNeueCyr;"><font color="#009900">слабое&nbsp;</font></span>
+                </font>
+                <font color="#009900" style="font-family: HelveticaNeueCyr;">
+                  <font color="#696969">&nbsp;</font>
+                </font><span style="color: #696969; font-family: HelveticaNeueCyr; font-size: 14px;">(&lt;</span><span style="color: #696969; font-family: HelveticaNeueCyr; font-size: 14px;">15%; &lt;10&nbsp;ед/м3),</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <font color="#000000">
+                  <span style="font-family: HelveticaNeueCyr;">
+                    <font color="#696969">
+                      <font style="background-color:#ffff00;">среднее</font>
+                    </font>
+                  </span>
+                </font>
+                <font color="#009900" style="font-family: HelveticaNeueCyr;">&nbsp;</font>
+                <font color="#696969" style="font-family: HelveticaNeueCyr;">
+                  <font color="#009900">
+                    <font color="#696969">&nbsp;</font>
+                  </font><span style="font-size: 14px;">(&lt;3</span><span style="font-size: 14px;">0%; &gt;10&nbsp;ед/м3),</span>&nbsp;
+                </font>
+              </p>
+            </li>
+            <li>
+              <p>
+                <font color="#000000">
+                  <span style="font-family: HelveticaNeueCyr;"><font color="#FF8C00">высокое</font></span>
+                </font>
+                <font color="#009900" style="font-family: HelveticaNeueCyr;">&nbsp;</font>
+                <font color="#696969" style="font-family: HelveticaNeueCyr;">
+                  <font color="#009900">
+                    <font color="#696969">&nbsp;</font>
+                  </font><span style="font-size: 14px;">(&lt;5</span><span style="font-size: 14px;">0%; &gt;100 ед/м3 (травы - 30)),</span>&nbsp;
+                </font>
+              </p>
+            </li>
+            <li>
+              <p>
+                <font color="#000000">
+                  <span style="font-family: HelveticaNeueCyr;"><font color="#FF0000">очень высокое</font></span>
+                </font>
+                <font color="#009900" style="font-family: HelveticaNeueCyr;">
+                  &nbsp;<font color="#696969">-&nbsp;</font>
+                </font><span style="color: #696969; font-family: HelveticaNeueCyr; font-size: 14px;">(&lt;70</span><span style="color: #696969; font-family: HelveticaNeueCyr; font-size: 14px;">%; &gt;1000 ед/м3 (травы -100)),</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <font color="#000000">
+                  <span style="font-family: HelveticaNeueCyr;"><font color="#800080">экстра</font></span>
+                </font>
+                <font color="#009900" style="font-family: HelveticaNeueCyr;">
+                  &nbsp;<font color="#696969">
+                    -<span style="font-size: 14px;">&nbsp;(&gt;70%; &gt;5000 ед/м3 (100 для трав)).</span>
+                  </font>
+                </font>
+              </p>
+            </li>
+          </ul>
+          <p>&nbsp;</p>
+          <p>
+            <span style="font-size:14px">
+              <a href="https://test.pollen.club/map_source/" target="_blank">Подробнее</a>
+              о шкале и данных
+            </span>
+          </p>
+        </div>
+        <div class="graph" id="graph"></div>
+        <div class="graph2" id="graph2"></div>
+        <div id="cbp-qtrotator" class="cbp-qtrotator" temp></div>
+      </div>
+      <div class="store">
+        <a href="https://play.google.com/store/apps/details?id=pollen.sgolovanov.pollen2" target="_blank" class="googlestore"></a>
+        <a href="https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=988384559&mt=8" target="_blank" class="applestore"></a>
+      </div>
+    </div>
   </div>
+
   <div class="content__map">
     <div class="content__reklama content-main__reklama">
       {% set current_date = date('Y-m-d') %}

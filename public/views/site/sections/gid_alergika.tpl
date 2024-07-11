@@ -45,6 +45,7 @@
     </div>
     <div class="content-alergika__cards-allergika">
       {% set current_date = date('Y-m-d') %}
+
       {% for item in gid_allergika.items|reverse|randomaddinarray(reklama[3]) %}
         {% set date_min = item.date_min|date('Y-m-d') %}
         {% set date_max = item.date_max|date('Y-m-d') %}
