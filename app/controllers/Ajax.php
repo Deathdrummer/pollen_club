@@ -46,6 +46,7 @@ class Ajax extends MY_Controller
      */
     public function get_pollen_data()
     {
+
         $url = $this->input->get('url');
         $method = $this->input->get('method');
         $params = $this->input->get('params');

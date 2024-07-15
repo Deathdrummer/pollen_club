@@ -94,4 +94,4 @@ defined('IMGPATH') OR define('IMGPATH', './public/images/'); // Путь до ф
 defined('FILEMANAGER') OR define('FILEMANAGER', './public/filemanager/'); // Путь до файлов файлменеджера
 defined('FILEMANAGERTHUMBS') OR define('FILEMANAGERTHUMBS', './public/filemanager/__thumbs__/'); // Путь до файлов файлменеджера
 defined('SPRITEPATH') OR define('SPRITEPATH', './public/svg/sprite.svg'); // Путь до SVG спрайта
-defined('MODIFICATIONS_FILE') OR define('MODIFICATIONS_FILE', './modifications.json'); // Путь до файло модификации
+defined('MODIFICATIONS_FILE') OR define('MODIFICATIONS_FILE', '/modifications.json'); // Путь до файло модификации

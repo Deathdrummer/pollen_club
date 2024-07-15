@@ -2781,7 +2781,7 @@ video {
   }
   .header__map {
     position: absolute;
-
+    z-index: 2;
     @include resp(
       left,
       (
@@ -2803,7 +2803,7 @@ video {
         lg: auto,
       )
     );
-    z-index: 1;
+
     &-menu {
       display: flex;
       flex-direction: row;
@@ -2823,7 +2823,23 @@ video {
           lg: 240px,
         )
       );
+
       li {
+        .dropbtn,
+        a {
+          padding: 7px 10px;
+
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 3px;
+          p {
+            display: flex;
+            align-items: center;
+            line-height: 1;
+            font-size: 10px;
+          }
+        }
         @include resp(
           width,
           (
@@ -2831,10 +2847,11 @@ video {
           )
         );
         font-size: 15px;
+        border-radius: 5px;
+
         background-color: $light;
         box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.09), 0 27px 80px 0 rgba(0, 0, 0, 0.18);
-        border-radius: 5px;
-        padding: 7px 10px;
+        cursor: pointer;
 
         &.news,
         &.news *,
@@ -2848,6 +2865,23 @@ video {
         }
         &.news {
           background-color: $green;
+        }
+      }
+
+      .dropdown-content {
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 100%;
+        z-index: 1;
+        li {
+          border-radius: 0px;
+          box-shadow: none;
+          &:hover {
+            a {
+              color: $green;
+            }
+          }
         }
       }
     }
@@ -2904,6 +2938,164 @@ video {
         lg: absolute,
       )
     );
+  }
+
+  .dell {
+    width: 100%;
+    overflow: hidden;
+    a {
+      float: right;
+      color: #8b8b8b;
+      font-size: 20px;
+      margin: 10px 20px 0 0;
+      cursor: pointer;
+    }
+  }
+
+  .banner-wrapper {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 2;
+    max-width: 360px;
+    width: 100%;
+    @include resp(
+      width,
+      (
+        md-down: calc(100% - 40px),
+      )
+    );
+  }
+  #bannerBlock {
+    background: #fff;
+    padding: 0 0 20px 0;
+    overflow-y: auto;
+    @include resp(
+      max-height,
+      (
+        md-down: 320px,
+      )
+    );
+  }
+  .arh_block {
+    display: none;
+    text-align: left;
+    padding: 10px 10px 0 10px;
+    float: left;
+    height: 260px;
+    line-height: normal;
+    background-color: #f0f0f0;
+    margin: 0 20px 20px 20px;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .cbp-qtrotator {
+    margin: 20px 0;
+  }
+
+  .cbp-qtcontent {
+    display: block;
+    padding: 0 20px;
+    p {
+      color: #8b8b8b;
+      background: #eee;
+      padding: 14px;
+      overflow: hidden;
+    }
+    img {
+      float: left;
+      margin: 0 10px 10px 0;
+      height: 70px;
+      width: 70px;
+    }
+    span {
+      float: left;
+    }
+    b {
+      float: left;
+      display: block;
+      font-weight: 700;
+      margin: 10px 0 0 0;
+    }
+  }
+
+  .cbp-qtprogress {
+    position: absolute;
+    background: #3e8e41;
+    height: 1px;
+    width: 0%;
+    margin: 30px 0;
+  }
+
+  .graph2,
+  .graph {
+    display: none;
+    width: 95%;
+    height: 250px;
+  }
+
+  .store {
+    display: block;
+    float: right;
+    max-width: 360px;
+    width: 100%;
+    background: #fff;
+    padding: 0 20px 20px 20px;
+    box-sizing: border-box;
+    margin: 0 0 20px 0;
+    overflow: hidden;
+    clear: both;
+  }
+
+  .googlestore {
+    float: left;
+    width: 50%;
+    height: 50px;
+    background: url('/public/filemanager/&M&o&b&i&l&jh&n&o&e&____&p&r&i&l&o&zh&e&n&i&e/googleplay.svg') no-repeat;
+    background-size: contain;
+  }
+
+  .applestore {
+    float: left;
+    width: 50%;
+    height: 50px;
+    background: url('/public/filemanager/&M&o&b&i&l&jh&n&o&e&____&p&r&i&l&o&zh&e&n&i&e/appstore.svg') no-repeat;
+    background-size: contain;
+  }
+
+  .cbp-qtrotator {
+    position: relative;
+    .cbp-qtcontent {
+      position: absolute;
+
+      top: 0;
+      z-index: 0;
+      opacity: 0;
+      &:before,
+      &:after {
+        content: ' ';
+        display: table;
+      }
+      &:after {
+        clear: both;
+      }
+    }
+  }
+
+  .cbp-qtrotator .cbp-qtcontent {
+    position: absolute;
+
+    top: 0;
+    z-index: 0;
+    opacity: 0;
+  }
+
+  .cbp-qtrotator .cbp-qtcontent.cbp-qtcurrent,
+  .no-js .cbp-qtrotator .cbp-qtcontent {
+    position: relative;
+    z-index: 100;
+    pointer-events: auto;
+    opacity: 1;
   }
 }
 
@@ -3378,19 +3570,13 @@ video {
       background: $light;
       width: 100%;
       height: 4.4px;
+      --percentage: 1;
+      $pos: calc(0vmin * 0.5 + var(--percentage) * (100% - 0vmin));
+      cursor: pointer;
+      &::-webkit-slider-container {
+        background: $gradientProgressBar 0 / $pos no-repeat, $light;
+      }
 
-      &::-webkit-slider-runnable-track {
-        width: calc(100% - var(--percentage));
-        height: 4.4px;
-        cursor: pointer;
-        background: $gradientProgressBar;
-      }
-      &::-moz-range-track {
-        width: 100%;
-        height: 4.4px;
-        cursor: pointer;
-        background: $gradientProgressBar;
-      }
       &::-ms-track {
         width: 100%;
         height: 4.4px;
@@ -3400,14 +3586,14 @@ video {
         color: transparent;
       }
       &::-webkit-slider-thumb {
-        display: none;
+        opacity: 0;
       }
 
       &::-moz-range-thumb {
-        display: none;
+        opacity: 0;
       }
       &::-ms-thumb {
-        display: none;
+        opacity: 0;
       }
       &::-ms-fill-lower {
         background: #194620;
@@ -4610,6 +4796,7 @@ video {
     font-size: 12px;
   }
 }
+
 @media screen and (max-width: 1024px) {
   .circle-1 {
     margin-left: 40px;

@@ -354,6 +354,165 @@ $(document).ready(function () {
       5: '#7733ff',
     };
 
+    function ChartJS(data, typeId) {
+      var xAxis = [],
+        yAxis = [];
+      for (var i = 0; i < 4; i++) {
+        var d = new Date();
+        d.setTime(d.getTime() - 1000 * 60 * 60 * 12 * (3 - i));
+        xAxis.push('' + d.getDate() + '/' + (d.getMonth() + 1) + ' ' + d.getHours() + ':00');
+      }
+      yAxis = getIndexValuesForIntervals(data, typeId);
+
+      // for (var i = 3; i >= 0; i--) {
+      //   var d = new Date();
+      //   d.setDate(d.getDate() - i);
+      //   xAxis.push('' + d.getDate() + '/' + (d.getMonth() + 1));
+      // }
+
+      const dataChart = [];
+      xAxis.forEach((x, i) => {
+        const newData = {
+          x: x,
+          y: yAxis[i],
+        };
+        dataChart.push(newData);
+      });
+
+      let maxLabel = 12;
+      if (window.matchMedia('(min-width: 768px)').matches) maxLabel = 16;
+
+      const annotations = [];
+
+      dataChart.forEach((dataPoint, index) => {
+        const annotation = {
+          type: 'label',
+          color: '#ffffff',
+          content: ctx => {
+            const currentValueForPoint = currentValueForIndex(ctx, index);
+            return `${currentValueForPoint.toFixed(0)}`;
+          },
+          font: {
+            size: 14,
+            weight: 'bold',
+          },
+          padding: {},
+          position: {
+            x: 'center',
+            y: 'end',
+          },
+          xValue: ctx => maxLabelForIndex(ctx, index),
+          yAdjust: -6,
+          yValue: ctx => currentValueForIndex(ctx, index),
+        };
+        const annotation_line = {
+          type: 'line',
+          borderColor: '#ffffff',
+          borderDash: [3, 3],
+          borderWidth: 1,
+          xMax: index,
+          xMin: index,
+          xScaleID: 'x',
+          yMax: 0,
+          yMin: dataPoint.y,
+          yScaleID: 'y',
+        };
+        annotations.push(annotation);
+        annotations.push(annotation_line);
+      });
+
+      function currentValueForIndex(ctx, index) {
+        const dataset = ctx.chart.data.datasets[0];
+        const values = dataset.data.map(item => item.y);
+        return values[index];
+      }
+
+      function maxLabelForIndex(ctx, index) {
+        const dataset = ctx.chart.data.datasets[0];
+        const labels = dataset.data.map(item => item.x);
+        return labels[index];
+      }
+      let width, height, gradient;
+      function getGradient(ctx, chartArea) {
+        const chartWidth = chartArea.right - chartArea.left;
+        const chartHeight = chartArea.bottom - chartArea.top;
+        if (!gradient || width !== chartWidth || height !== chartHeight) {
+          // Create the gradient because this is either the first render
+          // or the size of the chart has changed
+          width = chartWidth;
+          height = chartHeight;
+          gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+          gradient.addColorStop(0, '#70C270');
+          gradient.addColorStop(0.1, '#269ED9');
+          gradient.addColorStop(0.25, '#F5C23D');
+          gradient.addColorStop(0.5, '#F5C23D');
+          gradient.addColorStop(0.75, '#F5693D');
+        }
+
+        return gradient;
+      }
+      $('#myChart').remove();
+      $('.level-item__chart').append('<canvas id="myChart"></canvas>');
+
+      var ctx = document.getElementById('myChart');
+      var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          datasets: [
+            {
+              data: dataChart,
+              borderWidth: 2,
+              borderColor: function (context) {
+                const chart = context.chart;
+                const { ctx, chartArea } = chart;
+
+                if (!chartArea) {
+                  // This case happens on initial chart load
+                  return;
+                }
+                return getGradient(ctx, chartArea);
+              },
+            },
+          ],
+        },
+        spanGaps: true,
+        options: {
+          plugins: {
+            legend: false,
+            annotation: {
+              clip: false,
+              annotations: annotations,
+            },
+          },
+          scales: {
+            x: {
+              display: true,
+
+              ticks: {
+                color: '#ffffff',
+                font: {
+                  size: 12,
+                },
+              },
+            },
+            y: {
+              display: false,
+              min: 0,
+              max: maxLabel, // макс высота графика
+              ticks: {
+                stepSize: 1,
+              },
+            },
+          },
+          elements: {
+            point: {
+              pointStyle: false,
+            },
+          },
+        },
+      });
+    }
+
     function calculateIndex(data) {
       var stat = {};
       for (var i = 0; i < data.length; i++) {
@@ -378,7 +537,50 @@ $(document).ready(function () {
       }
       return stat;
     }
-    function pollenForType(id, hasData) {
+    function getIndexValuesForIntervals(data, typeId) {
+      intervals = [];
+      for (var i = 0; i < 4; i++) {
+        var d = new Date();
+        var from = new Date(d.getTime() - 1000 * 60 * 60 * 6 * (4 - i));
+        var to = new Date(from.getTime() + 1000 * 60 * 60 * 6);
+        var fromtime = parseInt(from.getHours() * 60 * 60 + from.getMinutes() * 60);
+        var totime = parseInt(to.getHours() * 60 * 60 + to.getMinutes() * 60);
+        var fromdate = '' + from.getFullYear() + '-' + (from.getMonth() > 8 ? '' : '0') + (from.getMonth() + 1) + '-' + (from.getDate() > 9 ? '' : '0') + from.getDate() + ' 00:00:00';
+        var todate = '' + to.getFullYear() + '-' + (to.getMonth() > 8 ? '' : '0') + (to.getMonth() + 1) + '-' + (to.getDate() > 9 ? '' : '0') + to.getDate() + ' 00:00:00';
+
+        intervals.push({ fromdate: fromdate, fromtime: fromtime, todate: todate, totime: totime, rows: [] });
+      }
+      l: for (var i = 0; i < data.length; i++) {
+        for (var j = 0; j < intervals.length; j++) {
+          if (checkInterval(intervals[j], data[i])) continue l;
+        }
+      }
+      var indexVales = [];
+      for (var i = 0; i < intervals.length; i++) {
+        try {
+          indexVales.push(calculateIndex(intervals[i].rows)[typeId].ball);
+        } catch (ex) {
+          indexVales.push(0);
+        }
+      }
+      return indexVales;
+    }
+    function checkInterval(interval, row) {
+      if (interval.fromdate == interval.todate) {
+        if (row.date == interval.fromdate && parseInt(row.time) > interval.fromtime && parseInt(row.time) <= interval.totime) {
+          interval.rows.push(row);
+          return true;
+        }
+      } else {
+        if ((row.date == interval.fromdate && parseInt(row.time) > interval.fromtime) || (row.date == interval.todate && parseInt(row.time) <= interval.totime)) {
+          interval.rows.push(row);
+          return true;
+        }
+      }
+      return false;
+    }
+
+    const pollenForType = function (id, hasData) {
       // if (id == -1) {
       //   $('#cbp-qtrotator').show();
       // } else {
@@ -390,14 +592,18 @@ $(document).ready(function () {
         d.setTime(d.getTime() - 1000 * 60 * 60 * 6 * 16);
         let fromtime = parseInt(d.getHours() * 60 * 60 + d.getMinutes() * 60);
         let fromdate = '' + d.getFullYear() + '-' + (d.getMonth() > 8 ? '' : '0') + (d.getMonth() + 1) + '-' + (d.getDate() > 9 ? '' : '0') + d.getDate();
-        console.log(id, fromtime, fromdate);
+
         $.ajax({
           type: 'GET',
           url: '/ajax/get_pollen_data',
           dataType: 'json',
           data: {
             url: 'https://test.pollen.club/maps/ddr_query.php',
+<<<<<<< HEAD
             method: 'index',
+=======
+            method: 'indexStat',
+>>>>>>> f884f2a21b1c4d0d128c2ab523ceb1f08cb321d7
             params: {
               type: id,
               fromd: fromdate,
@@ -405,10 +611,10 @@ $(document).ready(function () {
             },
           },
           beforeSend: function () {},
-          success: function (data) {
-            // var export_pins = JSON.parse(r.data);
-            console.log(data.data);
-            // showGraph(data, id);
+          success: function (state) {
+            let data = JSON.parse(state.data);
+            $('.myChartText').hide();
+            ChartJS(data, id);
           },
           error: function (e, status) {
             console.log(e, status);
@@ -418,11 +624,11 @@ $(document).ready(function () {
           },
         });
       } else {
-        // $('#graph').hide();
+        $('#myChart').hide();
+        $('.myChartText').show();
       }
+    };
 
-      // $('#graph2').hide();
-    }
     let riskLevelNone = '<span style="color:#8b8b8b">Нет пыльцы</span>';
     let pinsNone = '<span style="color:#8b8b8b">Нет отметок</span>';
     let level_item__level = document.querySelector('.level-item__level');
@@ -522,8 +728,11 @@ $(document).ready(function () {
                 hasData = statExport_pins[item.id] && statExport_pins[item.id].bad + statExport_pins[item.id].good + statExport_pins[item.id].middle >= 20;
                 ballov = statExport_pins[item.id] ? statExport_pins[item.id].ball : 0;
 
+<<<<<<< HEAD
                 pollenForType(item.id, hasData);
 
+=======
+>>>>>>> f884f2a21b1c4d0d128c2ab523ceb1f08cb321d7
                 if (hasData) {
                   if (ballov <= 1) {
                     level_item__index_text.innerHTML = pinsNone;
@@ -542,6 +751,7 @@ $(document).ready(function () {
                   level_item__index_text.innerHTML = pinsNone;
                   level_item__index_progress.style.background = '#8b8b8b';
                 }
+                pollenForType(item.id, hasData);
               }
               $('.drowdown-block--pollens .drowdown-block__active').attr('data-id', firstItemId).html(`${firstItemDesc}`);
               $('.drowdown-block--pollens .drowdown-block__list').append(`<li data-id="${id}" class="${isActive}"><span>${desc}</span></li>`);
@@ -605,6 +815,7 @@ $(document).ready(function () {
                 level_item__index_text.innerHTML = pinsNone;
                 level_item__index_progress.style.background = '#8b8b8b';
               }
+              pollenForType(clickedId, hasData);
             });
           },
           error: function (e, status) {
@@ -708,149 +919,6 @@ $(document).ready(function () {
     });
   }
 
-  const ctx = document.getElementById('myChart');
-  if (ctx) {
-    function ChartJS() {
-      // макс высота графика
-      let maxLabel = 12;
-      if (window.matchMedia('(min-width: 768px)').matches) maxLabel = 16;
-
-      const data = [
-        { x: '01/04', y: 8 },
-        { x: '01/05', y: 2 },
-        { x: '01/07', y: 5 },
-        { x: '01/08', y: 4 },
-        { x: '01/10', y: 10 },
-      ];
-
-      const annotations = [];
-
-      data.forEach((dataPoint, index) => {
-        const annotation = {
-          type: 'label',
-          color: '#ffffff',
-          content: ctx => {
-            const currentValueForPoint = currentValueForIndex(ctx, index);
-            return `${currentValueForPoint.toFixed(0)}`;
-          },
-          font: {
-            size: 14,
-            weight: 'bold',
-          },
-          padding: {},
-          position: {
-            x: 'center',
-            y: 'end',
-          },
-          xValue: ctx => maxLabelForIndex(ctx, index),
-          yAdjust: -6,
-          yValue: ctx => currentValueForIndex(ctx, index),
-        };
-        const annotation_line = {
-          type: 'line',
-          borderColor: '#ffffff',
-          borderDash: [3, 3],
-          borderWidth: 1,
-          xMax: index,
-          xMin: index,
-          xScaleID: 'x',
-          yMax: 0,
-          yMin: dataPoint.y,
-          yScaleID: 'y',
-        };
-        annotations.push(annotation);
-        annotations.push(annotation_line);
-      });
-
-      function currentValueForIndex(ctx, index) {
-        const dataset = ctx.chart.data.datasets[0];
-        const values = dataset.data.map(item => item.y);
-        return values[index];
-      }
-
-      function maxLabelForIndex(ctx, index) {
-        const dataset = ctx.chart.data.datasets[0];
-        const labels = dataset.data.map(item => item.x);
-        return labels[index];
-      }
-      let width, height, gradient;
-      function getGradient(ctx, chartArea) {
-        const chartWidth = chartArea.right - chartArea.left;
-        const chartHeight = chartArea.bottom - chartArea.top;
-        if (!gradient || width !== chartWidth || height !== chartHeight) {
-          // Create the gradient because this is either the first render
-          // or the size of the chart has changed
-          width = chartWidth;
-          height = chartHeight;
-          gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
-          gradient.addColorStop(0, '#70C270');
-          gradient.addColorStop(0.1, '#269ED9');
-          gradient.addColorStop(0.25, '#F5C23D');
-          gradient.addColorStop(0.5, '#F5C23D');
-          gradient.addColorStop(0.75, '#F5693D');
-        }
-
-        return gradient;
-      }
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          datasets: [
-            {
-              data: data,
-              borderWidth: 2,
-              borderColor: function (context) {
-                const chart = context.chart;
-                const { ctx, chartArea } = chart;
-
-                if (!chartArea) {
-                  // This case happens on initial chart load
-                  return;
-                }
-                return getGradient(ctx, chartArea);
-              },
-            },
-          ],
-        },
-        spanGaps: true,
-        options: {
-          plugins: {
-            legend: false,
-            annotation: {
-              clip: false,
-              annotations: annotations,
-            },
-          },
-          scales: {
-            x: {
-              display: true,
-
-              ticks: {
-                color: '#ffffff',
-                font: {
-                  size: 12,
-                },
-              },
-            },
-            y: {
-              display: false,
-              min: 0,
-              max: maxLabel, // макс высота графика
-              ticks: {
-                stepSize: 1,
-              },
-            },
-          },
-          elements: {
-            point: {
-              pointStyle: false,
-            },
-          },
-        },
-      });
-    }
-    ChartJS();
-  }
   const player = document.querySelector('.video-player__video');
   if (player) {
     const btnPlayPause = document.querySelector('.controls-buttons__play');
@@ -859,10 +927,10 @@ $(document).ready(function () {
     const volumeBar = document.querySelector('.controls-volume__range');
 
     // Update the video volume
-    volumeBar.addEventListener('change', function (evt) {
-      const { value, min, max } = evt.target;
-      const percentage = ((value - min) * 100) / (max - min);
-      volumeBar.style.setProperty('--percentage', `${100 - percentage}%`);
+    volumeBar.addEventListener('input', function (e) {
+      playerVolume = (e.target.value - e.target.min) / (e.target.max - e.target.min);
+      e.target.style.setProperty('--percentage', playerVolume);
+      player.volume = playerVolume;
     });
 
     // Add a listener for the timeupdate event so we can update the progress bar

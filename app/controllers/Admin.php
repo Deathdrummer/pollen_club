@@ -105,7 +105,7 @@ class Admin extends MY_Controller {
 	 * @return 
 	*/
 	private function _setBaseModification() {
-		if (file_exists(MODIFICATIONS_FILE) && filesize(MODIFICATIONS_FILE) > 0) return false;
+		if (!file_exists(MODIFICATIONS_FILE)) return false;
 		if ($this->_getModifications() != '') return true;
 		
 		$fp = fopen(MODIFICATIONS_FILE, "w");
