@@ -413,10 +413,6 @@ class MY_Controller extends CI_Controller
                     break; // Exit loop if second array has fewer elements than needed
                 }
             }
-<<<<<<< HEAD
-=======
-
->>>>>>> f884f2a21b1c4d0d128c2ab523ceb1f08cb321d7
             return $result;
         });
 

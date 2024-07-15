@@ -602,11 +602,7 @@ $(document).ready(function () {
           dataType: 'json',
           data: {
             url: 'https://test.pollen.club/maps/ddr_query.php',
-<<<<<<< HEAD
-            method: 'index',
-=======
             method: 'indexStat',
->>>>>>> f884f2a21b1c4d0d128c2ab523ceb1f08cb321d7
             params: {
               type: id,
               fromd: fromdate,
@@ -730,12 +726,9 @@ $(document).ready(function () {
 
                 hasData = statExport_pins[item.id] && statExport_pins[item.id].bad + statExport_pins[item.id].good + statExport_pins[item.id].middle >= 20;
                 ballov = statExport_pins[item.id] ? statExport_pins[item.id].ball : 0;
-
-<<<<<<< HEAD
+                
                 pollenForType(item.id, hasData);
-
-=======
->>>>>>> f884f2a21b1c4d0d128c2ab523ceb1f08cb321d7
+                
                 if (hasData) {
                   if (ballov <= 1) {
                     level_item__index_text.innerHTML = pinsNone;
