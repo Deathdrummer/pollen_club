@@ -77,9 +77,11 @@
         <div class="finance-last">
           {% set reversedDonate = donate|reverse %}
           {% for donat in reversedDonate|slice(0, 4) %}
-            <span>{{ donat.name }}</span>
-            <span class="finance-sum">{{ donat.price }} ₽</span>
-            <span>{{ donat.date }}</span>
+            <div class="finance-item">
+              <span class="finance-name">{{ donat.name }}</span>
+              <span class="finance-sum">{{ donat.price }} ₽</span>
+              <span>{{ donat.date }}</span>
+            </div>
           {% endfor %}
         </div>
       </div>

@@ -8,9 +8,11 @@
   <div class="finance-last-wrapper">
     <div class="finance-last" id="donate">
       {% for donat in donate %}
-        <span>{{ donat.name }}</span>
-        <span class="finance-sum">{{ donat.price }} ₽</span>
-        <span>{{ donat.date }}</span>
+        <div class="finance-item">
+          <span class="finance-name">{{ donat.name }}</span>
+          <span class="finance-sum">{{ donat.price }} ₽</span>
+          <span>{{ donat.date }}</span>
+        </div>
       {% endfor %}
     </div>
   </div>

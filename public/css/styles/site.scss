@@ -438,6 +438,8 @@ video {
       max-height: 372px;
       overflow-y: scroll;
       z-index: 1;
+      @include scrollbarNew(#081f2b10, linear-gradient(0deg, #70c270 0%, #269ed9 100%), 5px, 5px, 5px);
+      margin-right: 5px;
       li {
         a,
         span {
@@ -4102,14 +4104,20 @@ video {
   gap: 8px;
 }
 .finance-last {
-  display: grid;
-  grid-template-columns: 1fr 80px 82px;
-  column-gap: 10px;
+  display: flex;
+  flex-direction: column;
+
   row-gap: 6px;
-  .finance-sum {
-    text-align: right;
-    @include font('Roboto', 'medium');
-    color: $green;
+  @include scrollbarNew(#081f2b10, linear-gradient(0deg, #70c270 0%, #269ed9 100%), 5px, 5px, 5px);
+  .finance-item {
+    display: grid;
+    grid-template-columns: 1fr 80px 82px;
+    column-gap: 10px;
+    .finance-sum {
+      text-align: right;
+      @include font('Roboto', 'medium');
+      color: $green;
+    }
   }
 }
 

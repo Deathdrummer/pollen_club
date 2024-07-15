@@ -108,7 +108,7 @@
           <div style="font-weight: 700">
             <div>Уровень пыльцы</div>
 
-            <div style="display: flex; gap: 20px;">
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
               <div class="pollen-level__item">
                 <div class="level-item__content level-item__index">
                   <div class="level-item__content-text">
@@ -161,7 +161,7 @@
             </div>
             <div>Индекс самочувствия</div>
 
-            <div style="display: flex; gap: 20px;">
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
               <div class="pollen-level__item">
                 <div class="level-item__content level-item__index">
                   <div class="level-item__content-text">
