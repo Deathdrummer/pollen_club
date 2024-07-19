@@ -187,7 +187,7 @@
   <div class="content__map content__maps">
     <div class="content__reklama content-main__reklama">
       {% set current_date = date('Y-m-d') %}
-      {% for item in reklama[3]|slice(0, 3) %}
+      {% for item in reklama[4]|slice(0, 3) %}
         {% set date_min = item.date_min|date('Y-m-d') %}
         {% set date_max = item.date_max|date('Y-m-d') %}
         {% if current_date >= date_min and current_date <= date_max %}
