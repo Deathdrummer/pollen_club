@@ -422,13 +422,15 @@ class Admin extends MY_Controller {
 								if ($listInList && $i[0] == 'list' && !in_array($i[1], array_column($listInList, 'field'))) continue;
 								
 								if ($values	= isset($i[3]) ? ddrSplit($i[3], ',') : null) {
-									foreach ($values as $vk => $vi) {
-										$expval = ddrSplit($vi, ':');
-										if (count($expval) > 1) {
-											$values[$expval[0]] = $expval[1];
-											unset($values[$vk]); 
-										} 
-									}
+                                    if (is_array($values)) {
+                                        foreach ($values as $vk => $vi) {
+                                            $expval = ddrSplit($vi, ':');
+                                            if (count($expval) > 1) {
+                                                $values[$expval[0]] = $expval[1];
+                                                unset($values[$vk]);
+                                            }
+                                        }
+                                    }
 								}
 								
 								$fData[] = isset($i[2]) ? $i[2] : null;
