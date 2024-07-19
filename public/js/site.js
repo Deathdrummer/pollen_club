@@ -740,7 +740,9 @@ $(document).ready(function () {
 
                 hasData = statExport_pins[item.id] && statExport_pins[item.id].bad + statExport_pins[item.id].good + statExport_pins[item.id].middle >= 20;
                 ballov = statExport_pins[item.id] ? statExport_pins[item.id].ball : 0;
-
+                
+                pollenForType(item.id, hasData);
+                
                 if (hasData) {
                   if (ballov <= 1) {
                     level_item__index_text.innerHTML = pinsNone;

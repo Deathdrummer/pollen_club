@@ -51,7 +51,7 @@ class Ajax extends MY_Controller
         $method = $this->input->get('method');
         $params = $this->input->get('params');
 
-// Формируем URL с GET параметрами
+        // Формируем URL с GET параметрами
         $queryString = $params ? http_build_query(array_merge(['method' => $method], $params)) : '';
         $urlWithParams = $url . '?' . $queryString;
 
