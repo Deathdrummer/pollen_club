@@ -172,8 +172,8 @@ $(document).ready(function () {
   /* Function for working with the modal */
   function bannerModal() {
     const image = document.getElementById('bannerModalImage');
-    const linkDecktop = document.getElementById('bannerModalDesktop')?.value;
-    const linkMobile = document.getElementById('bannerModalMobile')?.value;
+    const linkDecktop = document.getElementById('bannerModalDesktop').value;
+    const linkMobile = document.getElementById('bannerModalMobile').value;
     const winW = window.outerWidth;
 
     return {
@@ -200,9 +200,9 @@ $(document).ready(function () {
   if (currentDate !== savedDate) {
     if (m) {
       setTimeout(() => {
-        modal.show();
+        modal.showModal();
         setTimeout(() => {
-          modal.hide();
+          modal.hideModal();
           localStorage.setItem('bannerDate', currentDate);
         }, timeEnd);
       }, timeStart);
@@ -740,9 +740,9 @@ $(document).ready(function () {
 
                 hasData = statExport_pins[item.id] && statExport_pins[item.id].bad + statExport_pins[item.id].good + statExport_pins[item.id].middle >= 20;
                 ballov = statExport_pins[item.id] ? statExport_pins[item.id].ball : 0;
-                
+
                 pollenForType(item.id, hasData);
-                
+
                 if (hasData) {
                   if (ballov <= 1) {
                     level_item__index_text.innerHTML = pinsNone;
