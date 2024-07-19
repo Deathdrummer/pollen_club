@@ -29,7 +29,7 @@
 				
 				<div class="file{% if not file %} empty{% endif %}">
 					{% if item.label %}<span class="file__label">{{item.label}}</span>{% endif %}
-					<label class="file__block" for="file{{id~k}}" filemanager="{{item.ext}}">
+					<label class="file__block" for="{{item.id ?: 'file'~id~k}}" filemanager="{{item.ext}}">
 						<div class="file__image" fileimage>
 							{% if file %}
 								{% if file|filename(2)|is_img_file %}
@@ -55,7 +55,7 @@
 						filesrc
 						name="{{inpName}}[{{item.name}}]{% if item.alt %}[file]{% endif %}"
 						value="{{file}}"
-						id="file{{id~k}}" />
+						id="{{item.id ?: 'file'~id~k}}" />
 						
 						{% if item.alt %}
 							<div class="field file__alt">
@@ -72,7 +72,7 @@
 						filesrc
 						name="{{item.name}}{% if item.alt %}[file]{% endif %}"
 						value="{{file}}"
-						id="file{{id~k}}" />
+						id="{{item.id ?: 'file'~id~k}}" />
 						
 						{% if item.alt %}
 							<div class="field file__alt">
@@ -95,7 +95,7 @@
 			{% endif %}
 			
 			<div class="file{% if not file %} empty{% endif %}">
-				<label class="file__block" for="file{{id}}" filemanager="{{ext}}">
+				<label class="file__block" for="{{id ?: 'file'~id}}" filemanager="{{ext}}">
 					<div class="file__image" fileimage>
 						{% if file %}
 							{% if file|filename(2)|is_img_file %}
@@ -119,7 +119,7 @@
 				filesrc
 				name="{{inpName}}{% if alt %}[file]{% endif %}"
 				value="{{file}}"
-				id="file{{id}}" />
+				id="{{id ?: 'file'~id}}" />
 				
 				{% if alt %}
 					<div class="field file__alt">
