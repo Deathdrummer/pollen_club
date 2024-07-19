@@ -154,14 +154,23 @@ $(document).ready(function () {
     },
   });
 
+  // баннеры на карте
+  $('.content__map .reklama-item').each(function () {
+    $(this)
+      .find('.reklama-close')
+      .on('click', function () {
+        $(this).closest('.reklama-item').remove();
+      });
+  });
   // рекламный баннер
 
   const currentDate = new Date().toDateString();
   const savedDate = localStorage.getItem('bannerDate');
-
+  const m = document.getElementById('bannerModal');
+  const timeStart = document.getElementById('bannerModal').getAttribute('data-time-start');
+  const timeEnd = document.getElementById('bannerModal').getAttribute('data-time-end');
   /* Function for working with the modal */
   function bannerModal() {
-    const m = document.getElementById('bannerModal');
     const image = document.getElementById('bannerModalImage');
     const linkDecktop = document.getElementById('bannerModalDesktop')?.value;
     const linkMobile = document.getElementById('bannerModalMobile')?.value;
@@ -187,14 +196,17 @@ $(document).ready(function () {
   // Show banner after time if the banner has not been clicked
   let hideTimeout;
   const modal = bannerModal();
+
   if (currentDate !== savedDate) {
-    setTimeout(() => {
-      modal.showModal();
+    if (m) {
       setTimeout(() => {
-        modal.hideModal();
-        localStorage.setItem('bannerDate', currentDate);
-      }, 12000);
-    }, 2);
+        modal.show();
+        setTimeout(() => {
+          modal.hide();
+          localStorage.setItem('bannerDate', currentDate);
+        }, timeEnd);
+      }, timeStart);
+    }
   }
 
   document.querySelectorAll('.banner-link').forEach(function (link) {
@@ -675,7 +687,9 @@ $(document).ready(function () {
           type: 1,
         },
       },
-      beforeSend: function () {},
+      beforeSend: function (e) {
+        $('.pollen-level').addClass('pollen-level_loading');
+      },
       success: function (risk) {
         let riskData = JSON.parse(risk.data);
         let riskmap = [];
@@ -704,13 +718,13 @@ $(document).ready(function () {
             let dataPollens = JSON.parse(r.data);
             let firstItemDesc = '';
             let firstItemId = '';
-
+            let defaultIndex = dataPollens.findIndex(item => item.default_site == 1);
             dataPollens.forEach(function (item, index) {
               let id = item.id;
               let desc = item.desc;
-              let isActive = index === 0 ? 'active' : ''; // Check if it's the first item
-
-              if (index === 0) {
+              let defaultItem = item.default_site;
+              let isActive = index == defaultIndex ? 'active' : ''; // Check if it's the first item
+              if (index == defaultIndex) {
                 firstItemDesc = desc;
                 firstItemId = id;
                 // Уровень пыльцы
@@ -760,6 +774,7 @@ $(document).ready(function () {
               });
             });
             $('.drowdown-block__list li').on('click', function () {
+              $('.pollen-level').addClass('pollen-level_loading');
               let clickedTitle = $(this).text();
               let clickedId = $(this).attr('data-id');
               $('.drowdown-block__active').text(clickedTitle);
@@ -777,6 +792,7 @@ $(document).ready(function () {
                   $('.pollen-level__left .photo img').attr('src', `public/filemanager/${matchedData.img}`);
                   $('.pollen-level__left .photo .photo-text').text(matchedData.title);
                 }
+                $('.pollen-level').removeClass('pollen-level_loading');
               });
               // Уровень пыльцы
 
@@ -811,6 +827,7 @@ $(document).ready(function () {
               }
               pollenForType(clickedId, hasData);
             });
+            $('.pollen-level').removeClass('pollen-level_loading');
           },
           error: function (e, status) {
             console.log(e, status);
@@ -836,16 +853,18 @@ $(document).ready(function () {
       opacity: '0',
       zIndex: '0',
     });
-
+    $('.content__silam').hide();
     $('#silambtn').on('click', function () {
       $('#map').css({
         opacity: '0',
         zIndex: '0',
       });
+      $('.content__maps').hide();
       $('#silam').css({
         opacity: '1',
         zIndex: '1',
       });
+      $('.content__silam').show();
       $('.header__map').css('visibility', 'hidden');
       $('.content-main__map-text__link').text('Закрыть SILAM');
       $('.content-main__map-link').attr('href', '#');
@@ -860,10 +879,12 @@ $(document).ready(function () {
         opacity: '1',
         zIndex: '1',
       });
+      $('.content__maps').show();
       $('#silam').css({
         opacity: '0',
         zIndex: '0',
       });
+      $('.content__silam').hide();
       $('.header__map').css('visibility', 'visible');
       $('.content-main__map-text__link').text('Закрыть Карту');
       $('.content-main__map-link').attr('href', '/');

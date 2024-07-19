@@ -184,32 +184,57 @@
     </div>
   </div>
 
-  <div class="content__map">
+  <div class="content__map content__maps">
     <div class="content__reklama content-main__reklama">
       {% set current_date = date('Y-m-d') %}
-      {% set bannerArr = [] %}
-      {% for item in reklama[3] %}
+      {% for item in reklama[3]|slice(0, 3) %}
         {% set date_min = item.date_min|date('Y-m-d') %}
         {% set date_max = item.date_max|date('Y-m-d') %}
         {% if current_date >= date_min and current_date <= date_max %}
-          {% set bannerArr = bannerArr|merge([item]) %}
+          <div class="reklama-item">
+            <div class="photo reklama-item__photo">
+              {% if item.img %}
+                <img src="{{ base_url('public/filemanager/' ~ item.img) }}" loading="lazy" alt="{{ item.title }}" />
+              {% else %}
+                <img src="{{ base_url('public/filemanager/' ~ item.main_image.file) }}" loading="lazy" alt="{{ item.main_image.alt }}" />
+              {% endif %}
+            </div>
+            <div class="reklama-item__content">
+              <h3 class="reklama-item__title">{{ item.title }} <div class="reklama-close"></div></h3>
+              <p class="reklama-item__text">{{ item.text ? : item.short_desc }}</p>
+              {% if item.text_link %}
+                <a href="{{ item.href }}" class="reklama-item__link">{{ item.text_link ? : 'Подробнее' }}</a>
+              {% endif %}
+            </div>
+          </div>
         {% endif %}
       {% endfor %}
-      {% for item in bannerArr|arrcombine(news_last.items|reverse, 3) %}
-        <div class="reklama-item">
-          <div class="photo reklama-item__photo">
-            {% if item.img %}
-              <img src="{{ base_url('public/filemanager/' ~ item.img) }}" loading="lazy" alt="{{ item.title }}" />
-            {% else %}
-              <img src="{{ base_url('public/filemanager/' ~ item.main_image.file) }}" loading="lazy" alt="{{ item.main_image.alt }}" />
-            {% endif %}
+    </div>
+  </div>
+  <div class="content__map content__silam" style="display: none;">
+    <div class="content__reklama content-main__reklama">
+      {% set current_date = date('Y-m-d') %}
+      {% for item in reklama[5]|slice(0, 3) %}
+        {% set date_min = item.date_min|date('Y-m-d') %}
+        {% set date_max = item.date_max|date('Y-m-d') %}
+        {% if current_date >= date_min and current_date <= date_max %}
+          <div class="reklama-item">
+            <div class="photo reklama-item__photo">
+              {% if item.img %}
+                <img src="{{ base_url('public/filemanager/' ~ item.img) }}" loading="lazy" alt="{{ item.title }}" />
+              {% else %}
+                <img src="{{ base_url('public/filemanager/' ~ item.main_image.file) }}" loading="lazy" alt="{{ item.main_image.alt }}" />
+              {% endif %}
+            </div>
+            <div class="reklama-item__content">
+              <h3 class="reklama-item__title">{{ item.title }} <div class="reklama-close"></div></h3>
+              <p class="reklama-item__text">{{ item.text ? : item.short_desc }}</p>
+              {% if item.text_link %}
+                <a href="{{ item.href }}" class="reklama-item__link">{{ item.text_link ? : 'Подробнее' }}</a>
+              {% endif %}
+            </div>
           </div>
-          <div class="reklama-item__content">
-            <h3 class="reklama-item__title">{{ item.title }}</h3>
-            <p class="reklama-item__text">{{ item.text ? : item.short_desc }}</p>
-            <a href="{{ item.href }}" class="reklama-item__link">{{ item.text_link ? : 'Подробнее' }}</a>
-          </div>
-        </div>
+        {% endif %}
       {% endfor %}
     </div>
   </div>

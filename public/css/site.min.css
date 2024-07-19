@@ -691,6 +691,9 @@ video {
 .story p:not(:last-child) {
   margin-bottom: 20px; }
 
+.story img {
+  width: auto; }
+
 /* Стили тегов */
 .tags ul {
   display: -webkit-box;
@@ -2548,37 +2551,94 @@ video {
   display: -ms-flexbox;
   display: flex;
   gap: 18px; }
+  @media screen and (min-width: 1440px) {
+    .pollen-level {
+      min-height: 232px; } }
   @media screen and (max-width: 1023px) {
     .pollen-level {
       margin: 16px 0 30px; } }
   @media screen and (min-width: 1024px) {
     .pollen-level {
       margin: 20px 0 50px; } }
+  .pollen-level .loadingBlock {
+    pointer-events: none;
+    opacity: 0;
+    -webkit-transition: opacity 0.16s linear;
+    transition: opacity 0.16s linear;
+    position: absolute;
+    inset: 0;
+    background-color: #00000090;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+       -moz-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+       -moz-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+    .pollen-level .loadingBlock i {
+      font-size: 48px;
+      color: #fff; }
+  .pollen-level_loading .loadingBlock {
+    pointer-events: auto;
+    opacity: 1; }
   @media screen and (max-width: 1023px) {
     .pollen-level__left {
       display: none; } }
-  @media screen and (max-width: 1764px) {
+  @media screen and (min-width: 1200px) {
     .pollen-level__left {
-      max-width: 100%; } }
-  @media screen and (max-width: 1439px) {
+      display: none; } }
+  @media screen and (min-width: 1440px) {
     .pollen-level__left {
-      max-width: 150px; } }
-  @media screen and (max-width: 1199px) {
-    .pollen-level__left {
-      max-width: 100%; } }
+      display: block; } }
   @media screen and (min-width: 768px) {
     .pollen-level__left {
       width: auto; } }
-  @media screen and (max-width: 1764px) {
+  @media screen and (min-width: 1440px) {
     .pollen-level__left {
-      width: 100%; } }
+      width: 75%; } }
+  @media screen and (min-width: 1765px) {
+    .pollen-level__left {
+      width: 200px; } }
   .pollen-level__left .photo {
     width: 100%;
-    height: 100%;
     min-width: 150px; }
+    @media screen and (min-width: 768px) {
+      .pollen-level__left .photo {
+        min-height: 350px; } }
+    @media screen and (min-width: 1200px) {
+      .pollen-level__left .photo {
+        min-height: auto; } }
+    @media screen and (min-width: 768px) {
+      .pollen-level__left .photo {
+        height: 300px; } }
+    @media screen and (min-width: 1440px) {
+      .pollen-level__left .photo {
+        height: 0; } }
+    @media screen and (min-width: 1765px) {
+      .pollen-level__left .photo {
+        height: 200px; } }
+    @media screen and (min-width: 1024px) {
+      .pollen-level__left .photo {
+        padding-bottom: 0; } }
+    @media screen and (min-width: 1440px) {
+      .pollen-level__left .photo {
+        padding-bottom: 100%; } }
+    @media screen and (min-width: 1765px) {
+      .pollen-level__left .photo {
+        padding-bottom: 0; } }
     .pollen-level__left .photo img {
       -o-object-fit: cover;
-         object-fit: cover; }
+         object-fit: cover;
+      offset-position: center center;
+      position: absolute; }
     .pollen-level__left .photo:after {
       content: '';
       display: block;
@@ -2687,6 +2747,8 @@ video {
       font-family: Roboto-medium, sans-serif; }
       .pollen-level__item .level-item__content #myChart {
         max-width: 100%; }
+      .pollen-level__item .level-item__content .myChartText {
+        margin-bottom: 43px; }
     .pollen-level__item .level-item__prognoz {
       width: 100%;
       margin: 0 auto; }
@@ -3182,6 +3244,49 @@ video {
   @media screen and (max-width: 1023px) {
     .section_map .content__map .content__reklama .reklama-item {
       max-width: 100%; } }
+  .section_map .content__map .content__reklama .reklama-item__title {
+    padding-right: 20px; }
+    .section_map .content__map .content__reklama .reklama-item__title .reklama-close {
+      display: block;
+      right: 0px;
+      top: 0%;
+      width: 17px;
+      height: 17px;
+      background-color: #8e8e93;
+      position: absolute;
+      width: 17px;
+      height: 17px;
+      z-index: 3;
+      border-radius: 50%;
+      -webkit-transition: all 0.16s linear;
+      transition: all 0.16s linear;
+      cursor: pointer; }
+      .section_map .content__map .content__reklama .reklama-item__title .reklama-close::before, .section_map .content__map .content__reklama .reklama-item__title .reklama-close::after {
+        content: '';
+        position: relative;
+        display: block;
+        left: 3px;
+        height: 2px;
+        background-color: #f5fafe;
+        border-radius: 2px;
+        width: 70%;
+        -webkit-transition: all 0.16s linear;
+        transition: all 0.16s linear; }
+      .section_map .content__map .content__reklama .reklama-item__title .reklama-close::before {
+        -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+        top: calc(50% - 1.5px); }
+      .section_map .content__map .content__reklama .reklama-item__title .reklama-close::after {
+        -webkit-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+        top: calc(50% - 3.5px); }
+      .section_map .content__map .content__reklama .reklama-item__title .reklama-close:hover::before, .section_map .content__map .content__reklama .reklama-item__title .reklama-close:hover::after {
+        opacity: 0.8;
+        background-color: #f5fafe;
+        -webkit-transition: all 0.16s linear;
+        transition: all 0.16s linear; }
   @media screen and (max-width: 1023px) {
     .section_map .content__map .content__reklama .reklama-item__link {
       display: none; } }
@@ -4531,13 +4636,13 @@ video {
 .wrapper-single .search {
   right: 0;
   top: 0; }
-  @media screen and (max-width: 1023px) {
+  @media screen and (max-width: 1764px) {
     .wrapper-single .search {
       position: relative; } }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1765px) {
     .wrapper-single .search {
       position: absolute; } }
-  @media screen and (max-width: 1023px) {
+  @media screen and (max-width: 1764px) {
     .wrapper-single .search {
       margin-bottom: 20px; } }
 
