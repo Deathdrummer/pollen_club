@@ -167,38 +167,39 @@ $(document).ready(function () {
   const currentDate = new Date().toDateString();
   const savedDate = localStorage.getItem('bannerDate');
   const m = document.getElementById('bannerModal');
-  const timeStart = document.getElementById('bannerModal').getAttribute('data-time-start');
-  const timeEnd = document.getElementById('bannerModal').getAttribute('data-time-end');
-  /* Function for working with the modal */
-  function bannerModal() {
-    const image = document.getElementById('bannerModalImage');
-    const linkDecktop = document.getElementById('bannerModalDesktop').value;
-    const linkMobile = document.getElementById('bannerModalMobile').value;
-    const winW = window.outerWidth;
 
-    return {
-      showModal() {
-        if (image) {
-          image.setAttribute('src', winW < 768 ? linkMobile : linkDecktop);
+  if (m) {
+    const timeStart = m.getAttribute('data-time-start') ? '' : 500;
+    const timeEnd = m.getAttribute('data-time-end') ? '' : 1500;
+    /* Function for working with the modal */
+    function bannerModal() {
+      const image = document.getElementById('bannerModalImage');
+      const linkDecktop = document.getElementById('bannerModalDesktop').value;
+      const linkMobile = document.getElementById('bannerModalMobile').value;
+      const winW = window.outerWidth;
 
-          const i = new Image();
-          const imageSrc = image.getAttribute('src');
-          i.onload = () => m.classList.add('modal_visible');
-          i.src = imageSrc;
-        }
-      },
-      hideModal() {
-        if (m) m.classList.remove('modal_visible');
-      },
-    };
-  }
+      return {
+        showModal() {
+          if (image) {
+            image.setAttribute('src', winW < 768 ? linkMobile : linkDecktop);
 
-  // Show banner after time if the banner has not been clicked
-  let hideTimeout;
-  const modal = bannerModal();
+            const i = new Image();
+            const imageSrc = image.getAttribute('src');
+            i.onload = () => m.classList.add('modal_visible');
+            i.src = imageSrc;
+          }
+        },
+        hideModal() {
+          if (m) m.classList.remove('modal_visible');
+        },
+      };
+    }
 
-  if (currentDate !== savedDate) {
-    if (m) {
+    // Show banner after time if the banner has not been clicked
+    let hideTimeout;
+    const modal = bannerModal();
+
+    if (currentDate !== savedDate) {
       setTimeout(() => {
         modal.showModal();
         setTimeout(() => {
@@ -233,7 +234,7 @@ $(document).ready(function () {
       url: '/ajax/search_products',
       dataType: 'json',
       data: {
-        field: 'title',
+        field: ['title', 'short_desc', 'description'],
         value: value,
         returnFields: ['title', 'seo_url'],
       },
