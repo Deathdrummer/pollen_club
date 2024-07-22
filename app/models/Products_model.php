@@ -446,11 +446,12 @@ class Products_model extends MY_Model {
         
         if (is_array($field)) {
         	foreach ($field as $f) {
-        		$this->db->like($f, $value, 'both');
+        		$this->db->or_like($f, $value, 'both');
         	}
         } else {
         	$this->db->like($field, $value, 'both');
         }
+        
         return $this->_result('products') ?: [];
     }
 
