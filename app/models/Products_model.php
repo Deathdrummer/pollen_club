@@ -451,7 +451,6 @@ class Products_model extends MY_Model {
         } else {
         	$this->db->like($field, $value, 'both');
         }
-        
         return $this->_result('products') ?: [];
     }
 
