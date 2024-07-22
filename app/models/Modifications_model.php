@@ -186,7 +186,7 @@ class Modifications_model extends MY_model {
 	
 	private function _readFile() {
 		if (!file_exists(MODIFICATIONS_FILE)) return false;
-		$fileData = json_decode(file_get_contents(MODIFICATIONS_FILE) ?: '', true);
+		$fileData = json_decode(@file_get_contents(MODIFICATIONS_FILE) ?: '', true);
 		return $fileData ?: false;
 	}
 	
