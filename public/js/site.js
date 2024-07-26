@@ -162,6 +162,20 @@ $(document).ready(function () {
         $(this).closest('.reklama-item').remove();
       });
   });
+  // Рекламный баннер на странице карты
+
+  $('.reklama-item__banner').each(function () {
+    var el = $(this);
+    el.css('display', 'flex');
+    console.log(el);
+    const linkDecktop = el.find('.reklama-item__bannerDesktop').val();
+    const linkMobile = el.find('.reklama-item__bannerMobile').val();
+
+    el.find('.reklama-item__bannerModalImage').attr('src', $(window).width() < 1024 ? linkMobile : linkDecktop);
+    var i = new Image();
+    var imageSrc = el.find('reklama-item__bannerModalImage').attr('src');
+    i.src = imageSrc;
+  });
   // рекламный баннер
 
   const currentDate = new Date().toDateString();
@@ -169,8 +183,8 @@ $(document).ready(function () {
   const m = document.getElementById('bannerModal');
 
   if (m) {
-    const timeStart = m.getAttribute('data-time-start') ? '' : 500;
-    const timeEnd = m.getAttribute('data-time-end') ? '' : 1500;
+    const timeStart = m.getAttribute('data-time-start') ? m.getAttribute('data-time-start') : 500;
+    const timeEnd = m.getAttribute('data-time-end') ? m.getAttribute('data-time-end') : 1500;
     /* Function for working with the modal */
     function bannerModal() {
       const image = document.getElementById('bannerModalImage');
@@ -208,15 +222,14 @@ $(document).ready(function () {
         }, timeEnd);
       }, timeStart);
     }
-  }
-
-  document.querySelectorAll('.banner-link').forEach(function (link) {
-    link.addEventListener('click', function () {
-      clearTimeout(hideTimeout);
-      localStorage.setItem('bannerDate', currentDate);
-      modal.hideModal();
+    document.querySelectorAll('.banner-link').forEach(function (link) {
+      link.addEventListener('click', function () {
+        clearTimeout(hideTimeout);
+        localStorage.setItem('bannerDate', currentDate);
+        modal.hideModal();
+      });
     });
-  });
+  }
 
   // поиск
   let search = $('.search');

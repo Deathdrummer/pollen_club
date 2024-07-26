@@ -134,6 +134,7 @@
         <div class="content__reklama content-main__reklama">
           {% set current_date = date('Y-m-d') %}
           {% set bannerArr = [] %}
+
           {% for item in reklama[1] %}
             {% set date_min = item.date_min|date('Y-m-d') %}
             {% set date_max = item.date_max|date('Y-m-d') %}
@@ -154,7 +155,7 @@
                 <h3 class="reklama-item__title">{{ item.title }}</h3>
                 <p class="reklama-item__text">{{ item.text ? : item.short_desc }}</p>
                 {% if item.text_link %}
-                  <a href="{{ item.href }}" class="reklama-item__link">{{ item.text_link ? : 'Подробнее' }}</a>
+                  <a href="{{ item.href }}" target="_blank" class="reklama-item__link">{{ item.text_link ? : 'Подробнее' }}</a>
                 {% endif %}
               </div>
             </div>

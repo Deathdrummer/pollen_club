@@ -55,7 +55,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js" integrity="sha512-Hn1w6YiiFw6p6S2lXv6yKeqTk0PLVzeCwWY9n32beuPjQ5HLcvz5l2QsP+KilEr1ws37rCTw3bZpvfvVIeTh0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    {% if scripts_head %}{{ scripts_head|raw }}{% endif %}
+    {% if hosting %}
+      {% if scripts %}{{scripts|raw}}{% endif %}
+      {% if scripts_head %}{{scripts_head|raw}}{% endif %}
+    {% endif %}
 
     {% if hosting %}{% include 'views/' ~ controller ~ '/layout/hosting.tpl' %}{% endif %} <!-- Если сайт на хостинге - выполнять функции -->
     <title itemprop="headline">{{ page_title|default('Страница без заголовка') }}</title>
@@ -108,6 +111,9 @@
     {# <script type="module" src="{{base_url('public/js/modelViewer.js')}}"></script> #}
     <script src="{{ base_url('public/js/swiper-bundle.min.js') }}"></script>
     {% if scripts_end %}{{ scripts_end|raw }}{% endif %}
+
+    
+
 
     {% if is_file('public/js/' ~ controller ~ '.js') %}
       <script src="{{ base_url('public/js/' ~ controller ~ '.js') }}"></script>

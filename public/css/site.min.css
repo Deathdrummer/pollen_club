@@ -3237,7 +3237,7 @@ video {
           color: #70c270; }
 
 .section_map .content__map {
-  z-index: 1; }
+  z-index: 2; }
   @media screen and (max-width: 767px) {
     .section_map .content__map .content__reklama .reklama-item {
       padding: 7px 0; } }
@@ -3246,53 +3246,65 @@ video {
       max-width: 100%; } }
   .section_map .content__map .content__reklama .reklama-item__title {
     padding-right: 20px; }
-    .section_map .content__map .content__reklama .reklama-item__title .reklama-close {
+  .section_map .content__map .content__reklama .reklama-item .reklama-close {
+    display: block;
+    right: 0px;
+    top: 0%;
+    background-color: #8e8e93;
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    z-index: 3;
+    border-radius: 50%;
+    -webkit-transition: all 0.16s linear;
+    transition: all 0.16s linear;
+    cursor: pointer; }
+    .section_map .content__map .content__reklama .reklama-item .reklama-close::before, .section_map .content__map .content__reklama .reklama-item .reklama-close::after {
+      content: '';
+      position: relative;
       display: block;
-      right: 0px;
-      top: 0%;
-      width: 17px;
-      height: 17px;
-      background-color: #8e8e93;
-      position: absolute;
-      width: 17px;
-      height: 17px;
-      z-index: 3;
-      border-radius: 50%;
+      left: 3px;
+      height: 2px;
+      background-color: #f5fafe;
+      border-radius: 2px;
+      width: 70%;
       -webkit-transition: all 0.16s linear;
-      transition: all 0.16s linear;
-      cursor: pointer; }
-      .section_map .content__map .content__reklama .reklama-item__title .reklama-close::before, .section_map .content__map .content__reklama .reklama-item__title .reklama-close::after {
-        content: '';
-        position: relative;
-        display: block;
-        left: 3px;
-        height: 2px;
-        background-color: #f5fafe;
-        border-radius: 2px;
-        width: 70%;
-        -webkit-transition: all 0.16s linear;
-        transition: all 0.16s linear; }
-      .section_map .content__map .content__reklama .reklama-item__title .reklama-close::before {
-        -webkit-transform: rotate(45deg);
-            -ms-transform: rotate(45deg);
-                transform: rotate(45deg);
-        top: calc(50% - 1.5px); }
-      .section_map .content__map .content__reklama .reklama-item__title .reklama-close::after {
-        -webkit-transform: rotate(-45deg);
-            -ms-transform: rotate(-45deg);
-                transform: rotate(-45deg);
-        top: calc(50% - 3.5px); }
-      .section_map .content__map .content__reklama .reklama-item__title .reklama-close:hover::before, .section_map .content__map .content__reklama .reklama-item__title .reklama-close:hover::after {
-        opacity: 0.8;
-        background-color: #f5fafe;
-        -webkit-transition: all 0.16s linear;
-        transition: all 0.16s linear; }
+      transition: all 0.16s linear; }
+    .section_map .content__map .content__reklama .reklama-item .reklama-close::before {
+      -webkit-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+              transform: rotate(45deg);
+      top: calc(50% - 1.5px); }
+    .section_map .content__map .content__reklama .reklama-item .reklama-close::after {
+      -webkit-transform: rotate(-45deg);
+          -ms-transform: rotate(-45deg);
+              transform: rotate(-45deg);
+      top: calc(50% - 3.5px); }
+    .section_map .content__map .content__reklama .reklama-item .reklama-close:hover::before, .section_map .content__map .content__reklama .reklama-item .reklama-close:hover::after {
+      opacity: 0.8;
+      background-color: #f5fafe;
+      -webkit-transition: all 0.16s linear;
+      transition: all 0.16s linear; }
   @media screen and (max-width: 1023px) {
     .section_map .content__map .content__reklama .reklama-item__link {
       display: none; } }
+  .section_map .content__map .content__reklama .reklama-item__banner {
+    padding-top: 30px !important;
+    background-color: #f5fafe;
+    -webkit-box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 4px 0 rgba(0, 0, 0, 0.05), 0 2px 8px 0 rgba(0, 0, 0, 0.06), 0 3px 15px 0 rgba(0, 0, 0, 0.07), 0 5px 28px 0 rgba(0, 0, 0, 0.09);
+            box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 4px 0 rgba(0, 0, 0, 0.05), 0 2px 8px 0 rgba(0, 0, 0, 0.06), 0 3px 15px 0 rgba(0, 0, 0, 0.07), 0 5px 28px 0 rgba(0, 0, 0, 0.09); }
+    @media screen and (max-width: 767px) {
+      .section_map .content__map .content__reklama .reklama-item__banner {
+        padding: 7px 15px; } }
+    @media screen and (max-width: 1199px) {
+      .section_map .content__map .content__reklama .reklama-item__banner .reklama-item__photo {
+        width: 100%; } }
+    .section_map .content__map .content__reklama .reklama-item__banner .reklama-close {
+      right: 7px;
+      top: 7px; }
   @media screen and (max-width: 1023px) {
     .section_map .content__map {
-      margin-top: 35px; } }
+      margin-bottom: 20px; } }
   @media screen and (min-width: 1024px) {
     .section_map .content__map {
       left: 30px; } }
@@ -4612,38 +4624,47 @@ video {
     -o-object-fit: contain;
        object-fit: contain; }
 
-/* общие стили для записи */
+/* общие стили для записи и для страниц*/
 @media screen and (max-width: 1764px) {
-  .wrapper-single__content {
+  .wrapper-single__content,
+  .wrapper-page__content {
     max-width: 100%; } }
 
 @media screen and (min-width: 1765px) {
-  .wrapper-single__content {
+  .wrapper-single__content,
+  .wrapper-page__content {
     max-width: calc(100% - 300px); } }
 
 @media screen and (max-width: 1023px) {
-  .wrapper-single .content-title {
+  .wrapper-single .content-title,
+  .wrapper-page .content-title {
     max-width: 100%; } }
 
 @media screen and (min-width: 1024px) {
-  .wrapper-single .content-title {
+  .wrapper-single .content-title,
+  .wrapper-page .content-title {
     max-width: calc(100% - 250px); } }
 
 @media screen and (min-width: 1024px) {
-  .wrapper-single .tags {
+  .wrapper-single .tags,
+  .wrapper-page .tags {
     max-width: calc(100% - 250px); } }
 
-.wrapper-single .search {
+.wrapper-single .search,
+.wrapper-page .search {
   right: 0;
   top: 0; }
   @media screen and (max-width: 1764px) {
-    .wrapper-single .search {
+    .wrapper-single .search,
+    .wrapper-page .search {
       position: relative; } }
   @media screen and (min-width: 1765px) {
-    .wrapper-single .search {
+    .wrapper-single .search,
+    .wrapper-page .search {
       position: absolute; } }
   @media screen and (max-width: 1764px) {
-    .wrapper-single .search {
+    .wrapper-single .search,
+    .wrapper-page .search {
       margin-bottom: 20px; } }
 
 .single .single_date {

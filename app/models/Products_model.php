@@ -32,6 +32,8 @@ class Products_model extends MY_Model {
 		if ($noOpsProds === true) $this->db->where('po.product_id IS NULL');
 		if ($noOpsProds === 'toSite') $this->db->where('po.product_id IS NULL');
 		
+		if ($noOpsProds === 'toSite') $this->db->where('pr.label', 1);
+		
 		$this->db->group_by('pr.id, cc.title');
 		if ($toList) $this->db->order_by('pr.id', 'ASC');
 		else $this->db->order_by('pr.sort', 'ASC');

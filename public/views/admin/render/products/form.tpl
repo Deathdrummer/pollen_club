@@ -528,7 +528,7 @@
 		
 		{% if access.label %}
 			<tr>
-				<td class="w-20"><div><span>Ярлык</span></div></td>
+				<td class="w-20"><div><span>Отобразить</span></div></td>
 				<td>
 					<div class="checkbox">
 						<div class="checkbox__item checkbox__item_ver2">

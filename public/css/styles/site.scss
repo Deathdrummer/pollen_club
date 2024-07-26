@@ -2947,7 +2947,6 @@ video {
     }
   }
   .content__map {
-    z-index: 1;
     .content__reklama {
       .reklama-item {
         @include resp(
@@ -2956,57 +2955,57 @@ video {
             sm-down: 7px 0,
           )
         );
+
         @include resp(
           max-width,
           (
             md-down: 100%,
           )
         );
+
         &__title {
           padding-right: 20px;
-          .reklama-close {
-            display: block;
-            right: 0px;
-            top: 0%;
+        }
+        .reklama-close {
+          display: block;
+          right: 0px;
+          top: 0%;
 
-            width: 17px;
-            height: 17px;
-            background-color: #8e8e93;
-            position: absolute;
-            width: 17px;
-            height: 17px;
-            z-index: 3;
-            border-radius: 50%;
+          background-color: #8e8e93;
+          position: absolute;
+          width: 17px;
+          height: 17px;
+          z-index: 3;
+          border-radius: 50%;
+          transition: all 0.16s linear;
+          cursor: pointer;
+          &::before,
+          &::after {
+            content: '';
+            position: relative;
+            display: block;
+
+            left: 3px;
+            height: 2px;
+            background-color: $light;
+            border-radius: 2px;
+            width: 70%;
             transition: all 0.16s linear;
-            cursor: pointer;
+          }
+          &::before {
+            transform: rotate(45deg);
+            top: calc(50% - 1.5px);
+          }
+          &::after {
+            transform: rotate(-45deg);
+            top: calc(50% - 3.5px);
+          }
+          &:hover {
             &::before,
             &::after {
-              content: '';
-              position: relative;
-              display: block;
-
-              left: 3px;
-              height: 2px;
+              opacity: 0.8;
               background-color: $light;
-              border-radius: 2px;
-              width: 70%;
               transition: all 0.16s linear;
-            }
-            &::before {
-              transform: rotate(45deg);
-              top: calc(50% - 1.5px);
-            }
-            &::after {
-              transform: rotate(-45deg);
-              top: calc(50% - 3.5px);
-            }
-            &:hover {
-              &::before,
-              &::after {
-                opacity: 0.8;
-                background-color: $light;
-                transition: all 0.16s linear;
-              }
             }
           }
         }
@@ -3018,13 +3017,36 @@ video {
             )
           );
         }
+        &__banner {
+          padding-top: 30px !important;
+          @include resp(
+            padding,
+            (
+              sm-down: 7px 15px,
+            )
+          );
+          background-color: $light;
+          box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 4px 0 rgba(0, 0, 0, 0.05), 0 2px 8px 0 rgba(0, 0, 0, 0.06), 0 3px 15px 0 rgba(0, 0, 0, 0.07), 0 5px 28px 0 rgba(0, 0, 0, 0.09);
+          .reklama-item__photo {
+            @include resp(
+              width,
+              (
+                lg-down: 100%,
+              )
+            );
+          }
+          .reklama-close {
+            right: 7px;
+            top: 7px;
+          }
+        }
       }
     }
-
+    z-index: 2;
     @include resp(
-      margin-top,
+      margin-bottom,
       (
-        md-down: 35px,
+        md-down: 20px,
       )
     );
     @include resp(
@@ -4428,8 +4450,9 @@ video {
     object-fit: contain;
   }
 }
-/* общие стили для записи */
-.wrapper-single {
+/* общие стили для записи и для страниц*/
+.wrapper-single,
+.wrapper-page {
   &__content {
     @include resp(
       max-width,

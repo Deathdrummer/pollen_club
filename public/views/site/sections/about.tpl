@@ -31,7 +31,7 @@
     <div class="content-main__left">
       <div class="mobile-about-video">
         <div class="video-player">
-          <video class="video-player__video" src="{{ base_url('public/filemanager/' ~ video[0]) }}"></video>
+          <video class="video-player__video" muted autoplay playsinline src="{{ base_url('public/filemanager/' ~ video[0]) }}"></video>
           <div class="video-player__controls">
             <div class="video-player__controls-info">
               <div class="video-player__controls-buttons">

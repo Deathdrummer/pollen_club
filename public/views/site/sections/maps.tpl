@@ -48,6 +48,74 @@
       </a>
     </div>
   </div>
+  <div class="content__map content__maps">
+    <div class="content__reklama content-main__reklama">
+      {% set current_date = date('Y-m-d') %}
+      {% for item in reklama[2]|slice(0, 1) %}
+        {% set date_min = item.date_min|date('Y-m-d') %}
+        {% set date_max = item.date_max|date('Y-m-d') %}
+        {% set img_mobile = item.img_mobile ?? item.img %}
+        {% if current_date >= date_min and current_date <= date_max %}
+          <a href="{{ item.href }}" target="_blank" class="reklama-item{% if not item.text %}{% endif %}" style="display: none;">
+            <div class="photo reklama-item__photo">
+              {% if item.img %}
+                <input type="hidden" class="reklama-item__bannerMobile" value="{{ base_url('public/filemanager/' ~ img_mobile) }}" />
+                <input type="hidden" class="reklama-item__bannerDesktop" value="{{ base_url('public/filemanager/' ~ item.img) }}" />
+                <img class="reklama-item__bannerModalImage" alt="{{ item.title }}" />
+              {% else %}
+                <img src="{{ base_url('public/filemanager/' ~ item.main_image.file) }}" loading="lazy" alt="{{ item.main_image.alt }}" />
+              {% endif %}
+            </div>
+            {% if item.title and item.text %}
+              <div class="reklama-item__content">
+                <h3 class="reklama-item__title">{{ item.title }} <div class="reklama-close"></div></h3>
+                <p class="reklama-item__text">{{ item.text ? : item.short_desc }}</p>
+                {% if item.text_link %}
+                  <a href="{{ item.href }}" target="_blank" class="reklama-item__link">{{ item.text_link ? : 'Подробнее' }}</a>
+                {% endif %}
+              </div>
+            {% else %}
+              <div onclick="event.preventDefault()" class="reklama-close"></div>
+            {% endif %}
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  <div class="content__map content__silam" style="display: none;">
+    <div class="content__reklama content-main__reklama">
+      {% set current_date = date('Y-m-d') %}
+      {% for item in reklama[5]|slice(0, 1) %}
+        {% set date_min = item.date_min|date('Y-m-d') %}
+        {% set date_max = item.date_max|date('Y-m-d') %}
+        {% set img_mobile = item.img_mobile ?? item.img %}
+        {% if current_date >= date_min and current_date <= date_max %}
+          <a href="{{ item.href }}" target="_blank" 0class="reklama-item{% if not item.text %}{% endif %}">
+            <div class="photo reklama-item__photo">
+              {% if item.img %}
+                <input type="hidden" class="reklama-item__bannerMobile" value="{{ base_url('public/filemanager/' ~ img_mobile) }}" />
+                <input type="hidden" class="reklama-item__bannerDesktop" value="{{ base_url('public/filemanager/' ~ item.img) }}" />
+                <img class="reklama-item__bannerModalImage" alt="{{ item.title }}" />
+              {% else %}
+                <img src="{{ base_url('public/filemanager/' ~ item.main_image.file) }}" loading="lazy" alt="{{ item.main_image.alt }}" />
+              {% endif %}
+            </div>
+            {% if item.title and item.text %}
+              <div class="reklama-item__content">
+                <h3 class="reklama-item__title">{{ item.title }} <div class="reklama-close"></div></h3>
+                <p class="reklama-item__text">{{ item.text ? : item.short_desc }}</p>
+                {% if item.text_link %}
+                  <a href="{{ item.href }}" target="_blank" class="reklama-item__link">{{ item.text_link ? : 'Подробнее' }}</a>
+                {% endif %}
+              </div>
+            {% else %}
+              <div onclick="event.preventDefault()" class="reklama-close"></div>
+            {% endif %}
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
   <div class="map-wrapper">
     {# <div id="preloader" style="background-color:#fff;border-radius:15px;position:absolute;bottom:20px;left:50%;padding: 6px 12px;z-index:2;translate(-50%, 0);display:none;">загрузка...</div> #}
     <iframe width="100%" height="100%" id="silam" src="https://api.pollen.club/static/map.html" frameborder="0"></iframe>
@@ -181,61 +249,6 @@
         <a href="https://play.google.com/store/apps/details?id=pollen.sgolovanov.pollen2" target="_blank" class="googlestore"></a>
         <a href="https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=988384559&mt=8" target="_blank" class="applestore"></a>
       </div>
-    </div>
-  </div>
-
-  <div class="content__map content__maps">
-    <div class="content__reklama content-main__reklama">
-      {% set current_date = date('Y-m-d') %}
-      {% for item in reklama[4]|slice(0, 3) %}
-        {% set date_min = item.date_min|date('Y-m-d') %}
-        {% set date_max = item.date_max|date('Y-m-d') %}
-        {% if current_date >= date_min and current_date <= date_max %}
-          <div class="reklama-item">
-            <div class="photo reklama-item__photo">
-              {% if item.img %}
-                <img src="{{ base_url('public/filemanager/' ~ item.img) }}" loading="lazy" alt="{{ item.title }}" />
-              {% else %}
-                <img src="{{ base_url('public/filemanager/' ~ item.main_image.file) }}" loading="lazy" alt="{{ item.main_image.alt }}" />
-              {% endif %}
-            </div>
-            <div class="reklama-item__content">
-              <h3 class="reklama-item__title">{{ item.title }} <div class="reklama-close"></div></h3>
-              <p class="reklama-item__text">{{ item.text ? : item.short_desc }}</p>
-              {% if item.text_link %}
-                <a href="{{ item.href }}" class="reklama-item__link">{{ item.text_link ? : 'Подробнее' }}</a>
-              {% endif %}
-            </div>
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-  <div class="content__map content__silam" style="display: none;">
-    <div class="content__reklama content-main__reklama">
-      {% set current_date = date('Y-m-d') %}
-      {% for item in reklama[5]|slice(0, 3) %}
-        {% set date_min = item.date_min|date('Y-m-d') %}
-        {% set date_max = item.date_max|date('Y-m-d') %}
-        {% if current_date >= date_min and current_date <= date_max %}
-          <div class="reklama-item">
-            <div class="photo reklama-item__photo">
-              {% if item.img %}
-                <img src="{{ base_url('public/filemanager/' ~ item.img) }}" loading="lazy" alt="{{ item.title }}" />
-              {% else %}
-                <img src="{{ base_url('public/filemanager/' ~ item.main_image.file) }}" loading="lazy" alt="{{ item.main_image.alt }}" />
-              {% endif %}
-            </div>
-            <div class="reklama-item__content">
-              <h3 class="reklama-item__title">{{ item.title }} <div class="reklama-close"></div></h3>
-              <p class="reklama-item__text">{{ item.text ? : item.short_desc }}</p>
-              {% if item.text_link %}
-                <a href="{{ item.href }}" class="reklama-item__link">{{ item.text_link ? : 'Подробнее' }}</a>
-              {% endif %}
-            </div>
-          </div>
-        {% endif %}
-      {% endfor %}
     </div>
   </div>
 </section>

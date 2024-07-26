@@ -25,7 +25,7 @@
                     <h3 class="card-news__content-title">{{ item.title }}</h3>
                     <p class="card-news__content-text">{{ item.short_desc }}</p>
                   </div> <span class="date">{{ item.article }}</span>
-                  <a href="{{ item.href }}" class="card-news__link"></a>
+                  <a href="{{ item.href }}" target="_blank" class="card-news__link"></a>
                 </div>
               </div>
             {% endfor %}
@@ -50,7 +50,7 @@
         {% set date_min = item.date_min|date('Y-m-d') %}
         {% set date_max = item.date_max|date('Y-m-d') %}
         {% if current_date >= date_min and current_date <= date_max %}
-          <a href="{{ item.href }}" class="card-allergika">
+          <a href="{{ item.href }}" target="_blank" class="card-allergika">
             <div class="card-allergika__tags tags">
               <ul>
                 {% if item.hashtags %}
