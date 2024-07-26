@@ -118,7 +118,7 @@
   </div>
   <div class="map-wrapper">
     {# <div id="preloader" style="background-color:#fff;border-radius:15px;position:absolute;bottom:20px;left:50%;padding: 6px 12px;z-index:2;translate(-50%, 0);display:none;">загрузка...</div> #}
-    <iframe width="100%" height="100%" id="silam" src="https://api.pollen.club/static/map.html" frameborder="0"></iframe>
+    <iframe width="100%" height="100%" id="silam" src="{{ silam_link }}" frameborder="0"></iframe>
     <div id="map"></div>
     <div class="content-main__map">
       <a href="/" class="content-main__map-link">

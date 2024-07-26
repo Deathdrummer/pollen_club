@@ -4496,6 +4496,60 @@ video {
       )
     );
   }
+  .story {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-bottom: 30px;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    strong,
+    b {
+      font-weight: 700;
+    }
+    h1,
+    h2 {
+      @include resp(
+        font-size,
+        (
+          md-down: 25px,
+          lg: 28px,
+        )
+      );
+    }
+    h3 {
+      font-size: 20px;
+    }
+    a {
+      &:before {
+        position: absolute;
+        content: '';
+        bottom: 0px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: #081530;
+        opacity: 1;
+        -webkit-transition: all 0.3s linear;
+        transition: all 0.3s linear;
+      }
+      &:hover {
+        &:before {
+          opacity: 0;
+          -webkit-transition: all 0.3s linear;
+          transition: all 0.3s linear;
+        }
+      }
+    }
+  }
 }
 .single {
   .single_date {
