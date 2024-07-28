@@ -397,10 +397,10 @@ class MY_Controller extends CI_Controller
         $this->twig->addFilter('arrcombine', function ($array1 = null, $array2 = null, $count = null) {
             $result = [];
             $array1Count = count($array1 ?? []);
-            if (!$array2) {
+            if (!$array2 || !is_array($array2)) {
                 return $array1;
             }
-
+            
             $array2 = array_values($array2);
             // Add elements from the first array
             if ($array1Count) {

@@ -60,7 +60,7 @@
         </div>
         <div class="content-main__content-news">
           <h2 class="content-title">
-            <a href="/gid-alergika/" class="content-main__news-all">
+            <a href="/gid-alergika/" target="_blank"  class="content-main__news-all">
               <span class="news-all-text">{{ title_news }}</span>
               <span class="news-all-icon" style=" mask-image: url({{ base_url('public/images/pollen/icons/arrow.svg') }})"></span>
             </a>
@@ -78,7 +78,7 @@
                         <h3 class="card-news__content-title">{{ item.title }}</h3>
                         <p class="card-news__content-text">{{ item.short_desc }}</p>
                       </div> <span class="date">{{ item.article }}</span>
-                      <a href="{{ item.href }}" class="card-news__link"></a>
+                      <a href="{{ item.href }}" target="_blank" class="card-news__link"></a>
                     </div>
                   </div>
                 {% endfor %}
@@ -94,13 +94,13 @@
         <div class="content-main__mobile-app">
           <div class="block-download-list">
             {% for app in download %}
-              <a class="appstore" href="{{ app.link }}"><img loading="lazy" src="{{ base_url('public/filemanager/' ~ app.img) }}" alt="" /></a>
+              <a class="appstore" target="_blank" href="{{ app.link }}"><img loading="lazy" src="{{ base_url('public/filemanager/' ~ app.img) }}" alt="" /></a>
             {% endfor %}
           </div>
           <p class="content-title">{{ title_download }}</p>
           <div class="qr-download">
             <div class="photo">
-              <img src="{{ base_url('public/filemanager/' ~ qr[0]) }}" alt="qr" />
+              <img src="{{ base_url('public/filemanager/' ~ qr) }}" alt="qr" />
             </div>
             <p class="qr-download__text">{{ text_download }}</p>
           </div>
@@ -134,7 +134,6 @@
         <div class="content__reklama content-main__reklama">
           {% set current_date = date('Y-m-d') %}
           {% set bannerArr = [] %}
-
           {% for item in reklama[1] %}
             {% set date_min = item.date_min|date('Y-m-d') %}
             {% set date_max = item.date_max|date('Y-m-d') %}
@@ -154,9 +153,7 @@
               <div class="reklama-item__content">
                 <h3 class="reklama-item__title">{{ item.title }}</h3>
                 <p class="reklama-item__text">{{ item.text ? : item.short_desc }}</p>
-                {% if item.text_link %}
-                  <a href="{{ item.href }}" target="_blank" class="reklama-item__link">{{ item.text_link ? : 'Подробнее' }}</a>
-                {% endif %}
+                <a href="{{ item.href }}" target="_blank" class="reklama-item__link">{{ item.text_link ? : 'Подробнее' }}</a>
               </div>
             </div>
           {% endfor %}
