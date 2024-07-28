@@ -62,6 +62,7 @@
       {% endfor %}
       {% for item in bannerArrMaps|slice(0, 1) %}
         {% set img_mobile = item.img_mobile ?? item.img %}
+        {# {% if not item.text %} reklama-item__banner{% endif %} #}
         <a href="{{ item.href }}" target="_blank" class="reklama-item{% if not item.text %}{% endif %}" style="display: none;">
           <div class="photo reklama-item__photo">
             {% if item.img %}
@@ -90,18 +91,19 @@
   <div class="content__map content__silam" style="display: none;">
     <div class="content__reklama content-main__reklama">
       {% set current_date = date('Y-m-d') %}
-      {% set bannerArrSiam = [] %}
+      {% set bannerArrSilam = [] %}
 
       {% for item in reklama[5] %}
         {% set date_min = item.date_min|date('Y-m-d') %}
         {% set date_max = item.date_max|date('Y-m-d') %}
         {% if current_date >= date_min and current_date <= date_max %}
-          {% set bannerArrSiam = bannerArrSiam|merge([item]) %}
+          {% set bannerArrSilam = bannerArrSilam|merge([item]) %}
         {% endif %}
       {% endfor %}
-      {% for item in bannerArrSiam|slice(0, 1) %}
+      {% for item in bannerArrSilam|slice(0, 1) %}
         {% set img_mobile = item.img_mobile ?? item.img %}
-        <a href="{{ item.href }}" target="_blank" 0class="reklama-item{% if not item.text %}{% endif %}">
+        {# {% if not item.text endif %}reklama-item__banner{% endif %} #}
+        <a href="{{ item.href }}" target="_blank" class="reklama-item {% if not item.text %}{% endif %}">
           <div class="photo reklama-item__photo">
             {% if item.img %}
               <input type="hidden" class="reklama-item__bannerMobile" value="{{ base_url('public/filemanager/' ~ img_mobile) }}" />

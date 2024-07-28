@@ -2717,9 +2717,18 @@ video {
         min-width: 150px;
         border-radius: 5px;
         overflow: hidden;
+
         img {
           object-fit: cover;
           object-position: center;
+
+          @include resp(
+            max-height,
+            (
+              md-down: auto,
+              lg: 500px,
+            )
+          );
         }
       }
 

@@ -167,7 +167,6 @@ $(document).ready(function () {
   $('.reklama-item__banner').each(function () {
     var el = $(this);
     el.css('display', 'flex');
-    console.log(el);
     const linkDecktop = el.find('.reklama-item__bannerDesktop').val();
     const linkMobile = el.find('.reklama-item__bannerMobile').val();
 
